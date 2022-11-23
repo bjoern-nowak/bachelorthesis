@@ -1,2 +1,3 @@
 # generated artefacts
 out/
+*.log
