@@ -1,0 +1,245 @@
+% Anpassung an Landessprache ---------------------------------------------------
+\usepackage[ngerman]{babel}
+
+% Umlaute ----------------------------------------------------------------------
+%   Umlaute/Sonderzeichen wie äüöß direkt im Quelltext verwenden (CodePage).
+%   Erlaubt automatische Trennung von Worten mit Umlauten.
+% ------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage{textcomp} % Euro-Zeichen etc.
+
+% Schrift ----------------------------------------------------------------------
+\usepackage{lmodern} % bessere Fonts
+\usepackage{relsize} % Schriftgröße relativ festlegen
+
+% Tabellen ---------------------------------------------------------------------
+\PassOptionsToPackage{table}{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{bigstrut}
+% für lange Tabellen
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{lscape}
+\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}} % Spaltendefinition rechtsbündig mit definierter Breite
+
+% Grafiken ---------------------------------------------------------------------
+\usepackage[dvips,final]{graphicx} % Einbinden von JPG-Grafiken ermöglichen
+\usepackage{graphics} % keepaspectratio
+\usepackage{floatflt} % zum Umfließen von Bildern
+\graphicspath{{Bilder/}} % hier liegen die Bilder des Dokuments
+
+\usepackage{tikz} % visualisation
+\usetikzlibrary{trees} % directory trees
+
+\usepackage{wrapfig}
+
+% Sonstiges --------------------------------------------------------------------
+\usepackage{amsmath,amsfonts} % Befehle aus AMSTeX für mathematische Symbole
+\usepackage{enumitem} % anpassbare Enumerates/Itemizes
+\usepackage{xspace} % sorgt dafür, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
+
+\usepackage{makeidx} % für Index-Ausgabe mit \printindex
+\usepackage{acronym} % es werden alle Definitionen aufgelistet | nur benutze : \usepackage[printonlyused]{acronym}
+
+% Einfache Definition der Zeilenabstände und Seitenränder etc.
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage[compact]{titlesec} % Zeilenabstände
+
+% Symbolverzeichnis
+\usepackage[intoc]{nomencl}
+\let\abbrev\nomenclature
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{.25\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+
+\usepackage{url} % URL verlinken, lange URLs umbrechen etc.
+\usepackage{chngcntr} % fortlaufendes Durchnummerieren der Fußnoten
+\usepackage{ifthen} % bei der Definition eigener Befehle benötigt
+\usepackage{todonotes} % definiert u.a. die Befehle \todo und \listoftodos
+\usepackage[square]{natbib} % wichtig für korrekte Zitierweise
+
+% PDF-Optionen -----------------------------------------------------------------
+\usepackage{pdfpages}
+\pdfminorversion=5 % erlaubt das Einfügen von pdf-Dateien bis Version 1.7, ohne eine Fehlermeldung zu werfen (keine Garantie für fehlerfreies Einbetten!)
+\usepackage[
+    bookmarks,
+    bookmarksnumbered,    
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    colorlinks=true,
+% diese Farbdefinitionen zeichnen Links im PDF farblich aus
+    linkcolor=MyBlau, % einfache interne Verknüpfungen
+    anchorcolor=MyBlau,% Ankertext
+    citecolor=MyBlau, % Verweise auf Literaturverzeichniseinträge im Text
+    filecolor=MyBlau, % Verknüpfungen, die lokale Dateien öffnen
+    menucolor=MyBlau, % Acrobat-Menüpunkte
+    urlcolor=MyBlau, 
+% diese Farbdefinitionen sollten für den Druck verwendet werden (alles schwarz)
+    %linkcolor=black, % einfache interne Verknüpfungen
+    %anchorcolor=black, % Ankertext
+    %citecolor=black, % Verweise auf Literaturverzeichniseinträge im Text
+    %filecolor=black, % Verknüpfungen, die lokale Dateien öffnen
+    %menucolor=black, % Acrobat-Menüpunkte
+    %urlcolor=black, 
+%
+    %backref, % Quellen werden zurück auf ihre Zitate verlinkt
+    pdftex,
+    plainpages=false, % zur korrekten Erstellung der Bookmarks
+    pdfpagelabels=true, % zur korrekten Erstellung der Bookmarks
+    hypertexnames=false, % zur korrekten Erstellung der Bookmarks
+    linktoc=all%linktocpage % Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
+]{hyperref}
+% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
+\hypersetup{
+    pdftitle={\titel},
+    pdfauthor={\autor},
+    pdfcreator={\autor},
+    pdfsubject={\titel},
+    pdfkeywords={\titel},
+}
+
+
+% zum Einbinden von Programmcode -----------------------------------------------
+\usepackage{listings}
+\usepackage{xcolor} 
+
+\definecolor{DEFhellgelb}{rgb}{1,1,0.9}
+\definecolor{DEFKeys}{rgb}{0,0,1}
+\definecolor{DEFIdentifier}{rgb}{0,0,0}
+\definecolor{DEFComments}{rgb}{0,0.5,0}
+\definecolor{DEFString}{rgb}{1,0,0}
+
+\definecolor{JAVAred}{rgb}{0.6,0,0}
+\definecolor{JAVAgreen}{rgb}{0.25,0.5,0.35} 
+\definecolor{JAVApurple}{rgb}{0.5,0,0.35} 
+\definecolor{JAVAdocblue}{rgb}{0.25,0.35,0.75} 
+
+\definecolor{forestgreen}{RGB}{34,139,34}
+\definecolor{orangered}{RGB}{239,134,64}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+
+\definecolor{HTMLdarkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{HTMLocherCode}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{HTMLblueCode}{rgb}{0, 0, 0.93} % #0000EE -> rgb(0, 0, 238)
+\definecolor{HTMLgreenCode}{rgb}{0, 0.6, 0} % #009900 -> rgb(0, 153, 0)
+
+\lstset{
+    float=hbp,
+	basicstyle=\footnotesize,
+    identifierstyle=\color{DEFIdentifier},
+    keywordstyle=\color{DEFKeys},
+    stringstyle=\color{DEFString},
+    commentstyle=\color{DEFComments},
+    backgroundcolor=\color{white},
+    columns=flexible,
+    tabsize=2,
+    frame=single,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+	captionpos=b,
+}
+
+\lstdefinestyle{Java}{
+    language=Java,
+    tabsize=4,
+    tabsize=4,
+    breakatwhitespace=false,   
+  	resetmargins=true     
+%
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{JAVApurple}\bfseries,
+	stringstyle=\color{JAVAred},
+	commentstyle=\color{JAVAgreen},
+%
+	sensitive=true,
+	morecomment=[l]{//},
+	morecomment=[s][\color{JAVAdocblue}]{/**}{*/},
+	morestring=[b]",
+	morestring=[b]',
+	morekeywords={
+		public,void,package,import,throws,
+		abstract,and,array,as,break,case,catch,cfunction,class,clone,const,
+		continue,declare,default,do,else,elseif,enddeclare,endfor,endforeach,
+		endif,endswitch,endwhile,extends,final,for,foreach,function,global,
+		goto,if,implements,interface,instanceof,namespace,new,old_function,or,
+		private,protected,public,static,switch,throw,try,use,var,while,xor
+		die,echo,empty,exit,eval,include,include_once,isset,list,require,
+		require_once,return,print,unset},
+}
+
+\lstdefinestyle{XML} {
+	basicstyle=\footnotesize,
+    columns=flexible,
+    tabsize=2,
+    frame=single,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+	captionpos=b,
+%
+    language=XML,
+    extendedchars=true, 
+    breaklines=true,
+    breakatwhitespace=true,
+    emph={},
+    emphstyle=\color{red},
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    commentstyle=\color{gray}\upshape,
+    morestring=[b]",
+    morecomment=[s]{<?}{?>},
+    morecomment=[s][\color{forestgreen}]{<!--}{-->},
+    keywordstyle=\color{orangered},
+    stringstyle=\ttfamily\color{black}\normalfont,
+    tagstyle=\color{darkblue}\bf,
+    morekeywords={attribute,xmlns,version,type,release},
+}
+
+\lstdefinelanguage{CSS} {
+	morekeywords={
+		color,background,margin,padding,font,weight,display,position,
+		top,left,right,bottom,list,style,border,size,white,space,min,width},
+	sensitive=false,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstdefinelanguage{JavaScript} {
+showstringspaces=false,
+keywordstyle=\ttfamily\bfseries\color{darkblue},
+identifierstyle=\ttfamily,
+stringstyle=\ttfamily\color{forestgreen},
+commentstyle=\color{gray},
+rulecolor=\color{gray},
+xleftmargin=5pt,
+xrightmargin=5pt,
+aboveskip=\bigskipamount,
+belowskip=\bigskipamount,
+%
+morekeywords={
+	break,const,continue,delete,do,while,export,for,in,function,
+	if,else,import,in,instanceOf,label,let,new,return,switch,this,
+	throw,try,catch,typeof,var,void,with,yield
+},
+sensitive=false,
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morestring=[b]",
+morestring=[d]'
+}

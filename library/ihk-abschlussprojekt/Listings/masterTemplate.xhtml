@@ -1,0 +1,34 @@
+<!-- ... -->
+<c:forEach items="#{menuController.menu}" var="menu">
+    <c:if test="#{menu.rendered}">
+        <li>
+            <h:commandLink action="#{menu.navigate()}"
+                           value="#{menu.label}"
+                           styleClass="#{menu.isActive() ? 'active' : ''} #{menu.label eq 'Tasks' ? 'taskNotification' : ''}"
+                           rendered="#{vms:isAllowed(menu.view.viewId, null)}"/>
+                           
+            <c:if test="#{menu.label eq 'Tasks'}">
+                <h:panelGroup id="taskNotification" styleClass="taskNotification">
+                    <h:commandLink styleClass="user_action"
+                                   action="#{openTaskList.showOnlyActionTasks()}"
+                                   value="#{notifications.taskStatistic.userActionTaskCount}"
+                                   style="#{notifications.taskStatistic.hasNewUserActionTasks ? 'font-weight: bold' : ''}"
+                                   title="#{globalBundle['taskNotification_userAction']}"/>
+                    <h:commandLink styleClass="error"
+                                   action="#{openTaskList.showOnlyErrorTasks()}"
+                                   value="#{notifications.taskStatistic.errorTaskCount}"
+                                   style="#{notifications.taskStatistic.hasNewErrorTasks ? 'font-weight: bold' : ''}"
+                                   title="#{globalBundle['taskNotification_error']}"
+                                   rendered="#{notifications.taskStatistic.errorTaskCount > 0}"/>
+                </h:panelGroup>
+                <h:commandButton id="taskNotification-update-btn" style="display: none"
+                                 action="#{notifications.resetTaskTypesStatistic()}">
+                    <f:ajax render="taskNotification"/>
+                </h:commandButton>
+            </c:if>
+            
+            <!-- submenu rendering -->
+        </li>
+    </c:if>
+</c:forEach>
+<!-- ... -->

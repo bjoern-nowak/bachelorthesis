@@ -1,0 +1,58 @@
+\section{Konzeptphase}
+\label{sec:Konzeptphase}
+In dieser Phase soll, vorbereitend für die Realisierungsphase, ein Konzept zur Umsetzung der bereits beschrieben Anforderungen
+aufgezeigt werden. Inklusive jener aus \VerweisVL{sub:Zukünftig mögliche Anforderungen}. Dies beinhaltet ein technisches Konzept,
+ein \Abkuerzung{UI}-Entwurf sowie die Aufstellung eines Testplans.
+
+
+\subsection{Technisches Konzept}
+\label{sub:Technisches Konzept}
+Die Anforderungen werden in technische Arbeitspakete gruppiert, wie in \VerweisVL{sub:Vorgehensweise} erläutert. Daraus
+resultieren die folgenden Arbeitspakete: Konfiguration von Atmosphere, Kommunikation: Server zu Client, Datenhaltung,
+Datenübertragung, Event-Handling und \Abkuerzung{UI}-Entwurfsumsetzung. Im Folgenden werden einige Pakete auszugsweise genauer
+spezifiziert.
+
+\begin{description}
+	\item [Kommunikation: Server zu Client]
+Das Framework \Fachbegriff{Atmosphere} bietet weitreichende Features an, daher sollen bei der Umsetzung möglichst viele Aufgaben
+vom Framework übernommen werden. Wie \zB der Verbindungsaufbau nach einem unerwarteten Abbruch und ein Nachrichten-Cache, um
+Nachrichten neu zu versenden, die ein angemeldeter Client nicht erhalten hat. Ein angemeldeter Client bedeutet in diesem Kontext,
+ein Browser der eine bestehende Verbindung zum Server hat. Auch das Senden von \sog "`Heartbeats"' (zu Deutsch: Herzschläge) kann
+konfiguriert werden. Diese werden benötigt um die Verbindung bei zwischengeschalteten Proxies, welche lang suspendierte
+Verbindungen unterbrechen, aufrecht zu erhalten.
+	\item [Datenhaltung]
+In einem Repository \VerweisKT{subsub:UserStatusRepository} sollen Benutzer-abhängige Informationen mit niedriger Kritikalität
+gehalten werden. Eine niedrige Kritikalität liegt vor, wenn es akzeptabel ist, die Information \zB durch einen Serverneustart zu
+verlieren. Diese wurde zuvor in der Datenbank abgelegt.
+	\item [Datenübertragung]
+Daten vom Server zum Client/Browser werden im Format \Abkuerzung{JSON}\footnote{Erklärung siehe \citep{JSON}.} übermittelt. Dazu
+soll jede Event-Klasse eine generalisierte Klasse erweitern. Diese bietet eine entsprechende Methode an, welche die Event-Daten im
+\Abkuerzung{JSON}-Format zurückliefert. Damit wird sichergestellt, dass übertragende Daten immer in diesem Format vorliegen. Es ist den
+abgeleiteten Klassen erlaubt, diese Methode zu überschreiben, um den Inhaltsumfang selbst zu definieren.
+\end{description}
+
+\subsection{UI-Entwurf}
+\label{sub:UI-Entwurf}
+Die grafische Benutzeroberfläche ist ein zentraler Bestandteil des \Abkuerzung{VMS}, weil sie die Schnittstelle zwischen Anwender
+und Software ist. Da bereits eine Weboberfläche vorhanden ist, müssen Änderungen in diese integriert werden. Der
+Gestaltungsspielraum wird dadurch stark eingeschränkt: Es ist daher verstärkt darauf zu achten, dass die Änderungen gut mit der
+restlichen Oberfläche harmonisieren. Da diese größtenteils aus Graustufen besteht werden ausschließlich Pastelltöne verwendet.\\
+Die Umsetzung der \Abkuerzung{UI} erfolgte prototypisch und ist im \Anhang{app:UI-Entwurf} zu sehen. Die Idee aus
+\VerweisKL{sub:Soll-Konzept} dem Benutzer auf explizit neue Tasks hinzuweisen, wurde dabei bereits aufgenommen. Es wurde
+vernachlässigt unterschiedliche Formen pro Task-Typ zu entwerfen.
+
+
+\subsection{Proof-of-Concept}
+\label{sub:Proof-of-Concept}
+Es wurde eine Demo-Implementierung mit dem Framework Atmosphere vorgenommen. Dazu wurde ein Chat-Beispiel nachgebaut. Das
+Augenmerk lag dabei auf der Einrichtung von Atmosphere, sowie der richtigen Konfiguration der Webapplikation für eine asynchrone
+Verarbeitung. Weil keine Minderung der Serverperformance festgestellt wurde, konnte mit dem Framework fortgefahren werden.
+
+
+\subsection{Testplan}
+\label{sub:Testplan}
+In einem Testplan werden die definierten Anforderungen zusammengefasst und beschrieben wie diese zu prüfen sind. Dies sichert
+bereits vor der Realisierungsphase die vollständige Umsetzung aller Anforderungen. Neben den in der \TabelleK{tab:Testfälle}
+aufgeführten Testfällen, soll mit einer sinnvollen Testabdeckung durch JUnit-Tests eine hohe Softwarequalität und -robustheit
+erreicht werden.
+\newTabelle{Testfälle}{tab:Testfälle}{Testfälle.tex}

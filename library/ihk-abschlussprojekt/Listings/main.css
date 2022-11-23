@@ -1,0 +1,123 @@
+.taskNotification {
+  @default-base: lightgrey;
+  @default-hover: darkgrey;
+  @default-border: #909090;
+
+  @error-base: rgba(222, 67, 67, 0.60);
+  @error-hover: #DE4343;
+  @error-border: #892d2d;
+
+  @user_action-base: rgba(78, 165, 205, 0.60);
+  @user_action-hover: #4EA5CD;
+  @user_action-border: #28526b;
+
+  @info-base: rgba(234, 175, 81, 0.60);
+  @info-hover: #eaaf51;
+  @info-border: #b3802d;
+
+  @resubmission-base: rgba(97, 184, 50, 0.60);
+  @resubmission-hover: #61B832;
+  @resubmission-border: #204312;
+
+
+  // style for table design: left color bar (for all task tables)
+  & td:first-of-type {
+    border-left: 6px solid @default-base;
+
+    &:hover, &.hover {
+      border-left-color: @default-hover;
+    }
+    &.error {
+      border-left-color: @error-base;
+      &:hover, &.hover {
+        border-left-color: @error-hover;
+      }
+    }
+    &.user_action {
+      border-left-color: @user_action-base;
+      &:hover, &.hover {
+        border-left-color: @user_action-hover;
+      }
+    }
+    &.info {
+      border-left-color: @info-base;
+      &:hover, &.hover {
+        border-left-color: @info-hover;
+      }
+    }
+    &.resubmission {
+      border-left-color: @resubmission-base;
+      &:hover, &.hover {
+        border-left-color: @resubmission-hover;
+      }
+    }
+  }
+
+  // style for task notification container in menu
+  & a {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 6px;
+    .font(14px);
+    color: #323232;
+    padding: 2px 3px;
+    margin-left: 5px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+
+    // default color style
+    border: solid 1px @default-border;
+    .linear-gradient(200deg, white, 0%, @default-base, 80%, right top, left bottom);
+    &:hover, &.hover {
+      .linear-gradient(200deg, white, 0%, @default-hover, 80%, right top, left bottom);
+    }
+
+    &.error {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      background: 0;
+
+      height: 20px;
+      display: inline-block;
+      margin-left: 5px;
+      padding: 0 5px;
+
+      border: 1px solid @error-border;
+      .linear-gradient(200deg, white, 0%, @error-base, 80%, right top, left bottom);
+      &:hover, &.hover {
+        .linear-gradient(200deg, white, 0%, @error-hover, 80%, right top, left bottom);
+      }
+    }
+
+    &.user_action {
+      border-radius: 90px;
+      text-align: center;
+      height: 20px;
+      display: inline-block;
+      margin: 0 2px 0 8px;
+      padding: 0px 8px;
+
+      border: 1px solid @user_action-border;
+      .linear-gradient(200deg, white, 0%, @user_action-base, 80%, right top, left bottom);
+      &:hover, &.hover {
+        .linear-gradient(200deg, white, 0%, @user_action-hover, 80%, right top, left bottom);
+      }
+    }
+
+    &.info {
+      border-color: @info-border;
+      .linear-gradient(200deg, white, 0%, @info-base, 80%, right top, left bottom);
+      &:hover, &.hover {
+        .linear-gradient(200deg, white, 0%, @info-hover, 80%, right top, left bottom);
+      }
+    }
+
+    &.resubmission {
+      border-color: @resubmission-border;
+      .linear-gradient(200deg, white, 0%, @resubmission-base, 80%, right top, left bottom);
+      &:hover, &.hover {
+        .linear-gradient(200deg, white, 0%, @resubmission-hover, 80%, right top, left bottom);
+      }
+    }
+  }
+}

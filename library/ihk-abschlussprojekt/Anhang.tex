@@ -1,0 +1,147 @@
+\section{Anhang}
+
+
+\subsection{Weboberfläche}
+\label{app:Weboberfläche}
+
+\subsubsection{UI-Entwurf}
+\label{app:UI-Entwurf}
+Zu sehen ist die Übersichtsseite der offenen Tasks. Neue Tasks werden fett-gedruckt dargestellt. Die Zeile auf der sich die Maus
+befindet wird bereits hervorgehoben. Daher soll sich dies auch bei dem farbigen Balken, links jeden Eintrages, wiederspiegeln.
+(Siehe sechster Eintrag von oben)
+\begin{figure}[htb]
+\centering
+\includegraphicsKeepAspectRatio{Anhang/ui_entwurf.png}{1.0}
+\caption{UI-Entwurf}
+\end{figure}
+
+\subsubsection{listOpenTasks.xhtml (Auszug)}
+\label{app:listOpenTasks}
+\lstinputlisting[language=HTML]{Listings/listOpenTasks.xhtml}
+
+\clearpage
+\subsubsection{main.less (Auszug)}
+\label{app:main.less}
+\lstinputlisting[language=CSS]{Listings/main.css}
+
+\subsubsection{masterTemplate.xhtml (Auszug)}
+\label{app:masterTemplate}
+\lstinputlisting[language=HTML]{Listings/masterTemplate.xhtml}
+
+
+\clearpage
+\subsection{Tabellen}
+\label{Tabellen}
+
+\subsubsection{Laptop-Spezifikation}
+\label{app:Laptop-Spezifikation}
+\newTabelle{Laptop-Spezifikation}{tab:Laptop-Spezifikation}{Laptop.tex}
+
+\subsubsection{Auszug der vorhandene Paketstruktur}
+\label{app:Paketstruktur}
+Ein vollständiges Beispielpacket wäre: \Code{com.<mandant>.contrax.contract.domain.model.transactions}
+\newTabelle{Packetstruktur: Fachliche Saeulen}{tab:Fachliche Saeulen}{Saeulen.tex}
+\newTabelle{Packetstruktur: Technische Layer}{tab:Technische Layer}{Layer.tex}
+
+\clearpage
+\subsection{Quellcode}
+\label{app:Quellcode}
+Bei Java-Dateien wurden zur Übersichtlichkeit sämtliche Importierungen mit "`\Code{import *;}"' abgekürzt. Ebent so sämtliche
+Kommentare, einschließlich JavaDoc, sofern diese nicht maßgeblich zum Verständnis beitragen. Es wird alphabetisch nach Dateinamen
+aufgelistet.
+
+\subsubsection{AbstractNotificationService.java}
+\label{app:AbstractNotificationService}
+\lstinputlisting[style=Java]{Listings/AbstractNotificationService.java}
+
+\subsubsection{AtmosphereConfig.java}
+\label{app:AtmosphereConfig}
+\lstinputlisting[style=Java]{Listings/AtmosphereConfig.java}
+
+\subsubsection{main.js (Auszug)}
+\label{app:main.js}
+Die Methode, welche den Hover-Effekt in der Task-Übersicht ermöglicht, und die Methode \\
+\Methode{configureListeners(request,socket)} wurden aufgrund der Anhangsbegrenzung ausgelassen. In Letzterer werden \sog Listener,
+wie \Methode{onOpen} und \Methode{onTransportFailure} definiert. Der \Methode{onMessage}-Listener wurde wegen seiner Wichtigkeit
+gesondert implementiert.
+\lstinputlisting[language=JavaScript]{Listings/main.js}
+
+\subsubsection{NotificationController.java}
+\label{app:NotificationController}
+\lstinputlisting[style=Java]{Listings/NotificationController.java}
+
+\subsubsection{NotificationServiceHandler.java}
+\label{app:NotificationServiceHandler}
+\lstinputlisting[style=Java]{Listings/NotificationServiceHandler.java}
+
+\subsubsection{OpenTaskListController.java}
+\label{app:OpenTaskListController}
+\lstinputlisting[style=Java]{Listings/OpenTaskListController.java}
+
+\subsubsection{pom.xml (Auszug)}
+\label{app:pom.xml}
+\lstinputlisting[style=XML]{Listings/pompom.xml}
+
+\clearpage
+\subsubsection{PostRenderView-Event}
+\label{app:PostRenderView-Event}
+Zum leztlichen Eintragen des Events in den JSF-Lebenszyklus, muss der \sog "`Phaselistener"' als dieser in die
+\Code{faces-config.xml} eingetragen werden.
+\lstinputlisting[style=Java]{Listings/PostRenderViewEvent.java}
+\lstinputlisting[style=Java]{Listings/PostRenderViewListener.java}
+
+\subsubsection{TaskNotificationEvent.java}
+\label{app:TaskNotificationEvent}
+\lstinputlisting[style=Java]{Listings/TaskNotificationEvent.java}
+
+\subsubsection{TaskNotificationService.java}
+\label{app:TaskNotificationService}
+\lstinputlisting[style=Java]{Listings/TaskNotificationService.java}
+
+\subsubsection{TaskQueryServiceImpl.java (Auszug)}
+\label{app:TaskQueryServiceImpl}
+Interface:
+\lstinputlisting[style=Java]{Listings/TaskQueryService.java}
+Implementierung:
+\lstinputlisting[style=Java]{Listings/TaskQueryServiceImpl.java}
+
+\subsubsection{UserStatus(Repository).java}
+\label{app:UserStatusRepository}
+\lstinputlisting[style=Java]{Listings/UserStatus.java}
+\lstinputlisting[style=Java]{Listings/UserStatusRepository.java}
+
+\clearpage
+\subsubsection{VmsWebAppInitializer.java (Auszug)}
+\label{app:VmsWebAppInitializer}
+\lstinputlisting[style=Java]{Listings/VmsWebAppInitializer.java}
+
+
+\clearpage
+\subsection{Weitere Grafiken}
+\label{app:Grafiken}
+Alle Grafiken sind in ihrer Größe reduziert. In den Klassendiagrammen werden ausschließlich Klassen betrachtet die
+hinzugefügt oder inhaltlich geändert wurden. Vererbungen und Implementierungen sind, sofern von Relevanz, angegeben.
+
+\subsubsection{UML-Klassendiagramm (Übersicht)}
+\label{app:UML-Klassendiagramm (Übersicht)}
+\begin{figure}[htb]
+\centering
+\includegraphicsKeepAspectRatio{Anhang/uml-diagram.png}{1}
+\caption{UML-Klassendiagramm (Übersicht)}
+\end{figure}
+
+\clearpage
+\subsubsection{UML-Klassendiagramm (Komplex)}
+\label{app:UML-Klassendiagramm (Komplex)}
+Eine Blau-geschriebene Methode weist darauf hin, dass diese verändert wurde. Eine in Grün geschrieben, dass diese neu hinzugefügt
+wurde. Beinhaltet eine dargestellte Klasse nur Letzteres ist davon auszugehen, dass diese gänzlich Neu ist.
+\begin{figure}[htb]
+\centering
+\includegraphicsKeepAspectRatio{Anhang/uml-diagram-full3.png}{1}
+\caption{UML-Klassendiagramm (Komplex)}
+\end{figure}
+
+
+
+
+

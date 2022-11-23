@@ -1,0 +1,181 @@
+\clearpage
+\section{Realisierungsphase}
+\label{sec:Realisierungsphase}
+Zur Dokumentierung dieser Phase wird eine Art "`Bottom-up-Prinzip"' genutzt. Dazu werden technisch oder fachlich getrennte
+Teilbereiche näher beleuchtet und dann in Zusammenhang gebracht.
+
+
+
+\subsection{Projektstruktur}
+\label{sub:Projektstruktur}
+\footnotetext{Internet Explorer (bis Version 7 pflicht), Mozilla Firefox, Google Chrome, Opera.}
+\input{Bilder/new_packages.tex}
+Es wird die im VMS verwendete Paketstruktur übernommen. Diese ist angelehnt an das "`Domain Driven
+Design"'\footnote{Definition siehe \citep{DDD}.} aufgebaut. Die Struktur startet unterhalb von \Code{"`com.<mandant>.contrax"'},
+dabei steht \Code{<mandant>} für das Kürzel eines Kunden. Auf der obersten Ebene befinden sich die fachlichen Säulen, gefolgt von
+den technischen Layern. Eine Erklärung dieser ist in einer tabellarischen und auszugsweisen Form im \AnhangK{app:Paketstruktur} zu
+finden. Durch die Implementierung des Benachrichtigungssystems wurden die in \Abbildung{app:DifferenzPacketstruktur} gestrichelten
+Packete hinzugefügt. Der Großteil der neuen Dateien konnte aber in die bisherige Struktur eingegliedert werden.
+
+
+
+\subsection{Einrichten/Konfigurieren von Atmosphere}
+\label{sub:Einrichten/Konfigurieren von Atmosphere}
+Das Framework wird wie im \Anhang{app:pom.xml} gezeigt per Maven\footnote{Maven ist ein "`Build-Management-Tool"' basierend auf
+Java.} in der Version 2.2.6 eingebunden. In \Abkuerzung{VMS} werden alle Servlet-Container Komponenten (wie Filter und Listener)
+in der \Klasse{VmsWebAppInitializer} konfiguriert. Hier wird die code-basierte Alternative, einer Servlet 3.0+ Umgebung, zu
+einer klassischen \Code{web.xml}-Konfiguration genutzt. Nachdem das Atmosphere-Servlet im Webapplikationskontext unter dem Pfad
+\Code{"/notify/*"} registriert wurde, wird es über eine \Fachbegriff{Spring}-annotierte Konfigurationsklasse (siehe
+\Anhang{app:AtmosphereConfig}) entsprechend eingerichtet. Für eine asynchrone Verarbeitung muss das Atmosphere-Servlet sowie alle
+unter diesem Pfad wirksamen Filter und Listener mit dem Attribut "`asyncSupported=true"' konfiguriert werden. (siehe
+\Anhang{app:VmsWebAppInitializer}).
+
+\subsection{Kommunikation: Server zu Client}
+\label{sub:Kommunikation: Server zu Client}
+In diesem Abschnitt wird hauptsächlich der Code vom \Anhang{app:NotificationServiceHandler} erläutert und sich
+auf \Anhang{app:main.js} bezogen. Außerdem werden unter Anderem einige Java-Klassen aus dem Framework Atmosphere namentlich
+genannt und daher im Folgenden erklärt. Für einen besseren Lesefluss wird bei den Begriffen der Präfix "`Atmosphere"' im weiteren
+Verlauf vernachlässigt.
+\begin{description}
+	\item [AtmosphereHandler] entspricht einem Servlet. Jeder \Klasse{AtmosphereHandler} ist einem konkretem Pfad unterhalb von
+	\Code{"/notify/*"} zugeordnet und übernimmt im Allgemeinen die Handhabung von POST/GET-Requests. 
+	\item [AtmosphereResource] ist eine Java(-Wrapper)-Klasse die einen HTTP-Request, also ein Verbindung, darstellt. Über die
+	jeweilige Instanz kann eine Verbindung \zB angehalten und Informationen über diese abgerufen werden.
+	\item [AtmosphereSession] ermöglicht im Backend die persistente Speicherung von Informationen über eine Verbindung. Jede
+	\Klasse{AtmosphereResource} kann eine \Klasse{AtmosphereSession} haben, welche auch nur solange lebt, wie die
+	\Klasse{AtmosphereResource} selbst.
+	\item [Broadcaster] sind Nachrichtenverteiler. Über die letztlich "`Events"' mittels der Methode \Methode{broadcast} übermittelt
+	werden können. Jede \Klasse{AtmosphereResource} Instanz wird einem \Klasse{Broadcaster} zugeteilt, welcher dann \zB über
+	\MethodenRef{AtmosphereResource\#getBroadcaster()} erreichbar ist. Zusätzlich kann eine \Klasse{AtmosphereResource} mehrere
+	\Klasse{Broadcaster} abonnieren. Nur die abonnierten \Klasse{Broadcaster} wissen dann von der \Klasse{AtmosphereResource}, nicht
+	andersrum. Über eine entsprechende \sog \Code{Factory}\footnote{Eine Factory kapselt die Logik zur Erstellung eines Objektes von
+	der eigentlichen Business-Logik ab. An die \Code{Factory}-Methode übergebene Daten werden dann zur Instanziierung eines
+	bestimmten Objekttyps genutzt, meist ist dies eine abgeleitete Klasse \zB eines Interfaces (zu Deutsch: Schnittstelle).
+	\citep[vgl.][]{Factory}} können \Klasse{Broadcaster} ermittelt werden.
+\end{description}
+
+\subsubsection{Verbindungshaltung}
+\label{subsub:Verbindungshaltung}
+Bei jedem Seitenwechsel stellt der Client per JavaScript eine zusätzliche Anfrage (\Code{\acs{XML}HttpRequest}) über den
+\Code{"/notify/*"} Pfad an den Server. Diese \Fachbegriff{Resource} wird vom entsprechenden \Fachbegriff{Handler} jedoch nicht
+beantwortet, sondern bis auf weiteres "`suspended"'. Die Verbindung wird daher aufrecht erhalten und ermöglicht dem Server im
+späteren Verlauf den Client/Browser bei Bedarf zu benachrichtigen. Wird ein Event veröffentlicht, werden die entsprechenden
+\Fachbegriff{Resource}s beantwortet. Unmittelbar nach Erhalt dieser Antwort, sendet der Client erneut eine Anfrage. Dieses
+Vorgehen wurde bereits als "`long-polling"' im \VerweisVL{sub:Soll-Konzept} aufgezeigt.\\
+\Fachbegriff{Atmosphere} stellt bei der Verwaltung dieser \Fachbegriff{Resource}s sicher, dass es nur eine \Fachbegriff{Resource}
+pro Browser gibt. Unter Anderem durch die Vergabe einer einmaligen Id für jeden Browser.
+
+\subsubsection{Identifikation einer Verbindung}
+\label{subsub:Identifikation einer Verbindung}
+Nachdem eine \Fachbegriff{Resource} suspendiert wurde, beschafft die \Klasse{AtmosphereResourceSessionFactory} die zugehörige
+\Fachbegriff{Session}. Mittels \Fachbegriff{Spring} wird der Benutzer ermittelt und seine Id in der \Fachbegriff{Session}
+gespeichert. Im späteren Verlauf kann so eine \Fachbegriff{Resource} dem jeweiligen Benutzer zugeordnet werden. Dies ist nötig,
+wenn \zB explizit nur ein bestimmter Benutzer benachrichtigt werden soll.
+
+Soll eine Benutzergruppe über ein Event informiert werden, so wird zur Identifikation der Verbindungen eine Reihe von 
+\Fachbegriff{Broadcaster}n genutzt. Bei der Initialisierung vom \Klasse{NotificationServiceHandler} wird dazu eine
+Map\footnote{Liste von Schlüssel/Wert-Paaren.} von \Fachbegriff{Broadcaster}n pro Benutzergruppe instanziiert. Anschließend wird
+eine Liste von allen dem System bekannten Benutzergruppen erstellt. Zuletzt wird für jeden Eintrag ein \Fachbegriff{Broadcaster},
+mit dem Gruppennamen als Kennung, definiert und der Map \Code{userRoleBroadcasterMap} hinzugefügt. Nun kann der
+Nachrichtenverteiler für eine Benutzergruppe mittels der \Klasse{BroadcasterFactory} und der Kennung ermittelt werden.
+
+\subsection{Datenhaltung}
+\label{sub:Datenhaltung}
+An dieser Stelle wird aufgezeigt, wie die Webanwendung bestimmte Informationen abspeichert. Es wird auf viele Anhänge aus dem
+\AnhangKapitel{app:Quellcode} und zu Teilen aus dem \AnhangKapitel{app:Weboberfläche} Bezug genommen.
+
+\subsubsection{UserStatusRepository}
+\label{subsub:UserStatusRepository}
+\begin{description}
+	\item [Repository]
+Ein Repository (zu Deutsch: Ablage, Aufbewahrungsort) stellt ein Mittel dar, die Geschäftslogik von der Beschaffung
+und/oder der Instanziierung zu trennen. Erzeugte Objekte liegen dann im Repository abrufbereit. Häufig genutzte Lese-, Schreib-
+und Änderungsvorgänge werden oftmals direkt vom Repository zur Verfügung gestellt. \citep[vgl.][]{Repository}
+\end{description}
+
+Zum Zeitpunkt der Implementierung wird bisher nur der letzte Besuch der Offenen-Task-Übersicht eines jeden Benutzers im
+\Fachbegriff{Repository} gespeichert. Die Ermittlung des Zeitstempels wird unten stehend erklärt. Da es sich lediglich um ein
+\Code{DateTime}-Objekt handelt, könnte diese Information in der vorhandenen Datenbank gespeichert werden. Gemäß dem Abschnitt
+Datenhaltung aus \VerweisVL{sub:Technisches Konzept} wurde jedoch das \Fachbegriff{Repository} entwickelt.
+
+\paragraph{Letzter Besuch der Offenen-Task-Übersicht}
+\label{para:Offene-Task-Übersicht}
+Beim Aufruf dieser Übersicht wird zunächst der aktuelle "`zuletzt besucht"'-Zeitstempel beim \Klasse{UserStatusRepository}
+erfragt. Existiert für den genannten Benutzer kein Zeitstempel, so wird der Zeitpunkt "`\Code{01.01.1970
+00:00:00}"'\footnote{Datum-Bedeutung: \url{http://openbook.rheinwerk-verlag.de/javainsel9/javainsel_15_002.htm}
+(Aufruf:~26.03.15).} angelegt. Der Zeitstempel wird dann für die Markierung neuer Tasks in der Weboberfläche genutzt.\\
+Da ein Aufruf der genannten Seite gleichzeitig diesen Zeitstempel verändern soll, musste dem JSF-Lebenszyklus\footnote{Erklärung:
+\url{http://jsfatwork.irian.at/book_de/jsf.html\#!idx:/jsf.html:2.6} (Aufruf:~26.03.15).} ein "`PostRenderView"'-Event hinzugefügt
+werden. Dieses Event wird erst ausgelöst, wenn eine Seite fertig gebaut ist und somit der bisherige Zeitstempel von der
+Weboberfläche verwendet wurde. Wurde das Event auf der besagten Seite (\Code{listOpenTasks.xhtml}) ausgelöst wird die Methode
+\MethodenRef{OpenTaskListController\#visitedOpenTasks()} aufgerufen, die den Prozess zur Aktualisierung des Zeitstempels anstößt.
+
+\subsubsection{TaskNotificationStatisticsModel}
+\label{subsub:TaskNotificationStatisticsModel}
+Diese Java-Klasse hält die Daten bereit, die für die Darstellung der Status-Anzeige\VerweisVF{sub:Soll-Konzept} benötigt werden
+und wird von der Weboberfläche\footnote{In diesem Kontext von \Anhang{app:masterTemplate}.} über den
+\Klasse{NotificationController} genutzt. Dieses "`Model"' ist ein Ergebnis der \Abkuerzung{SQL}-Abfrage in
+\Methode{getTaskNotificationModel(VmsUser user, DateTime lastVisit)} der Klasse \Klasse{TaskQueryService}. Dabei werden
+Informationen über die Task-Typen Fehler und Benutzerinteraktion abgefragt. Dazu gehört die Anzahl offener Tasks eines Typs und
+ob jeweils neue Tasks seit dem letzten Besuch der Offenen-Tasks-Übersicht hinzugekommen sind. Jede Information wird in einer
+Spalte angelegt. Anhand der Spaltenbezeichnung wird die Information entsprechend in das
+\Klasse{TaskNotificationStatisticsModel}-Objekt zugeordnet. Dabei handelt es sich entweder um einen numerischen oder booleschen
+Wert.
+
+
+\subsection{Datenübertragung}
+\label{sub:Datenübertragung}
+Bei derzeitiger Implementierung, nach \VerweisVL{sub:Technisches Konzept}, muss jede Event-Klasse die Klasse
+\Klasse{AtmosphereEvent} erweitern, und kann \ggfs die Methode \Methode{toJSON()} überschreiben.\\
+Eine Beispielimplementierung stellt dabei die Klasse \Klasse{TaskNotificationEvent} dar. In dieser wird ersichtlich wie Daten
+pro Task-Typ abgelegt werden können. Es wurde darauf verzichtet, \\die \Methode{AtmosphereEvent\#toJSON()} anzupassen. Dieses
+Event informiert den Client lediglich über neue Tasks, enthält aber nicht die zur Anzeige benötigten Informationen (Anzahl der offenen
+Task pro Typ). Diese werden wie in Kapitel \VerweisVL{sub:Event-Handling} beschrieben anschließend vom Client abgefragt.
+Die direkte Übertragung der Informationen hat für Probleme gesorgt. Zur Einhaltung des Zeitrahmens wurde der o.g. Lösungsansatz
+gewählt.
+
+
+\subsection{Event-Handling}
+\label{sub:Event-Handling}
+In diesem Kapitel wird aufgezeigt, wie Events im Backend publiziert werden können und wie diese im Frontend behandelt werden. Es
+wird Bezug auf \Anhang{app:TaskNotificationService}, \Anhang{app:main.js}, \Anhang{app:NotificationController} und
+\Anhang{app:main.less} genommen.
+
+\subsubsection{Im Backend}
+\label{subsub:Backend}
+Im Backend wird ein Service (\Klasse{TaskNotificationService}) bereitgestellt, welcher zur Publizierung von
+Task-Benachrichtigungs-Events über \Fachbegriff{Atmosphere} genutzt wird.\\
+Ein konkreter Service zum Versenden von Events implementiert die im Interface \Klasse{NotificationService} deklarierte Methode
+\Methode{pushNotification}. Diese Methode ist mehrfach überladen. Je nach Ziel kann der Methode als Parameter einen Benutzer
+oder eine Benutzergruppe übergeben werden. Bei Ersterem reicht die Benutzer-Id. Es gibt eine \Klasse{AbstractNotificationService}
+Klasse mit wichtigen Hilfsmethoden die von jedem derartigen Service benötigt werden.
+
+\subsubsection{Im Frontend}
+\label{subsub:Frontend}
+Beim Client wird das Event-Handling über den \Methode{onMessage}-Listener geregelt. Siehe \Anhang{app:main.js}. Alle Events, die
+vom Server veröffentlicht werden, kommen bei erfolgreicher Übermittlung bei dieser Methode an. Zunächst wird versucht, den
+Nachrichteninhalt in ein gültiges \Abkuerzung{JSON}-Objekt umzuwandeln. Falls die Konvertierung scheitert, wird bei bisheriger
+Implementierung die Nachricht vom Server nicht neu versendet. War die Umwandlung erfolgreich, so wird zur Unterscheidung der
+Event-Typen die Variable \Code{event} mit einem entsprechenden String verglichen. Dazu wird Kenntnis über die serverseitige
+Enum-Definition dieser Strings benötigt.\\
+Liegt ein Task-Benachrichtigungs-Event vor, wird mittels \Fachbegriff{jQuery} ein Klick auf einem versteckten Button in der
+Weboberfläche ausgelöst. Dadurch wird der Prozess zur \Abkuerzung{UI}-Aktualisierung angestoßen. Genauer wird zunächst das
+dahinterliegende Model der Status-Anzeigen zurückgesetzt, anschließend wird ein "`partial Ajax-Request"' ausgelöst. Dieser fordert
+das genannte Model beim Server an, da es zurückgesetzt wurde, wird es von diesem neu gebaut. Zum Schluss wird das nun
+aktualisierte Model zum Rendern der neuen Status-Anzeige genutzt.
+
+\subsection{UI-Entwurfsumsetzung}
+\label{sub:UI-Entwurfsumsetzung}
+Die spezifischen und konkreten Ideen aus \VerweisKL{sub:Soll-Konzept} und \VerweisKL{sub:UI-Entwurf} wurden umgesetzt. Der
+Task-Typ Benutzerinteraktion erscheint in einem blauen Oval, während die Status-Anzeige der Error-Tasks im roten Rechteck
+angezeigt wird. Durch die Formen allein sind die Task-Typen bereits unterscheidbar. Zusätzlich besitzt jede Status-Anzeige einen
+\sog Tooltip\footnote{Wenn die Maus über eine Element gehalten wird, erscheint eine kleine Infobox neben der Maus.}, welcher kurz
+und schlüssig die Anzeigen differenziert und erklärt. Dadurch kann auf eine Anwenderdokumentation verzichtet werden.
+
+In der Task-Übersicht ist erkennbar, dass außerdem alle weiteren Task-Typen einem Pastellton zugeordnet wurden. Darin ist
+ebenfalls der Hover-Effekt\footnote{Wenn die Maus über eine Element gehalten wird, wird dieses Element gesondert hervorgehoben.}
+sichtbar, der zur Verschönerung der Status-Anzeigen und des Farbbalkens hinzugefügt wurde.
+Angelehnt am bereits vorhandenem Hover-Effekt der Tabelle, bei der eine Zeile, über der die Maus liegt, subtil farblich
+hervorgehoben wird. So wird auch der farbliche Balken und die Status-Anzeige in der Farbtiefe angehoben (Siehe farblicher Balken
+in \Anhang{app:UI-Entwurf}).
+

@@ -1,0 +1,118 @@
+\section{Analysephase}
+\label{sec:Analysephase}
+Ziel der Analysephase ist es, Anforderungen zu definieren, die bis zum Projektabschluss in der bestehenden \Abkuerzung{Java
+EE}-Anwendung umgesetzt werden müssen. Dazu wird in der Ist-Analyse das bisherige System hinsichtlich der Task-Übersicht
+untersucht und beschrieben. Im Anschluss schildert das Soll-Konzept, wie die Zielsetzung\VerweisVF{sub:Motivation und
+Zielsetzung} mit dem Entwicklungsstand zum Zeitpunkt der Betrachtung erreicht werden soll. Nach einer kurzen Prüfung weiterer
+zukünftiger Anforderungen wird abschließend eine für das Projektumfeld hinreichende Wirtschaftlichkeitsbetrachtung dargelegt.
+
+\subsection{Ist-Analyse} 
+\label{sub:Ist-Analyse}
+Ein Task wird vom \Abkuerzung{VMS} automatisch generiert und ermöglicht bei bestimmten Ereignissen die Interaktion mit den
+Benutzern. Diese Task sind in vordefinierte Task-Typen unterteilt: Fehler, Information und Benutzerinteraktion (z.B. Bestätigung
+einer Vertragsänderung oder eines neuen Benutzers).
+
+In der Task-Übersicht findet der Endanwender alle offenen Tasks sowie die in Bearbeitung befindendlichen Task des eigenen
+Benutzers und seiner Benutzergruppen. Ein Benutzer kann nur aktiv nachsehen wie viele Tasks oder Info-Meldungen existieren. Dazu
+muss er die Task-Übersicht öffnen und nach einem spezifischen Task-Typ filtern. Erst dann wird die Anzahl der Task-Einträge für
+diesen Task-Typ ersichtlich. Der Benutzer wird weder auf neue Tasks hingewiesen, noch augenblicklich über diese informiert.
+\citep[vgl.][]{Antrag}
+
+\subsection{Soll-Konzept} 
+\label{sub:Soll-Konzept}
+Um einen schnellen Zugriff auf die Informationen "`Anzahl der offenen Tasks pro Typ"' gewährleisten zu können, sollen diese in die
+Navigationsleiste neben dem Menüpunkt "`Tasks"' integriert werden. Die Darstellung erfolgt getrennt nach Task-Typ. Als
+Darstellungsmittel werden einfache Symbole genutzt, welche die genannte Anzahl beinhalten. Dabei erhält jeder Typ eine Form und
+eine Farbe. Als Begrifflichkeit dafür wird im weiterem Verlauf "`Status-Anzeige"' genutzt. Dies kann sich auf die Anzeige eines
+oder aller Task-Typs beziehen.\\
+Dem Kunden sind die Task-Typen "`Fehler"' und "`Benutzerinteraktion"' besonders wichtig. Die Status-Anzeige der Tasks soll sich
+daher auf diese beiden beschränken.\\
+Der Fachanwender kann außerdem visuell explizit auf neue Tasks hingewiesen werden. Des Weiteren können die jeweiligen
+Status-Anzeigen auf die Task-Übersicht verlinkt werden. Die Übersicht wird dann entsprechend des Task-Typs gefiltert angezeigt.
+Dabei darf der Benutzer-spezifische Filter in der Weboberfläche visuell nicht verändert werden und muss weiterhin mit dem
+Benutzer-bekannten "`Filter anwenden"'-Button nutzbar sein. Die \AbbildungV{app:Mockup} dient zur Veranschaulichung dieser
+Anforderung.
+
+Zur Optimierung der Netzwerk- und Systemlast, muss darauf geachtet werden, dass die Anzeige vom \Abkuerzung{VMS} nur dann
+aktualisiert wird, wenn sich die angezeigte Information serverseitig geändert hat. Das herkömmliche Verfahren des sog.
+"`polling"' ist ungeeignet, da jeder Benutzer in einem festgelegtem Intervall die Informationen abfragt und damit eine erhöhte
+Last auf dem System erzeugt. Daher soll unter Anderem auf bekannte Verfahren wie "`Comet"' oder auch "`long-polling"' gesetzt
+werden. Bei diesen wird eine Anfrage zunächst vom Server nicht beantwortet sondern suspendiert. Liegt serverseitig ein Event vor,
+wird diese angehaltene Verbindung entsprechend beantwortet. Erst dann stellt der Browser erneut eine Anfrage. Er erhält also nur
+eine Antwort, wenn der Server dazu Bedarf sieht \citep[vgl.][]{HTTPLP}.
+
+\begin{figure}[t]
+\centering
+\includegraphicsKeepAspectRatio{Bilder/mockup_status-anzeige.png}{1}
+\caption{Mockup Status-Anzeige - Einbettung und Verknüpfung zur Task-Übersicht}
+\label{app:Mockup} 
+\end{figure}
+
+\subsection{Zukünftig mögliche Anforderungen} 
+\label{sub:Zukünftig mögliche Anforderungen}
+Da es sich bei der \Abkuerzung{TSO BSS} um ein Langzeitprojekt handelt, werden zukünftig zu erwartende Anforderungen im Konzept
+berücksichtigt. 
+
+Denkbar ist beispielsweise, dass die hier eingeführte Event-Technologie auch für andere Zwecke verwendet wird. Es könnte \zB
+gefordert werden, dass eine bestimmte Benutzergruppe direkten Einfluss auf einen Hintergrundprozess nehmen kann. Ein Prozess
+teilt dem \Abkuerzung{VMS} mit, dass eine Benutzerinteraktion erforderlich ist. Daraufhin löst \Abkuerzung{VMS} ein Event aus,
+dass bei einem Benutzer ein Popup anzeigt, welches die Aktion nachfragt. \\
+Des Weiteren könnte sich der Kunde dahingehend umentscheiden, dass nicht nur die in \Verweis{sub:Soll-Konzept} genannten
+Task-Typen angezeigt werden sollen, sondern auch weitere.\\
+Als Letztes wird davon ausgegangen, dass neben dem letzten Besuch der Offenen-Task-Übersicht eines Benutzers in Zukunft weitere
+Benutzer-abhängige Daten im \Abkuerzung{VMS} gesichert werden sollen. Dies wurde jedoch erst im Laufe der Realisierungsphase
+spezifiziert und im Rahmen des Puffers für Anforderungsänderungen, in \VerweisVL{subsub:UserStatusRepository}, beachtet.
+
+\subsection{Wirtschaftlichkeitsbetrachtung} 
+\label{sub:Wirtschaftlichkeitsbetrachtung}
+Zur Einhaltung des ökonomischen Prinzips wird die Wirtschaftlichkeit des Projektes überprüft. Dazu werden im Folgenden zunächst
+die zu ermittelten Projektkosten mit dem erwarteten Nutzen verglichen. Abgeschlossen wird diese Betrachtung mit einer
+Make-or-Buy-Entscheidung, die darlegt, warum nur eine Eigenentwicklung möglich ist und zur Realisierung ein kostenfreies Framework
+genutzt wird.
+
+\subsubsection{Kosten-Analyse} 
+\label{subsub:Kosten-Analyse}
+Die Kosten für das Projekt berechnen sich aus den Entwicklungskosten sowie den Kosten für zukünftige Anpassungen und Erweiterungen
+des daraus entstandenen Features.
+
+Zur Berechnung der Entwicklungskosten wird die in \VerweisKL{sub:Zeitlicher Rahmen des Projektes} genannte Projektdauer von 70
+Stunden genutzt und ein interner Verrechnungssatz von \eur{45} pro Stunde\footnote{Ausgedachter Wert; Der interne Satz darf nicht
+bekannt gegeben werden.} verwendet.
+Dieser setzt sich aus verschiedenen Kostenfaktoren zusammen. Dazu zählen unter anderem: Lohn- und Lohnnebenkosten, Energie,
+IT-Infrastruktur, Verwaltung, Nutzung von Räumlichkeiten \etc Somit ergibt sich für die reinen Entwicklungskosten ein Wert in Höhe
+von:
+\[ 70h * 45{\frac{\eur{}}{h}} = \eur{3150} \]
+
+\subsubsection{Nutzen-Analyse} 
+\label{subsub:Nutzen-Analyse}
+In der Nutzen-Analyse wird aufgezeigt, welcher Nutzen sich für die \Abkuerzung{BTC} aus der Investition in das Projekt "`\titel"'
+ ergibt. Dabei muss zwischen monetärem und nicht-monetärem Nutzen unterschieden werden.
+
+\paragraph{Monetärer Vorteil}
+Ein monetärer Vorteil entsteht im Regelfall durch die Verkaufserlöse einer Software. In Fall von \Abkuerzung{VMS} handelt es sich
+um eine Individualsoftware für einen Kunden, die kontinuierlich im Auftrag des Kunden weiterentwickelt wird. Der monetäre Vorteil
+erschließt sich also durch das Anbieten und gewinnbringende Verkaufen dieser Erweiterung in der nächsten Beauftragung. Der Erlös
+wird mit einem Verrechnungssatz von \eur{145} pro Stunde\footnote{Ausgedachter Wert; Der reelle Satz darf nicht
+bekannt gegeben werden.} ermittelt. Daraus kann der zu erwartene Gewinn wie folgt berechnet werden:
+\[ \bigg(70h * 145{\frac{\eur{}}{h}}\bigg) - \eur{3150} = \eur{7000} \]
+	
+\paragraph{Nicht-monetärer Vorteil}
+Ein nicht-monetärer Aspekt liegt vor, wenn dieser gar nicht bis unzureichend monetär bewertbar ist. Durch das Anbieten der
+Erweiterung signalisiert die \Abkuerzung{BTC} gegenüber dem Kunden das Verständnis seiner Bedürfnisse. Dies führt zu einer
+Verbesserung der Kundenzufriedenheit und -beziehung, welches wiederum zu weiteren Aufträgen führen kann. Das
+Task-Benachrichtigungssystem führt auch zu einer Verbesserung des operativen Tagesgeschäfts beim Kunden. So können die Mitarbeiter
+schneller über bestimmte Ereignisse informiert werden, was eine Optimierung der Reaktionszeiten bedeutet. Sobald in Oktober 2015
+in der Energie-Branche stündliche Vermarktungen eingeführt werden, wird beim Kunden dieser Faktor an Gewicht gewinnen.
+
+\subsubsection{Make-or-Buy-Entscheidung} 
+\label{subsub:Make-or-Buy-Entscheidung}
+Die in \VerweisVL{sub:Soll-Konzept} beschriebene Erweiterung ist so individuell, dass am Markt keine Lösung angeboten wird.
+Selbst im Falle eines standarisierten Marktproduktes könnte dieses nicht ohne größere Anpassungen und Implementierungsarbeiten
+eingesetzt werden. Da es sich außerdem bei \Abkuerzung{VMS} um eine ganzheitliche Eigenentwicklung der \Abkuerzung{BTC} handelt,
+soll auch weiterhin auf eine betriebsinterne Entwicklung gesetzt werden.
+
+\paragraph{Framework} Die Umsetzung der Kommunikation zwischen Server und Client sowie der Verbindungshaltung stellt einen
+kritischen Faktor dar. Das Atmosphere Framework bietet dafür geeignete Verfahren gemäß \VerweisVL{sub:Soll-Konzept} an. Auch um im
+Rahmen des magischen Dreiecks\footnote{Vgl.: \url{http://www.projektmanagementhandbuch.de/projektinitiierung/zieldefinition/}
+(Abruf: 24.03.2015).}: "`Zeit, Qualität und Kosten"' zu bleiben, wird auf das frei erhältliche Framework gesetzt. Dieses reduziert
+die benötigte Entwicklungszeit so, dass die geplante Projektdauer ohne Einschnitte in der Produktqualität eingehalten werden kann.

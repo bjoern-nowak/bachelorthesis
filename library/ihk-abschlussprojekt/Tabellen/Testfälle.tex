@@ -1,0 +1,30 @@
+\begin{longtable}{rp{2.5cm}|p{6.5cm}p{5.5cm}}
+\hline
+\rowcolor{head} \multicolumn{1}{c}{\textbf{Nr.}}   & \multicolumn{1}{c|}{\textbf{Testfall}} &
+\multicolumn{1}{c}{\textbf{Beschreibung}} & \multicolumn{1}{c}{\textbf{Erwartetes Ergebnis}} \\
+\hline
+1     & Consistent\linebreak \Fachbegriff{Repository} & Das \Fachbegriff{Repository} wird über definierte Schnittstellen zu verschiedenen Laufzeiten
+angesprochen. & Daten sind vorhanden und können nur vom \Fachbegriff{Repository} modifiziert werden. \\
+\hline
+\rowcolor{odd}2     & Task statistics validated & Es werden \Abkuerzung{SQL}-Abfragen bei verschiedenen Datenbankständen
+durchgeführt. & Korrekte Ergebnisse der Tasks-Statistik werden geliefert. \\
+\hline
+3     & Connectivity & Beim Aufrufen von \Abkuerzung{VMS} wird das Netzwerk-Traffic überwacht.  & Client-Server Verbindung besteht
+(\acs{XML}HttpRequest auf "pending"). \\
+\hline
+\rowcolor{odd}4     & Incoming\linebreak event & Es wird ein Event publiziert. & Im Frontend wird die JavaScript-Methode
+\Methode{onMessage} angesprochen. \\
+\hline
+5     & Data transfer & Es wird ein Event mit Inhalt publiziert. & Event-Daten sind im \Abkuerzung{JSON}-Format. \\
+\hline
+\rowcolor{odd}6     & Frontend event handling & Es wird ein Event publiziert. & Task-Event sorgt für Aktualisierung der
+\Abkuerzung{UI}-Task-Status-Anzeige. \\
+\hline
+7     & User scoping & Es werden Events mit unterschiedlichen Zielgruppen/-personen publiziert. & Nur gewünschte Benutzer werden
+benachrichtigt. \\
+\hline
+\rowcolor{odd}8     & Accessibility  & Die Weboberfläche wird S/W betrachtet. & Status-Anzeigen sind barrierefrei Nutzbar. \\
+\hline
+9     & Browser\linebreak compatibility & Die Weboberfläche wird mit den vier "major browser"\footnotemark{} getestet. & Das
+Design funktioniert bei allen angemessen.  \\
+\end{longtable}

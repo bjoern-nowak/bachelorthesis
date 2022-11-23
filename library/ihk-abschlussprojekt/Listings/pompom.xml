@@ -1,0 +1,15 @@
+<!-- ...  -->
+<properties>
+	<!-- ...  -->
+	<atmosphere.version>2.2.6</atmosphere.version>
+</properties>
+
+<dependencies>
+	<!-- ...  -->
+	<dependency>
+		<groupId>org.atmosphere</groupId>
+		<artifactId>atmosphere-runtime</artifactId>
+		<version>${atmosphere.version}</version>
+	</dependency>
+</dependencies>
+<!-- ...  -->

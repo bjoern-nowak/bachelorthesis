@@ -1,0 +1,85 @@
+\section{Einleitung}
+\label{sec:Einleitung}
+
+\subsection{Vorwort} 
+\label{sub:Vorwort}
+Im Jahre 2012 begann ich meine Ausbildung zum Fachinformatiker für Anwendungsentwicklung bei der \Abkuerzung{BTC}. Zuvor
+habe ich eine schulische Ausbildung zum staatlich geprüfter TAI\footnote{Technischer Assistent für Informatik.} absolviert und
+erlangte an derselben Schule die Fachhochschulreife. Seit Mitte Juli 2013 arbeite ich, fast durchgängig, in dem im
+Kapitel~\ref{sub:Projektumfeld} beschriebenem Team.
+
+Es liegt die Dokumentation des Projektes "`Erweiterung einer Webanwendung um Task Notifications"' vor. Dieses Projekt habe ich im
+Rahmen der angestrebten IHK-Ausbildung bei der \Abkuerzung{BTC} durchgeführt. Es stellt einen möglichen Prozess der Erweiterung
+einer bestehenden Webanwendung dar.
+
+\subsection{Kurzporträt der Ausbildungsstätte} 
+\label{sub:Kurzporträt der Ausbildungsstätte}
+Die BTC Business Technology Consulting AG ist eines der führenden IT-Consulting-Unternehmen in Deutschland mit
+Niederlassungen in der Schweiz, der Türkei, Polen und Japan. Das Unternehmen mit mehr als 1.600 Mitarbeitern und Hauptsitz in
+Oldenburg ist Partner von SAP und Microsoft. \Abkuerzung{BTC} erzielte in 2013 einen Umsatz von 195,2 Mio. Euro.
+
+\Abkuerzung{BTC} hat ein ganzheitliches, auf Branchen ausgerichtetes IT-Beratungsangebot und damit eine führende Position in den
+Bereichen Energie, Telekommunikation, Öffentlicher Sektor, Industrie und Dienstleistungen. Das Angebot umfasst Beratung,
+Systemintegration sowie Applikations- und Systemmanagement. Ein weiterer Fokus liegt auf energienahen Softwareprodukten.
+
+Seit der Gründung im Jahre 2000 hat die \Abkuerzung{BTC} ein dichtes Netz an Geschäftsstellen aufgebaut, um IT-Consulting kundennah
+erbringen zu können (Oldenburg, Berlin, Bremen, Hamburg, Leipzig, Mainz, Münster, Neckarsulm, Zürich, Poznań, Istanbul, Ankara,
+Tokio). \citep{BTC}
+
+\begingroup
+\setlength\intextsep{0pt}
+
+\subsection{Projektumfeld} 
+\label{sub:Projektumfeld}
+Das Projekt war im Entwicklerteam I des Bereiches "`Non-SAP Technologien"' der "`Business Unit Markets"' angesiedelt.
+Dieses Team ist hauptsächlich für die Entwicklung des Kundenprojektes \Abkuerzung{TSO BSS} zuständig. Daraus resultiert unter
+Anderem die Webanwendung \Abkuerzung{VMS}. Das Projekt ist als Teilprojekt der allgemeinen Weiterentwicklung des
+\Abkuerzung{VMS} zu sehen. Im Folgenden gehe ich daher kurz auf die \Abkuerzung{TSO BSS} und das \Abkuerzung{VMS} ein.  
+
+\begin{wrapfigure}[12]{r}[25pt]{0\textwidth}
+\includegraphicsKeepAspectRatio{Bilder/Systemlandschaft.pdf}{0.6}
+\caption{Systemlandschaft}
+\label{app:Systemlandschaft} 
+\end{wrapfigure}
+Die \Abkuerzung{TSO BSS} gehört dem Sektor Energie an und ist ein Vertrags- und Kapazitätsmanagementsystem mit einer engen
+Anbindung zu Vermarktungsplattformen. Die Webanwendung \Abkuerzung{VMS} dient der Verwaltung von Kundenverträgen. Zusätzlich
+unterstützt das System sowohl in fachlichen als auch technischen Prozessen. Als Kommunikationszentrale spricht das
+\Abkuerzung{VMS} mit nachgelagerten Systemen des \Abkuerzung{TSO} sowie mit externen Systemen, wie \zB Vermarktungsplattformen
+(Siehe \Abbildung{app:Systemlandschaft}) \citep[vgl.][]{TSOBSS}.
+
+\endgroup
+
+\subsection{Motivation und Zielsetzung} 
+\label{sub:Motivation und Zielsetzung}
+\Abkuerzung{BTC} hat für das \Abkuerzung{VMS} eine Erweiterung identifiziert und dem Kunden vorgestellt. Der Kunde hat dann
+die Umsetzung beauftragt.
+
+Der Benutzer soll zu jeder Zeit auf einen Blick die Task-Anzahl, der ihm oder seiner Benutzerrolle zugewiesenen offenen Tasks,
+sehen können. Hinsichtlich der Benutzerfreundlichkeit sollte diese Anzeige so in Form und Farbe gestaltet werden, dass
+diese intuitiv und auch für Menschen mit Sehschwächen, wie Farbenblindheit, ohne Einschränkungen nutzbar ist \citep{Antrag}.
+
+\subsection{Erklärung zum Dokument} 
+\label{sub:Erklärung zum Dokument}
+An dieser Stelle wird die Gestaltung des Dokuments erläutert. 
+\begin{itemize}[noitemsep]
+  \item Ein {[\textit{kursiver Text}]} weist auf eine Abkürzung hin, die im Abkürzungsverzeichnis zu finden ist.
+  \item Ein {[\textbf{fettgedruckter Text}]}, mit Ausnahme von Überschriften, weist auf einen Fachbegriff hin, zu dem im Dokument
+  eine Erklärung vorliegt. Ausgenommen sind Erklärungen in Fußnoten.
+  \item Ein {[\texttt{Text in Schreibmaschinenschrift}]} weist auf eine Klasse oder Methode hin.
+  \item Ein {[\textsf{Text in serifloser Schrift}]} weist auf sonstige Programmcode-Textbausteine hin.
+  \item Liegt das Dokument in elektronischer Form vor, sind Abkürzungen und Quellenangaben zum jeweiligen Verzeichniseintrag
+  verlinkt.
+\end{itemize}
+
+\subsection{Aufbau des Dokuments} 
+\label{sub:Aufbau des Dokuments}
+Einführend wird ein Überblick über den Aufbau der vorliegenden Projektdokumentation gegeben.
+
+Im folgenden Kapitel wird auf die Rahmenbedingungen und Vorgehensweiße zur Durchführung des Projektes eingegangen.
+Im dritten Kapitel wird die zugrundeliegende Webanwendung analysiert, Anforderungen an das Projekt definiert und die
+Wirtschaftlichkeit dargelegt.
+Die festgelegten Anforderungen werden im Kapitel Vier zu einem Konzept zusammengefasst.
+Das anschließende fünfte Kapitel erklärt wie das Konzept umgesetzt wurde.
+Nachfolgend wird im sechsten Kapitel aufgezeigt wie die Softwarequalität bewahrt wurde.
+Abschließend wird die Projektdurchführung in Kapitel Sieben zusammengefasst betrachtet und ein persönliches Fazit gezogen.
+
