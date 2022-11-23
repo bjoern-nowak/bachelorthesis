@@ -1,0 +1,24 @@
+\begingroup
+\hypersetup{linkcolor = black}
+
+\pdfbookmark[1]{Inhaltsverzeichnis}{toc}
+\addtocontents{toc}{\vspace{-14px}}
+\tableofcontents
+\addtocontents{toc}{\protect\setstretch{1.2}}
+\clearpage
+
+\listoftables
+\clearpage
+
+\listoffigures
+\clearpage
+
+\endgroup
+
+\newcommand{\abkvz}{Abkürzungsverzeichnis}
+\renewcommand{\nomname}{\abkvz}
+\section*{\abkvz}
+\label{toc:\abkvz}
+\markboth{\abkvz}{\abkvz}
+%\addcontentsline{toc}{section}{\abkvz}
+\input{abbreviation.tex}

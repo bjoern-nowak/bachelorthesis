@@ -1,0 +1,63 @@
+\clearpage
+
+
+\section{Realisierungsphase}
+\label{sec:Realisierungsphase}
+asdfasdf
+
+\subsection{Projektstruktur}
+\label{sub:Projektstruktur}
+\footnotetext{Internet Explorer (bis Version 7 pflicht), Mozilla Firefox, Google Chrome, Opera.}
+\input{picture/new_packages.tex}
+asdfasdf "`Domain Driven
+Design"'\footnote{Definition siehe .} asdfasdf \Code{"`com.<mandant>.contrax"'} asdfasdf \Code{<mandant>}
+asdfasdfasdf \AnhangK{app:Paketstruktur} asdfasdf \Abbildung{app:DifferenzPacketstruktur} asdfasdfasdf
+
+\subsection{Einrichten/Konfigurieren von Atmosphere}
+\label{sub:Einrichten/Konfigurieren von Atmosphere}
+Dasdfasdf \Anhang{app:pom.xml} asdfasdf Maven\footnote{Maven ist ein "`Build-Management-Tool"' basierend auf
+Java.} asdfasdf \Klasse{VmsWebAppInitializer} asdfasdf \Code{web.xml} asdfasdf \Code{"/notify/*"} asdfasdf
+\Fachbegriff{Spring} asdfasdf (siehe )
+
+\subsection{Kommunikation: Server zu Client}
+\label{sub:Kommunikation: Server zu Client}
+asdfasdf asdf \Anhang{app:main.js}
+\begin{description}
+    \item [AtmosphereHandler] asdfasdf \Klasse{AtmosphereHandler} \Code{"/notify/*"} asdfas
+    \item [Broadcaster] asdfasdf \Methode{broadcast} asdfasdf \MethodenRef{AtmosphereResource\#getBroadcaster()} asdf
+    aasdfasfd \sog \Code{Factory}\footnote{asdfasdf \Code{Factory}-asdfasdfe \zB asdfasdf} asdf
+\end{description}
+
+\subsubsection{Verbindungshaltung}
+\label{subsub:Verbindungshaltung}
+asdfasdf (\Code{\acs{SQL}HttpRequest}) asdfasdf \Fachbegriff{Resource} asdfasdf \VerweisVL{sub:Soll-Konzept} aufgezeigt.\\
+asdfasdf
+
+\subsection{Datenhaltung}
+\label{sub:Datenhaltung}
+asdfasdfasdf \AnhangKapitel{app:Quellcode}
+
+\subsubsection{UserStatusRepository}
+\label{subsub:UserStatusRepository}
+\begin{description}
+    \item [Repository]
+    asdfasdf
+\end{description}
+
+Zum Zeitpunkt der Implementierung wird bisher nur der letzte Besuch der Offenen-Task-Übersicht eines jeden Benutzers im
+\Fachbegriff{Repository} gespeichert. Die Ermittlung des Zeitstempels wird unten stehend erklärt. Da es sich lediglich um ein
+\Code{DateTime}-Objekt handelt, könnte diese Information in der vorhandenen Datenbank gespeichert werden. Gemäß dem Abschnitt
+Datenhaltung aus \VerweisVL{sub:Technisches Konzept} wurde jedoch das \Fachbegriff{Repository} entwickelt.
+
+\subsubsection{TaskNotificationStatisticsModel}
+\label{subsub:TaskNotificationStatisticsModel}
+asdfasdf \VerweisVF{sub:Soll-Konzept} asdfasdf
+
+\subsection{Datenübertragung}
+\label{sub:Datenübertragung}
+asdfasdf \ggfs asdfasdf
+
+\subsection{UI-Entwurfsumsetzung}
+\label{sub:UI-Entwurfsumsetzung}
+asdfasdf \VerweisKL{sub:Soll-Konzept} sdfg
+

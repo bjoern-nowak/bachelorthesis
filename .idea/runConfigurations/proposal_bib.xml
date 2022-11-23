@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="proposal bib" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
     <texify-bibtex>
-      <compiler>BIBTEX</compiler>
+      <compiler>BIBER</compiler>
       <compiler-path />
       <compiler-arguments />
       <envs>
@@ -9,7 +9,7 @@
         <env name="BSTINPUTS" value="$PROJECT_DIR$/src/proposal:" />
       </envs>
       <main-file>$PROJECT_DIR$/src/proposal/proposal.tex</main-file>
-      <aux-dir>$PROJECT_DIR$/out/proposal</aux-dir>
+      <aux-dir>$APPLICATION_HOME_DIR$/bin</aux-dir>
     </texify-bibtex>
     <method v="2" />
   </configuration>

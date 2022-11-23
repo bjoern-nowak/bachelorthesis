@@ -1,0 +1,66 @@
+\documentclass[
+%toc=listof, % Abbildungsverzeichnis sowie Tabellenverzeichnis in das Inhaltsverzeichnis aufnehmen
+    toc=bibliography, % Literaturverzeichnis in das Inhaltsverzeichnis aufnehmen
+    footnotes=multiple, % Trennen von direkt aufeinander folgenden Fußnoten
+    parskip=half % vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+]{scrartcl}
+
+% ----- settings --------------------------------
+\usepackage[utf8]{inputenc} % erlaubt Sonderzeichen im source; hier, weil meta es bereits braucht und packages.tex meta.tex nutzt
+\input{setting/meta.tex}
+\input{setting/packages.tex}
+\input{setting/style.tex}
+\input{setting/commands.tex}
+
+
+% ----- Start document --------------------------
+\begin{document}
+
+% ----- cover -----------------------------------
+    \clearpage
+
+    \input{cover.tex}
+
+% ----- preface ---------------------------------
+    \clearpage
+    \newpage\null\thispagestyle{empty}\newpage % empty page
+    \pagenumbering{Roman}
+
+    \input{preface.tex}
+
+% ----- content ---------------------------------
+    \clearpage
+    \newpage\null\thispagestyle{empty}\newpage % empty page
+    \pagenumbering{arabic}
+
+    \input{content/Einleitung}
+    \input{content/Planungsphase}
+    \input{content/Analysephase}
+    \input{content/Konzeptphase}
+    \input{content/Realisierungsphase}
+    \input{content/Qualitätssicherungsphase}
+    \input{content/Abschlussphase}
+
+% ----- declaration on oath ---------------------
+    \clearpage
+    \pagenumbering{arabic}
+
+    \input{declaration-on-oath.tex}
+
+% ----- bibliography ----------------------------
+    \clearpage
+    \pagenumbering{roman}
+
+    \renewcommand{\refname}{Literaturverzeichnis}
+    \printbibliography
+% TODO may divide sources, see https://www.overleaf.com/learn/latex/Articles/Getting_started_with_BibLaTeX
+
+% ----- appendix --------------------------------
+    \clearpage
+    \pagenumbering{roman}
+
+    \input{appendix.tex}
+
+% ----- End document ----------------------------
+\end{document}
+

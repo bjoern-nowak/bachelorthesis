@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="template bib" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+    <texify-bibtex>
+      <compiler>BIBER</compiler>
+      <compiler-path />
+      <compiler-arguments />
+      <envs>
+        <env name="BIBINPUTS" value="$PROJECT_DIR$/src/template" />
+        <env name="BSTINPUTS" value="$PROJECT_DIR$/src/template:" />
+      </envs>
+      <main-file>$PROJECT_DIR$/src/template/template.tex</main-file>
+      <aux-dir>$PROJECT_DIR$/out/template</aux-dir>
+    </texify-bibtex>
+    <method v="2" />
+  </configuration>
+</component>

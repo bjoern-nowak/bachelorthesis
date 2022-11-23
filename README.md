@@ -22,6 +22,16 @@ Start install (press ``I``; confirm with ``ENTER``).
 Install ``TeXiFy IDEA`` Plugin
 
 
+### Install deprecated KOMA-Script srcpage2
+
+``cd src/library/koma-script-obsolete && tex srcpage2-obsolete.dtx``
+
+``mkdir -P ~/texmf/tex/latex/local``
+
+``cp src/library/koma-script-obsolete/srcpage2.sty ~/texmf/tex/latex/local/``
+
+Else following error will pop up: ``! LaTeX Error: File `scrpage2.sty' not found.``
+
 ## Trobuleshoot
 
 ### Fix old/wrong TEX Live version is used

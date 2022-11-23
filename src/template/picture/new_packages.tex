@@ -1,0 +1,34 @@
+\begin{wrapfigure}[14]{r}[25pt]{0\textwidth}
+    \tikzstyle{every node}=[draw=black,thick,anchor=west]
+    \tikzstyle{new}=[dashed,fill=hig]
+    \scalebox{0.8}{
+        \begin{tikzpicture}
+            [%
+            grow via three points={one child at (0.5,-0.7) and
+            two children at (0.5,-0.7) and (0.5,-1.4)},
+            edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+            \texttt{
+                \node {com.<mandant>.contrax}
+                child { node {party.domain}
+                child { node [new] {repository}
+                }
+                }
+                child [missing] {}
+                child { node {shared.infrastructure.async}
+                child { node [new] {atmosphere}
+                child { node [new] {domain}
+                child { node [new] {model}
+                }
+                child { node [new] {service}
+                child { node [new] {impl}
+                }
+                }
+                }
+                }
+                };
+            }
+        \end{tikzpicture}
+    }
+    \caption{Differenz zur vorherigen Packetstruktur}
+    \label{app:DifferenzPacketstruktur}
+\end{wrapfigure}
