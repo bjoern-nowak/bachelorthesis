@@ -1,0 +1,52 @@
+wie kommt man auf das thema/anwendungsbereich?
+
+
+helden generierung und verwaltung?
+wie soll die API aussehen, da es entscheiend ist wie die backend funktionalitaeten sind. gibt das backend dem frontend das vor oder muss es abgestimmt werden.
+-> frontend in arbeit, ansprachen ja, abhaenigkeit nein
+
+bedeutet verwaltung dass das backend auch eine DB braucht?
+
+was genau wird unter verwaltung gemeint? (das ein held z.b. neue faehigkeiten bekommen soll und entsprechend die regeln anwendung finden)
+-> nur generirung wichtig
+-> verwatlung -> aufleveln
+-> import/export json vllt
+
+
+wo liegt der bewertungsschwerpunkt?
+eher auf funktionalen code, qualität des codes, architektur
+oder auf den BA text, z.b. begründung/herleitung warum man etwas so macht (entschieden hat)
+-> opensource -> code doc und qualitaet wichtiger als text
+-> uml nicht notwendig
+-> sauber architektur -> begrenzte funktionalitaet
+-> handvoll rassen und profession, gemiensam raussuchen
+-> regelbasis sollte kontinuerlich erweiterbar sein
+
+OpenSource direkt offen, oder basis architektur
+
+webframework -> wie solver
+-> anforderungsanalyse
+
+ist python und anwser set programming (clingo) ziel oder wirklich vorschlag?
+-> in der BA z.B. dennoch ein vergleich von alternativen machen, so das ASP und python rauskommt
+
+reicht es auch wenn wenige regeln umgesetzt sind, weil dadurch ja bereits die notwendige struktur/konzept gelegt ist und der rest fleisarbeit ist
+-> noten einfluss?
+
+
+
+formalien
+wie darf das verhaeltnis von text und code in der arbeit sein?
+---> verweis auf git repo, nur snippets, keine ganzen klassen
+
+wie ist der orga ablauf? an der uni OL war immer ein proposal vor der eig. BA anmeldung notwendig?
+-> zeitaufwand
+-> proposal schreiben ja -> schmall 4-5 seiten, 3 standard seiten
+---> ASP aufbereiten, literatur und darstellung
+-----. kommt dann in die BA
+
+wer ist zweitprüfer? von der UNI oder weiterhin vom offis?
+--> erstprufer von uni -> astrid (digitaliser energie systeme)
+
+ist word oder latex bevorzugt, also gibt es vorlagen?
+latex bevorzugt
