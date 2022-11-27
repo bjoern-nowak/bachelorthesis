@@ -9,7 +9,7 @@
         <env name="BSTINPUTS" value="$PROJECT_DIR$/src/thesis:" />
       </envs>
       <main-file>$PROJECT_DIR$/src/thesis/thesis.tex</main-file>
-      <aux-dir />
+      <aux-dir>$PROJECT_DIR$/out/thesis</aux-dir>
     </texify-bibtex>
     <method v="2" />
   </configuration>
