@@ -1,19 +1,41 @@
-%! Author = bjnowak
-%! Date = 22.11.22
+\documentclass[
+    %toc=listof, % Abbildungsverzeichnis sowie Tabellenverzeichnis in das Inhaltsverzeichnis aufnehmen
+    toc=bibliography, % Literaturverzeichnis in das Inhaltsverzeichnis aufnehmen
+    footnotes=multiple, % Trennen von direkt aufeinander folgenden Fußnoten
+    parskip=half % vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+]{scrartcl}
 
-% Preamble
-\documentclass[11pt]{article}
+% ----- settings --------------------------------
+\usepackage[utf8]{inputenc} % erlaubt Sonderzeichen im source; hier, weil meta es bereits braucht und packages.tex meta.tex nutzt
+\input{setting/packages.tex}
+\input{setting/meta.tex}
+\input{setting/style.tex}
+\input{setting/commands.tex}
 
-% Packages
-\usepackage{amsmath}
 
-% Document
+% ----- Start document --------------------------
 \begin{document}
+%    \layout % zeige seitenränder und co als bild
 
-    Insert your thesis.
+% ----- content ---------------------------------
+    \clearpage
+    \pagenumbering{arabic}
+
+    \input{content/kopf.tex}
+    \input{content/problem.tex}
+    \input{content/ablauf.tex}
+    \input{content/orga.tex}
+    \input{content/voraussetzungen.tex}
+    \input{content/gliederung.tex}
+    \input{content/meilensteine.tex}
+
+% ----- bibliography ----------------------------
+    \clearpage
+    \pagenumbering{roman}
 
     \nocite{*} % TODO may remove
-    \bibliography{proposal}
-    \bibliographystyle{plain}
+    \renewcommand{\refname}{Literaturverzeichnis}
+    \printbibliography
 
+% ----- End document ----------------------------
 \end{document}

@@ -1,0 +1,125 @@
+% Anpassung an Landessprache ---------------------------------------------------
+\usepackage[ngerman]{babel}
+
+% Umlaute ----------------------------------------------------------------------
+%   Umlaute/Sonderzeichen wie äüöß direkt im Quelltext verwenden (CodePage).
+% ------------------------------------------------------------------------------
+\usepackage[T1]{fontenc} % Erlaubt automatische Trennung von Worten mit Umlauten.
+\usepackage{textcomp} % Euro-Zeichen etc.
+
+% Schrift ----------------------------------------------------------------------
+\usepackage{relsize} % Schriftgröße relativ festlegen
+
+\usepackage{lmodern} % bessere Font fuer PDFs als latex default
+%\usepackage{libertine} \usepackage{libertinust1math} % eigener fav 1 - text
+
+%\usepackage{mathptmx} % uni vorgabe - times new romes
+%\usepackage{nunito} % uni coporate design
+%\usepackage[sfdefault]{biolinum}  % eigener fav 1 - überschriften
+%% Option 'sfdefault' only if the base font of the document is to be sans serif
+
+% Tabellen ---------------------------------------------------------------------
+\PassOptionsToPackage{table}{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{bigstrut}
+\usepackage{longtable} % für lange Tabellen
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{lscape}
+\usepackage{makecell} % cellen formatierung mit \makecell
+\usepackage{tablefootnote} % erlaubt fotenotes in tabellen ohne tricks
+\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}} % Spaltendefinition rechtsbündig mit definierter Breite
+
+% Grafiken ---------------------------------------------------------------------
+\usepackage[dvips,final]{graphicx} % Einbinden von JPG-Grafiken ermöglichen
+\usepackage{graphics} % keepaspectratio
+\usepackage{floatflt} % zum Umfließen von Bildern
+
+
+\usepackage{tikz} % visualisation
+\usetikzlibrary{trees} % directory trees
+
+\usepackage{wrapfig}
+
+% Sonstiges --------------------------------------------------------------------
+\usepackage{amssymb} % fuer /checkmark
+\usepackage{amsmath,amsfonts} % Befehle aus AMSTeX für mathematische Symbole
+\usepackage{enumitem} % anpassbare Enumerates/Itemizes
+\usepackage{xspace} % sorgt dafür, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
+
+\usepackage{makeidx} % für Index-Ausgabe mit \printindex
+\usepackage{acronym} % es werden alle Definitionen aufgelistet | nur benutze : \usepackage[printonlyused]{acronym}
+
+% Einfache Definition der Zeilenabstände und Seitenränder etc.
+\usepackage{setspace}
+\usepackage{geometry}
+% TODO may include
+%\usepackage[compact]{titlesec} % Zeilenabstände
+\usepackage{layout} % für command #layout
+
+% Symbolverzeichnis
+\usepackage[intoc]{nomencl}
+\let\abbrev\nomenclature
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{.25\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+
+\usepackage{url} % URL verlinken, lange URLs umbrechen etc.
+\usepackage{chngcntr} % fortlaufendes Durchnummerieren der Fußnoten
+\usepackage{ifthen} % bei der Definition eigener Befehle benötigt
+\usepackage{todonotes} % definiert u.a. die Befehle \todo und \listoftodos
+
+\usepackage[
+    backend=biber, %is default
+    style=ieee, % numeric, alphabetic, authoryear, authortitle, science, ieee
+    sorting=nyt
+]{biblatex} % literaturverzeichnis
+
+% nty   Sort by name, title, year.
+% nyt   Sort by name, year, title.
+% nyvt  Sort by name, year, volume, title.
+% anyt  Sort by alphabetic label, name, year, title.
+% anyvt Sort by alphabetic label, name, year, volume, title.
+% ynt   Sort by year, name, title.
+% ydnt  Sort by year (descending), name, title.
+% none  Do not sort at all. All entries are processed in citation order.
+
+
+% PDF-Optionen -----------------------------------------------------------------
+\usepackage{pdfpages}
+\pdfminorversion=5 % erlaubt das Einfügen von pdf-Dateien bis Version 1.7, ohne eine Fehlermeldung zu werfen (keine Garantie für fehlerfreies Einbetten!)
+\usepackage[
+    bookmarks,
+    bookmarksnumbered,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    colorlinks=true,
+% diese Farbdefinitionen zeichnen Links im PDF farblich aus
+    linkcolor=main, % einfache interne Verknüpfungen
+    anchorcolor=main,% Ankertext
+    citecolor=main, % Verweise auf Literaturverzeichniseinträge im Text
+    filecolor=main, % Verknüpfungen, die lokale Dateien öffnen
+    menucolor=main, % Acrobat-Menüpunkte
+    urlcolor=main,
+% diese Farbdefinitionen sollten für den Druck verwendet werden (alles schwarz)
+%linkcolor=black, % einfache interne Verknüpfungen
+%anchorcolor=black, % Ankertext
+%citecolor=black, % Verweise auf Literaturverzeichniseinträge im Text
+%filecolor=black, % Verknüpfungen, die lokale Dateien öffnen
+%menucolor=black, % Acrobat-Menüpunkte
+%urlcolor=black,
+%
+%backref, % Quellen werden zurück auf ihre Zitate verlinkt
+    pdftex,
+    plainpages=false, % zur korrekten Erstellung der Bookmarks
+    pdfpagelabels=true, % zur korrekten Erstellung der Bookmarks
+    hypertexnames=false, % zur korrekten Erstellung der Bookmarks
+    linktoc=all%linktocpage % Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
+]{hyperref}
+
+
+% zum Einbinden von Programmcode -----------------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
