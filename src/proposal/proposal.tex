@@ -15,6 +15,7 @@
 
 % ----- Start document --------------------------
 \begin{document}
+    \pagenumbering{arabic}
 %    \layout % zeige seitenränder und co als bild
 
 % ----- preface ---------------------------------
@@ -22,7 +23,6 @@
 
 % ----- content ---------------------------------
     \clearpage
-    \pagenumbering{arabic}
 
     \input{content/kopf.tex}
     \input{content/problem.tex}
@@ -33,10 +33,6 @@
     \input{content/meilensteine.tex}
 
 % ----- bibliography ----------------------------
-    \clearpage
-    \pagenumbering{roman}
-
-    \nocite{*} % TODO may remove
     \renewcommand{\refname}{Literaturverzeichnis}
     \printbibliography
 
