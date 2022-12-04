@@ -31,7 +31,8 @@
 \newcommand{\TabelleV}[1]{Tabelle~\ref{#1}: \nameref{#1} auf S.~\pageref{#1}}
 
 \newcommand{\includegraphicsKeepAspectRatio}[2]{\includegraphics[width=#2\textwidth,height=#2\textheight,keepaspectratio]{#1}}
-\newcommand{\Zitat}[2][\empty]{\ifthenelse{\equal{#1}{\empty}}{\parencite{#2}}{\parencite[#1]{#2}}}
+\NewDocumentCommand{\Zitat}{ O{} O{} m }{\parencite[#1][#2]{#3}\xspace}
+\NewDocumentCommand{\ZitatVgl}{ O{} m }{\parencite[vgl.][#1]{#2}\xspace}
 \newcommand{\Autor}[1]{\textsc{#1}} % zum Ausgeben von Autoren
 \newcommand{\itemd}[2]{\item{\textbf{#1}}\\{#2}} % erzeugt ein Listenelement mit fetter Überschrift
 
