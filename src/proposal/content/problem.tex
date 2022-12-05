@@ -1,9 +1,13 @@
 \section{Problemstellung}
+\label{sec:problemstellung}
 
-Beim Rollenspiel \ac{DSA} handelt es sich um ein \sog \ac{PPRPG}.
+\subsection{Fachliche Betrachtung}
+\label{subsec:fachliche-betrachtung}
+
+Beim Rollenspiel \Abk{DSA} handelt es sich um ein \sog \Abk{PPRPG}.
 Diese zeichnen sich \insb dadurch aus, dass die Teilnehmer physisch am selben Ort sind und vor allem mit Stift und
 Papier gearbeitet wird.
-Grundsätzlich wird in einem \ac{PPRPG} eine fiktive Geschichte von fiktiven Charakteren durch die Teilnehmer interaktiv
+Grundsätzlich wird in einem \Abk{PPRPG} eine fiktive Geschichte von fiktiven Charakteren durch die Teilnehmer interaktiv
 konstruiert und erzählt.
 Ein Teilnehmer besetzt die Rolle des \sog Spielleiters\; die Restlichen sind \sog Spieler.
 Der Spielleiter führt anhand einer fertig beschriebenen Spielwelt und einem passenden Regelwerk die Spieler durch die
@@ -11,20 +15,23 @@ Geschichte.
 Die Spieler besetzen jeweils die Rolle eines Charakters und beschreiben diesen auf einen \sog Charakterbogen, auf
 dem \uA dessen Beruf und Fähigkeiten stehen.
 
-Das \ac{PPRPG} Regelwerk zu \ac{DSA} ist im Jahr 1984 erschienen und befindet sich aktuell in der 5ten-Ausgabe aus 2015.
+Das \Abk{PPRPG} Regelwerk zu \Abk{DSA} ist im Jahr 1984 erschienen und befindet sich aktuell in der 5ten-Ausgabe aus
+2015.
 Es zeichnet sich \insb durch den Umfang und die Komplexität aus, was \uA die Character-Erstellung und -Verwaltung für
 die Teilnehmer deutlich schwer macht.
-Nachfolgend wird dies vereinfacht dargestellt:
+
+\subsubsection{Charakter-Erstellung \textit{(vereinfachte Darstellung)}}
+\label{subsubsec:charakter-erstellung}
 
 Ein Character definiert sich durch die folgenden Merkmale: seine Spezies, Kultur, Profession, Eigenschaften,
 Fertigkeiten sowie Vor- und Nachteilen.
 Einige Merkmale können Stufen \bzw eine Wertigkeit haben, \uA Eigenschaften, Fertigkeiten sowie Vor- und Nachteile.
 Fertigkeiten bestehen aus Talenten, Zaubern, magischen Handlungen und Liturgien.
-Jeder dieser Merkmale, oder die Steigerung einer Stufe/Wertigkeit, kostet dem Spieler \ac{AP} und kann bei der Wahl von
-Nachteilen \ac{AP} zurückbekommen.
-Bei der Character-Erstellung hat jeder Spieler eine, vom Spielleiter, vorgegebene Anzahl an Start-\ac{AP}.
+Jeder dieser Merkmale, oder die Steigerung einer Stufe/Wertigkeit, kostet dem Spieler \Abk{AP} und kann bei der Wahl von
+Nachteilen \Abk{AP} zurückbekommen.
+Bei der Character-Erstellung hat jeder Spieler eine, vom Spielleiter, vorgegebene Anzahl an Start-\Abk{AP}.
 Zunächst wird damit die Spezies, Kultur(en) und Profession ausgewählt.
-Mit den restlichen \ac{AP} wird für Fertigkeiten, Vorteile und andere Spielmechaniken bezahlt oder durch Nachteile
+Mit den restlichen \Abk{AP} wird für Fertigkeiten, Vorteile und andere Spielmechaniken bezahlt oder durch Nachteile
 erworben.
 Abschließen sind acht Basiswerte zu berechnen.
 Diese werden durch die Spezies, den Eigenschafts-Stufen, Vor- und Nachteilen sowie Sonderfertigkeiten beeinflusst.
@@ -58,7 +65,7 @@ Die \og Merkmale können sich \bspw gegenseitig beeinflussen oder ausschließen:
     \item Eine Profession gibt Fertigkeiten (Talente, Zauber, Rituale, Liturgien) vor
     \ZitatVgl{Regelwiki-Beruf-BruderDesFeuers}.
     \item Einige Fertigkeiten stehen nur bestimmten Professionen zur Verfügung (\sog Berufsgeheimnis*se)
-    \Zitat{Regelwiki-Berufsgeheimnis}.
+    \ZitatVgl{Regelwiki-Berufsgeheimnis}.
     \item Eine Sonderfertigkeit hat Voraussetzungen \uA \ggfs an Eigenschaften, Fertigkeiten, Vor- und Nachteilen sowie
     Sonderfertigkeiten \ZitatVgl{Regelwiki-Sonderfertigkeit-Blutrune}.
 \end{itemize}
@@ -73,9 +80,9 @@ abschließend) aufgezeigt:
     \item Die erste Kultur ist gratis \ZitatVgl[Schritt 4]{Regelwiki-Heldenerschaffung}.
     \item Zauber und Liturgien sind vor der Wert-Steigerung zu aktivieren, dafür sind Aktivierungskosten zu zahlen.
     \ZitatVgl[Schritt 8]{Regelwiki-Heldenerschaffung}
-    \item Es darf nur bis zu einer bestimmten Anzahl \ac{AP} Vorteile gekauft oder mit Nachteilen erworben werden
+    \item Es darf nur bis zu einer bestimmten Anzahl \Abk{AP} Vorteile gekauft oder mit Nachteilen erworben werden
     \ZitatVgl{Regelwiki-VorUndNachteile}.
-    \item Am Ende darf nur eine maximale Anzahl \ac{AP} übrig bleiben \ZitatVgl[Schritt
+    \item Am Ende darf nur eine maximale Anzahl \Abk{AP} übrig bleiben \ZitatVgl[Schritt
     11]{Regelwiki-Heldenerschaffung}.
     \item Eine Spezies gibt übliche und unübliche Kulturen sowie Vor- und Nachteile vor.
     \ZitatVgl{Regelwiki-Spezies-Elfen}
@@ -88,8 +95,39 @@ sind.
 Unübliche Merkmals-Kombinationen sind nicht per se verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen
 werden.
 
+\subsubsection{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
+\label{subsubsec:charakter-verwaltung}
 
 Im laufe der Geschichte gewinnt man AP und kann sich damit steigern
+
+\subsection{Technische Betrachtung}
+\label{subsec:technische-betrachtung}
+
+Bereits im Jahr 1993 wurde vom damaligen Herausgeber eine Software mit dem Namen ``\Abk{DSA}-Tools`` zur Erstellung
+und Verwaltung von Charakteren für die damalige Ausgabe veröffentlicht und 1995 in einer neuen Version
+\Zitat{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
+Doch die aktuell genutzten Softwares kommen aus der Community selbst, nachfolgend die populärsten aufgelistet:
+\begin{itemize}
+    \item \textbf{Optolith Heldengenerator}, erschienen am \Datum{2018-04-08} und zuletzt Aktualisiert am
+    \Datum{2022-03-22}, dient der Charakter-Erstellung und -Verwaltung in der 5ten-\Abk{DSA}-Ausgabe.
+    Es ist seit \Monat{2020-09} OpenSource und wird hauptsächlich von einer Person gewartet.
+    Genutzt werden die Sprachen TypeScript\Fussnote{Typisierter Superset von JavaScript; https://www.typescriptlang
+    \item .org/} und ReasonML\Fussnote{OCaml (https://ocaml.org/) in JavaScript-angelehnter Notation;
+    https://reasonml.github.io/}.
+    Die Regeln werden in \acs{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf
+    Anfrage und Notwendigkeit ermöglicht.
+    \Zitat{GitHub-Optolith}
+    \item \textbf{Helden-Software}, erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am
+    \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe.
+    Es ist nicht OpenSource.
+    Genutzt wird die Sprache Java\Fussnote{Betriebssystem-unabhängige \Abk{OOP} Sprache; https://www.oracle
+    .com/de/java/} und keine weiteren Frameworks/Bibliotheken \Zitat{HeldenSoftware-QA-Entwicklungsumgebung}.
+
+    Es wird von einem Team aus sieben Personen (fünf Entwickler und zwei Tester) gewartet \Zitat{HeldenSoftware-Team}.
+    Als Besonderheit bietet diese Lösung das Speichern der Charakter auf deren Server und eine Schnittstelle zur
+    Entwicklung von Plugins an, mit denen Informationen zu den Charakteren abgerufen werden können
+    \Zitat{HeldenSoftware-Internet,HeldenSoftware-Plugins}.
+\end{itemize}
 
 
 %%%  Community Wiki:

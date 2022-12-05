@@ -9,10 +9,8 @@
 
 % Schrift ----------------------------------------------------------------------
 \usepackage{relsize} % Schriftgröße relativ festlegen
-
 \usepackage{lmodern} % bessere Font fuer PDFs als latex default
 %\usepackage{libertine} \usepackage{libertinust1math} % eigener fav 1 - text
-
 %\usepackage{mathptmx} % uni vorgabe - times new romes
 %\usepackage{nunito} % uni coporate design
 %\usepackage[sfdefault]{biolinum}  % eigener fav 1 - überschriften
@@ -36,30 +34,27 @@
 \usepackage[dvips,final]{graphicx} % Einbinden von JPG-Grafiken ermöglichen
 \usepackage{graphics} % keepaspectratio
 \usepackage{floatflt} % zum Umfließen von Bildern
-
-
 \usepackage{tikz} % visualisation
 \usetikzlibrary{trees} % directory trees
-
 \usepackage{wrapfig}
 
-% Sonstiges --------------------------------------------------------------------
+% Sonstiges -------------------------------------------------------------------
 \usepackage{amssymb} % fuer /checkmark
 \usepackage{amsmath,amsfonts} % Befehle aus AMSTeX für mathematische Symbole
 \usepackage{enumitem} % anpassbare Enumerates/Itemizes
-\usepackage{xspace} % sorgt dafür, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
+\usepackage{xspace} % Leerzeichen hinter parameterlosen Commands einfügen
 \usepackage{xparse} % fuer \NewDocumentCommand, ermoeglicht mehrere optionale args
 \usepackage{makeidx} % für Index-Ausgabe mit \printindex
-\usepackage[nolist]{acronym} % es werden alle Definitionen aufgelistet | nur benutze : \usepackage[printonlyused]{acronym}
+\usepackage[useregional]{datetime2} % darstellung eines datum
 
 % Einfache Definition der Zeilenabstände und Seitenränder etc.
 \usepackage{setspace}
 \usepackage{geometry}
 % TODO may include
 %\usepackage[compact]{titlesec} % Zeilenabstände
-\usepackage{layout} % für command #layout
+\usepackage{layout} % für command \layout
 
-% Symbolverzeichnis
+% Abkürzungsverzeichnis -----------------------------------------------------------
 \usepackage[intoc]{nomencl}
 \let\abbrev\nomenclature
 \renewcommand{\nomname}{Abkürzungsverzeichnis}
@@ -67,17 +62,19 @@
 \renewcommand{\nomlabel}[1]{#1 \dotfill}
 \setlength{\nomitemsep}{-\parsep}
 
+% verzeichnisse -----------------------------------------------------------
 \usepackage{url} % URL verlinken, lange URLs umbrechen etc.
 \usepackage{chngcntr} % fortlaufendes Durchnummerieren der Fußnoten
 \usepackage{ifthen} % bei der Definition eigener Befehle benötigt
 \usepackage{todonotes} % definiert u.a. die Befehle \todo und \listoftodos
+\usepackage[nolist]{acronym} % liste alle Abkürzungen auf / nur benutzte: [printonlyused]
 
+% literaturverzeichnis --------------------------------------------------------
 \usepackage[
     backend=biber, %is default
     style=numeric, % numeric, alphabetic, authoryear, authortitle, science, ieee
     sorting=nyt
-]{biblatex} % literaturverzeichnis
-
+]{biblatex}
 % nty   Sort by name, title, year.
 % nyt   Sort by name, year, title.
 % nyvt  Sort by name, year, volume, title.
@@ -88,7 +85,7 @@
 % none  Do not sort at all. All entries are processed in citation order.
 
 
-% PDF-Optionen -----------------------------------------------------------------
+% PDF-Optionen ----------------------------------------------------------------
 \usepackage{pdfpages}
 \pdfminorversion=5 % erlaubt das Einfügen von pdf-Dateien bis Version 1.7, ohne eine Fehlermeldung zu werfen (keine Garantie für fehlerfreies Einbetten!)
 \usepackage[
@@ -121,6 +118,6 @@
 ]{hyperref}
 
 
-% zum Einbinden von Programmcode -----------------------------------------------
+% zum Einbinden von Programmcode ----------------------------------------------
 \usepackage{listings}
 \usepackage{xcolor}

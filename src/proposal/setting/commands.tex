@@ -21,24 +21,37 @@
 \newcommand{\og}{\mbox{o.\,g.}\xspace} % oben genannt
 \newcommand{\sog}{sog.\xspace} % sogenannt
 
-% Befehle für häufig anfallende Aufgaben
+% Verweise (im Dokument)
+% Default  = Name
+% K : Kurz = Seite
+% V : Voll = Name und Seite
 \newcommand{\Abbildung}[1]{Abbildung~\ref{#1}}
-\newcommand{\AbbildungV}[1]{Abbildung~\ref{#1}: \nameref{#1} auf S.~\pageref{#1}}
-\newcommand{\Anhang}[1]{Anhang~\ref{#1}: \nameref{#1} auf S.~\pageref{#1}}
+\newcommand{\AbbildungV}[1]{Abbildung~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
+\newcommand{\Anhang}[1]{Anhang~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
 \newcommand{\AnhangK}[1]{Anhang~\ref{#1} auf S.~\pageref{#1}}
-\newcommand{\AnhangKapitel}[1]{Kapitel~\ref{#1}: \nameref{#1} auf S.~\pageref{#1}}
-\newcommand{\Tabelle}[1]{Tabelle~\ref{#1}: \nameref{#1}}
+\newcommand{\AnhangKapitel}[1]{Kapitel~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
+\newcommand{\Tabelle}[1]{Tabelle~\ref{#1}:~\nameref{#1}}
 \newcommand{\TabelleK}[1]{Tabelle~\ref{#1} auf S.~\pageref{#1}}
-\newcommand{\TabelleV}[1]{Tabelle~\ref{#1}: \nameref{#1} auf S.~\pageref{#1}}
+\newcommand{\TabelleV}[1]{Tabelle~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
+\newcommand{\Verweis}[1]{Kapitel~\ref{#1}}
+\newcommand{\VerweisKL}[1]{Kapitel~\ref{#1} auf Seite~\pageref{#1}}
+\newcommand{\VerweisVL}[1]{Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}}
+\newcommand{\VerweisKT}[1]{(Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1})}
+\newcommand{\VerweisVT}[1]{(Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1})}
+\newcommand{\VerweisKF}[1]{\footnote{Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1}.}}
+\newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}.}}
+\newcommand{\Fussnote}[1]{\footnote{#1}}
 
-\newcommand{\includegraphicsKeepAspectRatio}[2]{\includegraphics[width=#2\textwidth,height=#2\textheight,keepaspectratio]{#1}}
+% Referenzen (außerhalb des Dokument)
 \NewDocumentCommand{\Zitat}{ O{} O{} m }{\parencite[#1][#2]{#3}\xspace}
 \NewDocumentCommand{\ZitatVgl}{ O{} m }{\parencite[vgl.][#1]{#2}\xspace}
-\newcommand{\Autor}[1]{\textsc{#1}} % zum Ausgeben von Autoren
+
+% Styling
 \newcommand{\itemd}[2]{\item{\textbf{#1}}\\{#2}} % erzeugt ein Listenelement mit fetter Überschrift
+\newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont} % einfaches Wechseln der Schrift, z.B.: \changefont{cmss}{sbc}{n}
 
 % fügt Tabellen aus einer TEX-Datei ein
-\newcommand{\newTabelle}[3] % Parameter: caption, label, file
+\newcommand{\newTable}[3] % Parameter: caption, label, file
 {\begin{table}[htb]
      \centering
      \singlespacing
@@ -46,16 +59,14 @@
      \caption{#1}
      \label{#2}
 \end{table}}
-
 \newcommand{\newTabelleAnhang}[1] % Parameter: file
 {\begin{center}
      \singlespacing
      \input{table/#1}
 \end{center}}
 
-% einfaches Wechseln der Schrift, z.B.: \changefont{cmss}{sbc}{n}
-\newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
 
+\newcommand{\includegraphicsKeepAspectRatio}[2]{\includegraphics[width=#2\textwidth,height=#2\textheight,keepaspectratio]{#1}}
 % Verwendung analog zu \includegraphics
 \newlength{\myx} % Variable zum Speichern der Bildbreite
 \newlength{\myy} % Variable zum Speichern der Bildhöhe
@@ -68,25 +79,15 @@
         \includegraphics[{#1}]{#2}}%
 }
 
-
-% Tabellen, die den Zwischenstand nach einer Projektphase verdeutlichen
-\newcommand{\Zwischenstand}[2]{\subsection{Zwischenstand}Tabelle~\ref{tab:#2} zeigt den Zwischenstand nach der #1.\newTabelle{Zwischenstand nach der #1}{tab:#2}{#2.tex}}
-
-% Verweise
-\newcommand{\Verweis}[1]{Kapitel~\ref{#1}}
-\newcommand{\VerweisKL}[1]{Kapitel~\ref{#1} auf Seite \pageref{#1}}
-\newcommand{\VerweisVL}[1]{Kapitel~\ref{#1}: \nameref{#1} auf Seite \pageref{#1}}
-\newcommand{\VerweisKT}[1]{(Siehe Kapitel~\ref{#1} auf Seite \pageref{#1})}
-\newcommand{\VerweisVT}[1]{(Siehe Kapitel~\ref{#1}: \nameref{#1} auf Seite \pageref{#1})}
-\newcommand{\VerweisKF}[1]{\footnote{Siehe Kapitel~\ref{#1} auf Seite \pageref{#1}.}}
-\newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}: \nameref{#1} auf Seite \pageref{#1}.}}
-
 % ### Semantische Textverarbeitung ###
-
-% Abkürzung
-\newcommand{\Abkuerzung}[1]{\textit{\ac{#1}}}
-
-% Begriffe
+\newcommand{\Abk}[1]{\textit{\ac{#1}}} % Abkürzung
+\newcommand{\Datum}[1]{\DTMdate{#1}} % Datum
+\newcommand{\Monat}[1]{% Datum ohne Tag, z.B. \Monat{2020-09}
+    \DTMlangsetup{showdayofmonth=false}%
+    \DTMdate{#1-01}%
+    \DTMlangsetup{showdayofmonth=true}%
+}
+\newcommand{\Jahr}[1]{#1} % Datum nur als Jahr
 \newcommand{\Fachbegriff}[1]{\textbf{#1}}
 \newcommand{\Klasse}[1]{\texttt{#1}}
 \newcommand{\Methode}[1]{\texttt{#1}}
