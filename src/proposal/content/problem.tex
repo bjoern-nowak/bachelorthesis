@@ -14,7 +14,7 @@ Der Spielleiter führt anhand einer fertig beschriebenen Spielwelt und einem pas
 Geschichte.
 Die Spieler besetzen jeweils die Rolle eines Charakters und beschreiben diesen auf einen \sog Charakterbogen, auf
 dem \uA dessen Beruf und Fähigkeiten stehen.
-
+\\
 Das \Abk{PPRPG} Regelwerk zu \Abk{DSA} ist im Jahr 1984 erschienen und befindet sich aktuell in der 5ten-Ausgabe aus
 2015.
 Es zeichnet sich \insb durch den Umfang und die Komplexität aus, was \uA die Character-Erstellung und -Verwaltung für
@@ -98,44 +98,60 @@ werden.
 \subsubsection{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
 \label{subsubsec:charakter-verwaltung}
 
-Im laufe der Geschichte gewinnt man AP und kann sich damit steigern
+Im laufe der Geschichte gewinnt man AP und kann sich damit steigern............ % TODO
 
 \subsection{Technische Betrachtung}
 \label{subsec:technische-betrachtung}
 
-Bereits im Jahr 1993 wurde vom damaligen Herausgeber eine Software mit dem Namen ``\Abk{DSA}-Tools`` zur Erstellung
-und Verwaltung von Charakteren für die damalige Ausgabe veröffentlicht und 1995 in einer neuen Version
+Um den zeitlichen Aufwand zu reduzieren, veröffentlichte bereits im Jahr 1993 und 1995 der damalige Herausgeber eine
+Software mit dem Namen ``\Abk{DSA}-Tools`` zur Erstellung und Verwaltung von Charakteren für die damalige Ausgabe
 \Zitat{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
-Doch die aktuell genutzten Softwares kommen aus der Community selbst, nachfolgend die populärsten aufgelistet:
+Die aktuell genutzten Softwares kommen hingegen aus der Community selbst und stehen kostenlos zur Verfügung,
+nachfolgend die populärsten aufgelistet:
 \begin{itemize}
     \item \textbf{Optolith Heldengenerator}, erschienen am \Datum{2018-04-08} und zuletzt Aktualisiert am
     \Datum{2022-03-22}, dient der Charakter-Erstellung und -Verwaltung in der 5ten-\Abk{DSA}-Ausgabe.
     Es ist seit \Monat{2020-09} OpenSource und wird hauptsächlich von einer Person gewartet.
-    Genutzt werden die Sprachen TypeScript\Fussnote{Typisierter Superset von JavaScript; https://www.typescriptlang
-    \item .org/} und ReasonML\Fussnote{OCaml (https://ocaml.org/) in JavaScript-angelehnter Notation;
-    https://reasonml.github.io/}.
-    Die Regeln werden in \acs{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf
+    Genutzt werden die Sprachen TypeScript\Note{Typisierter Superset von JavaScript;
+    \url{https://www.typescriptlang.org/}} und ReasonML\Note{OCaml (\url{https://ocaml.org/}) in
+    JavaScript-angelehnter Notation; \url{https://reasonml.github.io/}}.
+    Die Regeln werden in \AbkK{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf
     Anfrage und Notwendigkeit ermöglicht.
     \Zitat{GitHub-Optolith}
-    \item \textbf{Helden-Software}, erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am
-    \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe.
-    Es ist nicht OpenSource.
-    Genutzt wird die Sprache Java\Fussnote{Betriebssystem-unabhängige \Abk{OOP} Sprache; https://www.oracle
-    .com/de/java/} und keine weiteren Frameworks/Bibliotheken \Zitat{HeldenSoftware-QA-Entwicklungsumgebung}.
 
+    \item \textbf{Helden-Software}, erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am
+    \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe (für 5te-Ausgabe
+    ist keine Unterstützung geplant \ZitatVgl{HeldenSoftware-DSA5}).
+    Es ist nicht OpenSource.
+    Genutzt wird die Sprache Java\Note{\Abk{OS}-unabhängige \Abk{OOP} Sprache; \url{https://www.oracle.com/de/java/}}
+    und keine weiteren Frameworks/Bibliotheken. \Zitat{HeldenSoftware-QA-Entwicklungsumgebung}
+    \\
     Es wird von einem Team aus sieben Personen (fünf Entwickler und zwei Tester) gewartet \Zitat{HeldenSoftware-Team}.
     Als Besonderheit bietet diese Lösung das Speichern der Charakter auf deren Server und eine Schnittstelle zur
     Entwicklung von Plugins an, mit denen Informationen zu den Charakteren abgerufen werden können
     \Zitat{HeldenSoftware-Internet,HeldenSoftware-Plugins}.
+
+    \item \textbf{DSA Excel Heldenblatt}, erschienen im Jahr \Jahr{2003} und zuletzt Aktualisiert am
+    \Datum{2021-05-15}, dient der Charakter-Erstellung und -Verwaltung in der \Abk{DSA}-4.1 Ausgabe.
+    Es handelt sich hierbei um eine Tabellenkalkulation, basierend auf Excel\Note{Vom Hersteller Microsoft;
+    \url{https://www.microsoft.com/de-de/microsoft-365/excel}}, weshalb dieses als OpenSource zu betrachten ist.
+    Die Regelwerk-Werte hingehen sind, wie auch bei den bereits genannten Programmen, aufgrund von Lizenzen
+    verschlüsselt und damit nicht frei zugänglich.
+    Das Besondere hier ist, dass eigene Merkmals-Ausprägungen wie \zB Zauber, Rituale und Liturgien integriert werden
+    können. \Zitat{Orkenspalter-Heldenblatt,Heldenblatt}
+
+    \item \textbf{DSA MeisterGeister}, erschienen im Jahr \Jahr{2010} und zuletzt Aktualisiert am
+    \Datum{2022-06-06}, dient dem Spielleiter als Unterstützung in verschiedenen Bereich, darunter auch der
+    Charakter-Erstellung und -Verwaltung, in der \Abk{DSA}-4.1 Ausgabe (für die 5te-Ausgabe ist keine Unterstützung
+    geplant \Zitat{MeisterGeister-DSA5}) \Zitat{MeisterGeister}.
+    Erst mit der letzten Aktualisierung wurde der Programmcode veröffentlicht, aufgrund fehlender personellen
+    Kapazitäten im Team, von aktuell zwei Personen \Zitat{MeisterGeister-OpenSource, MeisterGeister-Team}.
+    Es ist in C\#\Note{Typsichere \Abk{OOP} Sprache;
+    \url{https://learn.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/}} geschrieben und daher auf das \Abk{OS}
+    ``Microsoft Windows`` ausgelegt \Zitat{MeisterGeister-GitHub}.
 \end{itemize}
 
 
-%%%  Community Wiki:
-%%%  https://de.wiki-aventurica.de/wiki/Willkommen_im_Wiki_Aventurica!
-
-%%%  Regelwerk vom Publisher
-%%%  https://www.ulisses-regelwiki.de/start.html
-%%%
 %%%  Arten von Rollenspiele:
 %%%  https://de.wikipedia.org/wiki/Rollenspiel_(Spiel)
 %%%

@@ -40,7 +40,7 @@
 \newcommand{\VerweisVT}[1]{(Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1})}
 \newcommand{\VerweisKF}[1]{\footnote{Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1}.}}
 \newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}.}}
-\newcommand{\Fussnote}[1]{\footnote{#1}}
+\newcommand{\Note}[1]{\footnote{#1}}
 
 % Referenzen (außerhalb des Dokument)
 \NewDocumentCommand{\Zitat}{ O{} O{} m }{\parencite[#1][#2]{#3}\xspace}
@@ -81,6 +81,7 @@
 
 % ### Semantische Textverarbeitung ###
 \newcommand{\Abk}[1]{\textit{\ac{#1}}} % Abkürzung
+\newcommand{\AbkK}[1]{\textit{\acs{#1}}} % Abkürzung kurz (ohne Erstnennung ausgeschrieben)
 \newcommand{\Datum}[1]{\DTMdate{#1}} % Datum
 \newcommand{\Monat}[1]{% Datum ohne Tag, z.B. \Monat{2020-09}
     \DTMlangsetup{showdayofmonth=false}%
@@ -93,7 +94,6 @@
 \newcommand{\Methode}[1]{\texttt{#1}}
 \newcommand{\MethodenRef}[1]{\texttt{#1}}
 \newcommand{\Code}[1]{\textsf{#1}}
-
 
 % text sizes
 % \Huge
