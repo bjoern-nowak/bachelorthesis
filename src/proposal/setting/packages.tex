@@ -1,125 +1,132 @@
-% Anpassung an Landessprache ---------------------------------------------------
-\usepackage[ngerman]{babel}
+%% develop support ----------------------------------------------------------------------------------------------------
+\RequirePackage[l2tabu, orthodox]{nag} %% detect and warm about obsolete/outdated/superseded stuff
+\usepackage{layout} %% print debug figure of page borders; \layout
+\usepackage{lipsum} %% generate dummy text
+\usepackage{ifthen} %% bei der Definition eigener Befehle benötigt
 
-% Umlaute ----------------------------------------------------------------------
-%   Umlaute/Sonderzeichen wie äüöß direkt im Quelltext verwenden (CodePage).
-% ------------------------------------------------------------------------------
-\usepackage[T1]{fontenc} % Erlaubt automatische Trennung von Worten mit Umlauten.
-\usepackage{textcomp} % Euro-Zeichen etc.
+%% Umlaute / Symbols --------------------------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc} %$ erlaubt Sonderzeichen/Umlaute im Quelltext %% ALWAYS ON TOP
+\usepackage[T1]{fontenc} %% automatische Trennung von Worten mit Umlauten
+%\usepackage{textcomp} %% diverse zeichen wie \texteuro %% TODO REMOVE
 
-% Schrift ----------------------------------------------------------------------
-\usepackage{relsize} % Schriftgröße relativ festlegen
-\usepackage{lmodern} % bessere Font fuer PDFs als latex default
-%\usepackage{libertine} \usepackage{libertinust1math} % eigener fav 1 - text
-%\usepackage{mathptmx} % uni vorgabe - times new romes
-%\usepackage{nunito} % uni coporate design
-%\usepackage[sfdefault]{biolinum}  % eigener fav 1 - überschriften
+
+%% Language -----------------------------------------------------------------------------------------------------------
+\usepackage[ngerman]{babel} %$ set language; new german
+\usepackage{csquotes} %% required by babel to ensure qoutes are typeset to language
+
+
+%% Font Family --------------------------------------------------------------------------------------------------------
+%\usepackage{relsize} %% Schriftgröße relativ festlegen %% TODO REMOVE
+\usepackage{lmodern} %% bessere Font fuer PDFs als latex default
+%\usepackage{libertine} \usepackage{libertinust1math} %% eigener fav 1 - text
+%\usepackage{mathptmx} %% uni vorgabe - times new romes
+%\usepackage{nunito} %% uni coporate design
+%\usepackage[sfdefault]{biolinum}  %% eigener fav 1 - überschriften
 %% Option 'sfdefault' only if the base font of the document is to be sans serif
 
-% Tabellen ---------------------------------------------------------------------
+
+%% Font Style ---------------------------------------------------------------------------------------------------------
+%\usepackage[compact]{titlesec} %% Zeilenabstände %% TODO may include
+\usepackage[onehalfspacing]{setspace} %% define space betweens lines
+\usepackage{geometry} %% define page borders
+\usepackage{soul} %% improved text-decoration commands (use \ul isntead of \underline)
+\usepackage{ragged2e} %% improved text alignment; captial version of defaults like \RaggedRight or \begin{FlushLeft}
+
+
+%% Table --------------------------------------------------------------------------------------------------------------
 \PassOptionsToPackage{table}{xcolor}
-\usepackage{tabularx}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{bigstrut}
-\usepackage{longtable} % für lange Tabellen
-\usepackage{array}
-\usepackage{ragged2e}
-\usepackage{lscape}
-\usepackage{makecell} % cellen formatierung mit \makecell
-\usepackage{tablefootnote} % erlaubt fotenotes in tabellen ohne tricks
-\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}} % Spaltendefinition rechtsbündig mit definierter Breite
+\usepackage{tabularx} %% automated line-breaks
+\usepackage{tabulary} %% control column text direction
+\usepackage{booktabs} %% \toprule \midrule[3pt] \cmidrule{1-2} \bottomrule \addlinespace
+\usepackage{multicol} %% span column over multiple columns
+\usepackage{multirow} %% span row over multiple rows
+\usepackage{bigstrut} %% better space alignment in tables; \bigstrut
+\usepackage{longtable} %% for long/vertical tables
+\usepackage{array} %% extends table column definitions
+\usepackage{makecell} %% cellen formatierung mit \makecell
+\usepackage{tablefootnote} %% erlaubt fotenotes in tabellen ohne tricks
+\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}} %% Spaltendefinition: rechtsbündig mit definierter Breite
 
-% Grafiken ---------------------------------------------------------------------
-\usepackage[dvips,final]{graphicx} % Einbinden von JPG-Grafiken ermöglichen
-\usepackage{graphics} % keepaspectratio
-\usepackage{floatflt} % zum Umfließen von Bildern
-\usepackage{tikz} % visualisation
-\usetikzlibrary{trees} % directory trees
-\usepackage{wrapfig}
 
-% Sonstiges -------------------------------------------------------------------
-\usepackage{amssymb} % fuer /checkmark
-\usepackage{amsmath,amsfonts} % Befehle aus AMSTeX für mathematische Symbole
-\usepackage{enumitem} % anpassbare Enumerates/Itemizes
-\usepackage{xspace} % Leerzeichen hinter parameterlosen Commands einfügen
-\usepackage{xparse} % fuer \NewDocumentCommand, ermoeglicht mehrere optionale args
-\usepackage{makeidx} % für Index-Ausgabe mit \printindex
-\usepackage[useregional]{datetime2} % darstellung eines datum
+%% Graphics and Media -------------------------------------------------------------------------------------------------
+\usepackage[dvips,final]{graphicx} %% Einbinden von JPG-Grafiken ermöglichen
+\usepackage{graphics} %% \keepaspectratio  %% TODO evtl schon enthalten
+\usepackage{wrapfig} %% float/wrap text around figures
+%\usepackage{floatflt} %% alternative to wrapfig;
+\usepackage{tikz} %% visualisation/drawing
+\usetikzlibrary{trees} %% directory trees
 
-% Einfache Definition der Zeilenabstände und Seitenränder etc.
-\usepackage{setspace}
-\usepackage{geometry}
-% TODO may include
-%\usepackage[compact]{titlesec} % Zeilenabstände
-\usepackage{layout} % für command \layout
 
-% Abkürzungsverzeichnis -----------------------------------------------------------
-\usepackage[intoc]{nomencl}
-\let\abbrev\nomenclature
-\renewcommand{\nomname}{Abkürzungsverzeichnis}
-\setlength{\nomlabelwidth}{.25\hsize}
-\renewcommand{\nomlabel}[1]{#1 \dotfill}
-\setlength{\nomitemsep}{-\parsep}
+%% Math ---------------------------------------------------------------------------------------------------------------
+\usepackage{amssymb} %% fuer /checkmark
+\usepackage{amsmath} %% Befehle aus AMSTeX für mathematische Symbole
+\usepackage{amsfonts} %% Font fuer amsmath %% TODO evtl auto-loaded by amssymb
 
-% verzeichnisse -----------------------------------------------------------
-\usepackage{url} % URL verlinken, lange URLs umbrechen etc.
-\usepackage{chngcntr} % fortlaufendes Durchnummerieren der Fußnoten
-\usepackage{ifthen} % bei der Definition eigener Befehle benötigt
-\usepackage{todonotes} % definiert u.a. die Befehle \todo und \listoftodos
-\usepackage[nolist]{acronym} % liste alle Abkürzungen auf / nur benutzte: [printonlyused]
 
-% literaturverzeichnis --------------------------------------------------------
+%% Styling ------------------------------------------------------------------------------------------------------------
+\usepackage{listings} %% pretty print source code; define with \lstset and print with \lstinputlisting
+\usepackage{xcolor} %% predefined color names
+\usepackage{lscape} %% rotates specific page in landscape
+
+
+%% Sonstiges ----------------------------------------------------------------------------------------------------------
+\usepackage{url} %% URL verlinken, lange URLs umbrechen etc.
+\usepackage{chngcntr} %% fortlaufendes Durchnummerieren der Fußnoten
+\usepackage{enumitem} %% anpassbare Enumerates/Itemizes
+\usepackage{xspace} %% Leerzeichen hinter parameterlosen Commands einfügen
+\usepackage{xparse} %% fuer \NewDocumentCommand, ermoeglicht mehrere optionale args
+\usepackage{makeidx} %% für Index-Ausgabe (Stichwortverzeichnis) mit \printindex
+\usepackage[useregional]{datetime2} %% darstellung eines datum
+
+
+%% Abkürzungsverzeichnis ----------------------------------------------------------------------------------------------
+\usepackage[nolist]{acronym} %% Abkürzungsliste mit \begin{acronym} ; [nolist, printonlyused, footnote, nohyperlinks, smaller]
+
+
+%% Symbolverzeichnis -------------------------------------------------------------------------------------------------
+%% TODO does not work
+\usepackage[intoc]{nomencl} %% [intoc] im Inhaltsverzeichnis
+%\let\abbrev\nomenclature
+%\renewcommand{\nomname}{Symbolverzeichnis}
+%\setlength{\nomlabelwidth}{.25\hsize}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
+%\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+
+
+%% literaturverzeichnis -----------------------------------------------------------------------------------------------
 \usepackage[
-    backend=biber, %is default
-    style=numeric, % numeric, alphabetic, authoryear, authortitle, science, ieee
+    backend=biber, %%is default
+    style=numeric, %% numeric, alphabetic, authoryear, authortitle, science, ieee
     sorting=nyt
 ]{biblatex}
-% nty   Sort by name, title, year.
-% nyt   Sort by name, year, title.
-% nyvt  Sort by name, year, volume, title.
-% anyt  Sort by alphabetic label, name, year, title.
-% anyvt Sort by alphabetic label, name, year, volume, title.
-% ynt   Sort by year, name, title.
-% ydnt  Sort by year (descending), name, title.
-% none  Do not sort at all. All entries are processed in citation order.
+%% nty   Sort by name, title, year.
+%% nyt   Sort by name, year, title.
+%% nyvt  Sort by name, year, volume, title.
+%% anyt  Sort by alphabetic label, name, year, title.
+%% anyvt Sort by alphabetic label, name, year, volume, title.
+%% ynt   Sort by year, name, title.
+%% ydnt  Sort by year (descending), name, title.
+%% none  Do not sort at all. All entries are processed in citation order.
 
-% TODO Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
-%\usepackage{csquotes}
-
-% PDF-Optionen ----------------------------------------------------------------
-\usepackage{pdfpages}
-\pdfminorversion=5 % erlaubt das Einfügen von pdf-Dateien bis Version 1.7, ohne eine Fehlermeldung zu werfen (keine Garantie für fehlerfreies Einbetten!)
+%% PDF ----------------------------------------------------------------------------------------------------------------
+\usepackage{pdfpages} %% import of PDFs into a PDF
 \usepackage[
     bookmarks,
     bookmarksnumbered,
     bookmarksopen=true,
     bookmarksopenlevel=1,
     colorlinks=true,
-% diese Farbdefinitionen zeichnen Links im PDF farblich aus
-    linkcolor=main, % einfache interne Verknüpfungen
-    anchorcolor=main,% Ankertext
-    citecolor=main, % Verweise auf Literaturverzeichniseinträge im Text
-    filecolor=main, % Verknüpfungen, die lokale Dateien öffnen
-    menucolor=main, % Acrobat-Menüpunkte
-    urlcolor=main,
-% diese Farbdefinitionen sollten für den Druck verwendet werden (alles schwarz)
-%linkcolor=black, % einfache interne Verknüpfungen
-%anchorcolor=black, % Ankertext
-%citecolor=black, % Verweise auf Literaturverzeichniseinträge im Text
-%filecolor=black, % Verknüpfungen, die lokale Dateien öffnen
-%menucolor=black, % Acrobat-Menüpunkte
-%urlcolor=black,
-%
-%backref, % Quellen werden zurück auf ihre Zitate verlinkt
+    linkcolor=main, %% link color of: simple links
+    anchorcolor=main,%% link color of: anchors like chapters?
+    citecolor=main, %% link color of: citations
+    filecolor=main, %% link color of: links to local files
+    menucolor=main, %% link color of: Acrobat menu item
+    urlcolor=main, %% link color of: URLs
+%backref, %% Quellen werden zurück auf ihre Zitate verlinkt
     pdftex,
-    plainpages=false, % zur korrekten Erstellung der Bookmarks
-    pdfpagelabels=true, % zur korrekten Erstellung der Bookmarks
-    hypertexnames=false, % zur korrekten Erstellung der Bookmarks
-    linktoc=all%linktocpage % Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
-]{hyperref}
-
-
-% zum Einbinden von Programmcode ----------------------------------------------
-\usepackage{listings}
-\usepackage{xcolor}
+    plainpages=false, %% zur korrekten Erstellung der Bookmarks
+    pdfpagelabels=true, %% zur korrekten Erstellung der Bookmarks
+    hypertexnames=false, %% zur korrekten Erstellung der Bookmarks
+    linktoc=all %% (all|linktocpage) Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
+]{hyperref} %% creates links within a document and outside

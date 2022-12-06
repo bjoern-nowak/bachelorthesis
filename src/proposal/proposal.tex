@@ -1,28 +1,30 @@
 \documentclass[
-    %toc=listof, % Abbildungsverzeichnis sowie Tabellenverzeichnis in das Inhaltsverzeichnis aufnehmen
-    toc=bibliography, % Literaturverzeichnis in das Inhaltsverzeichnis aufnehmen
-    footnotes=multiple, % Trennen von direkt aufeinander folgenden Fußnoten
-    parskip=half % vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+    toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz. / oder
+    %toc=bibliography, %% Literaturvrz. im Inhaltsvrz.
+    footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
+    parskip=half, %% vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+    fontsize=12pt,
 ]{scrartcl}
 
-% ----- settings --------------------------------
-\usepackage[utf8]{inputenc} % erlaubt Sonderzeichen im source; hier, weil meta es bereits braucht und packages.tex meta.tex nutzt
+%% ----- settings --------------------------------
 \input{setting/packages.tex}
 \input{setting/meta.tex}
 \input{setting/style.tex}
 \input{setting/commands.tex}
 
 
-% ----- Start document --------------------------
+%% ----- Start document --------------------------
 \begin{document}
     \pagenumbering{arabic}
-%    \layout % zeige seitenränder und co als bild
+    %\layout %% zeige seitenränder und co als bild
 
-% ----- preface ---------------------------------
-    \input{abbreviation.tex}
+%% ----- preface ---------------------------------
+    %\pagenumbering{Roman}
+    \input{preface.tex}
 
-% ----- content ---------------------------------
-    \clearpage
+%% ----- content ---------------------------------
+    %\clearpage
+    %\pagenumbering{arabic}
 
     \input{content/kopf.tex}
     \input{content/problem.tex}
@@ -32,14 +34,18 @@
     \input{content/gliederung.tex}
     \input{content/meilensteine.tex}
 
-% ----- bibliography ----------------------------
+%% ----- bibliography ----------------------------
+    %\clearpage
+    %\pagenumbering{roman}
+    %\nocite{*} %% insert when there are no citations
+
     \renewcommand{\refname}{Literaturverzeichnis}
     \printbibliography
 
-% ----- signing page ----------------------------
+%% ----- signing page ----------------------------
     \clearpage
 
     \input{signs.tex}
 
-% ----- End document ----------------------------
+%% ----- End document ----------------------------
 \end{document}

@@ -1,9 +1,9 @@
 \newcommand{\version}{Version 1}
 
 \newcommand{\paperTitle}{Vereinbarung zur {\paperType} von \autor}
-\newcommand{\thesisTitle}{Design und Implementierung
-einer webbasierten und quelloffenen Heldenverwaltung
-für das Rollenspiel „Das Schwarze Auge“
+\newcommand{\thesisTitle}{Design und Implementierung\\
+einer webbasierten und quelloffenen Heldenverwaltung\\
+für das Rollenspiel „Das Schwarze Auge“\\
 (Backend)}
 \newcommand{\paperType}{Bachelorarbeit}
 
@@ -26,10 +26,12 @@ für das Rollenspiel „Das Schwarze Auge“
 
 
 \addbibresource{proposal.bib}
-\graphicspath{{picture/}} % TODO geht nicht
 
-% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
-\hypersetup{
+\graphicspath{{picture/}} %% TODO geht nicht
+
+\newcommand{\abbrvTitle}{Abkürzungsverzeichnis} %% for custom \listofabbreviations
+
+\hypersetup{ %% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
     pdftitle={\paperTitle},
     pdfauthor={\autor},
     pdfcreator={\autor},
