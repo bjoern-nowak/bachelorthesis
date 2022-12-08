@@ -37,13 +37,13 @@ Abschließen sind acht Basiswerte zu berechnen.
 Diese werden durch die Spezies, den Eigenschafts-Stufen, Vor- und Nachteilen sowie Sonderfertigkeiten beeinflusst.
 \ZitatVgl{Regelwiki-Heldenerschaffung}
 
-Dabei ist aus folgendem Umfang zu wählen (dies stellt ein Auszug und keine komplette Aufstellung dar)
-\ZitatVgl[ff.]{Regelwiki}:
+Dabei ist aus folgenden und teils durch Regeln eingeschränkten Umfängen zu wählen (dies stellt ein Auszug und keine
+komplette Aufstellung dar) \ZitatVgl[ff.]{Regelwiki}:
 \begin{multicols}{2}
     \begin{itemize}
         \item vier Spezien
         \item 32 Kulturen
-        \item 51 Professionen
+        \item 51 Professionen (bis zu zwei)
         \item acht Eigenschaften
         \item 59 Talente
         \item 251 Zaubern und 74 Ritualen
@@ -54,8 +54,6 @@ Dabei ist aus folgendem Umfang zu wählen (dies stellt ein Auszug und keine komp
         \item weiteren Spielmechaniken wie \zB 21 Kampftechniken und 354 Sonderfertigkeiten
     \end{itemize}
 \end{multicols}
-
-%% TODO mache hochrechnung der kombi moeglichekieten per math formel
 
 Die Komplexität entsteht vor Allem durch die Vielzahl der Merkmals-Kombinationen und Regeln.
 Die \og Merkmale können sich \bspw gegenseitig beeinflussen oder ausschließen:
@@ -96,6 +94,64 @@ Bei den letzteren Zwei handelt es sich um Vorgaben der Spielwelt, damit die Merk
 sind.
 Unübliche Merkmals-Kombinationen sind nicht per se verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen
 werden.
+
+Die nachstehende \Formel{eq:merkmal-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der
+Merkmals-Kombinationen.
+Es werden die \og Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB mögliche gegenseitige
+Merkmals-Ausschlüsse, nicht berücksichtigt.
+Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad ``Erfahren`` gilt, dass jede Eigenschaft um bis zu sechs Stufen
+gesteigert werden kann und insgesamt 36 Eigenschaftsstufen erkauft werden können \ZitatVgl[Schritt 2 und
+5]{Regelwiki-Heldenerschaffung}.
+Es wird angenommen, dass eine zweit Profession gewählt werden kann, sechs Eigenschaften maximal gesteigert werden, 20
+Fertigkeiten aktiviert und gesteigert werden und 10 Vorteile und fünf Nachteile gewählt werden.
+%
+%Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad ``Erfahren`` gilt, dass es 1.100 Start-\Abk{AP} gibt, jede
+%Eigenschaft auf Stufe 8 startet, die Stufen-Obergrenze je Eigenschaft bei 14 liegt (also um bis zu 6 Stufen gesteigert
+%werden kann), jede Eigenschaftsstufe 15 \Abk{AP} kostet, die maximale Eigenschaftsstufen-Summe bei 100 liegt, jede
+%Fertigkeit maximal auf Stufe 10 (Stufe 0 nach Aktivierung) erweitert werden kann, maximal je 80 \Abk{AP} an Vorteile
+%gekauft oder Nachteile gewonnen werden darf. \ZitatVgl[Schritt 2, 5 und 7]{Regelwiki-Heldenerschaffung}\\
+%Angenommen wird das jeder Vorteil und Nachteil einen \Abk{AP}-Wert von 8 hat, 10 Vorteile und 5 Nachteile gewählt
+%werden und 300 \Abk{AP} für die freie Aktivierung und Steigerung von Fertigkeiten zur Verfügung steht, wodurch 100
+%Fertigkeits-Aktivierungen und Steigerungen vorgenommen werden.
+%
+% 8x 8 Stufen = 64 Stufen von 100 ==> also maximal 36 neue Stufen
+% 8x : 9 10 11 12 13 14 = 6 Stufen * 15 AP = 90 AP
+% Ich darf 8 mal 0 bis 6 Stufensteigerungen waehlen, maximal aber nur 36 Stufensteigerungen
+% 36 Stufen aus 8 gruppen von bis 6 Stufen => Multinomialkoeffizient
+%
+% xx [F]ertigkeiten, jede kann um bis zu 11 Stufen (incl. Aktivierung) gesteigert werden, 100 stehen zur verfügung
+% xx + 100 -1   über  100
+% (F * 11)! + 100 - 1   über  100
+%
+\begin{equation}
+    \label{eq:merkmal-kombinationen}
+    \underset{[S]pezien}{
+        \binom{S}{1}
+    }  *
+    \underset{[K]ulturen}{
+        \binom{K}{1}
+    }  *
+    \underset{[P]rofessionenn}{
+        \left( P + \binom{P}{2} \right)
+    }  *
+    \underset{[E]igenschaften}{
+    % TODO mach was draus
+        \left( \binom{36}{6, 6, 6, 6, 6, 6} \frac{36!}{6!^{E}} \right)
+    } *
+    \underset{[F]ertigkeiten}{
+        \binom{F}{20}
+    } *
+    \underset{[V]orteile}{
+        \binom{V}{10}
+    } *
+    \underset{[N]achteile}{
+        \binom{N}{5}
+    }
+\end{equation}
+% TODO korrigiere ergebnis entsprechend
+Ergeben sich \textbf{\ca 2,0684 Quattuordezilliarden (10\textsuperscript{87}) verschiedene Merkmals-Kombinationen}.
+Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zauber, Rituale, magischen Handlungen,
+Liturgien, Kampftechniken und Sonderfertigkeiten.
 
 \subsubsection{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
 \label{subsubsec:charakter-verwaltung}
