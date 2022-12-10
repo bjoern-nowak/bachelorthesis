@@ -4,6 +4,15 @@
 \usepackage{lipsum} %% generate dummy text
 \usepackage{ifthen} %% bei der Definition eigener Befehle benötigt
 
+\overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
+
+\RequirePackage{silence} %% susspress warnings
+%% for command \Monat and \Jahr
+\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
+\WarningFilter{datetime2}{Region `german-base' has ignored}
+\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
+\WarningFilter{datetime2}{Region `german-base' has ignored}
+
 %% Umlaute / Symbols --------------------------------------------------------------------------------------------------
 \usepackage[utf8]{inputenc} %$ erlaubt Sonderzeichen/Umlaute im Quelltext %% ALWAYS ON TOP
 \usepackage[T1]{fontenc} %% automatische Trennung von Worten mit Umlauten
@@ -11,7 +20,8 @@
 
 
 %% Language -----------------------------------------------------------------------------------------------------------
-\usepackage[ngerman]{babel} %$ set language; new german
+%% TODO may use something like \autocite
+\usepackage[ngerman]{babel} %% set language; new german
 \usepackage{csquotes} %% required by babel to ensure qoutes are typeset to language
 
 
@@ -31,6 +41,7 @@
 \usepackage{geometry} %% define page borders
 \usepackage{soul} %% improved text-decoration commands (use \ul isntead of \underline)
 \usepackage{ragged2e} %% improved text alignment; captial version of defaults like \RaggedRight or \begin{FlushLeft}
+\usepackage{microtype} %% make spacing of individual letters smoother
 
 
 %% Table --------------------------------------------------------------------------------------------------------------
@@ -45,7 +56,7 @@
 \usepackage{array} %% extends table column definitions
 \usepackage{makecell} %% cellen formatierung mit \makecell
 \usepackage{tablefootnote} %% erlaubt fotenotes in tabellen ohne tricks
-\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}} %% Spaltendefinition: rechtsbündig mit definierter Breite
+\newcolumntype{f}[1]{>{\raggedleft\hspace{0pt}}p{#1}} %% Spaltendefinition: rechtsbündig mit definierter Breite
 
 
 %% Graphics and Media -------------------------------------------------------------------------------------------------
@@ -72,7 +83,8 @@
 %% Sonstiges ----------------------------------------------------------------------------------------------------------
 \usepackage{url} %% URL verlinken, lange URLs umbrechen etc.
 \usepackage{chngcntr} %% fortlaufendes Durchnummerieren der Fußnoten
-\usepackage{enumitem} %% anpassbare Enumerates/Itemizes
+\usepackage[inline]{enumitem} %% anpassbare Enumerates/Itemizes
+%\usepackage{paralist} %% inline aufzählung mit \begin{inparaenum}[a)] (alternative zu enumitem)
 \usepackage{xspace} %% Leerzeichen hinter parameterlosen Commands einfügen
 \usepackage{xparse} %% fuer \NewDocumentCommand, ermoeglicht mehrere optionale args
 \usepackage{makeidx} %% für Index-Ausgabe (Stichwortverzeichnis) mit \printindex
@@ -130,3 +142,4 @@
     hypertexnames=false, %% zur korrekten Erstellung der Bookmarks
     linktoc=all %% (all|linktocpage) Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
 ]{hyperref} %% creates links within a document and outside
+\usepackage{hypcap} %% ensures hyperref's links to e.x. tables point to that and not the label below

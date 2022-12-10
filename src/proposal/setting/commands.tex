@@ -32,7 +32,8 @@
 
 %% Referenzen (außerhalb des Dokument) --------------------------------------------------------------------------------
 \NewDocumentCommand{\Zitat}{ O{} O{} m }{\parencite[#1][#2]{#3}\xspace}
-\NewDocumentCommand{\ZitatVgl}{ O{} m }{\parencite[vgl.][#1]{#2}\xspace}
+\NewDocumentCommand{\Vgl}{ O{} m }{\parencite[vgl.][#1]{#2}\xspace}
+\newcommand{\Note}[1]{\footnote{#1}}
 
 
 %% Styling ------------------------------------------------------------------------------------------------------------
@@ -125,7 +126,6 @@
 \newcommand{\VerweisVT}[1]{(Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1})}
 \newcommand{\VerweisKF}[1]{\footnote{Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1}.}}
 \newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}.}}
-\newcommand{\Note}[1]{\footnote{#1}}
 
 
 %% Abkürzungen, ggfs. mit korrektem Leerraum --------------------------------------------------------------------------
@@ -145,7 +145,7 @@
 \newcommand{\uA}{\mbox{u.\,A.}\xspace} % unter Anderem
 \newcommand{\usw}{usw.\xspace} % und so weiter
 \newcommand{\vgl}{vgl.\xspace} % vergleich
-\newcommand{\Vgl}{Vgl.\xspace} % Vergleich
+\newcommand{\Vvgl}{Vgl.\xspace} % Vergleich
 \newcommand{\zB}{\mbox{z.\,B.}\xspace} % zum Beispiel
 \newcommand{\ZB}{\mbox{Z.\,B.}\xspace} % zum Beispiel
 \newcommand{\og}{\mbox{o.\,g.}\xspace} % oben genannt

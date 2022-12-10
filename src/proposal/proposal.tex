@@ -4,6 +4,7 @@
     footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
     parskip=half, %% vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
     fontsize=12pt,
+    %draft, %% markiert 'overfull boxes' mit einem schwarzen Block im PDF %% TODO may use
 ]{scrartcl}
 
 %% ----- settings --------------------------------
@@ -28,6 +29,7 @@
     %\clearpage
     %\pagenumbering{arabic}
 
+    %% TODO vermeide füllwörter
     \input{content/kopf.tex}
     \input{content/problem.tex}
     \input{content/ablauf.tex}

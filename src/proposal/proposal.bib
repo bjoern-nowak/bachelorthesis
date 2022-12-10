@@ -1,6 +1,10 @@
 %! Author = bjnowak
 %! Date = 22.11.22
 
+%% HowTo:
+%%  - each entry (datamodel) will be validated on compile, see babel logs
+%%  - use field 'langid' on references of other languages, or fallback 'language'
+
 @online{Wiki-DSA-Tools,
     author = {Wiki Aventurica},
     title = {DSA-Tools},
@@ -29,9 +33,7 @@
 %
 %
 
-% TODO ungenutzt
-
-@online{Wiki-HeldenSoftware,
+@online{Wiki-HeldenSoftware, % TODO ungenutzt
     author = {Wiki Aventurica},
     title = {Helden-Software},
     date = {2022-10-12},
@@ -39,7 +41,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{HeldenSoftware-Team,
+@online{HS-Team,
     author = {helden-software.de},
     title = {Team},
     date = {2010-06-23},
@@ -47,7 +49,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{HeldenSoftware-Internet,
+@online{HS-Internet,
     author = {helden-software.de},
     title = {Steigern/Menü/Internet},
     date = {2007-02-28},
@@ -55,7 +57,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{HeldenSoftware-Plugins,
+@online{HS-Plugins,
     author = {helden-software.de},
     title = {Plugins},
     date = {2010-06-23},
@@ -63,7 +65,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{HeldenSoftware-QA-Entwicklungsumgebung,
+@online{HS-QA-DevEnv,
     author = {helden-software.de},
     title = {Großes Q\&A - Entwicklungsumgebung},
     date = {2007-04-25},
@@ -71,7 +73,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{HeldenSoftware-DSA5,
+@online{HS-DSA5,
     author = {helden-software.de},
     title = {Helden-Software und DSA 5.0},
     date = {2015-08-25},
@@ -115,14 +117,14 @@
 %
 %
 
-@online{MeisterGeister,
+@online{MG,
     author = {MeisterGeister-Team},
     title = {Was ist MeisterGeister?},
     url = {https://meistergeister.org/meistergeister},
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{MeisterGeister-DSA5,
+@online{MG-DSA5,
     author = {MeisterGeister-Team},
     title = {MeisterGeister Projekt – Wir leben noch!},
     date = {2018-10-17},
@@ -130,7 +132,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{MeisterGeister-OpenSource,
+@online{MG-OpenSource,
     author = {MeisterGeister-Team},
     title = {BugFix Version 2.6.0.7 erschienen},
     date = {2022-06-06},
@@ -138,14 +140,14 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{MeisterGeister-Team,
+@online{MG-Team,
     author = {MeisterGeister-Team},
     title = {Team},
     url = {http://meistergeister.org/team/},
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{MeisterGeister-GitHub,
+@online{MG-GitHub,
     author = {MeisterGeister-Team},
     title = {GitHub},
     date = {2022-05-15},
@@ -155,9 +157,9 @@
 
 %
 %
-%
+% TODO ersetze regelwiki links ggf. mit publikationen (stehen unten auf der wiki seite)
 
-@online{Regelwiki,
+@online{RWiki,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki},
     year = {2022},
@@ -165,7 +167,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-Heldenerschaffung,
+@online{RWiki-Erstellung,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Heldenerschaffung},
     year = {2022},
@@ -173,7 +175,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-Spezies-Elfen,
+@online{RWiki-Spezies-Elfen,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Spezies Elfen},
     year = {2022},
@@ -181,7 +183,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-Berufsgeheimnis,
+@online{RWiki-Berufsgeheimnis,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Berufsgeheimnis},
     year = {2022},
@@ -189,7 +191,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-Beruf-BruderDesFeuers,
+@online{RWiki-Beruf-BruderDesFeuers,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Bruder des Feuers},
     year = {2022},
@@ -197,7 +199,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-VorUndNachteile,
+@online{RWiki-VorUndNachteile,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Vor- und Nachteile},
     year = {2022},
@@ -205,7 +207,7 @@
     addendum = {aufgrufen am 02.12.2022},
 }
 
-@online{Regelwiki-Sonderfertigkeit-Blutrune,
+@online{RWiki-Sonderf-Blutrune,
     author = {Ulisses Spiele GmbH},
     title = {DSA Regel Wiki - Sonderfertigkeit - Blutrune},
     year = {2022},
