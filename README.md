@@ -1,6 +1,6 @@
 
-## ToDos
-- Use better fonts (may install cm-super)
+## Helpful
+- https://www.semipol.de/posts/2018/06/latex-best-practices-lessons-learned-from-writing-a-phd-thesis/#building-latex-documents
 
 
 ## Setup (Linux)

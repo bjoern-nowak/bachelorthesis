@@ -3,7 +3,7 @@
     <texify-bibtex>
       <compiler>BIBER</compiler>
       <compiler-path />
-      <compiler-arguments />
+      <compiler-arguments>--validate-datamodel</compiler-arguments>
       <envs>
         <env name="BIBINPUTS" value="$PROJECT_DIR$/src/template" />
         <env name="BSTINPUTS" value="$PROJECT_DIR$/src/template:" />
