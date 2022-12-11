@@ -12,9 +12,18 @@ Der Spielleiter führt anhand einer fertig beschriebenen Spielwelt und einem pas
 Die Spieler besetzen jeweils die Rolle eines Charakters und beschreiben diesen auf einen \sog Charakterbogen, auf dem \uA dessen Beruf und Fähigkeiten stehen.
 
 Das \Abk{PPRPG} Regelwerk zu \Abk{DSA} ist im Jahr 1984 erschienen und befindet sich aktuell in der 5ten-Ausgabe aus 2015.
-Es zeichnet sich \insb durch den Umfang und die Komplexität aus, was \uA die Character-Erstellung und -Verwaltung für die Teilnehmer deutlich schwer macht.
+Es zeichnet sich \insb durch den Umfang und die Komplexität aus, welches durch zahlreiche Regelerweiterungsbänder verschärft wird und \uA die Character-Erstellung und -Verwaltung für die Teilnehmer deutlich schwer macht.
+Regeln werden wie folgt kategorisiert:
+\begin{inparaenum}
+    [a)]
+    \item Grundregel: ist immer einzuhalten
+    \item Optionale Regel: kann zu Beginn zugeschaltet werden
+    \item Fokusregel: kann nach Bedarf zu- und abgeschaltet werden, vertieft Regel eines speziellen Bereichs (\zB die Jagd oder Hausbau)
+    \item Hausregel: inoffiziell, wird unter den Teilnehmer ausgemacht.
+\end{inparaenum}\\
+Nachfolgenden werden ausschließlich Grundregeln ohne Regelerweiterungsbänder beachtet.
 
-\subsubsection{Charakter-Erstellung \textit{(vereinfachte Darstellung)}}
+\subsubsection*{Charakter-Erstellung \textit{(vereinfachte Darstellung)}}
 \label{subsubsec:charakter-erstellung}
 
 Ein Character definiert sich durch die folgenden Merkmale: seine Spezies, Kultur, Profession, Eigenschaften, Fertigkeiten sowie Vor- und Nachteilen.
@@ -70,12 +79,19 @@ abschließend) aufgezeigt:
 Bei den letzteren Zwei handelt es sich um Vorgaben der Spielwelt, damit die Merkmals-Kombinationen in dieser stimmig sind.
 Unübliche Merkmals-Kombinationen sind nicht per se verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen werden.
 
-Die nachstehende \Formel{eq:merkmal-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen.
-Es werden die \og Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB mögliche gegenseitige Merkmals-Ausschlüsse, nicht berücksichtigt.
-Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass jede Eigenschaft um bis zu sechs Stufen gesteigert werden kann und insgesamt 36 Eigenschaftsstufen erkauft werden können \Vgl[Schritt 2 und 5]{RWiki-Erstellung}.
-Es wird angenommen, dass eine zweit Profession gewählt werden kann, sechs Eigenschaften maximal gesteigert werden, 20 Fertigkeiten aktiviert und gesteigert werden und 10 Vorteile und fünf Nachteile gewählt werden.
+Die nachstehende \Formel{eq:merkmals-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen.
+Es werden die \og Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB Voraussetzungen von Merkmalen, nicht berücksichtigt.
+Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass jede Eigenschaft um bis zu sechs Stufen gesteigert werden kann aber maximal 36 Eigenschaftsstufen erkauft werden können \Vgl[Schritt 2 und 5]{RWiki-Erstellung}.
+Es wird angenommen, dass
+\begin{itemize*}[label={}, itemjoin={,}]
+    \item eine zweite Profession gewählt werden kann
+    \item sechs Eigenschaften maximal gesteigert werden
+    \item 20 Fertigkeiten aktiviert und gesteigert werden
+    \item 10 Vorteile und fünf Nachteile gewählt werden
+    \item und die Hälfte der Vor- und Nachteile sowie ein Viertel der Fertigkeiten sich ausschließen.
+\end{itemize*}
 %
-%Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass es 1.100 Start-\Abk{AP} gibt, jede
+%Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass es 1 100 Start-\Abk{AP} gibt, jede
 %Eigenschaft auf Stufe 8 startet, die Stufen-Obergrenze je Eigenschaft bei 14 liegt (also um bis zu 6 Stufen gesteigert
 %werden kann), jede Eigenschaftsstufe 15 \Abk{AP} kostet, die maximale Eigenschaftsstufen-Summe bei 100 liegt, jede
 %Fertigkeit maximal auf Stufe 10 (Stufe 0 nach Aktivierung) erweitert werden kann, maximal je 80 \Abk{AP} an Vorteile
@@ -88,73 +104,82 @@ Es wird angenommen, dass eine zweit Profession gewählt werden kann, sechs Eigen
 % 8x : 9 10 11 12 13 14 = 6 Stufen * 15 AP = 90 AP
 % Ich darf 8 mal 0 bis 6 Stufensteigerungen waehlen, maximal aber nur 36 Stufensteigerungen
 % 36 Stufen aus 8 gruppen von bis 6 Stufen => Multinomialkoeffizient
+% \left( \frac{36!}{6!^{E}} \right)
 %
 % xx [F]ertigkeiten, jede kann um bis zu 11 Stufen (incl. Aktivierung) gesteigert werden, 100 stehen zur verfügung
 % xx + 100 -1   über  100
 % (F * 11)! + 100 - 1   über  100
 %
-%% TODO halbiere als annahme vorteile und nachteile, sowie fertigkeiten, wegen auschlussregeln
 \begin{equation}
-    \label{eq:merkmal-kombinationen}
+    \label{eq:merkmals-kombinationen}
     \underset{[S]pezien}{
         \binom{S}{1}
-    }  *
+    } *
     \underset{[K]ulturen}{
         \binom{K}{1}
-    }  *
+    } *
     \underset{[P]rofessionenn}{
         \left( P + \binom{P}{2} \right)
-    }  *
+    } *
     \underset{[E]igenschaften}{
-    %% TODO mach was draus
-        \left( \binom{36}{6, 6, 6, 6, 6, 6} \frac{36!}{6!^{E}} \right)
+        \binom{E}{6}
     } *
     \underset{[F]ertigkeiten}{
-        \binom{F}{20}
+        \binom{\frac{V}{4}}{20}
     } *
     \underset{[V]orteile}{
-        \binom{V}{10}
+        \binom{\frac{V}{2}}{10}
     } *
     \underset{[N]achteile}{
-        \binom{N}{5}
+        \binom{\frac{N}{2}}{5}
     }
 \end{equation}
-%% TODO korrigiere ergebnis entsprechend
-Daraus ergeben sich \textbf{\ca 2,0684 Quattuordezilliarden (10\textsuperscript{87}) verschiedene Merkmals-Kombinationen}.
+Daraus ergeben sich \textbf{\ca 224,710 Oktilliarden (10\textsuperscript{51}) Merkmals-Kombinationen}.
 Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zauber, Rituale, magischen Handlungen, Liturgien, Kampftechniken und Sonderfertigkeiten.
 
-\subsubsection{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
+\subsubsection*{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
 \label{subsubsec:charakter-verwaltung}
 
-Bei der Charakter-Verwaltung geht es um Zukäufe und Steigerungen von Merkmalen, welche mit, im Laufe der Spielgeschichte, erhaltenen \Abk{AP} getätigt werden können.
-Die meisten der bereits, zur Charakter-Erstellung, genannten Regeln und einhegenden Problemen gelten auch bei der Verwaltung.
-So \zB Merkmals-Ausschlüsse, bei dem ein bereits gewähltes/gekauftes Merkmal ein anderen nicht erlaubt (sinngemäß nach unüblichen Merkmalen).
+Bei der Charakter-Verwaltung geht es um Zukäufe und Steigerungen von Merkmalen, welche mit, im Laufe der Spielgeschichte, erhaltenen \Abk{AP} getätigt werden können (\inkl der Nachpflege im Charakterbogen).
+Die meisten der bereits, zur Charakter-Erstellung, genannten Regeln und einhergehenden Problemen gelten auch bei der Verwaltung.
+So \zB Merkmals-Ausschlüsse, bei dem ein bereits gewähltes/gekauftes Merkmal ein Anderen nicht erlaubt (sinngemäß nach unüblichen Merkmalen).
 Oder das Einhalten der Regeln, ohne Hilfsmittel, eine zeitintensive und fehleranfällige Aufgabe ist.
 Zusätzlich zu den bekannten kauf- \bzw steigerbaren Merkmalen können drei der acht Basiswerte gesteigert werden.
-%% TODO fill me further
 \Vgl{RWiki-Verwaltung}
+
+Weitere Regeln die zu beachten sind werden nachfolgend (und nicht abschließend) aufgezeigt \Vgl{RWiki-Verwaltung}:
+\begin{itemize}
+    \item Fertigkeiten können maximal bis zwei Stufen über der höhsten beteiligten Eigenschaft gesteigert werden.
+    \item Kampftechniken können maximal bis zwei Stufen über der Leit-Eigenschaft gesteigert werden.
+    \item Der Basiswert Lebensenergie kann maximal um die Höhe der Eigenschaft Konstitution gesteigert werden.
+    \item Zauber und Liturgien können bis maximal Stufe 14 erhöht werden, dies kann durch die Sonderfertigkeit Merkmalskenntnis \bzw Aspektkenntnis aufgehoben werden.
+    \item Nur in Abstimmung mit dem Spielleiter können Vorteile gekauft und Nachteile abgelegt werden
+\end{itemize}
 
 \subsection{Technische Betrachtung}
 \label{subsec:technische-betrachtung}
 
-Um den zeitlichen Aufwand zu reduzieren, veröffentlichte bereits im Jahr 1993 und 1995 der damalige Herausgeber eine Software mit dem Namen \textquote{\Abk{DSA}-Tools} zur Erstellung und Verwaltung von Charakteren für die damalige Ausgabe \Vgl{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
-Die aktuell genutzten Softwares kommen hingegen aus der Community selbst und stehen kostenlos zur Verfügung, nachfolgend die populärsten aufgelistet:
+Um der Komplexität, dem Zeitaufwand und unbeabsichtigte Regelverstößen entgegenzuwirken bedarf es an Hilfsmitteln.
+Bis Heute werden in der Community selbsterstellte und teils veröffentlichte Hilfsmittel genutzt.
+Diese reichen von Charakterbögen-Layouts, über Tabellenkalkulationen bis hin zu Programmen. %% TODO add referenz
+Im Jahr 1993 und 1995 veröffentlichte der damalige Herausgeber eine Software mit dem Namen \textquote{\Abk{DSA}-Tools} zur Erstellung und Verwaltung von Charakteren für die damalige Ausgabe \Vgl{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
+Die aktuell umfangreichsten veröffentlichten Hilfsmittel kommen aus der Community selbst und stehen kostenlos zur Verfügung, nachfolgend die Populärsten aufgelistet:
 \begin{itemize}
     \item \textbf{Optolith Heldengenerator}, erschienen am \Datum{2018-04-08} und zuletzt Aktualisiert am \Datum{2022-03-22}, dient der Charakter-Erstellung und -Verwaltung in der 5ten-\Abk{DSA}-Ausgabe.
-    Es ist seit \Monat{2020-09} OpenSource und wird hauptsächlich von einer Person gewartet.
+    Es ist seit \Monat{2020-09} quelloffen und wird hauptsächlich von einer Person gewartet.
     Genutzt werden die Sprachen TypeScript\Note{Typisierter Superset von JavaScript; \url{https://www.typescriptlang.org/}} und ReasonML\Note{OCaml (\url{https://ocaml.org/}) in JavaScript-angelehnter Notation; \url{https://reasonml.github.io/}}.
     Die Regeln werden in \AbkK{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf Anfrage und Notwendigkeit ermöglicht.
     \Vgl{GitHub-Optolith}
 
     \item \textbf{Helden-Software}, erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe (für 5te-Ausgabe ist keine Unterstützung geplant \Vgl{HS-DSA5}).
-    Es ist nicht OpenSource.
+    Es ist nicht quelloffen.
     Genutzt wird die Sprache Java\Note{\Abk{OS}-unabhängige \Abk{OOP} Sprache; \url{https://www.oracle.com/de/java/}} und keine weiteren Frameworks/Bibliotheken. \Vgl{HS-QA-DevEnv}
 
     Es wird von einem Team aus sieben Personen (fünf Entwickler und zwei Tester) gewartet \Zitat{HS-Team}.
     Als Besonderheit bietet diese Lösung das Speichern der Charakter auf deren Server und eine Schnittstelle zur Entwicklung von Plugins an, mit denen Informationen zu den Charakteren abgerufen werden können \Vgl{HS-Internet,HS-Plugins}.
 
     \item \textbf{DSA Excel Heldenblatt}, erschienen im Jahr \Jahr{2003} und zuletzt Aktualisiert am \Datum{2021-05-15}, dient der Charakter-Erstellung und -Verwaltung in der \Abk{DSA}-4.1 Ausgabe.
-    Es handelt sich hierbei um eine Tabellenkalkulation, basierend auf Excel\Note{Vom Hersteller Microsoft; \url{https://www.microsoft.com/de-de/microsoft-365/excel}}, weshalb dieses als OpenSource zu betrachten ist.
+    Es handelt sich hierbei um eine Tabellenkalkulation, basierend auf Excel\Note{Vom Hersteller Microsoft; \url{https://www.microsoft.com/de-de/microsoft-365/excel}}, weshalb dieses als quelloffen zu betrachten ist.
     Die Regelwerk-Werte hingehen sind, wie auch bei den bereits genannten Programmen, aufgrund von Lizenzen verschlüsselt und damit nicht frei zugänglich.
     Das Besondere hier ist, dass eigene Merkmals-Ausprägungen wie \zB Zauber, Rituale und Liturgien integriert werden können.
     \Vgl{Orkenspalter-Heldenblatt,Heldenblatt}
@@ -164,8 +189,30 @@ Die aktuell genutzten Softwares kommen hingegen aus der Community selbst und ste
     Es ist in C\#\Note{Typsichere \Abk{OOP} Sprache; \url{https://learn.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/}} geschrieben und daher auf das \Abk{OS} \textquote{Microsoft Windows} ausgelegt \Vgl{MG-GitHub}.
 \end{itemize}
 
-%% TODO zeige was im generellen die technische schwierrigkeit ist
-%% TODO zeige was schwierigkeit bei opensoruce ist (hindernisse von contributoren)
+\subsubsection*{Technische Herausforderungen}
+\label{subsubsec:technische-herausforderungen}
+%% TODO add references
+
+Kern der technischen Herausforderung ist es das Regelwerk möglichst effizient und modular (leicht erweiter- und wartbar) abzubilden.
+Daher muss Vielzahl der Regeln in \textquote{kleinere Probleme} zerteilt werden;
+also in einzelne formale Regeln zur automatisierte Überprüfungen von Charakteren, zur Laufzeit.
+%% TODO fill me
+
+\subsubsection*{Quelloffen-bezogene Herausforderungen}
+\label{subsubsec:quelloffen-bezogene-herausforderungen}
+%% TODO add references
+
+Eine quelloffene Software lebt und fällt mit den \sog Mitwirkenden, welche letztlich die Tätigkeiten klassischer Softwareentwicklung durchführen, \zB das Anpassen, Testen und Veröffentlichen der Software.
+Das Interesse an der Software kann noch so groß sein, hat es nicht genügend aktiv Mitwirkende besteht die Gefahr das die Software veraltet und letztlich \textquote{stirbt}.
+Daraus lassen sich einige wichtige technische Anforderungen, um die Hürden für Mitwirkende gering zu halten, ableiten und stellen damit Voraussetzungen für ein langfristig erfolgreiches quelloffenes Projekt dar:
+\begin{inparaenum}
+    [a)]
+    \item die Dokumentationen müssen stets aktuell, leicht auffindbar und verständlich sein.
+    Dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen zur Mitwirkung, Einrichtung und Testdurchführung.
+    \item die Projektstruktur, der Quellcode und die Architektur sollten möglichst \textquote{Branchen-Standards} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}) erfüllen.
+    \item eine hohe und qualitative Testabdeckung zur frühen Fehlererkennung auch durch neue Mitwirkende.
+    \item es sollten möglichst weitverbreitete Programmiersprachen und Frameworks genutzt werden.
+\end{inparaenum}
 
 %%%  Arten von Rollenspiele:
 %%%  https://de.wikipedia.org/wiki/Rollenspiel_(Spiel)
