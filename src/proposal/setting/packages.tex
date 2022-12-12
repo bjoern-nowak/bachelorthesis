@@ -1,4 +1,4 @@
-%% develop support ----------------------------------------------------------------------------------------------------
+%% ----- develop support ------------------------------------------------------
 \RequirePackage[l2tabu, orthodox]{nag} %% detect and warm about obsolete/outdated/superseded stuff
 \usepackage{layout} %% print debug figure of page borders; \layout
 \usepackage{lipsum} %% generate dummy text
@@ -7,35 +7,35 @@
 \overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
 
 \RequirePackage{silence} %% susspress warnings
-%% for command \Monat and \Jahr
+%% --- for command \Monat and \Jahr ---
 \WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
 \WarningFilter{datetime2}{Region `german-base' has ignored}
 \WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
 \WarningFilter{datetime2}{Region `german-base' has ignored}
 
-%% Umlaute / Symbols --------------------------------------------------------------------------------------------------
+%% ----- Umlaute / Symbols ----------------------------------------------------
 \usepackage[utf8]{inputenc} %$ erlaubt Sonderzeichen/Umlaute im Quelltext %% ALWAYS ON TOP
 \usepackage[T1]{fontenc} %% automatische Trennung von Worten mit Umlauten
 %\usepackage{textcomp} %% diverse zeichen wie \texteuro %% TODO REMOVE
 
 
-%% Language -----------------------------------------------------------------------------------------------------------
+%% ----- Language -------------------------------------------------------------
 %% TODO may use something like \autocite
 \usepackage[ngerman]{babel} %% set language; new german
 \usepackage{csquotes} %% required by babel to ensure qoutes are typeset to language
 
 
-%% Font Family --------------------------------------------------------------------------------------------------------
+%% ----- Font Family ----------------------------------------------------------
 %\usepackage{relsize} %% Schriftgröße relativ festlegen %% TODO REMOVE
 \usepackage{lmodern} %% bessere Font fuer PDFs als latex default
 %\usepackage{libertine} \usepackage{libertinust1math} %% eigener fav 1 - text
 %\usepackage{mathptmx} %% uni vorgabe - times new romes
 %\usepackage{nunito} %% uni coporate design
 %\usepackage[sfdefault]{biolinum}  %% eigener fav 1 - überschriften
-%% Option 'sfdefault' only if the base font of the document is to be sans serif
+%% [sfdefault] only if the base font of the document is to be sans serif
 
 
-%% Font Style ---------------------------------------------------------------------------------------------------------
+%% ----- Font Style -----------------------------------------------------------
 %\usepackage[compact]{titlesec} %% Zeilenabstände %% TODO may include
 \usepackage[onehalfspacing]{setspace} %% define space betweens lines
 \usepackage{geometry} %% define page borders
@@ -44,8 +44,8 @@
 \usepackage{microtype} %% make spacing of individual letters smoother
 
 
-%% Table --------------------------------------------------------------------------------------------------------------
-\PassOptionsToPackage{table}{xcolor}
+%% ----- Table ----------------------------------------------------------------
+\PassOptionsToPackage{table}{xcolor} %% include color schema for tables
 \usepackage{tabularx} %% automated line-breaks
 \usepackage{tabulary} %% control column text direction
 \usepackage{booktabs} %% \toprule \midrule[3pt] \cmidrule{1-2} \bottomrule \addlinespace
@@ -59,7 +59,7 @@
 \newcolumntype{f}[1]{>{\raggedleft\hspace{0pt}}p{#1}} %% Spaltendefinition: rechtsbündig mit definierter Breite
 
 
-%% Graphics and Media -------------------------------------------------------------------------------------------------
+%% ----- Graphics and Media ---------------------------------------------------
 \usepackage[dvips,final]{graphicx} %% Einbinden von JPG-Grafiken ermöglichen
 \usepackage{graphics} %% \keepaspectratio  %% TODO evtl schon enthalten
 \usepackage{wrapfig} %% float/wrap text around figures
@@ -68,19 +68,19 @@
 \usetikzlibrary{trees} %% directory trees
 
 
-%% Math ---------------------------------------------------------------------------------------------------------------
+%% ----- Math -----------------------------------------------------------------
 \usepackage{amssymb} %% fuer /checkmark
 \usepackage{amsmath} %% Befehle aus AMSTeX für mathematische Symbole
 \usepackage{amsfonts} %% Font fuer amsmath %% TODO evtl auto-loaded by amssymb
 
 
-%% Styling ------------------------------------------------------------------------------------------------------------
+%% ----- Styling --------------------------------------------------------------
 \usepackage{listings} %% pretty print source code; define with \lstset and print with \lstinputlisting
 \usepackage{xcolor} %% predefined color names
 \usepackage{lscape} %% rotates specific page in landscape
 
 
-%% Sonstiges ----------------------------------------------------------------------------------------------------------
+%% ----- Sonstiges ------------------------------------------------------------
 \usepackage{url} %% URL verlinken, lange URLs umbrechen etc.
 \usepackage{chngcntr} %% fortlaufendes Durchnummerieren der Fußnoten
 \usepackage{paralist} %% inline aufzählung mit \begin{inparaenum}[a)] (alternative zu enumitem)
@@ -91,11 +91,11 @@
 \usepackage[useregional]{datetime2} %% darstellung eines datum
 
 
-%% Abkürzungsverzeichnis ----------------------------------------------------------------------------------------------
-\usepackage[nolist]{acronym} %% Abkürzungsliste mit \begin{acronym} ; [nolist, printonlyused, footnote, nohyperlinks, smaller]
+%% ----- Abkürzungsverzeichnis ------------------------------------------------
+\usepackage[nolist]{acronym} %% liste mit \begin{acronym} ; [nolist, printonlyused, footnote, nohyperlinks, smaller]
 
 
-%% Symbolverzeichnis -------------------------------------------------------------------------------------------------
+%% ----- Symbolverzeichnis ----------------------------------------------------
 %% TODO does not work
 \usepackage[intoc]{nomencl} %% [intoc] im Inhaltsverzeichnis
 %\let\abbrev\nomenclature
@@ -106,7 +106,7 @@
 \makenomenclature
 
 
-%% literaturverzeichnis -----------------------------------------------------------------------------------------------
+%% ----- literaturverzeichnis -------------------------------------------------
 \usepackage[
     backend=biber, %%is default
     style=numeric, %% numeric, alphabetic, authoryear, authortitle, science, ieee
@@ -121,7 +121,7 @@
 %% ydnt  Sort by year (descending), name, title.
 %% none  Do not sort at all. All entries are processed in citation order.
 
-%% PDF ----------------------------------------------------------------------------------------------------------------
+%% ----- PDF ------------------------------------------------------------------
 \usepackage{pdfpages} %% import of PDFs into a PDF
 \usepackage[
     bookmarks,
@@ -135,7 +135,7 @@
     filecolor=main, %% link color of: links to local files
     menucolor=main, %% link color of: Acrobat menu item
     urlcolor=main, %% link color of: URLs
-%backref, %% Quellen werden zurück auf ihre Zitate verlinkt
+%    backref, %% Quellen werden zurück auf ihre Zitate verlinkt
     pdftex,
     plainpages=false, %% zur korrekten Erstellung der Bookmarks
     pdfpagelabels=true, %% zur korrekten Erstellung der Bookmarks

@@ -1,31 +1,41 @@
 \documentclass[
+%   ----- develop relevant -----
+%    draft, %% markiert 'overfull boxes' mit einem schwarzen Block im PDF %% TODO may use
+%   ----- hard guidelines -----
+    11pt, %% Schriftgröße vorgegeben
     toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz. / oder
-    %toc=bibliography, %% Literaturvrz. im Inhaltsvrz.
+%    toc=bib, %% Literaturvrz. im Inhaltsvrz. (ggf. =bibliography )
     footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
+%    parskip=false, %% Absatzauszeichnung: 1 em Einzug, kein Abstand / oder
     parskip=half, %% vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
-    fontsize=12pt,
-    %draft, %% markiert 'overfull boxes' mit einem schwarzen Block im PDF %% TODO may use
-]{scrartcl}
+%    leqno, %% Gleichungen links statt rechts nummerieren
+    fleqn, %% Gleichungen linksbündig statt zentriert ausgeben
+%   ----- settings for {scrreprt} or without noticable difference -----
+    a4paper, %% Papierformat zur Berechnung des Satzspiegels
+    pagesize=auto, %% Papierformat des Kompilates gemäß 'paper' setzen
+    footinclude=false, %% Fußzeile zum Textkörper zählen
+    headinclude=true, %% Kopfzeile zum Textkörper zählen
+]{scrartcl} %% TODO set correct documentclass
+%% scrartcl for proposal : use \section as toplevel
+%% scrreprt for thesis : use \chapter as toplevel (not scrbook since abstract environment is missing)
 
-%% ----- settings --------------------------------
+%% ----- settings -------------------------------------------------------------
 \input{setting/packages.tex}
 \input{setting/meta.tex}
+\input{setting/config.tex}
 \input{setting/style.tex}
 \input{setting/commands.tex}
 
-\addbibresource{proposal.bib}
-\graphicspath{{picture/}} %% TODO geht nicht
-
-%% ----- Start document --------------------------
+%% ----- Start document -------------------------------------------------------
 \begin{document}
     \pagenumbering{arabic}
     %\layout %% zeige seitenränder und co als bild
 
-%% ----- preface ---------------------------------
+%% ----- preface --------------------------------------------------------------
     %\pagenumbering{Roman}
     \input{preface.tex}
 
-%% ----- content ---------------------------------
+%% ----- content --------------------------------------------------------------
     %\clearpage
     %\pagenumbering{arabic}
 
@@ -39,18 +49,18 @@
     \input{content/60_gliederung.tex}
     \input{content/70_meilensteine.tex}
 
-%% ----- bibliography ----------------------------
+%% ----- bibliography ---------------------------------------------------------
     %\clearpage
     %\pagenumbering{roman}
     %\nocite{*} %% insert when there are no citations
 
-    \renewcommand{\refname}{Literaturverzeichnis}
+    \renewcommand{\refname}{\bibTitle}
     \printbibliography
 
-%% ----- signing page ----------------------------
+%% ----- signing page ---------------------------------------------------------
     \clearpage
 
     \input{signs.tex}
 
-%% ----- End document ----------------------------
+%% ----- End document ---------------------------------------------------------
 \end{document}

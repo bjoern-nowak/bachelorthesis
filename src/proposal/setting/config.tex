@@ -1,0 +1,19 @@
+%% ----- paths -----
+\addbibresource{proposal.bib}
+\graphicspath{{picture/}} %% TODO geht nicht
+
+
+%% ----- namings -----
+\newcommand{\sectionPrefix}{Kapitel} %% for \autoref see style.tex
+\newcommand{\abbrvTitle}{Abkürzungsverzeichnis} %% for custom \listofabbreviations
+\newcommand{\bibTitle}{Literaturverzeichnis}
+
+
+%% ----- PDF file -----
+\hypersetup{ %% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
+    pdftitle={\paperTitle},
+    pdfauthor={\student},
+    pdfcreator={\student},
+    pdfsubject={\paperTitle},
+    pdfkeywords={\paperTitle},
+}

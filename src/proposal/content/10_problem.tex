@@ -79,7 +79,7 @@ abschließend) aufgezeigt:
 Bei den letzteren Zwei handelt es sich um Vorgaben der Spielwelt, damit die Merkmals-Kombinationen in dieser stimmig sind.
 Unübliche Merkmals-Kombinationen sind nicht per se verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen werden.
 
-Die nachstehende \Formel{eq:merkmals-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen.
+Die nachstehende \Gleichung{eq:merkmals-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen.
 Es werden die \og Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB Voraussetzungen von Merkmalen, nicht berücksichtigt.
 Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass jede Eigenschaft um bis zu sechs Stufen gesteigert werden kann aber maximal 36 Eigenschaftsstufen erkauft werden können \Vgl[Schritt 2 und 5]{RWiki-Erstellung}.
 Es wird angenommen, dass
@@ -90,48 +90,31 @@ Es wird angenommen, dass
     \item 10 Vorteile und fünf Nachteile gewählt werden
     \item und die Hälfte der Vor- und Nachteile sowie ein Viertel der Fertigkeiten sich ausschließen.
 \end{itemize*}
-%
-%Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass es 1 100 Start-\Abk{AP} gibt, jede
-%Eigenschaft auf Stufe 8 startet, die Stufen-Obergrenze je Eigenschaft bei 14 liegt (also um bis zu 6 Stufen gesteigert
-%werden kann), jede Eigenschaftsstufe 15 \Abk{AP} kostet, die maximale Eigenschaftsstufen-Summe bei 100 liegt, jede
-%Fertigkeit maximal auf Stufe 10 (Stufe 0 nach Aktivierung) erweitert werden kann, maximal je 80 \Abk{AP} an Vorteile
-%gekauft oder Nachteile gewonnen werden darf. \ZitatVgl[Schritt 2, 5 und 7]{RWiki-Erstellung}\\
-%Angenommen wird das jeder Vorteil und Nachteil einen \Abk{AP}-Wert von 8 hat, 10 Vorteile und 5 Nachteile gewählt
-%werden und 300 \Abk{AP} für die freie Aktivierung und Steigerung von Fertigkeiten zur Verfügung steht, wodurch 100
-%Fertigkeits-Aktivierungen und Steigerungen vorgenommen werden.
-%
-% 8x 8 Stufen = 64 Stufen von 100 ==> also maximal 36 neue Stufen
-% 8x : 9 10 11 12 13 14 = 6 Stufen * 15 AP = 90 AP
-% Ich darf 8 mal 0 bis 6 Stufensteigerungen waehlen, maximal aber nur 36 Stufensteigerungen
-% 36 Stufen aus 8 gruppen von bis 6 Stufen => Multinomialkoeffizient
-% \left( \frac{36!}{6!^{E}} \right)
-%
-% xx [F]ertigkeiten, jede kann um bis zu 11 Stufen (incl. Aktivierung) gesteigert werden, 100 stehen zur verfügung
-% xx + 100 -1   über  100
-% (F * 11)! + 100 - 1   über  100
-%
+%% variablen, count indicies: italic : \textrm
+%% constanten, indicies: steep : \textrm
+%% complex numbers: underlined
 \begin{equation}
     \label{eq:merkmals-kombinationen}
-    \underset{[S]pezien}{
-        \binom{S}{1}
+    \underset{[\textrm{S}]pezien}{
+        \binom{\textrm{S}}{1}
     } *
-    \underset{[K]ulturen}{
-        \binom{K}{1}
+    \underset{[\textrm{K}]ulturen}{
+        \binom{\textrm{K}}{1}
     } *
-    \underset{[P]rofessionenn}{
-        \left( P + \binom{P}{2} \right)
+    \underset{[\textrm{P}]rofessionenn}{
+        \left( \textrm{P} + \binom{\textrm{P}}{2} \right)
     } *
-    \underset{[E]igenschaften}{
-        \binom{E}{6}
+    \underset{[\textrm{E}]igenschaften}{
+        \binom{\textrm{E}}{6}
     } *
-    \underset{[F]ertigkeiten}{
-        \binom{\frac{V}{4}}{20}
+    \underset{[\textrm{F}]ertigkeiten}{
+        \binom{\frac{\textrm{F}}{4}}{20}
     } *
-    \underset{[V]orteile}{
-        \binom{\frac{V}{2}}{10}
+    \underset{[\textrm{V}]orteile}{
+        \binom{\frac{\textrm{V}}{2}}{10}
     } *
-    \underset{[N]achteile}{
-        \binom{\frac{N}{2}}{5}
+    \underset{[\textrm{N}]achteile}{
+        \binom{\frac{\textrm{N}}{2}}{5}
     }
 \end{equation}
 Daraus ergeben sich \textbf{\ca 224,710 Oktilliarden (10\textsuperscript{51}) Merkmals-Kombinationen}.

@@ -1,7 +1,7 @@
-%% Seitenränder -----------------------------------------------------------------
+%% ----- Seitenränder ---------------------------------------------------------
 \setlength{\topskip}{\ht\strutbox} %% behebt Warnung von geometry
 \geometry{
-    %showframe,
+%    showframe,
     a4paper,
     left=20mm,
     right=20mm,
@@ -12,18 +12,19 @@
 }
 
 \usepackage[
-    automark, %% Kapitelangaben in Kopfzeile automatisch erstellen
+%    automark, %% Kapitelangaben in Kopfzeile automatisch erstellen
+%    ilines %% Trennlinie linksbündig ausrichten
     headsepline, %% Trennlinie unter Kopfzeile
     footsepline, %% Trennlinie über Fußzeile
-    ilines %% Trennlinie linksbündig ausrichten
 ]{scrlayer-scrpage}
 
-%% Kopf- und Fußzeilen ----------------------------------------------------------
+
+%% ----- Kopf- und Fußzeilen --------------------------------------------------
 \pagestyle{scrheadings}
-%\renewcommand{\chapterpagestyle}{scrheadings}
+%\renewcommand{\chapterpagestyle}{scrheadings} %% TODO may relevant for documentclass scrreprt
 \clearpairofpagestyles
 
-%% Kopfzeile
+%% ----- Kopfzeile -----
 %% TODO add logo from https://ulisses-spiele.de/wp-content/uploads/2022/10/DSA_LARP_Logo.png
 %%  or https://www.ulisses-regelwiki.de/files/media/DSA5_Logo.png
 \renewcommand{\headfont}{\normalfont} %% Schriftform der Kopfzeile
@@ -33,24 +34,26 @@
 \setlength{\headheight}{15mm} %% Höhe der Kopfzeile
 %\setheadwidth[0pt]{textwithmarginpar} %% Kopfzeile über den Text hinaus verbreitern (falls Logo den Text überdeckt)
 
-%% Fußzeile
+%% ----- Fußzeile -----
 \ifoot{\\\version}
 \cfoot{\\\today}
 \ofoot{\\Seite \pagemark\xspace von 9} %% TODO fill in last page number
 %% abstand vom inhalt zur "grundlinie" (Boden vom Text) und nicht obere Kante vom Text
 \setlength{\footskip}{10mm}
 
-%% Zeilenabstände
+
+%% ----- Zeilenabstände -------------------------------------------------------
 \singlespacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
 
-%% Schusterjungen und Hurenkinder vermeiden
+%% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
 \clubpenalty = 10000
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
 
-%% Quellcode-Ausgabe formatieren
+
+%% ----- Quellcode-Ausgabe formatieren ----------------------------------------
 \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
 \lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
 
@@ -59,25 +62,30 @@
 \setcounter{secnumdepth}{4} %% Kapitel bis zum Level der paragraphen werden nummeriert
 %% \subsubsectionlevel = level 3
 
-%% Aufzählungen anpassen
+
+%% ----- Aufzählungen anpassen ------------------------------------------------
+\renewcommand{\autodot}{} %% Remove all end-of-counter dots
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 
-\renewcommand{\autodot}{} %% Remove all end-of-counter dots
+%% ----- Bezeichner für Kapitel über \autoref ---------------------------------
+%% (original in babel ngerman: Kapitel, Abschnitt, Unterabschnitt, Unterunterabschnitt)
+\addto\extrasngerman{
+    \renewcommand{\sectionautorefname}{\sectionPrefix}
+    \renewcommand{\subsectionautorefname}{\sectionPrefix}
+    \renewcommand{\subsubsectionautorefname}{\sectionPrefix}
+}
 
-%% Färbung:
+%% ----- Farben ---------------------------------------------------------------
 \definecolor{main}{RGB}{0, 63, 107}
-
-\definecolor{head}{RGB}{173,216,230} %% {0.4, 0.6, 0.8}
+\definecolor{head}{RGB}{173,216,230}
 \definecolor{sub}{RGB}{209,238,238}
 \definecolor{odd}{RGB}{255,255,234}
 \definecolor{hig}{RGB}{255,255,224}
 
-
-
+%% ----- für Code Schemas -----
 %% TODO find better way of producing color schema for code/listings
-%% Farb und SChema Infos für Code
 \definecolor{DEFhellgelb}{rgb}{1,1,0.9}
 \definecolor{DEFKeys}{rgb}{0,0,1}
 \definecolor{DEFIdentifier}{rgb}{0,0,0}
