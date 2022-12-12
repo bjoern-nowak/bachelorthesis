@@ -1,0 +1,466 @@
+%----------------------------------------------------------------------------
+%-----UOL_Praesentation------------------------------------------------------
+%-----Erstellt von Natalia Chernov im Auftrag der CvO Universität Oldenburg--
+%----------------------------------------------------------------------------
+%--Diese Vorlage basiert auf der Klasse 'beamer', für weitere Informationen-- 
+%--siehe--------------------------------------------------------------------- 
+%-http://mirrors.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf
+%----------------------------------------------------------------------------
+%--Kompilieren mit 'pdflatex UOL_Praesentation.tex'--------------------------
+%--Die Datei 'UOL_Logo_Negativ.png' soll sich im selben Verzeichnis befinden-
+%----------------------------------------------------------------------------
+\documentclass[xcolor=table,9pt,aspectratio=169]{beamer}
+
+\usepackage[english, ngerman]{babel} 
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc} 
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tikz}
+\usepackage{datetime}
+\usepackage{anyfontsize}
+\usepackage{lipsum}
+\usepackage{multicol} 
+\usepackage{smartdiagram}
+
+\definecolor{uolblue}{RGB}{0,62,107}
+
+\definecolor{blue1}{RGB}{0,78,159} 
+\definecolor{blue2}{RGB}{0,171,217}
+\definecolor{blue3}{RGB}{91,197,242}
+\definecolor{blue4}{RGB}{161,217,248}
+
+\definecolor{green1}{RGB}{0,120,120}
+\definecolor{green2}{RGB}{0,168,121}
+\definecolor{green3}{RGB}{148,193,28}
+\definecolor{green4}{RGB}{199,211,0}
+
+\definecolor{orange1}{RGB}{213,59,10}
+\definecolor{orange2}{RGB}{238,113,0}
+\definecolor{orange3}{RGB}{243,145,0}
+\definecolor{orange4}{RGB}{253,195,0}
+
+\definecolor{gr}{RGB}{191,191,191}
+
+\setbeamertemplate{frametitle}{\color{uolblue}\fontsize{12}{20}\selectfont{\insertframetitle}}
+
+\pgfdeclareimage[width=0.145\paperwidth]{UOLLogo}{UOL_Logo_Negativ}
+\pgfdeclareimage[width=0.072\paperwidth]{UOLLogo_small}{UOL_Logo_Negativ}
+
+\defbeamertemplate*{background canvas}{default_page}
+{%
+\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight);        
+	\filldraw[fill=uolblue,fill opacity=1,draw=none] (0,0) rectangle (0.119\paperwidth, \the\paperheight);
+    \filldraw[fill=blue2,fill opacity=1,draw=none] (0.119\paperwidth, 0) -- (0.119\paperwidth, 0.565\paperheight) arc (117.2:180:0.6\paperwidth) -- cycle;
+    \pgftext[at=\pgfpoint{10}{\the\paperheight-11.5}, left, top]{\pgfsetfillopacity{1}\pgfuseimage{UOLLogo_small}}; 
+\end{tikzpicture}
+}
+\defbeamertemplate*{background canvas}{titlepage_image}
+{
+\begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight); 
+	\filldraw[fill=uolblue,fill opacity=1, draw=none] (0,0) rectangle (\the\paperwidth, \the\paperheight);
+    \filldraw[fill=blue2, fill opacity=1, draw=none] (\the\paperwidth, 0) -- (\the\paperwidth, 0.66\paperheight) arc (90:180:0.6\paperwidth) -- cycle;
+    \pgftext[at=\pgfpoint{14}{\the\paperheight-17.5}, left, top]{\pgfsetfillopacity{1}\pgfuseimage{UOLLogo}}; 
+\end{tikzpicture}  
+}
+\BeforeBeginEnvironment{frame}{%
+  \setbeamertemplate{background canvas}[default_page]%
+}
+\makeatletter
+\define@key{beamerframe}{titlepage_image}[true]{%
+  \setbeamercovered{invisible}%
+  \setbeamertemplate{background canvas}[titlepage_image]%
+ }
+\makeatother%
+
+ \setbeamertemplate{footline}
+{
+  \leavevmode
+  \hbox{
+  \hspace*{.025\paperwidth}\begin{beamercolorbox}[wd=.094\paperwidth,ht=2.25ex,dp=1ex,left]{}
+  ~
+  
+  \vspace*{.042\paperheight}
+     \fontsize{4.4}{5.9} \selectfont \color{white} \textbf{Seite \insertframenumber} \newline \insertdate
+  \vspace*{.026\paperheight}
+  \end{beamercolorbox}
+  \hspace*{.05\paperwidth}\begin{beamercolorbox}
+  [wd=.79\paperwidth,ht=2.25ex,dp=1ex,left]{}  
+ ~ 
+
+  \vspace*{.042\paperheight}
+     \fontsize{4.4}{5.9} \selectfont \color{black} \textbf{\inserttitle}~---~\insertsubtitle \newline \color{gray}Titel \insertauthor~---~Einrichtung
+  \vspace*{.026\paperheight}
+  \end{beamercolorbox} 
+  }
+  \vskip0pt
+}
+%--------------------------------------------------------------------------------------------
+\setbeamerfont{title}{size={\fontsize{22}{25}}}
+\setbeamerfont{subtitle}{size={\fontsize{12}{14}}}
+\setbeamerfont{author}{size={\fontsize{9}{11}}}
+\setbeamerfont{date}{size={\fontsize{9}{11}}}
+\setbeamercolor{title}{fg=white} 
+\setbeamercolor{subtitle}{fg=white} 
+\setbeamercolor{author}{fg=white} 
+\setbeamercolor{date}{fg=white} 
+\setbeamercolor{color_Logo-Platzhalter}{fg=white,bg=gray!40}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{ \vspace*{20mm}
+  \hspace*{-22.5mm}
+  \begin{minipage}{\textwidth}
+  \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+  \bigskip
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+  \bigskip
+  \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor, 
+  \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par
+  \end{minipage}
+}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.17\paperwidth,text margin right=0.04\paperwidth} 
+
+\title{Titel der Präsentation}
+\subtitle{Untertitel der Präsentation}
+\author{Vorname Name}
+\date{\renewcommand{\dateseparator}{.} \ddmmyyyydate \today}
+\usepackage{enumitem}
+\def\labelitemi{--}
+\def\labelitemii{--}
+\def\labelitemiii{--}
+
+\begin{document}
+%---------------------------------------------------------------------------------
+%-----Titelseite------------------------------------------------------------------
+%--------------------------------------------------------------------------------- 
+{    
+\setbeamertemplate{footline}{} 
+  \begin{frame}[titlepage_image]
+  \maketitle
+   
+  \end{frame}
+}
+%---------------------------------------------------------------------------------
+%-----Seite 2---------------------------------------------------------------------
+%---------------------------------------------------------------------------------  
+\begin{frame}
+ \begin{overlayarea}{\textwidth}{0.81\paperheight}
+{
+
+\vspace*{11mm}
+
+\usebeamerfont{title} \textcolor{uolblue}
+{Überschrift Kapiteltrenner}}
+
+\vspace*{7mm}
+
+{\usebeamerfont{subtitle} \textcolor{uolblue}
+{Untertitel Kapiteltrenner}}
+ 
+\end{overlayarea}
+\begin{overlayarea}{\textwidth}{0.1\paperheight}
+
+    \begin{minipage}{0.5\textwidth}
+    	\begin{beamercolorbox}[wd=10mm,ht=4mm,center]{color_Logo-Platzhalter}
+   	 		\fontsize{3.5}{5} \selectfont  Platzhalter- \newline Logo  \vspace*{0.3mm}
+    	\end{beamercolorbox} 
+    \end{minipage}
+    \begin{minipage}{0.6\textwidth}
+    	\fontsize{4.5}{5.5} \selectfont \color{red} 
+    	Für mehr als drei Logos (oder wenn der Platz unten rechts nicht ausreicht) 
+    \end{minipage}
+{\color{red} \hrule}
+
+
+\vspace*{1mm}
+\begin{flushright}    
+    \begin{minipage}{58mm}
+    	\begin{flushright}    
+    		\begin{minipage}{0.5\textwidth}
+				\begin{beamercolorbox}[wd=14mm,ht=4mm,center]{color_Logo-Platzhalter}
+    				\fontsize{3.5}{5} \selectfont  Platzhalter- \newline Logo  \vspace*{0.3mm}
+    			\end{beamercolorbox} 
+    		\end{minipage}
+    		\begin{minipage}{0.5\textwidth}
+				\begin{beamercolorbox}[wd=26mm,ht=4mm,center]{color_Logo-Platzhalter}
+    				\fontsize{3.5}{5} \selectfont  Platzhalter- \newline Logo  \vspace*{0.3mm}
+    			\end{beamercolorbox} 
+    		\end{minipage}
+   			\begin{minipage}{0.5\textwidth}
+				\begin{beamercolorbox}[wd=14mm,ht=4mm,center]{color_Logo-Platzhalter}
+    				\fontsize{3.5}{5} \selectfont  Platzhalter- \newline Logo  \vspace*{0.3mm}
+   				\end{beamercolorbox} 
+    		\end{minipage}
+			{\color{red} \hrule}
+    	\end{flushright}
+    \end{minipage}
+\end{flushright}
+
+\end{overlayarea}
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 3---------------------------------------------------------------------
+%---------------------------------------------------------------------------------  
+\begin{frame}
+
+%\vspace*{5mm}
+
+\textcolor{uolblue}{\fontsize{16}{17}\selectfont{}Kapitelüberschrift}
+\bigskip
+
+	\begin{tikzpicture}
+    	\fill[gr] (2,0) rectangle (15,5);
+	\end{tikzpicture}
+ 
+
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 4---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}{\vspace*{10mm}Überschrift}
+\vspace*{-10mm}
+\begin{itemize}
+\item Aufzählung Standard
+	\begin{itemize}
+	\item
+	Aufzählung Ebene 2, zweizeilig\\
+	Aufzählung Ebene 2
+		\begin{itemize}
+		\item Aufzählung Ebene 3
+		\item ...
+		\end{itemize}
+	\item ...
+	\end{itemize}
+     	\item Aufzählung Standard
+     	\item \fontsize{11}{16}\selectfont Aufzählung vergrößert\\
+     	 zweizeilig
+\end{itemize}
+   
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 5---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}{\vspace*{10mm}Überschrift}
+
+\lipsum[1][1-6]\\
+
+\begin{center}
+\begin{tikzpicture}
+    \draw[very thick,blue2] (15,0) -- (16.1,0.4);
+    \draw[very thick,blue2] (15,0) -- (13.9,0.4);
+  \end{tikzpicture}
+  
+{\color{blue2} \fontsize{16}{16} \selectfont%
+Dies ist der Blindtext einer\\[0.2ex]
+farbigen Hervorhebung, wie zum Beispiel\\[0.2ex]
+eine Zusammenfassung.}
+\end{center}
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 6---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}{\vspace*{10mm}Überschrift}
+
+\begin{multicols}{2} 
+
+Fließtext, 2-Spaltig. \lipsum[2][1-4]
+
+\medskip
+
+\textbf{Eine Zwischenüberschrift}\\
+
+\lipsum[2][1-4] \textbf{Eine Hervorhebung.} \lipsum[2][5-11]
+\end{multicols}
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 7---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}{\vspace*{10mm}Überschrift}
+\begin{multicols}{2} 
+\lipsum[2][1-5]
+
+\medskip
+
+\lipsum[2][6-10]
+\begin{center}\vspace{1cm}
+%
+%-Für echte Farben in Ihrem Bild soll 'decodearray={1 0 1 0 1 0}' entfernt werden-
+\includegraphics[width=0.8\linewidth,decodearray={1 0 1 0 1 0}]{UOL_Logo_Negativ}
+%
+\end{center}\vspace{1cm}
+\end{multicols}
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 8---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}[h]{p{8cm}cr}
+\arrayrulecolor{blue2}\hline
+\textbf{Überschrift einer Tabelle}\\
+\hline
+Zeile einer Tabelle & 00 AB & Lorem Ipsum \\
+Zeile einer Tabelle & 00 AB & Lorem Ipsum \\
+Zeile einer Tabelle & 00 AB & Lorem Ipsum \\
+Zeile einer Tabelle & 00 AB & Lorem Ipsum \\
+\hline
+\end{tabular}
+
+\bigskip
+
+\begin{tabular}[h]{lcr}
+\arrayrulecolor{blue2}\hline
+\textbf{Überschrift einer Tabelle}\\
+\hline
+Zeile einer Tabelle && 00 AB \\
+Zeile einer Tabelle && 00 AB \\
+Zeile einer Tabelle && 00 AB \\
+Zeile einer Tabelle && 00 AB \\
+Zeile einer Tabelle && 00 AB \\
+\hline
+\end{tabular}
+
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 9---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}
+
+
+\mbox{\colorbox{blue2}{
+\begin{minipage}{0.25\textwidth}
+	\begin{center}
+	\color{white} 
+	Beispiel für\\
+	zentrierten Blindtext\\ 
+	auf einem\\
+	farbigen Infokasten
+	\end{center}
+\end{minipage}
+}
+\quad
+\fcolorbox{uolblue}{white}{
+\begin{minipage}{0.25\textwidth}
+	\color{uolblue} 
+	Beispiel für links-\\
+	bündigen Blindtext\\ 
+	auf einem Outline-\\
+	Infokasten
+\end{minipage}
+}
+\quad
+\begin{minipage}{0.15\textwidth}
+\begin{tikzpicture}[yscale=0.3]
+    \draw [line width=1mm,    blue2] (0,-1) -- (2,-1);
+    \draw [line width=0.75mm, blue2] (0,-2) -- (2,-2);
+    \draw [line width=0.5mm,  blue2] (0,-3) -- (2,-3);
+    \draw [line width=0.3mm,  blue2] (0,-4) -- (2,-4);
+    \draw [line width=0.2mm,  blue2] (0,-5) -- (2,-5);
+    \draw [line width=0.1mm,  blue2] (0,-6) -- (2,-6);
+  \end{tikzpicture}
+\end{minipage}
+\quad
+\begin{minipage}{0.15\textwidth}
+\begin{tikzpicture}[yscale=0.3]
+    \draw [line width=1mm,    uolblue] (0,-1) -- (2,-1);
+    \draw [line width=0.75mm, uolblue] (0,-2) -- (2,-2);
+    \draw [line width=0.5mm,  uolblue] (0,-3) -- (2,-3);
+    \draw [line width=0.3mm,  uolblue] (0,-4) -- (2,-4);
+    \draw [line width=0.2mm,  uolblue] (0,-5) -- (2,-5);
+    \draw [line width=0.1mm,  uolblue] (0,-6) -- (2,-6);
+  \end{tikzpicture}
+\end{minipage}}
+
+
+\begin{flushleft}
+\smartdiagramset{uniform sequence color=true, 
+sequence item uniform color=blue2,
+sequence item border color=white,
+sequence item font size=\footnotesize, 
+sequence item text color=white,
+sequence item height=1.5cm,
+sequence item width=1.8cm
+}
+\smartdiagram[sequence diagram]{1,2,3,4} 
+\end{flushleft}
+
+
+Keine Verläufe
+ 
+Keine farbigen Schriften auf farbigen Flächen
+ 
+Keine Schrift auf Bildern
+ 
+Grundsätzliches Farbklima: Blau
+
+\end{frame}
+%---------------------------------------------------------------------------------
+%-----Seite 10---------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\begin{frame}{\vspace*{10mm}Farben}
+\vspace*{-10mm}
+\begin{multicols}{2} 
+\textbf{Primärfarben}
+
+\bigskip
+
+UOL-Blau
+
+\begin{tikzpicture}
+    \fill[uolblue]
+  (2,0) rectangle (7.9,1.5);
+  \end{tikzpicture}
+  
+\medskip
+  
+Farbgruppe Blau
+
+\begin{tikzpicture}
+    \fill[blue1]
+  (2,0) rectangle (3.4,1.5);
+    \fill[blue2]
+  (3.5,0) rectangle (4.9,1.5);
+    \fill[blue3]
+  (5,0) rectangle (6.4,1.5);
+    \fill[blue4]
+  (6.5,0) rectangle (7.9,1.5);
+  \end{tikzpicture}
+  
+\textbf{Sekundärfarben}
+
+\bigskip
+
+Farbgruppe Grün
+
+\begin{tikzpicture}
+     \fill[green1]
+  (2,0) rectangle (3.4,1.5);
+    \fill[green2]
+  (3.5,0) rectangle (4.9,1.5);
+    \fill[green3]
+  (5,0) rectangle (6.4,1.5);
+    \fill[green4]
+  (6.5,0) rectangle (7.9,1.5);
+  \end{tikzpicture}
+
+\medskip
+  
+Farbgruppe Orange
+
+\begin{tikzpicture}
+    \fill[orange1]
+  (2,0) rectangle (3.4,1.5);
+    \fill[orange2]
+  (3.5,0) rectangle (4.9,1.5);
+    \fill[orange3]
+  (5,0) rectangle (6.4,1.5);
+    \fill[orange4]
+  (6.5,0) rectangle (7.9,1.5);
+  \end{tikzpicture}
+\end{multicols}
+\end{frame}
+ \end{document}

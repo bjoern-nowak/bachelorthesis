@@ -12,7 +12,17 @@
 - Nutze https://www.zotero.org/ als Citavi Alternative für Linux
 - Abgabeformalien prüfen (was muss abgegeben werden, in welcher Form)
 - COde in English kommentieren
-- Referenzierte Webseiten exportieren um langfristig Inhalt nachzuweißen
+- Referenzierte Webseiten exportieren um langfristig Inhalt nachzuweißen 
+
+## Vorlagen
+
+https://elearning.uni-oldenburg.de/wiki.php?cid=269ab840de8f895304b71118419ef26a
+./des-templates/
+
+- ./proposal : https://gitlab.uni-oldenburg.de/des/vorlage/proposal
+- ./thesis : https://gitlab.uni-oldenburg.de/des/vorlage/abschlussarbeit
+- ./powerpoint : https://cloud.uol.de/s/sCLpJ7M2eoLAnZ6
+- ./latex-presentation : https://cloud.uol.de/s/xYWisjBK7PoqrMk
 
 ## Randinfos
 
