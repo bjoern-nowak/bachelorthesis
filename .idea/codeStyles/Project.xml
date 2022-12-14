@@ -1,5 +1,12 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <Latex>
+      <option name="BLANK_LINES_BEFORE_PART" value="4" />
+      <option name="BLANK_LINES_BEFORE_CHAPTER" value="4" />
+      <option name="BLANK_LINES_BEFORE_SECTION" value="4" />
+      <option name="BLANK_LINES_BEFORE_SUBSECTION" value="2" />
+      <option name="BLANK_LINES_BEFORE_SUBSUBSECTION" value="2" />
+    </Latex>
     <codeStyleSettings language="Latex">
       <option name="SOFT_MARGINS" value="120" />
     </codeStyleSettings>
