@@ -1,6 +1,7 @@
 \section{Problemstellung}
 \label{sec:problemstellung}
 
+
 \subsection{Fachliche Betrachtung}
 \label{subsec:fachliche-betrachtung}
 
@@ -18,12 +19,15 @@ Regeln werden wie folgt kategorisiert:
     [a)]
     \item Grundregel: ist immer einzuhalten
     \item Optionale Regel: kann zu Beginn zugeschaltet werden
-    \item Fokusregel: kann nach Bedarf zu- und abgeschaltet werden, vertieft Regel eines speziellen Bereichs (\zB die Jagd oder Hausbau)
-    \item Hausregel: inoffiziell, wird unter den Teilnehmer ausgemacht.
-\end{inparaenum}\\
-Nachfolgenden werden ausschließlich Grundregeln ohne Regelerweiterungsbänder beachtet.
+    \item Fokusregel: kann nach Bedarf zu- und abgeschaltet werden, vertieft Regel eines speziellen Bereichs; \zB die Jagd oder den Hausbau
+    \item Hausregel: ist inoffiziell und wird unter den Teilnehmer ausgemacht.
+\end{inparaenum}
 
-\subsubsection*{Charakter-Erstellung \textit{(vereinfachte Darstellung)}}
+In den nachfolgenden Kapiteln werden ausschließlich die Grundregeln des Basis-Regelwerks beachtet.
+Regelerweiterungsbänder, welche dieses um weitere Grundregeln und Merkmale erweitern würden, werden nicht beachtet.
+
+
+\subsubsection{Charakter-Erstellung}
 \label{subsubsec:charakter-erstellung}
 
 Ein Character definiert sich durch die folgenden Merkmale: seine Spezies, Kultur, Profession, Eigenschaften, Fertigkeiten sowie Vor- und Nachteilen.
@@ -37,11 +41,11 @@ Abschließen sind acht Basiswerte, nach vorgebenden Formeln, zu berechnen.
 Diese werden \ggfs durch die Spezies, den Eigenschafts-Stufen, Vor- und Nachteilen sowie Sonderfertigkeiten beeinflusst.
 \Vgl{RWiki-Erstellung}
 
-Dabei ist aus folgenden und teils durch Regeln eingeschränkten Umfängen zu wählen (dies stellt ein Auszug und keine komplette Aufstellung dar):
-\begin{itemize*}[label={}, itemjoin={,}]
+Dabei ist aus folgenden und teils durch Regeln eingeschränkten Umfängen zu wählen (dies stellt ein Auszug und keine komplette Aufstellung dar):%
+\begin{itemize*}[label={}, itemjoin={,}]%
     \item vier Spezien
     \item 32 Kulturen
-    \item 51 Professionen (bis zu zwei)
+    \item 51 Professionen
     \item acht Eigenschaften
     \item 59 Talente
     \item 251 Zaubern und 74 Ritualen
@@ -55,7 +59,6 @@ Dabei ist aus folgenden und teils durch Regeln eingeschränkten Umfängen zu wä
 
 Die Komplexität entsteht durch die Vielzahl der Merkmals-Kombinationen und Regeln.
 Alle Regeln, ohne weitere Hilfsmittel, einzuhalten ist aufgrund der Anzahl für die Teilnehmer eine zeitintensive und fehleranfälligen Aufgabe.
-
 Die \og Merkmale können sich \bspw gegenseitig beeinflussen oder ausschließen:
 \begin{itemize}
     \item Eine Spezies gibt Boni und Mali für Eigenschaften vor \Vgl{RWiki-Spezies-Elfen}.
@@ -65,8 +68,9 @@ Die \og Merkmale können sich \bspw gegenseitig beeinflussen oder ausschließen:
     \item Einige Fertigkeiten stehen nur bestimmten Professionen zur Verfügung (\sog Berufsgeheimnis*se) \Vgl{RWiki-Berufsgeheimnis}.
 \end{itemize}
 
-Weitere Regeln, welche bei der Charakter-Erstellung zu beachtet sind, werden nachfolgend (und nicht
-abschließend) aufgezeigt:
+Übliche und unübliche Merkmals-Kombinationen sind Vorgaben der Spielwelt \bzw des Regelwerks, um eine stimmige und logische Spielwelt zu erhalten.
+Unübliche Merkmals-Kombinationen sind nicht verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen werden \Vgl{RWiki-Spezies-Elfen}.
+Weitere Regeln, welche bei der Charakter-Erstellung zu beachtet sind, werden nachfolgend (und nicht abschließend) aufgezeigt:
 \begin{itemize}
     \item Es darf eine vorher festgelegte maximale Anzahl an aktivierten Zauber und Liturgien, sowie \textquote{Fremdzauber} (nicht der Profession zugeordnet) nicht überschritten werden. \Vgl[Schritt 2]{RWiki-Erstellung}
     \item Eigenschaften, Fertigkeiten und Kampftechniken können nur bis zu einem vorab festgelegten maximalen Wert verbessert werden. \Vgl[Schritt 2]{RWiki-Erstellung}
@@ -76,11 +80,67 @@ abschließend) aufgezeigt:
     \item Am Ende darf nur eine maximale Anzahl \Abk{AP} übrig bleiben. \Vgl[Schritt 11]{RWiki-Erstellung}
 \end{itemize}
 
-Bei den letzteren Zwei handelt es sich um Vorgaben der Spielwelt, damit die Merkmals-Kombinationen in dieser stimmig sind.
-Unübliche Merkmals-Kombinationen sind nicht per se verboten, müssen jedoch bekannt und mit dem Spielleiter abgesprochen werden.
 
-Die nachstehende \Gleichung{eq:merkmals-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen.
-Es werden die \og Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB Voraussetzungen von Merkmalen, nicht berücksichtigt.
+
+\subsubsection{Charakter-Verwaltung}
+\label{subsubsec:charakter-verwaltung}
+
+Bei der Charakter-Verwaltung geht es um Zukäufe und Steigerungen von Merkmalen, welche mit, im Laufe der Spielgeschichte, erhaltenen \Abk{AP} getätigt werden können (\inkl der Nachpflege im Charakterbogen).
+Die meisten der bereits, zur Charakter-Erstellung, genannten Regeln und einhergehenden Problemen gelten auch bei der Verwaltung.
+So \zB Merkmals-Ausschlüsse, bei dem ein bereits gewähltes/gekauftes Merkmal ein Anderen nicht erlaubt (sinngemäß nach unüblichen Merkmalen).
+Oder das Einhalten der Regeln, ohne Hilfsmittel, eine zeitintensive und fehleranfällige Aufgabe ist.
+Zusätzlich zu den bekannten kauf- \bzw steigerbaren Merkmalen können drei der acht Basiswerte gesteigert werden.
+\Vgl{RWiki-Verwaltung}
+
+Weitere Regeln die zu beachten sind werden nachfolgend (und nicht abschließend) aufgezeigt \Vgl{RWiki-Verwaltung}:
+\begin{itemize}
+    \item Fertigkeiten können maximal bis zwei Stufen über der höhsten beteiligten Eigenschaft gesteigert werden.
+    \item Kampftechniken können maximal bis zwei Stufen über der Leit-Eigenschaft gesteigert werden.
+    \item Der Basiswert Lebensenergie kann maximal um die Höhe der Eigenschaft Konstitution gesteigert werden.
+    \item Zauber und Liturgien können bis maximal Stufe 14 erhöht werden, dies kann durch die Sonderfertigkeit Merkmalskenntnis \bzw Aspektkenntnis aufgehoben werden.
+    \item Nur in Abstimmung mit dem Spielleiter können Vorteile gekauft und Nachteile abgelegt werden
+\end{itemize}
+
+
+\subsubsection{Hilfsmittel}
+\label{subsubsec:hilftmittel}
+
+Um der Komplexität, dem Zeitaufwand und unbeabsichtigte Regelverstößen entgegenzuwirken bedarf es an Hilfsmitteln.
+Bis Heute werden in der Community selbsterstellte und teils veröffentlichte Hilfsmittel genutzt.
+Diese reichen von Charakterbögen-Layouts, über Tabellenkalkulationen bis hin zu Programmen. %% TODO add referenz
+Im Jahr 1993 und 1995 veröffentlichte der damalige Herausgeber eine Software mit dem Namen \textquote{\Abk{DSA}-Tools} zur Erstellung und Verwaltung von Charakteren für die damalige Ausgabe \Vgl{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
+Die aktuell umfangreichsten veröffentlichten Hilfsmittel kommen aus der Community selbst und stehen kostenlos zur Verfügung, nachfolgend die Populärsten aufgelistet:
+\begin{description}
+    \item[Optolith Heldengenerator] Erschienen am \Datum{2018-04-08} und zuletzt Aktualisiert am \Datum{2022-03-22}, dient der Charakter-Erstellung und -Verwaltung in der 5ten-\Abk{DSA}-Ausgabe.
+    Es ist seit \Monat{2020-09} quelloffen und wird hauptsächlich von einer Person gewartet.
+    Genutzt werden die Sprachen TypeScript\Note{Typisierter Superset von JavaScript; \url{https://www.typescriptlang.org/}} und ReasonML\Note{OCaml (\url{https://ocaml.org/}) in JavaScript-angelehnter Notation; \url{https://reasonml.github.io/}}.
+    Die Regeln werden in \AbkK{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf Anfrage und Notwendigkeit ermöglicht.
+    \Vgl{GitHub-Optolith}
+
+    \item[Helden-Software] Erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe (für 5te-Ausgabe ist keine Unterstützung geplant \Vgl{HS-DSA5}).
+    Es ist nicht quelloffen.
+    Genutzt wird die Sprache Java\Note{\Abk{OS}-unabhängige \Abk{OOP} Sprache; \url{https://www.oracle.com/de/java/}} und keine weiteren Frameworks/Bibliotheken. \Vgl{HS-QA-DevEnv}
+
+    Es wird von einem Team aus sieben Personen (fünf Entwickler und zwei Tester) gewartet \Zitat{HS-Team}.
+    Als Besonderheit bietet diese Lösung das Speichern der Charakter auf deren Server und eine Schnittstelle zur Entwicklung von Plugins an, mit denen Informationen zu den Charakteren abgerufen werden können \Vgl{HS-Internet,HS-Plugins}.
+
+    \item[DSA Excel Heldenblatt] Erschienen im Jahr \Jahr{2003} und zuletzt Aktualisiert am \Datum{2021-05-15}, dient der Charakter-Erstellung und -Verwaltung in der \Abk{DSA}-4.1 Ausgabe.
+    Es handelt sich hierbei um eine Tabellenkalkulation, basierend auf Excel\Note{Vom Hersteller Microsoft; \url{https://www.microsoft.com/de-de/microsoft-365/excel}}, weshalb dieses als quelloffen zu betrachten ist.
+    Die Regelwerk-Werte hingehen sind, wie auch bei den bereits genannten Programmen, aufgrund von Lizenzen verschlüsselt und damit nicht frei zugänglich.
+    Das Besondere hier ist, dass eigene Merkmals-Ausprägungen wie \zB Zauber, Rituale und Liturgien integriert werden können.
+    \Vgl{Orkenspalter-Heldenblatt,Heldenblatt}
+
+    \item[DSA MeisterGeister] Erschienen im Jahr \Jahr{2010} und zuletzt Aktualisiert am \Datum{2022-06-06}, dient dem Spielleiter als Unterstützung in verschiedenen Bereich, darunter auch der Charakter-Erstellung und -Verwaltung, in der \Abk{DSA}-4.1 Ausgabe (für die 5te-Ausgabe ist keine Unterstützung geplant \Vgl{MG-DSA5}) \Vgl{MG}.
+    Erst mit der letzten Aktualisierung wurde der Programmcode veröffentlicht, aufgrund fehlender personellen Kapazitäten im Team, von aktuell zwei Personen \Vgl{MG-OpenSource, MG-Team}.
+    Es ist in C\#\Note{Typsichere \Abk{OOP} Sprache; \url{https://learn.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/}} geschrieben und daher auf das \Abk{OS} \textquote{Microsoft Windows} ausgelegt \Vgl{MG-GitHub}.
+\end{description}
+
+
+\subsection{Technische Betrachtung}
+\label{subsec:technische-betrachtung}
+
+Die nachstehende \Gleichung{eq:merkmals-kombinationen} verdeutlicht vereinfacht und beispielhaft die Vielzahl der Merkmals-Kombinationen, mit der ein Hilfsmittel umgehen muss.
+Es werden die, in Absatz 2 von \Kapitel[NP]{subsubsec:charakter-erstellung} genannten, Umfänge für Merkmale genutzt und komplexe Regeln, wie \zB Voraussetzungen von Merkmalen, nicht berücksichtigt.
 Gemäß Regelwerk für einen Spieler mit dem Erfahrungsgrad \textquote{Erfahren} gilt, dass jede Eigenschaft um bis zu sechs Stufen gesteigert werden kann aber maximal 36 Eigenschaftsstufen erkauft werden können \Vgl[Schritt 2 und 5]{RWiki-Erstellung}.
 Es wird angenommen, dass
 \begin{itemize*}[label={}, itemjoin={,}]
@@ -120,59 +180,8 @@ Es wird angenommen, dass
 Daraus ergeben sich \textbf{\ca 224,710 Oktilliarden (10\textsuperscript{51}) Merkmals-Kombinationen}.
 Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zauber, Rituale, magischen Handlungen, Liturgien, Kampftechniken und Sonderfertigkeiten.
 
-\subsubsection*{Charakter-Verwaltung \textit{(vereinfachte Darstellung)}}
-\label{subsubsec:charakter-verwaltung}
 
-Bei der Charakter-Verwaltung geht es um Zukäufe und Steigerungen von Merkmalen, welche mit, im Laufe der Spielgeschichte, erhaltenen \Abk{AP} getätigt werden können (\inkl der Nachpflege im Charakterbogen).
-Die meisten der bereits, zur Charakter-Erstellung, genannten Regeln und einhergehenden Problemen gelten auch bei der Verwaltung.
-So \zB Merkmals-Ausschlüsse, bei dem ein bereits gewähltes/gekauftes Merkmal ein Anderen nicht erlaubt (sinngemäß nach unüblichen Merkmalen).
-Oder das Einhalten der Regeln, ohne Hilfsmittel, eine zeitintensive und fehleranfällige Aufgabe ist.
-Zusätzlich zu den bekannten kauf- \bzw steigerbaren Merkmalen können drei der acht Basiswerte gesteigert werden.
-\Vgl{RWiki-Verwaltung}
-
-Weitere Regeln die zu beachten sind werden nachfolgend (und nicht abschließend) aufgezeigt \Vgl{RWiki-Verwaltung}:
-\begin{itemize}
-    \item Fertigkeiten können maximal bis zwei Stufen über der höhsten beteiligten Eigenschaft gesteigert werden.
-    \item Kampftechniken können maximal bis zwei Stufen über der Leit-Eigenschaft gesteigert werden.
-    \item Der Basiswert Lebensenergie kann maximal um die Höhe der Eigenschaft Konstitution gesteigert werden.
-    \item Zauber und Liturgien können bis maximal Stufe 14 erhöht werden, dies kann durch die Sonderfertigkeit Merkmalskenntnis \bzw Aspektkenntnis aufgehoben werden.
-    \item Nur in Abstimmung mit dem Spielleiter können Vorteile gekauft und Nachteile abgelegt werden
-\end{itemize}
-
-\subsection{Technische Betrachtung}
-\label{subsec:technische-betrachtung}
-
-Um der Komplexität, dem Zeitaufwand und unbeabsichtigte Regelverstößen entgegenzuwirken bedarf es an Hilfsmitteln.
-Bis Heute werden in der Community selbsterstellte und teils veröffentlichte Hilfsmittel genutzt.
-Diese reichen von Charakterbögen-Layouts, über Tabellenkalkulationen bis hin zu Programmen. %% TODO add referenz
-Im Jahr 1993 und 1995 veröffentlichte der damalige Herausgeber eine Software mit dem Namen \textquote{\Abk{DSA}-Tools} zur Erstellung und Verwaltung von Charakteren für die damalige Ausgabe \Vgl{Wiki-DSA-Tools,Wiki-DSA-Tools-Deluxe}.
-Die aktuell umfangreichsten veröffentlichten Hilfsmittel kommen aus der Community selbst und stehen kostenlos zur Verfügung, nachfolgend die Populärsten aufgelistet:
-\begin{itemize}
-    \item \textbf{Optolith Heldengenerator}, erschienen am \Datum{2018-04-08} und zuletzt Aktualisiert am \Datum{2022-03-22}, dient der Charakter-Erstellung und -Verwaltung in der 5ten-\Abk{DSA}-Ausgabe.
-    Es ist seit \Monat{2020-09} quelloffen und wird hauptsächlich von einer Person gewartet.
-    Genutzt werden die Sprachen TypeScript\Note{Typisierter Superset von JavaScript; \url{https://www.typescriptlang.org/}} und ReasonML\Note{OCaml (\url{https://ocaml.org/}) in JavaScript-angelehnter Notation; \url{https://reasonml.github.io/}}.
-    Die Regeln werden in \AbkK{YAML}-Dateien festgehalten und ein Zugriff wird, aufgrund von Lizenzgebungen, nur auf Anfrage und Notwendigkeit ermöglicht.
-    \Vgl{GitHub-Optolith}
-
-    \item \textbf{Helden-Software}, erschienen im Jahr \Jahr{2012} und zuletzt Aktualisiert am \Datum{2017-07-23}, dient der Charakter-Erstellung und -Verwaltung in der 4ten-\Abk{DSA}-Ausgabe (für 5te-Ausgabe ist keine Unterstützung geplant \Vgl{HS-DSA5}).
-    Es ist nicht quelloffen.
-    Genutzt wird die Sprache Java\Note{\Abk{OS}-unabhängige \Abk{OOP} Sprache; \url{https://www.oracle.com/de/java/}} und keine weiteren Frameworks/Bibliotheken. \Vgl{HS-QA-DevEnv}
-
-    Es wird von einem Team aus sieben Personen (fünf Entwickler und zwei Tester) gewartet \Zitat{HS-Team}.
-    Als Besonderheit bietet diese Lösung das Speichern der Charakter auf deren Server und eine Schnittstelle zur Entwicklung von Plugins an, mit denen Informationen zu den Charakteren abgerufen werden können \Vgl{HS-Internet,HS-Plugins}.
-
-    \item \textbf{DSA Excel Heldenblatt}, erschienen im Jahr \Jahr{2003} und zuletzt Aktualisiert am \Datum{2021-05-15}, dient der Charakter-Erstellung und -Verwaltung in der \Abk{DSA}-4.1 Ausgabe.
-    Es handelt sich hierbei um eine Tabellenkalkulation, basierend auf Excel\Note{Vom Hersteller Microsoft; \url{https://www.microsoft.com/de-de/microsoft-365/excel}}, weshalb dieses als quelloffen zu betrachten ist.
-    Die Regelwerk-Werte hingehen sind, wie auch bei den bereits genannten Programmen, aufgrund von Lizenzen verschlüsselt und damit nicht frei zugänglich.
-    Das Besondere hier ist, dass eigene Merkmals-Ausprägungen wie \zB Zauber, Rituale und Liturgien integriert werden können.
-    \Vgl{Orkenspalter-Heldenblatt,Heldenblatt}
-
-    \item \textbf{DSA MeisterGeister}, erschienen im Jahr \Jahr{2010} und zuletzt Aktualisiert am \Datum{2022-06-06}, dient dem Spielleiter als Unterstützung in verschiedenen Bereich, darunter auch der Charakter-Erstellung und -Verwaltung, in der \Abk{DSA}-4.1 Ausgabe (für die 5te-Ausgabe ist keine Unterstützung geplant \Vgl{MG-DSA5}) \Vgl{MG}.
-    Erst mit der letzten Aktualisierung wurde der Programmcode veröffentlicht, aufgrund fehlender personellen Kapazitäten im Team, von aktuell zwei Personen \Vgl{MG-OpenSource, MG-Team}.
-    Es ist in C\#\Note{Typsichere \Abk{OOP} Sprache; \url{https://learn.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/}} geschrieben und daher auf das \Abk{OS} \textquote{Microsoft Windows} ausgelegt \Vgl{MG-GitHub}.
-\end{itemize}
-
-\subsubsection*{Technische Herausforderungen}
+\subsubsection{Technische Herausforderungen}
 \label{subsubsec:technische-herausforderungen}
 %% TODO add references
 
@@ -181,7 +190,8 @@ Daher muss Vielzahl der Regeln in \textquote{kleinere Probleme} zerteilt werden;
 also in einzelne formale Regeln zur automatisierte Überprüfungen von Charakteren, zur Laufzeit.
 %% TODO fill me
 
-\subsubsection*{Quelloffen-bezogene Herausforderungen}
+
+\subsubsection{Quelloffen-bezogene Herausforderungen}
 \label{subsubsec:quelloffen-bezogene-herausforderungen}
 %% TODO add references
 

@@ -117,7 +117,13 @@
 \newcommand{\Abbildung}[1]{\autoref{#1}}
 \newcommand{\Anhang}[1]{\autoref{#1}}
 \newcommand{\Tabelle}[1]{\autoref{#1}}
-\newcommand{\Kapitel}[1]{\autoref{#1}}
+\newcommand{\Kapitel}[2][\empty]{%
+    \IfStrEqCase{#1}{
+            {N}{\autoref{#2}:~\nameref{#2}}
+            {P}{\autoref{#2} auf S.~\pageref{#2}}
+            {NP}{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}
+    }[\autoref{#2}]%
+}
 
 %% manual naming with \ref
 %\newcommand{\Gleichung}[1]{Gleichung~\ref{#1}}

@@ -1,6 +1,59 @@
 \section{Vorläufige Gliederung}
 \label{sec:vorlaufige-gliederung}
 
-{\color{red}
-    \lipsum[1] %% TODO write me out
+{
+    \setlength\tabcolsep{1pt} %% shrink space between column, set cell text start like normal paragraph
+    \renewcommand{\arraystretch}{1.3} %% inscrease
+    \begin{tabularx}{\textwidth}{p{.08\textwidth}p{.5\textwidth}p{.42\textwidth}} %% p column required to use enumerate in cells
+        Seiten & Kapitel                                   & Bemerkung                                    \\
+        \midrule
+        6      & \textbf{1 Einleitung}                     &                                              \\
+        ~      & 1.1 Motivation                            &                                              \\
+        ~      & 1.2 Grundlagen                            &                                              \\
+        ~      & 1.3 Zielsetzung \dotfill                  & \textit{Abgrenzung was nicht Teil sein wird} \\
+        ~      & 1.4 Aufbau der Arbeit                     &                                              \\
+        12     & \textbf{2 Konzept}                        &                                              \\
+        ~      & 2.1 Verfahrens-Evaluation \dotfill        & \textit{Auswahl des Algorithmus}             \\
+        ~      & 2.2 Programmiersprache                    &                                              \\
+        ~      & 2.3 Anforderungen an quelloffene Software &                                              \\
+        ~      & 2.4 Frontend-Schnittstelle                &                                              \\
+        ~      & 2.5 Regelwerk Interpretation \dotfill     & \textit{Formaliserung der Regeln}            \\
+        20     & \textbf{3 Realisierung}                   &                                              \\
+        ~      & 3.1 Projektstruktur                       &                                              \\
+        ~      & 3.2 Architektur                           &                                              \\
+        ~      & 3.3 Design Entscheidungen \dotfill        & \textit{Abweichungen vom Standard}           \\
+        ~      & 3.4 Kern-Funktionalität                   &                                              \\
+        ~      & 3.4 Qualitätssicherung                    &                                              \\
+        ~      & 3.5 Probleme \dotfill                     & \textit{unerwartete}                         \\
+        1      & \textbf{4 Diskussion / Ausblick} \dotfill & \textit{offene Aufgaben}                     \\
+        1      & \textbf{5 Fazit}                          &                                              \\
+    \end{tabularx}
 }
+
+%{
+%    \color{red}
+%    \setlength\tabcolsep{0pt} %% remove space between column, set cell text start like normal paragraph
+%    \begin{tabularx}{\textwidth}{p{.08\textwidth}p{.5\textwidth}p{.42\textwidth}} %% p column required to use enumerate in cells
+%        \renewcommand{\labelenumi}{\arabic*}
+%        \renewcommand{\labelenumii}{\labelenumi.\arabic*}
+%        \begin{enumerate}[topsep=-\parskip,wide] %% remove top margin of list , remove left indent from list
+%            \item Einleitung
+%            \begin{enumerate}[wide]
+%                \item Zielsetzung \dotfill
+%            \end{enumerate}
+%            \item Konzept-Aufbau \dotfill
+%        \end{enumerate}
+%        \nointerlineskip %% remove forced space below list
+%         &
+%        \renewcommand\labelenumi{}
+%        \renewcommand\labelenumii{}
+%        \begin{enumerate}[topsep=-\parskip,wide] %% remove top margin of list , remove left indent from list
+%            \item \phantom{X}
+%            \begin{enumerate}[wide]
+%                \item \textit{Abgrenzung was nicht Teil sein wird}
+%            \end{enumerate}
+%            \item \textit{offene Aufgaben}
+%        \end{enumerate}
+%        \nointerlineskip %% remove forced space below list
+%    \end{tabularx}
+%}
