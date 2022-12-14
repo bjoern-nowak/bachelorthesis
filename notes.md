@@ -8,6 +8,7 @@
 
 ## Hinweise
 
+- 40 bis 60 Seiten
 - siehe Thesis Vorlage für Wichtige Hinweise  (!)
 - Nutze https://www.zotero.org/ als Citavi Alternative für Linux
 - Abgabeformalien prüfen (was muss abgegeben werden, in welcher Form)
