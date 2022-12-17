@@ -102,8 +102,8 @@ Weitere Regeln die zu beachten sind werden nachfolgend (und nicht abschließend)
 \end{itemize}
 
 
-\subsubsection{Hilfsmittel}
-\label{subsubsec:hilftmittel}
+\subsubsection{Existierende Hilfsmittel}
+\label{subsubsec:existierende-hilftmittel}
 
 Um der Komplexität, dem Zeitaufwand und unbeabsichtigte Regelverstößen entgegenzuwirken bedarf es an Hilfsmitteln.
 Bis Heute werden in der Community selbsterstellte und teils veröffentlichte Hilfsmittel genutzt.
@@ -185,10 +185,13 @@ Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zau
 \label{subsubsec:technische-herausforderungen}
 %% TODO add references
 
-Kern der technischen Herausforderung ist es das Regelwerk möglichst effizient und modular (leicht erweiter- und wartbar) abzubilden.
-Daher muss Vielzahl der Regeln in \textquote{kleinere Probleme} zerteilt werden;
-also in einzelne formale Regeln zur automatisierte Überprüfungen von Charakteren, zur Laufzeit.
-%% TODO fill me
+Die technische Herausforderung kann in zwei Teile gefasst werden.
+Eines ist es die Vielzahl der Regeln in \textquote{kleinere Probleme} zu zerteilt und Formal darzustellen, sodass diese zur automatischen Überprüfung von Charakteren, effizient zur Laufzeit, genutzt werden können.
+Das Andere ist es das Regelwerk möglichst modular, also leicht erweiter- und wartbar, abzubilden, sodass Regeln einfach angepasst, hinzugefügt und getestet werden können.
+Dazu gehört auch die konzeptionelle Berücksichtigung der Einbindung von Regelerweiterungsbändern.
+
+Für Ersteres muss eine geeignete Lösung (Framework/Algorithmus) ermittelt werden, dies könnte \zB \Abk{ASP} sein.
+Für Letzteres muss eine geeignete Programmiersprache, unter Beachtung der zuvor beschriebene zu wählenden Lösung, gewählt und damit eine \textquote{saubere} Architektur implementiert und dokumentiert werden.
 
 
 \subsubsection{Quelloffen-bezogene Herausforderungen}
@@ -196,7 +199,8 @@ also in einzelne formale Regeln zur automatisierte Überprüfungen von Charakter
 %% TODO add references
 
 Eine quelloffene Software lebt und fällt mit den \sog Mitwirkenden, welche letztlich die Tätigkeiten klassischer Softwareentwicklung durchführen, \zB das Anpassen, Testen und Veröffentlichen der Software.
-Das Interesse an der Software kann noch so groß sein, hat es nicht genügend aktiv Mitwirkende besteht die Gefahr das die Software veraltet und letztlich \textquote{stirbt}.
+Auch wenn das Interesse der Nutzer einer quelloffenen Software groß ist, besteht die Gefahr das die Software veraltet und letztlich \textquote{stirbt}, wenn diese nicht genügend aktiv Mitwirkende hat.
+
 Daraus lassen sich einige wichtige technische Anforderungen, um die Hürden für Mitwirkende gering zu halten, ableiten und stellen damit Voraussetzungen für ein langfristig erfolgreiches quelloffenes Projekt dar:
 \begin{inparaenum}
     [a)]

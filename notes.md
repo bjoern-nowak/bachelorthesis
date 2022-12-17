@@ -9,6 +9,7 @@
 ## Hinweise
 
 - 40 bis 60 Seiten
+- Dauer vier Monate ab Anmeldung
 - siehe Thesis Vorlage für Wichtige Hinweise  (!)
 - Nutze https://www.zotero.org/ als Citavi Alternative für Linux
 - Abgabeformalien prüfen (was muss abgegeben werden, in welcher Form)
