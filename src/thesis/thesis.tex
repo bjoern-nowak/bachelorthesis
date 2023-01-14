@@ -1,43 +1,72 @@
 \documentclass[
-%toc=listof, % Abbildungsverzeichnis sowie Tabellenverzeichnis in das Inhaltsverzeichnis aufnehmen
-    toc=bibliography, % Literaturverzeichnis in das Inhaltsverzeichnis aufnehmen
-    footnotes=multiple, % Trennen von direkt aufeinander folgenden Fußnoten
-    parskip=half % vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
-]{scrartcl}
+%   ----- develop relevant -----
+%    draft, %% markiert 'overfull boxes' mit einem schwarzen Block im PDF %% TODO may use
+%   ----- hard guidelines -----
+    11pt, %% Schriftgröße vorgegeben
+    toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz.
+    toc=bib, %% Literaturvrz. im Inhaltsvrz. (ggf. =bibliography )
+    footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
+%    parskip=false, %% Absatzauszeichnung: 1 em Einzug, kein Abstand / oder
+    parskip=half, %% vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+%    leqno, %% Gleichungen links statt rechts nummerieren
+    fleqn, %% Gleichungen linksbündig statt zentriert ausgeben
+%   ----- settings for {scrreprt} or without noticable difference -----
+    a4paper, %% Papierformat zur Berechnung des Satzspiegels
+    pagesize=auto, %% Papierformat des Kompilates gemäß 'paper' setzen
+    footinclude=false, %% Fußzeile zum Textkörper zählen
+    headinclude=true, %% Kopfzeile zum Textkörper zählen
+]{scrreprt} %% TODO set correct documentclass
+%% scrartcl for proposal : use \section as toplevel
+%% scrreprt for thesis : use \chapter as toplevel (not scrbook since abstract environment is missing)
 
 % ----- settings --------------------------------
-\usepackage[utf8]{inputenc} % erlaubt Sonderzeichen im source; hier, weil meta es bereits braucht und packages.tex meta.tex nutzt
 \input{setting/packages.tex}
 \input{setting/meta.tex}
+\input{setting/config.tex}
 \input{setting/style.tex}
 \input{setting/commands.tex}
 
 
 % ----- Start document --------------------------
 \begin{document}
+    \pagenumbering{arabic}
 %    \layout % zeige seitenränder und co als bild
 
 % ----- cover -----------------------------------
     \clearpage
-
     \input{cover.tex}
 
+
+% ----- abstract --------------------------------
+    \clearpage
+    \input{abstract.tex}
+
+
+% ----- preface ---------------------------------
+    \pagenumbering{Roman}
+    \input{preface.tex}
 % TODO add disclaimer in preface about usage of male pronouns only for readability
 
 % ----- content ---------------------------------
     \clearpage
-    \newpage\null\thispagestyle{empty}\newpage % empty page
+%    \newpage\null\thispagestyle{empty}\newpage % empty page
     \pagenumbering{arabic}
-
+    \renewcommand*\chapterpagestyle{scrheadings} %% add header and footer to chapter pages
     \input{content.tex}
+    \renewcommand*\chapterpagestyle{plain} %% reset to default for listings
 
-% ----- bibliography ----------------------------
+% ----- postface --------------------------------
     \clearpage
     \pagenumbering{roman}
+    \input{postface.tex}
 
-    \nocite{*} % TODO may remove
-    \renewcommand{\refname}{Literaturverzeichnis}
-    \printbibliography
+% ----- postface --------------------------------
+    \appendix
+    \input{appendix.tex}
+
+% ----- statement -------------------------------
+    \clearpage
+    \input{statement.tex}
 
 % ----- End document ----------------------------
 \end{document}

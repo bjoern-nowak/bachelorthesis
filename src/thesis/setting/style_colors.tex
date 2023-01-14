@@ -1,0 +1,145 @@
+%% ----- Farben ---------------------------------------------------------------
+\definecolor{main}{RGB}{0, 63, 107}
+\definecolor{head}{RGB}{173,216,230}
+\definecolor{sub}{RGB}{209,238,238}
+\definecolor{odd}{RGB}{255,255,234}
+\definecolor{hig}{RGB}{255,255,224}
+
+%% ----- für Code Schemas -----
+%% TODO find better way of producing color schema for code/listings
+\definecolor{DEFhellgelb}{rgb}{1,1,0.9}
+\definecolor{DEFKeys}{rgb}{0,0,1}
+\definecolor{DEFIdentifier}{rgb}{0,0,0}
+\definecolor{DEFComments}{rgb}{0,0.5,0}
+\definecolor{DEFString}{rgb}{1,0,0}
+
+\definecolor{JAVAred}{rgb}{0.6,0,0}
+\definecolor{JAVAgreen}{rgb}{0.25,0.5,0.35}
+\definecolor{JAVApurple}{rgb}{0.5,0,0.35}
+\definecolor{JAVAdocblue}{rgb}{0.25,0.35,0.75}
+
+\definecolor{forestgreen}{RGB}{34,139,34}
+\definecolor{orangered}{RGB}{239,134,64}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+
+\definecolor{HTMLdarkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{HTMLocherCode}{rgb}{1, 0.5, 0} %% #FF7F00 -> rgb(239, 169, 0)
+\definecolor{HTMLblueCode}{rgb}{0, 0, 0.93} %% #0000EE -> rgb(0, 0, 238)
+\definecolor{HTMLgreenCode}{rgb}{0, 0.6, 0} %% #009900 -> rgb(0, 153, 0)
+
+\lstset{
+    float=hbp,
+    basicstyle=\footnotesize,
+    identifierstyle=\color{DEFIdentifier},
+    keywordstyle=\color{DEFKeys},
+    stringstyle=\color{DEFString},
+    commentstyle=\color{DEFComments},
+    backgroundcolor=\color{white},
+    columns=flexible,
+    tabsize=2,
+    frame=single,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+    captionpos=b,
+}
+
+\lstdefinestyle{Java}{
+    language=Java,
+    tabsize=4,
+    tabsize=4,
+    breakatwhitespace=false,
+    resetmargins=true
+%
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{JAVApurple}\bfseries,
+    stringstyle=\color{JAVAred},
+    commentstyle=\color{JAVAgreen},
+%
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s][\color{JAVAdocblue}]{/**}{*/},
+    morestring=[b]",
+    morestring=[b]',
+    morekeywords={
+        public,void,package,import,throws,
+        abstract,and,array,as,break,case,catch,cfunction,class,clone,const,
+        continue,declare,default,do,else,elseif,enddeclare,endfor,endforeach,
+        endif,endswitch,endwhile,extends,final,for,foreach,function,global,
+        goto,if,implements,interface,instanceof,namespace,new,old_function,or,
+        private,protected,public,static,switch,throw,try,use,var,while,xor
+        die,echo,empty,exit,eval,include,include_once,isset,list,require,
+        require_once,return,print,unset},
+}
+
+\lstdefinestyle{XML} {
+    basicstyle=\footnotesize,
+    columns=flexible,
+    tabsize=2,
+    frame=single,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+    captionpos=b,
+%
+    language=XML,
+    extendedchars=true,
+    breaklines=true,
+    breakatwhitespace=true,
+    emph={},
+    emphstyle=\color{red},
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    commentstyle=\color{gray}\upshape,
+    morestring=[b]",
+    morecomment=[s]{<?}{?>},
+    morecomment=[s][\color{forestgreen}]{<!--}{-->},
+    keywordstyle=\color{orangered},
+    stringstyle=\ttfamily\color{black}\normalfont,
+    tagstyle=\color{darkblue}\textbf,
+    morekeywords={attribute,xmlns,version,type,release},
+}
+
+\lstdefinelanguage{CSS} {
+    morekeywords={
+        color,background,margin,padding,font,weight,display,position,
+        top,left,right,bottom,list,style,border,size,white,space,min,width},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]',
+    morestring=[b]"
+}
+
+\lstdefinelanguage{JavaScript} {
+    showstringspaces=false,
+    keywordstyle=\ttfamily\bfseries\color{darkblue},
+    identifierstyle=\ttfamily,
+    stringstyle=\ttfamily\color{forestgreen},
+    commentstyle=\color{gray},
+    rulecolor=\color{gray},
+    xleftmargin=5pt,
+    xrightmargin=5pt,
+    aboveskip=\bigskipamount,
+    belowskip=\bigskipamount,
+%
+    morekeywords={
+        break,const,continue,delete,do,while,export,for,in,function,
+        if,else,import,in,instanceOf,label,let,new,return,switch,this,
+        throw,try,catch,typeof,var,void,with,yield
+    },
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morestring=[d]'
+}

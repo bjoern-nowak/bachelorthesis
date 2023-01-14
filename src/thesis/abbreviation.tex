@@ -1,0 +1,29 @@
+%% usage -------------------------------------------------------------
+%%  \ac: First mention with definition, after that only short vresion
+%%  \acp: Similar to \ac but with plural
+%%  \acs: Only gives the short form
+%% there are much more, see 1.4 in https://www.namsu.de/Extra/pakete/Acronym.html
+
+%% definition --------------------------------------------------------
+%%  \acro{Kuerzel}[Kurzform]{Langform}
+%%
+%% example:                 \acro{ABC}{Aaa Bbb Ccc\acroextra{ (Ddd)}}
+%% in list:                 ABC Aaa Bbb Ccc (Ddd)
+%% in text with \ac{ABC}:   Aaa Bbb Ccc (ABC)
+
+%% plural ------------------------------------------------------------
+%% default plural ending is 's' (\acs) else do following:
+%%  \acroplural{Kuerzel}[Kurzform des Plurals]{Langform des Plurals}
+%% MUST have a singular variant, plurals wont be in list
+
+\begin{acronym}
+    \acro{AP}{Abenteuerpunkt*e}
+    \acro{ASP}{Answer Set Programming}
+    \acro{DES}{Abteilung für Digitalisierte Energiesysteme}
+    \acro{DSA}{``Das Schwarze Auge``}
+    \acro{OOP}{Objekt-orientierte Programmierung*s}
+    \acro{OS}{Betriebssystem}
+    \acro{PPRPG}[$P\&P-RPG$]{``Pen \& Paper`` Rollenspiel}
+    \acro{PP}[$P\&P$]{``Pen \& Paper``}
+    \acro{YAML}{YAML Ain’t Markup Language (ursprünglich ``Yet Another Markup Language``)}
+\end{acronym}

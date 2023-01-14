@@ -1,0 +1,22 @@
+%% ----- paths -----
+\addbibresource{thesis.bib}
+\graphicspath{{picture/}} %% TODO geht nicht
+
+
+%% ----- namings -----
+\newcommand{\sectionPrefix}{Kapitel} %% for \autoref see style.tex
+\newcommand{\abbrvTitle}{Abkürzungen} %% for custom \listofabbreviations
+\newcommand{\bibTitle}{Literaturverzeichnis}
+
+
+%% ----- special -----
+\def\UrlBreaks{\do\/\do-} %% breche Urls bei 'slash' (/) und 'minus' (-) %% TODO check if it has an effect
+
+%% ----- PDF file -----
+\hypersetup{ %% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
+    pdftitle={\paperTitleCompact},
+    pdfauthor={\student},
+    pdfcreator={\student},
+    pdfsubject={\paperTitleLong},
+    pdfkeywords={\paperTitleLong},
+}

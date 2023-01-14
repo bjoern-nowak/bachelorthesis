@@ -1,5 +1,5 @@
-% Seitenränder -----------------------------------------------------------------
-\setlength{\topskip}{\ht\strutbox} % behebt Warnung von geometry
+%% ----- Seitenränder ---------------------------------------------------------
+\setlength{\topskip}{\ht\strutbox} %% behebt Warnung von geometry
 \geometry{
 %    showframe,
     a4paper,
@@ -7,210 +7,76 @@
     right=20mm,
     top=25mm,
     bottom=35mm,
-    includehead=false, % head wird nicht von seitenrändern beeinflusst
-    includefoot=false, % foot wird nicht von seitenrändern beeinflusst
+    includehead=false, %% head wird nicht von seitenrändern beeinflusst
+    includefoot=false, %% foot wird nicht von seitenrändern beeinflusst
 }
 
 \usepackage[
-    automark, % Kapitelangaben in Kopfzeile automatisch erstellen
-    headsepline, % Trennlinie unter Kopfzeile
-    footsepline, % Trennlinie über Fußzeile
-    ilines % Trennlinie linksbündig ausrichten
-]{scrpage2}
-% TODO old {scrpage2}
-% TODO new {scrlayer-scrpage}
+%    automark, %% Kapitelangaben in Kopfzeile automatisch erstellen %% TODO may activate
+%    ilines %% Trennlinie linksbündig ausrichten
+    headsepline, %% Trennlinie unter Kopfzeile
+    footsepline, %% Trennlinie über Fußzeile
+]{scrlayer-scrpage}
 
-% Kopf- und Fußzeilen ----------------------------------------------------------
+
+%% ----- Kopf- und Fußzeilen --------------------------------------------------
 \pagestyle{scrheadings}
-%\renewcommand{\chapterpagestyle}{scrheadings}
-\clearscrheadfoot
+\clearpairofpagestyles
+\renewcommand{\chaptermark}[1]{\markboth{\textsc{\thechapter~#1}}{}}
 
-% Kopfzeile
-\renewcommand{\headfont}{\normalfont} % Schriftform der Kopfzeile
-\ihead{\large{\textsc{\paperTitleCompact}} \\[0.5em] \textit{\chaptername \headmark}}
+%% ----- Kopfzeile -----
+%% TODO add logo from https://ulisses-spiele.de/wp-content/uploads/2022/10/DSA_LARP_Logo.png
+%%  or https://www.ulisses-regelwiki.de/files/media/DSA5_Logo.png
+\renewcommand{\headfont}{\normalfont} %% Schriftform der Kopfzeile
+\ihead{\small\textsc{\paperTitleCompact}\\
+\leftmark}
 \chead{}
 \ohead{}
-\setlength{\headheight}{15mm} % Höhe der Kopfzeile
-%\setheadwidth[0pt]{textwithmarginpar} % Kopfzeile über den Text hinaus verbreitern (falls Logo den Text überdeckt)
+\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
+%\setheadwidth[0pt]{textwithmarginpar} %% Kopfzeile über den Text hinaus verbreitern (falls Logo den Text überdeckt)
 
-% Fußzeile
-\ifoot{\\\copyright\ \copyrightInfo}
-\cfoot{}
-\ofoot{\\-\pagemark-}
-% abstand vom inhalt zur "grundlinie" (Boden vom Text) und nicht obere Kante vom Text
-% 1em ist daher ca. das minimum
+%% ----- Fußzeile -----
+\ifoot{\small\\\textsc{\version}}
+\cfoot{\small\\\textsc{\student}}
+\ofoot{\small\\\textsc{Seite \pagemark\xspace von 40}} %% TODO fill in last page number
+%% abstand vom inhalt zur "grundlinie" (Boden vom Text) und nicht obere Kante vom Text
 \setlength{\footskip}{10mm}
 
-% Zeilenabstände
-\singlespacing % Zeilenabstand 1,5 Zeilen
-\frenchspacing % erzeugt ein wenig mehr Platz hinter einem Punkt
+
+%% ----- Zeilenabstände -------------------------------------------------------
+\singlespacing %% Zeilenabstand 1,5 Zeilen
+\frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
 
-% Schusterjungen und Hurenkinder vermeiden
+%% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
 \clubpenalty = 10000
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
 
-% Quellcode-Ausgabe formatieren
+
+%% ----- Quellcode-Ausgabe formatieren ----------------------------------------
 \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
 \lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
 
-\counterwithout{footnote}{section} % Fußnoten fortlaufend durchnummerieren
-\setcounter{tocdepth}{2} % im Inhaltsverzeichnis werden die Kapitel bis zum Level der paragraphen übernommen
-\setcounter{secnumdepth}{4} % Kapitel bis zum Level der paragraphen werden nummeriert
-% \subsubsectionlevel = level 3
+\counterwithout{footnote}{section} %% Fußnoten fortlaufend durchnummerieren
+\setcounter{tocdepth}{2} %% im Inhaltsverzeichnis werden die Kapitel bis zum Level der paragraphen übernommen
+\setcounter{secnumdepth}{4} %% Kapitel bis zum Level der paragraphen werden nummeriert
+%% \subsubsectionlevel = level 3
 
-% Aufzählungen anpassen
+
+%% ----- Aufzählungen anpassen ------------------------------------------------
+\renewcommand{\autodot}{} %% Remove all end-of-counter dots
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 
-\renewcommand{\autodot}{} % Remove all end-of-counter dots
-
-% Färbung:
-\definecolor{main}{RGB}{0, 63, 107}
-
-\definecolor{head}{RGB}{173,216,230} % {0.4, 0.6, 0.8}
-\definecolor{sub}{RGB}{209,238,238}
-\definecolor{odd}{RGB}{255,255,234}
-\definecolor{hig}{RGB}{255,255,224}
-
-
-
-% Farb und SChema Infos für Code
-\definecolor{DEFhellgelb}{rgb}{1,1,0.9}
-\definecolor{DEFKeys}{rgb}{0,0,1}
-\definecolor{DEFIdentifier}{rgb}{0,0,0}
-\definecolor{DEFComments}{rgb}{0,0.5,0}
-\definecolor{DEFString}{rgb}{1,0,0}
-
-\definecolor{JAVAred}{rgb}{0.6,0,0}
-\definecolor{JAVAgreen}{rgb}{0.25,0.5,0.35}
-\definecolor{JAVApurple}{rgb}{0.5,0,0.35}
-\definecolor{JAVAdocblue}{rgb}{0.25,0.35,0.75}
-
-\definecolor{forestgreen}{RGB}{34,139,34}
-\definecolor{orangered}{RGB}{239,134,64}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
-\definecolor{gray}{rgb}{0.4,0.4,0.4}
-
-\definecolor{HTMLdarkgray}{rgb}{0.4, 0.4, 0.4}
-\definecolor{HTMLocherCode}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
-\definecolor{HTMLblueCode}{rgb}{0, 0, 0.93} % #0000EE -> rgb(0, 0, 238)
-\definecolor{HTMLgreenCode}{rgb}{0, 0.6, 0} % #009900 -> rgb(0, 153, 0)
-
-\lstset{
-    float=hbp,
-    basicstyle=\footnotesize,
-    identifierstyle=\color{DEFIdentifier},
-    keywordstyle=\color{DEFKeys},
-    stringstyle=\color{DEFString},
-    commentstyle=\color{DEFComments},
-    backgroundcolor=\color{white},
-    columns=flexible,
-    tabsize=2,
-    frame=single,
-    extendedchars=true,
-    showspaces=false,
-    showstringspaces=false,
-    numbers=left,
-    numberstyle=\tiny,
-    breaklines=true,
-    breakautoindent=true,
-    captionpos=b,
+%% ----- Bezeichner für Kapitel über \autoref ---------------------------------
+%% (original in babel ngerman: Kapitel, Abschnitt, Unterabschnitt, Unterunterabschnitt)
+\addto\extrasngerman{
+    \renewcommand{\sectionautorefname}{\sectionPrefix}
+    \renewcommand{\subsectionautorefname}{\sectionPrefix}
+    \renewcommand{\subsubsectionautorefname}{\sectionPrefix}
 }
 
-\lstdefinestyle{Java}{
-    language=Java,
-    tabsize=4,
-    tabsize=4,
-    breakatwhitespace=false,
-    resetmargins=true
-%
-    basicstyle=\footnotesize\ttfamily,
-    keywordstyle=\color{JAVApurple}\bfseries,
-    stringstyle=\color{JAVAred},
-    commentstyle=\color{JAVAgreen},
-%
-    sensitive=true,
-    morecomment=[l]{//},
-    morecomment=[s][\color{JAVAdocblue}]{/**}{*/},
-    morestring=[b]",
-    morestring=[b]',
-    morekeywords={
-        public,void,package,import,throws,
-        abstract,and,array,as,break,case,catch,cfunction,class,clone,const,
-        continue,declare,default,do,else,elseif,enddeclare,endfor,endforeach,
-        endif,endswitch,endwhile,extends,final,for,foreach,function,global,
-        goto,if,implements,interface,instanceof,namespace,new,old_function,or,
-        private,protected,public,static,switch,throw,try,use,var,while,xor
-        die,echo,empty,exit,eval,include,include_once,isset,list,require,
-        require_once,return,print,unset},
-}
-
-\lstdefinestyle{XML} {
-    basicstyle=\footnotesize,
-    columns=flexible,
-    tabsize=2,
-    frame=single,
-    extendedchars=true,
-    showspaces=false,
-    showstringspaces=false,
-    numbers=left,
-    numberstyle=\tiny,
-    breaklines=true,
-    breakautoindent=true,
-    captionpos=b,
-%
-    language=XML,
-    extendedchars=true,
-    breaklines=true,
-    breakatwhitespace=true,
-    emph={},
-    emphstyle=\color{red},
-    basicstyle=\ttfamily,
-    columns=fullflexible,
-    commentstyle=\color{gray}\upshape,
-    morestring=[b]",
-    morecomment=[s]{<?}{?>},
-    morecomment=[s][\color{forestgreen}]{<!--}{-->},
-    keywordstyle=\color{orangered},
-    stringstyle=\ttfamily\color{black}\normalfont,
-    tagstyle=\color{darkblue}\textbf,
-    morekeywords={attribute,xmlns,version,type,release},
-}
-
-\lstdefinelanguage{CSS} {
-    morekeywords={
-        color,background,margin,padding,font,weight,display,position,
-        top,left,right,bottom,list,style,border,size,white,space,min,width},
-    sensitive=false,
-    morecomment=[l]{//},
-    morecomment=[s]{/*}{*/},
-    morestring=[b]',
-    morestring=[b]"
-}
-
-\lstdefinelanguage{JavaScript} {
-    showstringspaces=false,
-    keywordstyle=\ttfamily\bfseries\color{darkblue},
-    identifierstyle=\ttfamily,
-    stringstyle=\ttfamily\color{forestgreen},
-    commentstyle=\color{gray},
-    rulecolor=\color{gray},
-    xleftmargin=5pt,
-    xrightmargin=5pt,
-    aboveskip=\bigskipamount,
-    belowskip=\bigskipamount,
-%
-    morekeywords={
-        break,const,continue,delete,do,while,export,for,in,function,
-        if,else,import,in,instanceOf,label,let,new,return,switch,this,
-        throw,try,catch,typeof,var,void,with,yield
-    },
-    sensitive=false,
-    morecomment=[l]{//},
-    morecomment=[s]{/*}{*/},
-    morestring=[b]",
-    morestring=[d]'
-}
+%% ----- Farben ---------------------------------------------------------------
+\input{setting/style_colors.tex}
