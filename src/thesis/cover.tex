@@ -1,8 +1,7 @@
-\thispagestyle{plain}
+\newgeometry{margin=20mm}
 
 \begin{titlepage}
-    \onehalfspacing
-    \vspace*{-1.5cm}
+    \vspace*{1em}
 
     \begin{center}
         \begin{tabular}{cc}
@@ -11,44 +10,49 @@
 %                \footnote{\url{https://uol.de/corporate-design/uni-logo}}
             }
             &
-            \makecell[tl]{\\[-2.5em]
-                {\Large\textsc{\paperType}}\\[0.5em]
-                {\Large\textsc{\studentStudiengang}}\\[0.5em]
-                {\Large\textsc{\uniAbteilung}}
+            \makecell[tl]{
+%                \\[-2.5em]
+%                {\LARGE\textbf{\textsc{\paperType}}}\\[0.5em]
+%                {\Large\textsc{\studentStudiengang}}\\[0.5em]
+%                {\Large\textsc{\uniAbteilung}}
+                %% above OR this
+                \\[-.53em]
+                {\LARGE\textbf{\textsc{\paperType}}}\\[0.47em]
+                {\Large\textsc{\studentStudiengang}}
             }
         \end{tabular}\\[6em]
 
-        {\LARGE\textbf{\paperTitle}}\\[4em]
+        {\LARGE\textbf{\paperTitle}}\\[6em]
 
         Wissenschaftliche Arbeit zur Erlangung\\
         des akademischen Grades Bachelor of Science\\
         vorgelegt am {\today} von:\\[2em]
         {\Large\textbf{\student}}\\
         geboren 10.07.1993 in Bremen\\
-        bjoern.nowak@uol.de / info@nowakhub.de\\
-        (\textit{\studentMatrikelNr})\\[5em]
+        ( \textit{\studentMatrikelNr} )\\[8em]
 
-        \begin{tabular}{ll}
-            Erstprüferin:                 & Zweitprüfer und Betreuer:              \\[0.5em]
-            \textbf{\firstExaminer}       & \textbf{\secondExaminer}               \\
-            Professorin für \uniAbteilung & Gruppenleiter \textquote{\offisGruppe} \\[0.5em]
-            \uni                          & \offis                                 \\
-            \uniFakultaet                 & \offisBereich                          \\[0.5em]
-            \makecell[c]{
-                \includegraphics[scale=0.45]{picture/logo-des}
+        \setlength{\tabcolsep}{2em}
+        \small\begin{tabular}{ll}
+                  Erstprüferin:                          & Zweitprüfer und Betreuer:                       \\[0.5em]
+                  \textbf{\firstExaminer}                & \textbf{\secondExaminer}                        \\[0.5em]
+                  \textit{Professorin für \uniAbteilung} & \textit{Gruppenleiter \textquote{\offisGruppe}} \\
+                  \textit{\uni}                          & \textit{\offis}                                 \\
+                  \textit{\uniFakultaet}                 & \textit{\offisBereich}                          \\[0.5em]
+                  \makecell[c]{
+                      \includegraphics[scale=0.4]{picture/logo-des}
 %                \footnote{\url{https://uol.de/des}}
-            }
-            &
-            \makecell[c]{
-                \includegraphics[scale=1.2]{picture/logo-offis}
+                  }
+                  &
+                  \makecell[c]{
+                      \includegraphics[scale=1]{picture/logo-offis}
 %                \footnote{\url{https://www.offis.de/}}
-            }
-            \\
-        \end{tabular}
+                  }
+                  \\
+        \end{tabular}\normalsize
 
     \end{center}
 
     \vspace*{\fill}
-    \small{\copyrightLong}
-
+    \tiny{\copyrightLong}
 \end{titlepage}
+\restoregeometry

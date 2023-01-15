@@ -37,6 +37,15 @@
 %\usepackage[sfdefault]{biolinum}  %% eigener fav 1 - überschriften
 %% [sfdefault] only if the base font of the document is to be sans serif
 
+%% ----- fix 'lmodern' not having a bold small capital style -----
+\usepackage{fix-cm}
+\rmfamily % To load Latin Modern Roman and enable the following NFSS declarations.
+% Declare that Latin Modern Roman (lmr) should take
+% its bold (b) and bold extended (bx) weight, and small capital (sc) shape,
+% from the corresponding Computer Modern Roman (cmr) font, for the T1 font encoding.
+\DeclareFontShape{T1}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
+\DeclareFontShape{T1}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
+
 
 %% ----- Font Style -----------------------------------------------------------
 \usepackage{setspace} %% define space betweens lines
