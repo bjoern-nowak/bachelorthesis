@@ -1,22 +1,52 @@
-%% ----- paths -----
+%% ----- Print-Modus ----------------------------------------------------------
+\KOMAoption{draft}{false} %% markiert z.B. 'overfull boxes' mit einem schwarzen Block im PDF
+
+%% TODO [SUBMISSION] set print mode (draft and (non-)book print)
+\newboolean{isbookprint}
+\newboolean{isfinalversion}
+\setboolean{isbookprint}{false} %% Printversion (alle Hyperlinks schwarz-weiß)
+\setboolean{isfinalversion}{false} %% Versionsangabe im header/footer
+
+%% ----- paths ----------------------------------------------------------------
 \addbibresource{thesis.bib}
 \graphicspath{{picture/}} %% TODO geht nicht
 
 
-%% ----- namings -----
+%% ----- namings --------------------------------------------------------------
 \newcommand{\sectionPrefix}{Kapitel} %% for \autoref see style.tex
 \newcommand{\abbrvTitle}{Abkürzungen} %% for custom \listofabbreviations
 \newcommand{\bibTitle}{Literaturverzeichnis}
 
-
-%% ----- special -----
-\def\UrlBreaks{\do\/\do-} %% breche Urls bei 'slash' (/) und 'minus' (-) %% TODO check if it has an effect
-
-%% ----- PDF file -----
+%% ----- PDF file -------------------------------------------------------------
 \hypersetup{ %% Befehle, die Umlaute ausgeben, führen zu Fehlern, wenn sie hyperref als Optionen übergeben werden
+    pdftex,
+%% ----- meta infos -----
+    pdfauthor={\copyrightShort},
     pdftitle={\paperTitleCompact},
-    pdfauthor={\student},
-    pdfcreator={\student},
     pdfsubject={\paperTitleLong},
     pdfkeywords={\paperTitleLong},
+%% ----- preset bookmark window -----
+    bookmarks,
+    bookmarksnumbered,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+%% ----- links -----
+    linktoc=all, %% (all|linktocpage) Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
+%    backref, %% Quellen werden zurück auf ihre Zitate verlinkt
+    plainpages=false, %% Position des Bookmarks
+    pdfpagelabels=true, %% Position des Bookmarks
+    hypertexnames=false, %% Position des Bookmarks
+%% ----- colors -----
+    colorlinks=true,
+    linkcolor=main,   %% link color of: simple links
+    anchorcolor=main, %% link color of: anchors like chapters?
+    citecolor=main,   %% link color of: citations
+    filecolor=main,   %% link color of: links to local files
+    menucolor=main,   %% link color of: Acrobat menu item
+    urlcolor=main,    %% link color of: URLs
 }
+%% ----- Copy-Pasteable Listings -----
+%% see http://www.monperrus.net/martin/copy-pastable-listings-in-pdf-from-latex
+%% see http://tex.stackexchange.com/questions/4911/phantom-spaces-in-listings-pdf
+\usepackage[space=true]{accsupp}
+\newcommand{\copyablespace}{\BeginAccSupp{method=hex,unicode,ActualText=00A0}\ \EndAccSupp{}}

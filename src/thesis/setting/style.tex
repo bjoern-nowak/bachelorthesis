@@ -12,60 +12,128 @@
 }
 
 %% ----- Kopf- und Fußzeilen --------------------------------------------------
-%% TODO [SUBMISSION] choose (non)-book variant
-\usepackage[
-%% ----- book variant -----
-%    automark, %% \chaptermark und \sectionmark automatisch definiert
-%% ----- non-book variant -----
-    headsepline, %% Trennlinie unter Kopfzeile
-    footsepline, %% Trennlinie über Fußzeile
-    plainheadsepline, %% Kopftrennlinie auf chapter seiten
-    plainfootsepline, %% Fußtrennlinie auf chapter seiten
-]{scrlayer-scrpage}
-\pagestyle{scrheadings}
+\ifthenelse{\boolean{isbookprint}}{%
+    \usepackage[
+        automark, %% \chaptermark und \sectionmark automatisch definiert
+    ]{scrlayer-scrpage}
+    \pagestyle{scrheadings}
+    \clearmainofpairofpagestyles
+
+    \lehead
+    {\small\textsc{\color{gray}\hspace{-1.5em}\leftmark}}
+    \rohead
+    {\small\textsc{\color{gray}\hspace{-1.5em}\rightmark}}
+
+    \ofoot
+    [\large\textsc{-~\pagemark~-}]
+    {\large\textsc{-~\pagemark~-}}
+
+    \ifthenelse{\boolean{isfinalversion}}{%
+        %% empty on purpose
+    }{
+        \cfoot
+        [\large\textsc{\color{red}-~\version~-}]
+        {\large\textsc{\color{red}-~\version~-}}
+    }
+}{
+    \usepackage[
+        headsepline, %% Trennlinie unter Kopfzeile
+        footsepline, %% Trennlinie über Fußzeile
+        plainheadsepline, %% Kopftrennlinie auf chapter seiten
+        plainfootsepline, %% Fußtrennlinie auf chapter seiten
+    ]{scrlayer-scrpage}
+    \pagestyle{scrheadings}
+    \clearpairofpagestyles
+
+    \renewcommand{\chaptermark}[1]{\markright{\thechapter~#1}\markleft{\thechapter~#1}}
+    \renewcommand{\sectionmark}[1]{\markright{\thesection~#1}}
+    \addtokomafont{headsepline}{\color{gray}}
+    \addtokomafont{footsepline}{\color{gray}}
+
+    \ihead
+    {\small\textsc{\color{gray}\\\leftmark}}
+    \ohead
+    {\small\textsc{\color{gray}\\\rightmark}}
+    \ifoot
+    [\small\textsc{\color{gray}\paperTitleCompact\\\student}]
+    {\small\textsc{\color{gray}\paperTitleCompact\\\student}}
+    \ofoot
+    [\large\textsc{\\-~\pagemark~-}]
+    {\large\textsc{\\-~\pagemark~-}}
+
+    \ifthenelse{\boolean{isfinalversion}}{%
+    %% empty on purpose
+    }{
+        \chead
+        [\large\textsc{\color{red}\version\\}]
+        {\large\textsc{\color{red}\version\\}}
+    }
+}
 
 %\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
 %\setheadwidth[0pt]{textwithmarginpar} %% enlarge Head over Text (falls Logo den Text überdeckt)
 %\setlength{\footskip}{10mm} %% Höhe Fußzeile: abstand inhalt zur "grundlinie" (Textboden); nicht obere Kante vom Text
 
-%% TODO [SUBMISSION] choose (non)-book variant
-%% ----- non-book variant -----
-\clearpairofpagestyles
-\renewcommand{\chaptermark}[1]{\markright{\thechapter~#1}\markleft{\thechapter~#1}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}}
-\addtokomafont{headsepline}{\color{gray}}
-\addtokomafont{footsepline}{\color{gray}}
-\ihead
-{\small\textsc{\color{gray}\\\leftmark}}
-\chead %% TODO [SUBMISSION] remove version for final subsmission
-[\large\textsc{\color{red}\version\\}]
-{\large\textsc{\color{red}\version\\}}
-\ohead
-{\small\textsc{\color{gray}\\\rightmark}}
-\ifoot
-[\small\textsc{\color{gray}\paperTitleCompact\\\student}]
-{\small\textsc{\color{gray}\paperTitleCompact\\\student}}
-\ofoot
-[\large\textsc{\\-~\pagemark~-}]
-{\large\textsc{\\-~\pagemark~-}} %% TODO [SUBMISSION] set total page number
-%% ----- book variant -----
-%\clearmainofpairofpagestyles
-%\lehead
-%{\small\textsc{\color{gray}\hspace{-1.5em}\leftmark}}
-%\rohead
-%{\small\textsc{\color{gray}\hspace{-1.5em}\rightmark}}
-%\cfoot %% TODO [SUBMISSION] remove version on final submission
-%[\large\textsc{\color{red}-~\version~-}]
-%{\large\textsc{\color{red}-~\version~-}}
-%\ofoot
-%[\large\textsc{-~\pagemark~-}]
-%{\large\textsc{-~\pagemark~-}}
+
+%% ----- Font Optimierung -----------------------------------------------------
+%% below settings are from DES template
+\usepackage[
+    activate={true,nocompatibility}, %% activate protrusion and expansion
+    final, %% enable microtype; use "draft" to disable
+    tracking=true,
+    kerning=true,
+    spacing=true,
+    factor=1100, %% add 10% to the protrusion amount (default is 1000)
+    stretch=10, %% reduce stretchability (default is 20)
+    shrink=10, %% reduce shrinkability (default is 20)
+]{microtype}
+\SetExtraKerning[unit=space] {
+    encoding={*},
+    family={bch},
+    series={*},
+    size={footnotesize,small,normalsize}
+} {
+    \textendash={400,400}, %% en-dash, add more space around it
+    "28={ ,150}, %% left bracket, add space from right
+    "29={150, }, %% right bracket, add space from left
+    \textquotedblleft={ ,150}, %% left quotation mark, space from right
+    \textquotedblright={150, } %% right quotation mark, space from left
+}
 
 
 %% ----- Zeilenabstände -------------------------------------------------------
 \onehalfspacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
+
+%% ----- Top-Level Kapitel ----------------------------------------------------
+%% format: <kapitelNr> | <kapitelTitel>
+%% wobei <kapitelNr> rießig ist
+\newfont{\chapterNumber}{eurb10 scaled 4000}
+\renewcommand*{\chapterformat}{%
+    \chapterNumber\thechapter%
+    \hspace{0.3em}%
+    \smash{\protect\rule[-.15em]{1pt}{1em}}%
+    \hspace{0.3em}%
+}
+\ifthenelse{\boolean{isbookprint}}{%
+    %% currently empty
+}{
+    \RedeclareSectionCommand[beforeskip=1em]{chapter}
+}
+
+
+%% ----- Font-Stil der Überschriften -----------------------------------------------
+\SetTracking[context=largetracking]{encoding=*}{160}
+\SetTracking[context=smalltracking]{encoding=*}{80}
+\setkomafont{chapter}{\microtypecontext{tracking=largetracking}\normalfont\LARGE\lsstyle\bfseries}
+\setkomafont{section}{\microtypecontext{tracking=smalltracking}\normalfont\Large\lsstyle\bfseries}
+\setkomafont{subsection}{\microtypecontext{tracking=smalltracking}\normalfont\Large\lsstyle}
+\setkomafont{subsubsection}{\microtypecontext{tracking=smalltracking}\normalfont\large\lsstyle}
+%% Stil der Abschnittsnummerierung %% TODO [STYLE] make section numbers bold
+%\renewcommand\sectionformat{\bfseries\thesection\autodot\enskip}
+%\renewcommand\subsectionformat{\bfseries\thesubsection\autodot\enskip}
+%\renewcommand\subsubsectionformat{\bfseries\thesubsubsection\autodot\enskip}
 
 %% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
 %% TODO set clubpenalty and widowpenalty

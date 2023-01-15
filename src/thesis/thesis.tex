@@ -1,21 +1,13 @@
 \documentclass[
-%   ----- develop relevant -----
-%    draft, %% markiert 'overfull boxes' mit einem schwarzen Block im PDF %% TODO [DEVELOP] may use
 %   ----- hard guidelines -----
     11pt, %% Schriftgröße (Vorgabe)
     toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz.
     toc=bib, %% Literaturvrz. im Inhaltsvrz. (ggf. =bibliography )
     footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
-%    parskip=false, %% Absatzauszeichnung: 1 em Einzug, kein Abstand / oder
-    parskip=half, %% vertikalen Abstand zwischen Absätzen verwenden anstatt horizontale Einrückung von Folgeabsätzen
+%    parskip=false, %% Absatzauszeichnung 1: 1 em Einzug, kein Abstand
+    parskip=half, %% Absatzauszeichnung 2: vertikalen Abstand zwischen Absätzen
 %    leqno, %% Gleichungen links statt rechts nummerieren
     fleqn, %% Gleichungen linksbündig statt zentriert ausgeben
-%   ----- book variant (more in style.tex) ----- %% TODO [SUBMISSION] choose (non)-book variant
-%    twoside=true, %% Dokument zweiseitig (book style: left and right page styling)
-%    cleardoublepage=empty, %% Vakatseiten komplett leer
-%    open=right, %% Kapitel immer auf rechter Doppelseite beginnen
-%    BCOR=10mm, %% Bindekorrektur 10 mm > will correct page margins! %% TODO test effect
-%    DIV=12, %% Textspiegel: Zwölferteilung (siehe Beschreibung KOMA-Script) %% TODO test effect
 ]{scrreprt} %% TODO [DEVELOP] set correct documentclass
 %% scrartcl for proposal : use \section as toplevel
 %% scrreprt for thesis : use \chapter as toplevel (not scrbook since abstract environment is missing)
@@ -23,9 +15,19 @@
 % ----- settings --------------------------------
 \input{setting/packages.tex}
 \input{setting/meta.tex}
+\input{setting/commands.tex}
 \input{setting/config.tex}
 \input{setting/style.tex}
-\input{setting/commands.tex}
+
+\ifthenelse{\boolean{isbookprint}}{%
+    \KOMAoption{twoside}{true} %% Dokument zweiseitig (book style: left and right page styling)
+    \KOMAoption{cleardoublepage}{empty} %% Vakatseiten komplett leer
+    \KOMAoption{open}{right} %% Kapitel immer auf rechter Doppelseite beginnen
+    \KOMAoption{BCOR}{10mm} %% Bindekorrektur 10 mm > will correct page margins! %% TODO test effect
+    \KOMAoption{DIV}{12} %% Textspiegel: Zwölferteilung (siehe Beschreibung KOMA-Script) %% TODO test effect
+}{
+%% empty on purpose
+}
 
 
 % ----- Start document --------------------------

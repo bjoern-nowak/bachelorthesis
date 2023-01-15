@@ -21,9 +21,9 @@
 
 
 %% ----- Language -------------------------------------------------------------
-%% TODO may use something like \autocite
+%% TODO [DEVELOP] may use something like \autocite
 \usepackage[ngerman]{babel} %% set language; new german
-\usepackage{csquotes} %% required by babel to ensure qoutes are typeset to language
+\usepackage[strict]{csquotes} %% required by babel to ensure qoutes are typeset to language
 
 
 %% ----- Font Family ----------------------------------------------------------
@@ -39,33 +39,10 @@
 
 
 %% ----- Font Style -----------------------------------------------------------
-\usepackage[onehalfspacing]{setspace} %% define space betweens lines
+\usepackage{setspace} %% define space betweens lines
 \usepackage{geometry} %% define page borders
 \usepackage{soul} %% improved text-decoration commands (use \ul isntead of \underline)
-%\usepackage{ragged2e} %% improved text alignment; captial version of defaults like \RaggedRight or \begin{FlushLeft} %% TODO incompatible with package 'microtype' option 'spacing'
-%% below settings are from DES template
-\usepackage[
-    activate={true,nocompatibility}, %% activate protrusion and expansion
-    final, %% enable microtype; use "draft" to disable
-    tracking=true,
-    kerning=true,
-    spacing=true,
-    factor=1100, %% add 10% to the protrusion amount (default is 1000)
-    stretch=10, %% reduce stretchability (default is 20)
-    shrink=10, %% reduce shrinkability (default is 20)
-]{microtype}
-%\SetExtraKerning[unit=space] {
-%    encoding={*},
-%    family={bch},
-%    series={*},
-%    size={footnotesize,small,normalsize}
-%} {
-%    \textendash={400,400}, %% en-dash, add more space around it
-%    "28={ ,150}, %% left bracket, add space from right
-%    "29={150, }, %% right bracket, add space from left
-%    \textquotedblleft={ ,150}, %% left quotation mark, space from right
-%    \textquotedblright={150, } %% right quotation mark, space from left
-%}
+%\usepackage{ragged2e} %% improved text alignment; captial version of defaults like \RaggedRight or \begin{FlushLeft} %% TODO incompatible with package 'microtype' option 'spacing' (in style.tex)
 
 
 %% ----- Table ----------------------------------------------------------------
@@ -107,7 +84,7 @@
 
 
 %% ----- Sonstiges ------------------------------------------------------------
-\usepackage{url} %% URL verlinken, lange URLs umbrechen etc.
+\usepackage[hyphens]{url} %% URL verlinken, lange URLs umbrechen etc.
 \usepackage{chngcntr} %% fortlaufendes Durchnummerieren der Fußnoten
 \usepackage{paralist} %% inline aufzählung mit \begin{inparaenum}[a)] (alternative zu enumitem)
 \usepackage[inline]{enumitem} %% anpassbare Enumerates/Itemizes
@@ -149,23 +126,5 @@
 
 %% ----- PDF ------------------------------------------------------------------
 \usepackage{pdfpages} %% import of PDFs into a PDF
-\usepackage[
-    bookmarks,
-    bookmarksnumbered,
-    bookmarksopen=true,
-    bookmarksopenlevel=1,
-    colorlinks=true,
-    linkcolor=main, %% link color of: simple links
-    anchorcolor=main,%% link color of: anchors like chapters?
-    citecolor=main, %% link color of: citations
-    filecolor=main, %% link color of: links to local files
-    menucolor=main, %% link color of: Acrobat menu item
-    urlcolor=main, %% link color of: URLs
-%    backref, %% Quellen werden zurück auf ihre Zitate verlinkt
-    pdftex,
-    plainpages=false, %% zur korrekten Erstellung der Bookmarks
-    pdfpagelabels=true, %% zur korrekten Erstellung der Bookmarks
-    hypertexnames=false, %% zur korrekten Erstellung der Bookmarks
-    linktoc=all %% (all|linktocpage) Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
-]{hyperref} %% creates links within a document and outside
+\usepackage{hyperref} %% creates links within a document and outside
 \usepackage{hypcap} %% ensures hyperref's links to e.x. tables point to that and not the label below
