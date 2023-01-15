@@ -11,47 +11,66 @@
     includefoot=false, %% foot wird nicht von seitenrändern beeinflusst
 }
 
+%% ----- Kopf- und Fußzeilen --------------------------------------------------
+%% TODO [SUBMISSION] choose (non)-book variant
 \usepackage[
-%    automark, %% Kapitelangaben in Kopfzeile automatisch erstellen %% TODO may activate
-%    ilines %% Trennlinie linksbündig ausrichten
+%% ----- book variant -----
+%    automark, %% \chaptermark und \sectionmark automatisch definiert
+%% ----- non-book variant -----
     headsepline, %% Trennlinie unter Kopfzeile
     footsepline, %% Trennlinie über Fußzeile
+    plainheadsepline, %% Kopftrennlinie auf chapter seiten
+    plainfootsepline, %% Fußtrennlinie auf chapter seiten
 ]{scrlayer-scrpage}
-
-
-%% ----- Kopf- und Fußzeilen --------------------------------------------------
 \pagestyle{scrheadings}
+
+%\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
+%\setheadwidth[0pt]{textwithmarginpar} %% enlarge Head over Text (falls Logo den Text überdeckt)
+%\setlength{\footskip}{10mm} %% Höhe Fußzeile: abstand inhalt zur "grundlinie" (Textboden); nicht obere Kante vom Text
+
+%% TODO [SUBMISSION] choose (non)-book variant
+%% ----- non-book variant -----
 \clearpairofpagestyles
-\renewcommand{\chaptermark}[1]{\markboth{\textsc{\thechapter~#1}}{}}
-
-%% ----- Kopfzeile -----
-%% TODO add logo from https://ulisses-spiele.de/wp-content/uploads/2022/10/DSA_LARP_Logo.png
-%%  or https://www.ulisses-regelwiki.de/files/media/DSA5_Logo.png
-\renewcommand{\headfont}{\normalfont} %% Schriftform der Kopfzeile
-\ihead{\small\textsc{\paperTitleCompact}\\
-\leftmark}
-\chead{}
-\ohead{}
-\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
-%\setheadwidth[0pt]{textwithmarginpar} %% Kopfzeile über den Text hinaus verbreitern (falls Logo den Text überdeckt)
-
-%% ----- Fußzeile -----
-\ifoot{\small\\\textsc{\version}}
-\cfoot{\small\\\textsc{\student}}
-\ofoot{\small\\\textsc{Seite \pagemark\xspace von 40}} %% TODO fill in last page number
-%% abstand vom inhalt zur "grundlinie" (Boden vom Text) und nicht obere Kante vom Text
-\setlength{\footskip}{10mm}
+\renewcommand{\chaptermark}[1]{\markright{\thechapter~#1}\markleft{\thechapter~#1}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}}
+\addtokomafont{headsepline}{\color{gray}}
+\addtokomafont{footsepline}{\color{gray}}
+\ihead
+{\small\textsc{\color{gray}\\\leftmark}}
+\chead %% TODO [SUBMISSION] remove version for final subsmission
+[\large\textsc{\color{red}\version\\}]
+{\large\textsc{\color{red}\version\\}}
+\ohead
+{\small\textsc{\color{gray}\\\rightmark}}
+\ifoot
+[\small\textsc{\color{gray}\paperTitleCompact\\\student}]
+{\small\textsc{\color{gray}\paperTitleCompact\\\student}}
+\ofoot
+[\large\textsc{\\-~\pagemark~-}]
+{\large\textsc{\\-~\pagemark~-}} %% TODO [SUBMISSION] set total page number
+%% ----- book variant -----
+%\clearmainofpairofpagestyles
+%\lehead
+%{\small\textsc{\color{gray}\hspace{-1.5em}\leftmark}}
+%\rohead
+%{\small\textsc{\color{gray}\hspace{-1.5em}\rightmark}}
+%\cfoot %% TODO [SUBMISSION] remove version on final submission
+%[\large\textsc{\color{red}-~\version~-}]
+%{\large\textsc{\color{red}-~\version~-}}
+%\ofoot
+%[\large\textsc{-~\pagemark~-}]
+%{\large\textsc{-~\pagemark~-}}
 
 
 %% ----- Zeilenabstände -------------------------------------------------------
-\singlespacing %% Zeilenabstand 1,5 Zeilen
+\onehalfspacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
 
 %% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
-\clubpenalty = 10000
-\widowpenalty = 10000
-\displaywidowpenalty = 10000
+%% TODO set clubpenalty and widowpenalty
+%\clubpenalty=10000
+%\widowpenalty=10000
 
 
 %% ----- Quellcode-Ausgabe formatieren ----------------------------------------
