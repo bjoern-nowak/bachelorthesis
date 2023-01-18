@@ -21,6 +21,8 @@
 %% MUST have a singular variant, plurals won't be in list
 
 \begin{acronym}[1234567890] %% option defines space width between acronym and description
+    \renewcommand*{\aclabelfont}[1]{\textbf{\textit{\acsfont{\boldmath#1}}}}
+    \itemsep.5em
     \acro{API}{Application Programming Interface}
     \acro{AP}{Abenteuerpunkt*e}
     \acro{ASP}{Answer Set Programming}

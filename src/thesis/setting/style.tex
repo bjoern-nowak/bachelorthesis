@@ -15,6 +15,7 @@
     }
 }
 
+
 %% ----- Kopf- und Fußzeilen --------------------------------------------------
 \ifthenelse{\boolean{isBookPrint}}{
     \usepackage[
@@ -74,7 +75,6 @@
 %\setheadwidth[0pt]{textwithmarginpar} %% enlarge Head over Text (falls Logo den Text überdeckt)
 %\setlength{\footskip}{10mm} %% Höhe Fußzeile: abstand inhalt zur "grundlinie" (Textboden); nicht obere Kante vom Text
 %\setlength{\headsep}{50mm} %% separation space between header and text
-%\setlength{\footnotesep}{50mm} %% separation space between text and footnote area
 
 
 %% ----- Font Optimierung -----------------------------------------------------
@@ -136,6 +136,7 @@
 %\renewcommand\subsectionformat{\bfseries\thesubsection\autodot\enskip}
 %\renewcommand\subsubsectionformat{\bfseries\thesubsubsection\autodot\enskip}
 
+
 %% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
 %% TODO set clubpenalty and widowpenalty
 %\clubpenalty=10000
@@ -146,17 +147,20 @@
 \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
 \lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
 
-\counterwithout{footnote}{section} %% Fußnoten fortlaufend durchnummerieren
+
+%% ----- Inhaltsverzeichniss anpassen -----------------------------------------
 \setcounter{tocdepth}{2} %% im Inhaltsverzeichnis werden die Kapitel bis zum Level der paragraphen übernommen
 \setcounter{secnumdepth}{4} %% Kapitel bis zum Level der paragraphen werden nummeriert
 %% \subsubsectionlevel = level 3
 
 
 %% ----- Aufzählungen anpassen ------------------------------------------------
+\counterwithout{footnote}{section} %% Fußnoten fortlaufend durchnummerieren
 \renewcommand{\autodot}{} %% Remove all end-of-counter dots
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
 
 %% ----- Bezeichner für Kapitel über \autoref ---------------------------------
 %% (original in babel ngerman: Kapitel, Abschnitt, Unterabschnitt, Unterunterabschnitt)
@@ -165,6 +169,7 @@
     \renewcommand{\subsectionautorefname}{\sectionPrefix}
     \renewcommand{\subsubsectionautorefname}{\sectionPrefix}
 }
+
 
 %% ----- Farben ---------------------------------------------------------------
 \input{setting/style_colors.tex}
