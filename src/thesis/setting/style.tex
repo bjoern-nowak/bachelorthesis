@@ -3,15 +3,15 @@
 \ifthenelse{\boolean{isDebug}}{
     \geometry{showframe}
 }{}
-\ifthenelse{\boolean{isBookPrint}}{}{
+\ifthenelse{\boolean{isBookPrint}}{
+    %% is set by KOMA options due to twoside, BCOR and DIV
+}{
     %% non-book print - manuall adapt to DES template
     \geometry{
         left=35mm,
         right=25mm,
         top=40mm,
         bottom=40mm,
-        includehead=false, %% head as content, stay within page borders
-        includefoot=false, %% foot as content, stay within page borders
     }
 }
 
@@ -22,7 +22,7 @@
         automark, %% \chaptermark und \sectionmark automatisch definiert
     ]{scrlayer-scrpage}
     \pagestyle{scrheadings}
-    \clearmainofpairofpagestyles
+    \clearpairofpagestyles
 
     \lehead
     {\small\textsc{\color{gray}\hspace{-1.5em}\leftmark}}
@@ -71,12 +71,6 @@
     }
 }
 
-%\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
-%\setheadwidth[0pt]{textwithmarginpar} %% enlarge Head over Text (falls Logo den Text überdeckt)
-%\setlength{\footskip}{10mm} %% Höhe Fußzeile: abstand inhalt zur "grundlinie" (Textboden); nicht obere Kante vom Text
-%\setlength{\headsep}{50mm} %% separation space between header and text
-
-
 %% ----- Font Optimierung -----------------------------------------------------
 %% below settings are from DES template
 \usepackage[
@@ -107,6 +101,15 @@
 \onehalfspacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
+\setlength{\parskip}{.5em} %% Absatz-Trennung
+
+\RedeclareSectionCommand[beforeskip=5.5em,afterskip=1.5em]{chapter}
+\RedeclareSectionCommand[runin=false,beforeskip=1em,afterskip=.5em]{section}
+\RedeclareSectionCommand[runin=false,beforeskip=.4em,afterskip=.2em]{subsection}
+%\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{subsubsection}
+%\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{paragraph}
+%\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{subparagraph}
+
 
 %% ----- Top-Level Kapitel ----------------------------------------------------
 %% format: <kapitelNr> | <kapitelTitel>
@@ -117,9 +120,6 @@
     \hspace{0.3em}%
     \smash{\protect\rule[-.15em]{1pt}{1em}}%
     \hspace{0.3em}%
-}
-\ifthenelse{\boolean{isBookPrint}}{}{
-    \RedeclareSectionCommand[beforeskip=1em]{chapter}
 }
 
 

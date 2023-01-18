@@ -4,8 +4,7 @@
     toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz.
     toc=bib, %% Literaturvrz. im Inhaltsvrz. (ggf. =bibliography )
     footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
-%    parskip=false, %% Absatzauszeichnung 1: 1 em Einzug, kein Abstand
-    parskip=half, %% Absatzauszeichnung 2: vertikalen Abstand zwischen Absätzen
+    parskip=half, %% vertikalen Abstand zwischen Absätzen > sonst nur 1em Einzug
 %    leqno, %% Gleichungen links statt rechts nummerieren
     fleqn, %% Gleichungen linksbündig statt zentriert ausgeben
     pdftex, %% set pdf engine
@@ -27,6 +26,8 @@
     \KOMAoption{open}{right} %% Kapitel immer auf rechter Doppelseite beginnen
     \KOMAoption{BCOR}{10mm} %% Bindekorrektur => adds page margin at inner side of pages
     \KOMAoption{DIV}{12} %% Textspiegel: Zwölferteilung => effects page margins
+    \KOMAoption{headinclude}{true} %% head in content, stay within page borders
+    \KOMAoption{footinclude}{false} %% foot in content, stay within page borders
 }{}
 \ifthenelse{\boolean{isDebug}}{
 %    \KOMAoption{draft}{true} %% zeigt lineale
