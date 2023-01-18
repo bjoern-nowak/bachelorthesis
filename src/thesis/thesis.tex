@@ -1,7 +1,6 @@
 \documentclass[
-    a4paper
-%   ----- hard guidelines -----
-    11pt, %% Schriftgröße (Vorgabe)
+    fontsize=11pt, %% Schriftgröße (Vorgabe)
+    a4paper,
     toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz.
     toc=bib, %% Literaturvrz. im Inhaltsvrz. (ggf. =bibliography )
     footnotes=multiple, %% Trennen von direkt aufeinander folgenden Fußnoten
@@ -35,6 +34,7 @@
     \overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
 }
 
+\recalctypearea %% recalulates typeare based on main font size, may changed by packages %% TODO may not needed
 
 % ----- Start document --------------------------
 \begin{document}

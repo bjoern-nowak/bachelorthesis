@@ -7,7 +7,10 @@
       <pdf-viewer>NONE</pdf-viewer>
       <viewer-command />
       <compiler-arguments />
-      <envs />
+      <envs>
+        <env name="max_print_line" value="9999" />
+        <env name="error_line" value="9999" />
+      </envs>
       <main-file>$PROJECT_DIR$/src/template/template.tex</main-file>
       <output-path>$PROJECT_DIR$/out/template</output-path>
       <auxil-path>{projectDir}/auxil</auxil-path>
