@@ -2,9 +2,9 @@
 % -----------------------------------------------------------------------------
 % Entwurfsmodus
 %
-\KOMAoption{draft}{false}                                                       % Entwurfsmodus?
-\def\printversion{false}                                                        % Printversion (alle Hyperlinks schwarz-weiß)?
-\def\versionlabel{true}                                                         % Versionsangabe im footer?
+\KOMAoption{draft}{false}            % Entwurfsmodus?
+\def\printversion{false}             % Printversion (alle Hyperlinks schwarz-weiß)?
+\def\versionlabel{true}              % Versionsangabe im footer?
 %
 %
 \usepackage{scrtime}
@@ -44,14 +44,14 @@
 %************************************************************
 % lists
 %************************************************************
-% \renewcommand\labelitemi{\color{halfgray}$\bullet$}                             % Semi-transparent bullet points
+% \renewcommand\labelitemi{\color{halfgray}$\bullet$}           % Semi-transparent bullet points
 % \let\oldlabelenumi\labelenumi
-% \renewcommand\labelenumi{\color{halfgray}\oldlabelenumi}                        % Semi-transparent numbers
+% \renewcommand\labelenumi{\color{halfgray}\oldlabelenumi}      % Semi-transparent numbers
 %
 %************************************************************
 % caption
 %************************************************************
-\addtokomafont{captionlabel}{\bfseries}                                         % Caption labels in bold face
+\addtokomafont{captionlabel}{\bfseries}     % Caption labels in bold face
 %
 % ***********************************************************
 % layout of the TOC, LOF and LOT (LOL-workaround see next section)
@@ -61,12 +61,12 @@
 % -----------------------------------------------------------------------------
 % Abbildungen
 %
-\setcapindent{1em}                                                              % Reduzierter hängender Einzug (siehe scrguide)
+\setcapindent{1em} % Reduzierter hängender Einzug (siehe scrguide)
 % -----------------------------------------------------------------------------
 % Tabellen
 %
-\usepackage{array}                                                              % liefert \newcolumntype
-\usepackage{booktabs}                                                           % Typografisch korrekte Tabellen
+\usepackage{array} % liefert \newcolumntype
+\usepackage{booktabs}                % Typografisch korrekte Tabellen
 %
 % Guidelines:
 %
@@ -97,8 +97,8 @@
 % Anführungszeichen
 %
 \usepackage[
-  strict,                                                                       % Warnungen werden als Fehler ausgegeben
-  babel                                                                         % Unterstützung für babel aktivieren
+  strict,          % Warnungen werden als Fehler ausgegeben
+  babel            % Unterstützung für babel aktivieren
 ]{csquotes}
 
 
@@ -121,13 +121,13 @@
 
 % -----------------------------------------------------------------------------
 % Weitere Pakete
-% \let\thesubfigureorig\thesubfigure                                              % Speichere aktuelles Format der Nummerierung
-\usepackage{amsthm}                                                             % verbessert \newtheorem, für thmtools
-\usepackage{mdframed}                                                           % Rahmen, für thmtools
-\usepackage{thmtools}                                                           % liefert \declaretheorem
+% \let\thesubfigureorig\thesubfigure   % Speichere aktuelles Format der Nummerierung
+\usepackage{amsthm}% verbessert \newtheorem, für thmtools
+\usepackage{mdframed}                % Rahmen, für thmtools
+\usepackage{thmtools}                % liefert \declaretheorem
 \usepackage{environ}
 %
-\usepackage{tikz}                                                               % Diagramme
+\usepackage{tikz}  % Diagramme
 \usetikzlibrary{
   trees,
   positioning,
@@ -140,7 +140,7 @@
   decorations.pathmorphing,
   decorations.pathreplacing,
 }
-\usetikzlibrary{external}                                                       % Externalize TikZ images
+\usetikzlibrary{external}            % Externalize TikZ images
 \tikzexternalize[prefix=images/,mode=list and make,optimize=false]
 %
 %
