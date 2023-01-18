@@ -28,6 +28,7 @@
     \KOMAoption{DIV}{12} %% Textspiegel: Zwölferteilung => effects page margins
     \KOMAoption{headinclude}{true} %% head in content, stay within page borders
     \KOMAoption{footinclude}{false} %% foot in content, stay within page borders
+    \recalctypearea %% recalulates typeare based on main font size, may changed by packages
 }{}
 \ifthenelse{\boolean{isDebug}}{
 %    \KOMAoption{draft}{true} %% zeigt lineale
@@ -36,7 +37,6 @@
     \overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
 }
 
-\recalctypearea %% recalulates typeare based on main font size, may changed by packages %% TODO may not needed
 
 % ----- Start document --------------------------
 \begin{document}

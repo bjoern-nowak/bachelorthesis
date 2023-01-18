@@ -6,15 +6,14 @@
 \ifthenelse{\boolean{isBookPrint}}{
     %% is set by KOMA options due to twoside, BCOR and DIV
 }{
-    %% non-book print - manuall adapt to DES template
+    %% non-book print - adapt to book print
     \geometry{
-        left=35mm,
-        right=25mm,
+        left=26mm,
+        right=33mm,
         top=40mm,
-        bottom=40mm,
+        bottom=45mm,
     }
 }
-
 
 %% ----- Kopf- und Fußzeilen --------------------------------------------------
 \ifthenelse{\boolean{isBookPrint}}{
@@ -69,6 +68,10 @@
         [\large\textsc{\color{red}\version\\}]
         {\large\textsc{\color{red}\version\\}}
     }
+    %% manual adapt to book print
+    \setlength{\voffset}{-1.1mm}
+    \setlength{\headsep}{9mm} %% separation space between header and text
+    \setlength{\footskip}{13mm} %% Höhe Fußzeile: abstand zu content baseline; nicht obere Kante vom Text
 }
 
 %% ----- Font Optimierung -----------------------------------------------------
