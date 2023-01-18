@@ -74,8 +74,12 @@
 
 
 %% ----- Semantische Textverarbeitung -----------------------------------------
+\makeatletter
+\let\ACplacelabel\AC@placelabel %% required for hyperref, else warning about undefined ref
+\makeatother
+
 \newcommand{\Abk}[1]{\textit{\ac{#1}}} % Abkürzung
-\newcommand{\AbkK}[1]{\textit{\acs{#1}}} % Abkürzung kurz (ohne Erstnennung ausgeschrieben)
+\newcommand{\AbkK}[1]{\textit{\acs{#1}}\ACplacelabel{#1}} % Abkürzung kurz (ohne Erstnennung ausgeschrieben)
 \newcommand{\Datum}[1]{\DTMdate{#1}} % Datum
 \newcommand{\Monat}[1]{% Datum ohne Tag, z.B. \Monat{2020-09}
     \DTMlangsetup{showdayofmonth=false}%
