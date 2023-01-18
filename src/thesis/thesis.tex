@@ -1,4 +1,5 @@
 \documentclass[
+    a4paper
 %   ----- hard guidelines -----
     11pt, %% Schriftgröße (Vorgabe)
     toc=listof, %% Abbildungsvrz., Tabellenvrz. im Inhaltsvrz.
@@ -13,36 +14,49 @@
 %% scrreprt for thesis : use \chapter as toplevel (not scrbook since abstract environment is missing)
 
 % ----- settings --------------------------------
+\input{setting/develop.tex}
 \input{setting/packages.tex}
 \input{setting/meta.tex}
 \input{setting/commands.tex}
 \input{setting/config.tex}
 \input{setting/style.tex}
 
-\ifthenelse{\boolean{isbookprint}}{%
+\ifthenelse{\boolean{isBookPrint}}{
     \KOMAoption{twoside}{true} %% Dokument zweiseitig (book style: left and right page styling)
     \KOMAoption{cleardoublepage}{empty} %% Vakatseiten komplett leer
     \KOMAoption{open}{right} %% Kapitel immer auf rechter Doppelseite beginnen
-    \KOMAoption{BCOR}{10mm} %% Bindekorrektur 10 mm > will correct page margins! %% TODO test effect, check margins with ruler
-    \KOMAoption{DIV}{12} %% Textspiegel: Zwölferteilung (siehe Beschreibung KOMA-Script) %% TODO test effect
-}{
-%% empty on purpose
+    \KOMAoption{BCOR}{10mm} %% Bindekorrektur => adds page margin at inner side of pages
+    \KOMAoption{DIV}{12} %% Textspiegel: Zwölferteilung => effects page margins
+}{}
+\ifthenelse{\boolean{isDebug}}{
+%    \KOMAoption{draft}{true} %% zeigt lineale
+}{}
+\ifthenelse{\boolean{isFinalVersion}}{}{
+    \overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
 }
 
 
 % ----- Start document --------------------------
 \begin{document}
+    \ifthenelse{\boolean{isDebug}}{
+        \layout %% print two pages about page layout
+    }{}
+
     \pagenumbering{arabic}
 %    \layout % zeige seitenränder und co als bild
 
 % ----- cover -----------------------------------
-    \clearpage
-    \input{cover.tex}
+    \ifthenelse{\boolean{includeCover}}{
+        \clearpage
+        \input{cover.tex}
+    }{}
 
 
 % ----- abstract --------------------------------
-    \clearpage
-    \input{abstract.tex}
+    \ifthenelse{\boolean{includeAbstract}}{
+        \clearpage
+        \input{abstract.tex}
+    }{}
 
 
 % ----- preface ---------------------------------
@@ -68,8 +82,10 @@
 
 
 % ----- statement -------------------------------
-    \clearpage
-    \input{statement.tex}
+    \ifthenelse{\boolean{includeStatement}}{
+        \clearpage
+        \input{statement.tex}
+    }{}
 
 % ----- End document ----------------------------
 \end{document}

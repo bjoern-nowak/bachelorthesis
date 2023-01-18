@@ -1,18 +1,8 @@
 %% ----- develop support ------------------------------------------------------
-\RequirePackage[l2tabu, orthodox]{nag} %% detect and warm about obsolete/outdated/superseded stuff
+\usepackage[l2tabu, orthodox]{nag} %% detect and warm about obsolete/outdated/superseded stuff
 \usepackage{layout} %% print debug figure of page borders; \layout
-\usepackage{lipsum} %% generate dummy text
-\usepackage{ifthen} %% bei der Definition eigener Befehle benötigt
+\usepackage{lipsum} %% generate dummy text with \lipsum{1-2}
 \usepackage{xstring} %% string comparision commands like \IfStrEqCase
-
-%\overfullrule=2cm %% always mark overfull boxes with a 2cm width black box
-
-\RequirePackage{silence} %% susspress warnings
-%% --- for command \Monat and \Jahr ---
-\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
-\WarningFilter{datetime2}{Region `german-base' has ignored}
-\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
-\WarningFilter{datetime2}{Region `german-base' has ignored}
 
 %% ----- Umlaute / Symbols ----------------------------------------------------
 \usepackage[utf8]{inputenc} %$ erlaubt Sonderzeichen/Umlaute im Quelltext %% ALWAYS ON TOP
@@ -21,7 +11,6 @@
 
 
 %% ----- Language -------------------------------------------------------------
-%% TODO [DEVELOP] may use something like \autocite
 \usepackage[ngerman]{babel} %% set language; new german
 \usepackage[strict]{csquotes} %% required by babel to ensure qoutes are typeset to language
 
@@ -75,8 +64,12 @@
 \usepackage{wrapfig} %% float/wrap text around figures
 %\usepackage{floatflt} %% alternative to wrapfig;
 \usepackage{tikz} %% visualisation/drawing
-\usetikzlibrary{trees} %% directory trees
-
+\usetikzlibrary{
+    trees, %% directory trees
+}
+%% ----- Externalize TikZ images -----
+%\usetikzlibrary{external}
+%\tikzexternalize[prefix=images/,mode=list and make,optimize=false]
 
 %% ----- Math -----------------------------------------------------------------
 \usepackage{amssymb} %% fuer /checkmark
@@ -104,18 +97,42 @@
 
 
 %% ----- Abkürzungsverzeichnis ------------------------------------------------
-\usepackage[printonlyused]{acronym} %% liste mit \begin{acronym} ; [nolist, printonlyused, footnote, nohyperlinks, smaller]
+\ifthenelse{\boolean{isBookPrint}}{
+    \PassOptionsToPackage{nohyperlinks}{acronym}
+}{}
+\usepackage[printonlyused]{acronym} %% liste mit \begin{acronym} ; [nolist, printonlyused, footnote, smaller]
 
 
 %% ----- Symbolverzeichnis ----------------------------------------------------
 %% TODO does not work
-\usepackage[intoc]{nomencl} %% [intoc] im Inhaltsverzeichnis
+%\usepackage[intoc]{nomencl} %% [intoc] im Inhaltsverzeichnis
 %\let\abbrev\nomenclature
 %\renewcommand{\nomname}{Symbolverzeichnis}
 %\setlength{\nomlabelwidth}{.25\hsize}
 %\renewcommand{\nomlabel}[1]{#1 \dotfill}
 %\setlength{\nomitemsep}{-\parsep}
-\makenomenclature
+%\makenomenclature
+%% OR
+%\usepackage[intoc, german, noprefix]{nomencl}
+%\makenomenclature
+%% Mehrere nomencl-Abschnitte:
+%% http://www.mrunix.de/forums/showpost.php?p=210422&postcount=29
+%\renewcommand{\nomname}{Akronyme}
+%\renewcommand{\nompreamble}{\markboth{\nomname}{\nomname}}
+%\renewcommand{\nomlabelwidth}{2.5cm}
+%\newcommand{\nomaltname}{Symbole}
+%\newcommand{\nomaltpreamble}{\markboth{\nomaltname}{\nomaltname}}
+%\newcommand{\nomaltpostamble}{}
+%\newcommand{\switchnomitem}{S}
+%\renewcommand{\nomgroup}[1]{%
+%    \ifthenelse{\equal{#1}{\switchnomitem}}{\switchnomalt}{}}
+%\newcommand{\switchnomalt}{%
+%\end{thenomenclature}
+%\renewcommand{\nomname}{\nomaltname}
+%\renewcommand{\nompreamble}{\nomaltpreamble}
+%\renewcommand{\nompostamble}{\nomaltpostamble}
+%\begin{thenomenclature}
+%}
 
 
 %% ----- literaturverzeichnis -------------------------------------------------

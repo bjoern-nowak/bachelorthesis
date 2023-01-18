@@ -1,18 +1,22 @@
 %% ----- Seitenränder ---------------------------------------------------------
-\setlength{\topskip}{\ht\strutbox} %% behebt Warnung von geometry
-\geometry{
-%    showframe,
-    a4paper,
-    left=20mm,
-    right=20mm,
-    top=25mm,
-    bottom=35mm,
-    includehead=false, %% head wird nicht von seitenrändern beeinflusst
-    includefoot=false, %% foot wird nicht von seitenrändern beeinflusst
+%\setlength{\topskip}{\ht\strutbox} %% behebt Warnung von geometry
+\ifthenelse{\boolean{isDebug}}{
+    \geometry{showframe}
+}{}
+\ifthenelse{\boolean{isBookPrint}}{}{
+    %% non-book print - manuall adapt to DES template
+    \geometry{
+        left=35mm,
+        right=25mm,
+        top=40mm,
+        bottom=40mm,
+        includehead=false, %% head as content, stay within page borders
+        includefoot=false, %% foot as content, stay within page borders
+    }
 }
 
 %% ----- Kopf- und Fußzeilen --------------------------------------------------
-\ifthenelse{\boolean{isbookprint}}{%
+\ifthenelse{\boolean{isBookPrint}}{
     \usepackage[
         automark, %% \chaptermark und \sectionmark automatisch definiert
     ]{scrlayer-scrpage}
@@ -28,9 +32,7 @@
     [\large\textsc{-~\pagemark~-}]
     {\large\textsc{-~\pagemark~-}}
 
-    \ifthenelse{\boolean{isfinalversion}}{%
-        %% empty on purpose
-    }{
+    \ifthenelse{\boolean{isFinalVersion}}{}{
         \cfoot
         [\large\textsc{\color{red}-~\version~-}]
         {\large\textsc{\color{red}-~\version~-}}
@@ -61,9 +63,7 @@
     [\large\textsc{\\-~\pagemark~-}]
     {\large\textsc{\\-~\pagemark~-}}
 
-    \ifthenelse{\boolean{isfinalversion}}{%
-    %% empty on purpose
-    }{
+    \ifthenelse{\boolean{isFinalVersion}}{}{
         \chead
         [\large\textsc{\color{red}\version\\}]
         {\large\textsc{\color{red}\version\\}}
@@ -73,6 +73,8 @@
 %\setlength{\headheight}{15mm} %% Höhe der Kopfzeile
 %\setheadwidth[0pt]{textwithmarginpar} %% enlarge Head over Text (falls Logo den Text überdeckt)
 %\setlength{\footskip}{10mm} %% Höhe Fußzeile: abstand inhalt zur "grundlinie" (Textboden); nicht obere Kante vom Text
+%\setlength{\headsep}{50mm} %% separation space between header and text
+%\setlength{\footnotesep}{50mm} %% separation space between text and footnote area
 
 
 %% ----- Font Optimierung -----------------------------------------------------
@@ -116,14 +118,13 @@
     \smash{\protect\rule[-.15em]{1pt}{1em}}%
     \hspace{0.3em}%
 }
-\ifthenelse{\boolean{isbookprint}}{%
-    %% currently empty
-}{
+\ifthenelse{\boolean{isBookPrint}}{}{
     \RedeclareSectionCommand[beforeskip=1em]{chapter}
 }
 
 
 %% ----- Font-Stil der Überschriften -----------------------------------------------
+\setkomafont{sectioning}{\normalfont\normalcolor\bfseries} %% in TOC
 \SetTracking[context=largetracking]{encoding=*}{160}
 \SetTracking[context=smalltracking]{encoding=*}{80}
 \setkomafont{chapter}{\microtypecontext{tracking=largetracking}\normalfont\LARGE\lsstyle\bfseries}

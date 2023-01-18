@@ -1,0 +1,22 @@
+
+%% ----- variables ------------------------------------------------------------
+\usepackage{ifthen} %% bei der Definition eigener Befehle benötigt %% TODO replace with etoolbox
+%% TODO [SUBMISSION] define print target
+\newboolean{isBookPrint}\setboolean{isBookPrint}{true} %% Printversion
+\newboolean{isFinalVersion}\setboolean{isFinalVersion}{false} %% Versionsangabe im header/footer
+%% ---- define paper pre and postface
+\newboolean{includeCover}\setboolean{includeCover}{true} %% show dummy text
+\newboolean{includeAbstract}\setboolean{includeAbstract}{true} %% show dummy text
+\newboolean{includeStatement}\setboolean{includeStatement}{true} %% show dummy text
+%% ----- debug -----
+\newboolean{isDummyText}\setboolean{isDummyText}{false} %% show dummy text
+\newboolean{isDebug}\setboolean{isDebug}{false} %% zeige diverse infos an
+
+
+%% ----- surpress some logs ---------------------------------------------------
+\usepackage{silence} %% susspress warnings like with \WarningFilter
+%% --- for command \Monat and \Jahr ---
+\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
+\WarningFilter{datetime2}{Region `german-base' has ignored}
+\WarningFilter{datetime2}{Region `german-base-ascii' has ignored}
+\WarningFilter{datetime2}{Region `german-base' has ignored}

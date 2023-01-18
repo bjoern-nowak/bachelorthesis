@@ -1,29 +1,27 @@
+%% ----- develop commands -----------------------------------------------------
+\newcommand{\dummyText}[2]{%
+    \ifthenelse{\boolean{isDummyText}}{
+        \color{#1}\lipsum[#2]
+    }{}
+}
+
 %% ----- Abkürzungsverzeichnis ------------------------------------------------
 \makeatletter %% erlaubt (at) symbol as text
 \newcommand{\@acronym@nolist}{0}
-\AtBeginDocument{%
-    \@ifpackagewith{acronym}{nolist} {%
-        \renewcommand{\@acronym@nolist}{1}%
-    } {%
-        \renewcommand{\@acronym@nolist}{0}%
-    }%
+\AtBeginDocument{
+    \@ifpackagewith{acronym}{nolist}
+    {\renewcommand{\@acronym@nolist}{1}}
+    {\renewcommand{\@acronym@nolist}{0}}
 }
 %% \listofabbreviations ; add to toc when [intoc], no list (nor title) when package 'acronym' has [nolist]
 \newcommand{\listofabbreviations}[1][]{
-    \ifthenelse{ \@acronym@nolist=0 } { %% then
+    \ifthenelse{ \@acronym@nolist=0 }{
         \chapter*{\abbrvTitle} %% add sectoin without numbering (and not in TOC)
         \label{toc:\abbrvTitle}
-        \ifthenelse{ \equal{#1}{intoc} } { %% then
+        \ifthenelse{ \equal{#1}{intoc} }{
             \addcontentsline{toc}{chapter}{\abbrvTitle}
-        }{ %% else
-        %% do nothing
-        }
-
-    } { %% else
-    %% do nothing
-    }
-
-    \input{abbreviation.tex}
+        }{}
+    }{}
 }
 \makeatother %% reset (at) symbol to default behavior
 
