@@ -59,7 +59,7 @@
 
 
 %% ----- Graphics and Media ---------------------------------------------------
-\usepackage[dvips,final]{graphicx} %% Einbinden von JPG-Grafiken ermöglichen
+\usepackage[dvips,final]{graphicx} %% Einbinden von JPG-Grafiken (in PDF) ermöglichen
 \usepackage{graphics} %% \keepaspectratio  %% TODO evtl schon enthalten
 \usepackage{wrapfig} %% float/wrap text around figures
 %\usepackage{floatflt} %% alternative to wrapfig;
@@ -151,6 +151,7 @@
 %% none  Do not sort at all. All entries are processed in citation order.
 
 %% ----- PDF ------------------------------------------------------------------
+\usepackage{pdflscape} % pdf-Grafiken quer auf eine Seite
 \usepackage{pdfpages} %% import of PDFs into a PDF
 \usepackage{hyperref} %% creates links within a document and outside
 \usepackage{hypcap} %% ensures hyperref's links to e.x. tables point to that and not the label below
