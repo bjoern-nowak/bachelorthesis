@@ -104,7 +104,7 @@
 \onehalfspacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
-\setlength{\parskip}{.5em} %% Absatz-Trennung
+\setlength{\parskip}{.5em plus .5em minus .25em} %% Absatz-Trennung dynamisch: .25em bis 1em (default .5em)
 
 \RedeclareSectionCommand[beforeskip=5.5em,afterskip=1.5em]{chapter}
 \RedeclareSectionCommand[runin=false,beforeskip=1em,afterskip=.5em]{section}
