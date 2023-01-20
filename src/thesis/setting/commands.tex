@@ -56,20 +56,13 @@
 
 
 %% ----- Graphics -------------------------------------------------------------
-\newcommand{\includegraphicsKeepAspectRatio}[2]{%
-    \includegraphics[width=#2\textwidth,height=#2\textheight,keepaspectratio]{#1}%
+\newcommand{\Image}[2][]{%
+    %% usage like \includegraphics : \Image[<includegraphics-options>]{<path>}
+    \includegraphics[#1]{#2}%
 }
-%% Verwendung analog zu \includegraphics
-\newlength{\myx} %% Variable zum Speichern der Bildbreite
-\newlength{\myy} %% Variable zum Speichern der Bildhöhe
-\newcommand\includegraphicstotab[2][\relax]{%
-%% Abspeichern der Bildabmessungen
-    \settowidth{\myx}{\includegraphics[{#1}]{#2}}%
-    \settoheight{\myy}{\includegraphics[{#1}]{#2}}%
-    %% das eigentliche Einfügen
-    \parbox[c][1.1\myy][c]{\myx}{%
-        \includegraphics[{#1}]{#2}%
-    }%
+\newcommand{\ImageInRatio}[3][]{%
+    %% usage: \ImageInRatio[<includegraphics-options>]{<scale>}{<path>}
+    \Image[width=#2\textwidth,height=#2\textheight,keepaspectratio,#1]{#3}%
 }
 
 

@@ -9,7 +9,11 @@
 	Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
 	\vspace*{3em}
 
-	\hspace*{14em}\includegraphicsKeepAspectRatio{/home/bjnowak/OneDrive/_data/private/sign_fresh_clean_blue}{.3}\vspace*{-2.5em}\\
+	\ifthenelse{\boolean{isFinalVersion}}{
+		\sign{}\\
+	}{
+		{\color{white}\sign[draft]}\\
+	}
 	\rule{\textwidth}{0.5pt}\\
 	\hspace*{1cm}\paperLocation, \paperDate \hfill \paperAuthor\hspace*{.5cm}
 \end{abstract}
