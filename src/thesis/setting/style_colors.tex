@@ -1,5 +1,13 @@
+\newcommand{\colorLinks}{true}
+\newcommand{\linkColor}{linkColor}
+\ifthenelse{\boolean{isBookPrint}}{
+    \renewcommand{\linkColor}{linkColorBook}
+}{}
+
 %% ----- Farben ---------------------------------------------------------------
-\definecolor{main}{RGB}{0, 63, 107}
+\definecolor{main}{RGB}{0, 64, 108}
+\definecolor{linkColor}{RGB}{0, 64, 108}
+\definecolor{linkColorBook}{RGB}{0, 37, 61}
 
 %% ----- für Code Schemas -----
 %% TODO find better way of producing color schema for code/listings
