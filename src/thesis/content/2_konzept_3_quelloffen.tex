@@ -1,4 +1,52 @@
 \section{Anforderungen an quelloffene Software}
 \label{sec:anforderungen-an-quelloffene-software}
 
-\dummyText{violet}{1-8}
+In diesem Kapitel wird zunächst die wissenschaftlich belegten Motivationsfaktoren von an quelloffener Software Mitwirkenden dargelegt und anschließend darauf ableitbare technische Bedingungen an eine quelloffene Software aufgezeigt, damit diese diesen Motivationsfaktoren nicht entgegensteht.
+
+%% TODO may use
+%%
+%% By Bernd Brügge, Dietmar Harhoff, Arnold Picot, Oliver Creighton, Marina Fiedler, Joachim Henkel
+%% Open-Source-Software: Eine ökonomische und technische Analyse
+%%    https://books.google.de/books?hl=en&lr=&id=5VciBgAAQBAJ&oi=fnd&pg=PA1&dq=erfolg+open+source+software&ots=xCfL5-gtEj&sig=GQq6dg6Ip_VsMzgq1mg6HTAxM4k&redir_esc=y#v=onepage&q=erfolg%20open%20source%20software&f=false
+%%    Seite 99
+%%
+%% Hartmut Heinrich, Friedrich-L. Holl, Katharina Menzel, Jan Tobias Mühlberg, Ingo Schäfer, Hanno Schüngel
+%% Metastudie: Open-Source-Software und ihre Bedeutung für Innovatives Handeln
+%%    https://opus4.kobv.de/opus4-fhbrb/frontdoor/index/index/docId/21
+%%    https://opus4.kobv.de/opus4-fhbrb/frontdoor/deliver/index/docId/21/file/Metastudie_OSS.pdf
+%%
+%% Holtgrewe, Ursula
+%% Kreativität als Norm - zum Erfolg verdammt? Open-Source- Software zwischen sozialer Bewegung und technischer Innovation
+%%    https://www.ssoar.info/ssoar/handle/document/12263
+%%    https://www.ssoar.info/ssoar/bitstream/handle/document/12263/ssoar-2001-holtgrewe-kreativitat_als_norm_-_zum.pdf?sequence=1&isAllowed=y&lnkname=ssoar-2001-holtgrewe-kreativitat_als_norm_-_zum.pdf
+%%
+
+\subsection{Motivationsfaktoren der Mitwirkenden}
+\label{subsec:motivationsfaktoren-der-mitwirkenden}
+
+\Vgl{OS-Motiv-Osterloh-Rota}
+
+Die in \Zitat{OS-Motiv-Luthiger} zusammengefassten Motivationsfaktoren, ermittelt aus verschiedene empirische Studien (\Zitat{OS-Motiv-Luthiger-1},\Zitat{OS-Motiv-Luthiger-2},\Zitat{OS-Motiv-Luthiger-3},\Zitat{OS-Motiv-Luthiger-4},\Zitat{OS-Motiv-Luthiger-5},\Zitat{OS-Motiv-Luthiger-6},\Zitat{OS-Motiv-Luthiger-7},\Zitat{OS-Motiv-Luthiger-8},\Zitat{OS-Motiv-Luthiger-8},\Zitat{OS-Motiv-Luthiger-10}), werden nachfolgenden sinngemäß prägnant wiedergegeben:
+\begin{inparaenum}[(a)]
+    \item Nutzen: die Mitwirkenden können, \insb nach eigener Anpassung, einen Nutzen aus Software ziehen, um \zB ein eigenes Problem zu lösen.
+    \item Ansehen: durch die Mitwirkung kann die Person in verschiedenen Personenkreisen ansehen erlangen.
+    Unter Entwicklern (ein Fachkreis) könnte dies \zB die Qualität und Quantität der Mitwirkung aufzeigen.
+    Wenn dieses Ansehen in Fachkreisen anerkannt wird, kann dies \zB zu besseren Arbeitsangeboten führen.
+    \item Identifikation: wenn sich die Mitwirkenden stark mit den Zielen der Projektgruppe identifizieren können, so steigt das (zeitliche) Engagement mitzuwirken.
+    \item Wissen: Mitwirkende können die eigenen Fähigkeiten, durch das Erlernen von Wissen bei der Lösung von Problemen und Anwendung neuer Technologien, verbessern.
+    \item Altruismus: Selbstlosigkeit und Uneigennützigkeit: .
+    \item Nutzen: .
+\end{inparaenum}
+
+
+\subsection{Abgeleitete technische Anforderungen}
+\label{subsec:abgeleitete-technische-anforderungen}
+
+Daraus lassen sich einige wichtige technische Anforderungen, um die Hürden für Mitwirkende gering zu halten, ableiten und stellen damit Voraussetzungen für ein langfristig erfolgreiches quelloffenes Projekt dar:
+\begin{inparaenum}[(a)]
+    \item die Dokumentationen müssen stets aktuell, leicht auffindbar und verständlich sein;
+    Dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen zur Mitwirkung, Einrichtung und Testdurchführung;
+    \item die Projektstruktur, der Quellcode und die Architektur sollten möglichst \textquote{Branchen-Standards} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}) erfüllen;
+    \item eine hohe und qualitative Testabdeckung zur frühen Fehlererkennung auch durch neue Mitwirkende;
+    \item es sollten möglichst weitverbreitete Programmiersprachen und Frameworks genutzt werden.
+\end{inparaenum}
