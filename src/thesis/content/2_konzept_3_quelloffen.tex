@@ -1,7 +1,7 @@
 \section{Anforderungen an quelloffene Software}
 \label{sec:anforderungen-an-quelloffene-software}
 
-In diesem Kapitel wird zunächst die wissenschaftlich belegten Motivationsfaktoren von an quelloffener Software Mitwirkenden dargelegt und anschließend darauf ableitbare technische Bedingungen an eine quelloffene Software aufgezeigt, damit diese diesen Motivationsfaktoren nicht entgegensteht.
+In diesem Kapitel werden zunächst die wissenschaftlich belegten Motivationsfaktoren von an quelloffener Software Mitwirkenden dargelegt und anschließend darauf ableitbare technische Bedingungen an eine quelloffene Software aufgezeigt, damit dieser diesen Motivationsfaktoren nicht entgegensteht.
 
 %% TODO may use
 %%
@@ -24,8 +24,6 @@ In diesem Kapitel wird zunächst die wissenschaftlich belegten Motivationsfaktor
 \subsection{Motivationsfaktoren der Mitwirkenden}
 \label{subsec:motivationsfaktoren-der-mitwirkenden}
 
-\Vgl{OS-Motiv-Osterloh-Rota}
-
 Die in \Zitat{OS-Motiv-Luthiger} zusammengefassten Motivationsfaktoren, ermittelt aus verschiedene empirische Studien (\Zitat{OS-Motiv-Luthiger-1},\Zitat{OS-Motiv-Luthiger-2},\Zitat{OS-Motiv-Luthiger-3},\Zitat{OS-Motiv-Luthiger-4},\Zitat{OS-Motiv-Luthiger-5},\Zitat{OS-Motiv-Luthiger-6},\Zitat{OS-Motiv-Luthiger-7},\Zitat{OS-Motiv-Luthiger-8},\Zitat{OS-Motiv-Luthiger-8},\Zitat{OS-Motiv-Luthiger-10}), werden nachfolgenden sinngemäß prägnant wiedergegeben:
 \begin{inparaenum}[\bfseries(a)]
     \item \textbf{Nutzen:} die Mitwirkenden können, \insb nach eigener Anpassung, einen Nutzen aus Software ziehen, um \zB ein eigenes Problem zu lösen.
@@ -41,13 +39,17 @@ Die in \Zitat{OS-Motiv-Luthiger} zusammengefassten Motivationsfaktoren, ermittel
 
 \subsection{Abgeleitete technische Anforderungen}
 \label{subsec:abgeleitete-technische-anforderungen}
-{\color{red} %% TODO
-Daraus lassen sich einige wichtige technische Anforderungen, um die Hürden für Mitwirkende gering zu halten, ableiten und stellen damit Voraussetzungen für ein langfristig erfolgreiches quelloffenes Projekt dar:
+
+Aus den in \Kapitel{sec:zielsetzung} genannten Herausforderungen für quelloffene Software-Projekte und den zuvor genannten \Kapitel[N]{subsec:motivationsfaktoren-der-mitwirkenden} lassen sich einige wichtige technische Anforderungen ableiten und stellen damit wichtige Voraussetzungen für ein langfristig erfolgreiches quelloffenes Software-Projekt dar.
+
+Die Einstiegshürden für Mitwirkende sind möglichst gering zu halten.
+Dies kann erreicht werden, wenn \uA folgendes eingehalten \bzw gegeben ist:
 \begin{inparaenum}[\bfseries(a)]
     \item die Dokumentationen müssen stets aktuell, leicht auffindbar und verständlich sein;
-    Dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen zur Mitwirkung, Einrichtung und Testdurchführung;
-    \item die Projektstruktur, der Quellcode und die Architektur sollten möglichst \textquote{Branchen-Standards} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}) erfüllen;
-    \item eine hohe und qualitative Testabdeckung zur frühen Fehlererkennung auch durch neue Mitwirkende;
-    \item es sollten möglichst weitverbreitete Programmiersprachen und Frameworks genutzt werden.
+    dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen und Richtlinien zur Mitwirkung, Einrichtung der Entwicklungsumgebung und Testdurchführung;
+    umso prägnanter diese sind, umso zuträglicher für die Wartbarkeit und \insb neuen Mitwirkenden, sodass diese nicht erschlagend wirken;
+    \item die Projektstruktur, der Quellcode und die Architektur entsprechen weites gehend den \textquote{Branchen-} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}), Programmiersprachen- und Frameworks-Standards;
+    abweichungen sind überall erlaubt, wo es \insb dem Verständnis und der Wartbarkeit hilft;
+    \item es existiert eine hohe und vor allem qualitative Testabdeckung, durch diese \insb neue Mitwirkende frühzeitig Fehler während der Entwicklung erkennen können;
+    \item es werden nach Möglichkeit weitverbreitete Programmiersprachen und Frameworks genutzt, um die Zugänglichkeit, also das Finden von Hilfsmaterialien (\zB Dokumentationen und Anleitungen\Englisch{guides}) und Hilfestellungen Dritter, des Projekts indirekt zu erhöhen, als auch eine gewisse Langlebigkeit dieser und damit einen einhergehenden niedrigeren Wartungsaufwand sicherzustellen.
 \end{inparaenum}
-}
