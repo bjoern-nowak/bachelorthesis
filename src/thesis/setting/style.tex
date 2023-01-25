@@ -104,13 +104,23 @@
 \onehalfspacing %% Zeilenabstand 1,5 Zeilen
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
-\setlength{\parskip}{.5em plus .5em minus .25em} %% Absatz-Trennung dynamisch: .25em bis 1em (default .5em)
+\setlength{\parskip}{.5em plus .25em minus .25em} %% Absatz-Trennung dynamisch: .25em bis 1em (default .5em)
 %\setlist[description]{leftmargin=1.5em} %% set text indention
 %\setlist[itemize]{leftmargin=1.5em} %% set text indention
 
-\RedeclareSectionCommand[beforeskip=5.5em,afterskip=1.5em]{chapter}
-\RedeclareSectionCommand[runin=false,beforeskip=1em,afterskip=.5em]{section}
-\RedeclareSectionCommand[runin=false,beforeskip=.4em,afterskip=.2em]{subsection}
+%% TODO should use "<amount>\baselineskip" instead of "<amount>em"
+\RedeclareSectionCommand[
+    beforeskip=5.5em,
+    afterskip=1.5em plus .5em minus .25em
+]{chapter}
+\RedeclareSectionCommand[runin=false,
+    beforeskip=1.25em plus .5em minus .25em,
+    afterskip=.75em plus .5em minus .5em
+]{section}
+\RedeclareSectionCommand[runin=false,
+    beforeskip=.75em plus .375em minus .375em,
+    afterskip=.5em plus .25em minus .25em,
+]{subsection}
 %\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{subsubsection}
 %\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{paragraph}
 %\RedeclareSectionCommand[runin=false,beforeskip=1sp,afterskip=1sp]{subparagraph}
