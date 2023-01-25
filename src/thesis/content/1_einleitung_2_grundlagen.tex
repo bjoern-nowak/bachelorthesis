@@ -28,16 +28,17 @@ Diese werden \ggfs durch die Spezies, den Eigenschaften, Vor- und Nachteilen sow
 Dabei ist aus folgenden und teils durch Regeln eingeschränkten Umfängen zu wählen (dies stellt einen Auszug und keine komplette Aufstellung dar):%
 \begin{itemize*}[label={}, itemjoin={,}]%
     \item vier Spezien
-    \item 32 Kulturen
-    \item 51 Professionen
+    \item 25 Kulturen
+    \item 33 Professionen
     \item acht Eigenschaften
     \item 59 Talente
-    \item 251 Zaubern und 74 Ritualen
-    \item 181 magischen Handlungen
-    \item 74 Liturgien
-    \item 130 Vorteile
-    \item 77 Nachteile
-    \item und weiteren Spielmechaniken, wie \zB 21 Kampftechniken und 354 Sonderfertigkeiten.
+    \item 45 Zaubern
+    \item sechs Rituale
+    \item 16 magischen Handlungen
+    \item 34 Liturgien
+    \item 50 Vorteile
+    \item 52 Nachteile
+    \item und weiteren Spielmechaniken, wie \zB 222 Sonderfertigkeiten\Note{Sonderfertigkeiten der Kategorie \textquote{Sprachen und Schriften} wurden aufgrund schwieriger Zuordnung ausgeschlossen}.
 \end{itemize*}
 \Vgl[ff.]{RWiki}
 
@@ -94,12 +95,13 @@ Es werden die, in Absatz 2 von \Kapitel[NP]{subsec:charakter-erstellung} genannt
 Gemäß Regelwerk gilt für einen Spielenden mit dem Erfahrungsgrad \textquote{Erfahren}, dass jede Eigenschaft um bis zu sechs Stufen gesteigert werden kann, aber maximal 36 Eigenschaftsstufen erkauft werden können \Vgl[Schritt 2 und 5]{RWiki-Erstellung}.
 Es wird angenommen, dass
 \begin{itemize*}[label={}, itemjoin={,}]
-    \item eine zweite Profession gewählt werden kann
+    \item zwei Professionen gewählt werden
     \item sechs Eigenschaften maximal gesteigert werden
     \item 20 Fertigkeiten aktiviert und gesteigert werden
     \item 10 Vorteile und fünf Nachteile gewählt werden
-    \item und sich die Hälfte der Vor- und Nachteile sowie ein Viertel der Fertigkeiten ausschließen.
+    \item und sich die Hälfte der Vor- und Nachteile sowie ein Viertel der Fertigkeiten, von denen nur 1/10 der Sonderfertigkeiten auswählbar sind, ausschließen.
 \end{itemize*}
+Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zauber, Rituale, magische Handlungen und Liturgien.
 %% variablen, count indicies: italic : \textrm
 %% constanten, indicies: steep : \textrm
 %% complex numbers: underlined
@@ -112,14 +114,15 @@ Es wird angenommen, dass
         \binom{\textrm{K}}{1}
     } *
     \underset{[\textrm{P}]rofessionen}{
-        \left( \textrm{P} + \binom{\textrm{P}}{2} \right)
+        \binom{\textrm{P}}{2}
     } *
     \underset{[\textrm{E}]igenschaften}{
         \binom{\textrm{E}}{6}
     } *
+    \underset{[\textrm{SF}] Sonderfertigkeiten}{
     \underset{[\textrm{F}]ertigkeiten}{
-        \binom{\frac{\textrm{F}}{4}}{20}
-    } *
+        \binom{\frac{\textrm{F}}{4}+\frac{\textrm{SF}}{10}}{20}
+    }} *
     \underset{[\textrm{V}]orteile}{
         \binom{\frac{\textrm{V}}{2}}{10}
     } *
@@ -127,5 +130,7 @@ Es wird angenommen, dass
         \binom{\frac{\textrm{N}}{2}}{5}
     }
 \end{equation}
-Daraus ergeben sich \textbf{\ca 224,710 Oktilliarden (10\textsuperscript{51}) Merkmals-Kombinationen}.
-Unter Fertigkeiten wurden folgende Spielmechaniken zusammengefasst: Talente, Zauber, Rituale, magische Handlungen, Liturgien, Kampftechniken und Sonderfertigkeiten.
+Damit ergeben sich \textbf{\ca 3,160780 Quintilliarden (10\textsuperscript{33}) Merkmals-Kombinationen}.
+Diese Zahl steigt auf \ca 3,409411 Oktilliarden (10\textsuperscript{51}), wenn man alle vom Herausgeber online veröffentlichte Merkmale, welches Regelerweiterungsbänder und nicht Grundregeln voraussetzt, inkludiert.
+Dies sind 32 Kulturen, 270 Professionen, 189 Liturgien, 251 Zaubern, 74 Rituale, 184 magischen Handlungen, 1755 Sonderfertigkeiten, 130 Vorteile und 77 Nachteile \Vgl{RWiki}.
+Wobei 1/3 der Professionen sich ausschließen und 1/6 der Fertigkeiten und 1/20 der Sonderfertigkeiten auswählbar seien.
