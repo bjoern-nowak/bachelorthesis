@@ -36,6 +36,11 @@
 \newcommand{\itemd}[2]{\item{\textbf{#1}}\\{#2}} %% erzeugt ein Listenelement mit fetter Überschrift
 \newcommand{\changefont}[3] %% einfaches Wechseln der Schrift, z.B.: \changefont{cmss}{sbc}{n}
 {\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+\newenvironment{absolutelynopagebreak}
+{\par\nobreak\vfil\penalty0\vfilneg
+\vtop\bgroup}
+{\par\xdef\tpd{\the\prevdepth}\egroup
+\prevdepth=\tpd}
 
 
 %% ----- Tables ---------------------------------------------------------------
@@ -73,6 +78,7 @@
 
 \newcommand{\Abk}[1]{\textit{\ac{#1}}} % Abkürzung
 \newcommand{\AbkK}[1]{\textit{\acs{#1}}\ACplacelabel{#1}} % Abkürzung kurz (ohne Erstnennung ausgeschrieben)
+\newcommand{\AbkL}[1]{\textit{\acf{#1}}\ACplacelabel{#1}} % Abkürzung lang (immer ausgeschrieben)
 \newcommand{\Datum}[1]{\DTMdate{#1}} % Datum
 \newcommand{\Monat}[1]{% Datum ohne Tag, z.B. \Monat{2020-09}
     \DTMlangsetup{showdayofmonth=false}%
@@ -81,8 +87,8 @@
 }
 \newcommand{\Jahr}[1]{#1} % Datum nur als Jahr
 \newcommand{\Englisch}[1]{ (englisch: \textit{#1})} % englischer Begriff
+\newcommand{\Begriff}[1]{\textit{#1}}
 
-\newcommand{\Fachbegriff}[1]{\textbf{#1}}
 \newcommand{\Klasse}[1]{\texttt{#1}}
 \newcommand{\Methode}[1]{\texttt{#1}}
 \newcommand{\MethodenRef}[1]{\texttt{#1}}
@@ -120,9 +126,9 @@
 \newcommand{\Kapitel}[2][\KapitelDefaultRef]{% K=Kapitel~<Nr> N=<Kapitelname> P='auf S.~<Seite>'
     \IfStrEqCase{#1}{
             {N}{\nameref{#2}}
-            {NK}{\nameref{#2} (\autoref{#2})}
-            {KN}{\autoref{#2}:~\nameref{#2}}
-            {KP}{\autoref{#2} auf S.~\pageref{#2}}
+            {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
+            {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
+            {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
             {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
     }[\autoref{#2}]%
 }

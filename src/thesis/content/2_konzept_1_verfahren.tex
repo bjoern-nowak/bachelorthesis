@@ -1,8 +1,62 @@
 \section{Verfahrens-Evaluation}
 \label{sec:verfahrens-evaluation}
 
-{\color{red} %% TODO
-Für Ersteres muss eine geeignete Lösung (Framework/Algorithmus) ermittelt werden; dies könnte \zB \Abk{ASP} sein.
-}
 
-\dummyText{violet}{1-8}
+Für die im \Kapitel{sec:zielsetzung} genannten technischen Herausforderungen muss eine geeignete Lösung (Framework/Algorithmus) ermittelt werden.
+Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel-basierten Systemen und (Bedingungs-basierten) Logiksystemen vorgestellt und nach einer Gegenüberstellung dieser eins ausgewählt.
+
+\subsection{\AbkL{Prolog}}
+\label{subsec:prolog}
+
+Die Grundlage von \Abk{Prolog} ist die formalisierte Darstellung von Wissen und die Verwendung von logischen Regeln, um dieses Wissen zu verarbeiten und Probleme zu lösen.
+\Abk{Prolog} basiert auf der \Begriff{Horn-Klausel}-Semantik (Logikprogrammierung), bei der eine Aussage durch eine Menge von, einer bestimmten Form von, Horn-Klauseln dargestellt wird und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
+Eine Horn-Klausel ist eine logische Formel, die aus einem Kopf und einer Menge von Füßen besteht, wobei der Kopf eine positive Literal ist und die Füße negative Literale sind.
+Eine Aussage ist dann wahr, wenn es eine Übereinstimmung (Unifikation) zwischen dem Kopf und einer der Füße gibt.
+Um die Horn-Klauseln zu verarbeiten wird ein Übereinstimmung-Algorithmus genutzt.
+Dieser versucht die Variablen in den Horn-Klauseln so zu substituieren, dass der Kopf und einer der Füße übereinstimmen.
+Nur wenn eine solche Substitution möglich ist, wird die Horn-Klausel als wahr betrachtet.
+Außerdem kommt auch ein \sog Backtracking-Mechanismus zum Einsatz, bei dem zu einem früheren Punkt im Suchprozess zurückgekehrt wird, um alternative Lösungen zu finden oder wenn keine Übereinstimmung möglich ist.
+Indem also \Abk{Prolog} durch verschiedene Möglichkeiten navigiert, kann es komplexe Probleme lösen.
+\Vgl{PROLOG-Apt1997,PROLOG-Bratko2012}
+
+\subsection{\AbkL{SAT}}
+\label{subsec:sat}
+
+Das \Abk{SAT} ist ein Entscheidungsproblem, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene Boolean-Formel (eine Formel, die nur die Operatoren \textquote{und}, \textquote{oder} und \textquote{nicht} verwendet) gibt, welche die Formel als wahr evaluiert.
+Eine Boolean-Formel kann als Konjunktion von Disjunktionen von Literalen dargestellt werden, wobei ein Literal entweder eine Variable oder deren Negation ist.
+\Abk{SAT} ist ein NP-vollständiges Problem, was bedeutet, dass es keine effiziente algorithmische Lösung gibt, die für alle Fälle eine korrekte Lösung findet.
+Es gibt jedoch algorithmische Ansätze, die in vielen Fällen effizient arbeiten und erfolgreich eingesetzt werden.
+Wichtige und weit verbreitete Ansätze ist der Davis-Putnam-Logemann-Loveland (DPLL) Algorithmus und Backtracking-Algorithmen wie Conflict-Driven Clause Learning (CDCL).
+Letzterer vermeidet unnötige Backtracks, und erhöht damit die Effizients, indem es Konflikt- und Klausel-Lernstrategien nutzt.
+Das \Abk{SAT}-Solver-Verfahren wird häufig mit anderen Techniken, wie \zB Beweisverfahren und Formalisierungstechniken, kombiniert, um Probleme in einer formalen Sprache zu beschreiben und Lösungen effizient zu verifizieren.
+Es ist ein wichtiges und weitverbreitetes Problem in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und noch intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
+\Vgl{SAT-Zhang2002,SAT-MarquesSilva2008,SAT-Vizel2015}
+
+\subsection{\AbkL{ASP}}
+\label{subsec:asp}
+
+\Abk{ASP} ist ein deklaratives Problemlösungsparadigma, es basiert auf der Logikprogrammierung (\AbkK{Prolog}), Wissensrepräsentation und Argumentation, sowie dem Erfüllbarkeitsproblem der Aussagenlogik (\AbkK{SAT}).
+Ein \Abk{ASP}-Programm besteht aus einer Menge von \Begriff{Regeln} und \Begriff{Fakten}.
+Die Regeln sind logische Implikationen in der Form \textquote{\textit{wenn A dann B}}, wobei \Begriff{A} und \Begriff{B} logische \Begriff{Aussagen} sind.
+Ein Beispiel wäre: \textquote{\textit{Wenn es regnet, dann nehme ich einen Regenschirm mit.}}. Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
+Die Fakten sind einfach logische Aussagen, die bereits als \Begriff{wahr} bekannt sind.
+Das Ziel des \Abk{ASP}-Programms ist es, eine Menge von Aussagen zu finden die, unter den gegeben Regeln und Fakten, \Begriff{wahr} sind.
+Diese Menge von Aussagen wird als \Begriff{Answer Set} (oder \Begriff{stable models}) bezeichnet.
+Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Begriff{Answert Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
+Es beginnt mit der Menge der Fakten und wendet die Regeln an, um zu sehen, welche anderen Aussagen logisch aus ihnen abgeleitet werden können.
+Wenn ein Widerspruch gefunden wird, geht das System zurück und versucht einen anderen Weg.
+Wenn es keine weiteren Schlussfolgerungen mehr findet, gibt es die Menge der abgeleiteten Aussagen als Answer Set zurück.
+Weitere Eigenschaften von \Abk{ASP} sind \uA:
+\begin{inparaenum}[\bfseries(a)]
+    \item es ist möglich mehrere Lösungen (Answer Sets) zu finden;
+    \item Regeln und Fakten können negiert oder als \textquote{unbekannt/unvollständig} gekennzeichnet werden, weshalb \Abk{ASP} als nicht-deterministisch angesehen werden kann;
+    \item Regeln können mit Gewichtungen versehen werden, was es ermöglicht unterschiedliche Arten von Unvollständigkeiten zu berücksichtigen;
+    \item die formale Modellierung ist besonders flexibel, weil Regeln dynamisch hinzugefügt und entfernt werden können.
+\end{inparaenum}
+\Vgl{ASP-Eiter2009,ASP-Brewka2011}
+
+
+\subsection{Gegenüberstellung und Auswahl}
+\label{subsec:gegenuberstellung-und-auswahl}
+{\color{red} %% TODO
+}
