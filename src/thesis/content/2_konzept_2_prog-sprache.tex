@@ -3,6 +3,45 @@
 
 {\color{red} %% TODO
 Für Letzteres muss eine geeignete Programmiersprache, unter Beachtung der, zuvor beschriebenen, zu wählenden Lösung, gewählt und damit eine \textquote{saubere} Architektur implementiert und dokumentiert werden.
-}
+Es gilt als zunächst die existierenden Frameworks für \Abk{ASP} zu ermitteln und zu bewerten.
 
-\dummyText{violet}{1-8}
+%% TODO add homepages as references
+
+Clingo by \Abk{Potassco}
+Clingo bietet für Python und C(++) eine \Abk{API}/Framework/Library an.
+%% TODO erklaere clingo.
+
+DLV by DLVSYSTEM S.R.L.
+%% TODO erklaere DLV
+https://www.dlvsystem.it/dlvsite/dlv/
+\Vgl{DLV-Leone2006}
+
+Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert
+Anbindung an Java mit JDLV (https://www.dlvsystem.it/dlvsite/jdlv/), jedoch über eine Meta-Spezification JASP \Vgl{DLV-Febbraro2012}.
+
+Wrapper-Abk{API}s dritter die Clingo oder DLV für weitere Programmiersprachen verfügbar machen oder vereinfachen werden nicht beachtet.
+Der Grund ist, das diese eine weitere Komplexitätsschicht bringen würden, dies aber nicht mit dem Vorteilen dieser ausgleichbar ist. Ein weitere Grund ist ein Risiko wenn diese nicht mehr gewartet werden oder dies bereits der Fall ist.
+Beispiele sind PyASP\Note{https://github.com/sthiele/pyasp} (für Python), Asp4J\Note{https://github.com/hbeck/asp4j} (für Java)
+
+\subsection{Clingo by Potassco}
+\label{subsec:clingo-by-potassco}
+\Begriff{Clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selben Herrstellers vereint.
+
+\subsection{Python}
+\label{subsec:python}
+
+Python ist eine hochlevel-Programmiersprache, die ursprünglich von Guido van Rossum im Jahr 1989 entwickelt wurde.
+Sie hat sich seitdem zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
+Eines der wichtigsten Merkmale von Python ist seine Lesbarkeit und Schreibbarkeit, die es Entwicklern ermöglicht, ihre Codezeilen einfacher und verständlicher zu gestalten.
+Es verwendet eine natürliche und lesbare Syntax, die ähnlich wie Englisch ist, was es erleichtert, den Code zu verstehen und zu pflegen.
+Python ist eine interpretierte Sprache, was bedeutet, dass der Code nicht vor der Ausführung kompiliert werden muss.
+Dies ermöglicht es Entwicklern, schnell Änderungen am Code vorzunehmen und zu testen, ohne dass ein langwieriger Kompilierungsprozess erforderlich ist.
+Ein weiteres wichtiges Merkmal von Python ist seine Dynamik.
+Es ermöglicht es Entwicklern, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie zu kompilieren und zu deklarieren.
+Dies erleichtert die Entwicklung von Prototypen und ermöglicht es, flexibler auf Änderungen im Code zu reagieren.
+Python hat auch eine große und aktive Community, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die Entwicklern das Schreiben von Code erleichtern und die Entwicklung von Anwendungen beschleunigen.
+Beispiele für solche Bibliotheken sind NumPy und Pandas für Datenanalyse, TensorFlow für künstliche Intelligenz und Django für Webentwicklung.
+Insgesamt ist Python eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Anfänger als auch für erfahrene Entwickler eignet und in einer Vielzahl von Anwendungen eingesetzt werden kann.
+Es erleichtert die Entwicklung von Code durch seine lesbare und schreibbare Syntax, die Dynamik und die Verfügbarkeit von Bibliotheken und Modulen.
+\Vgl{PYTHON-Oliphant2007,PYTHON-Millman2011,PYTHON-Jaworski2021}
+}
