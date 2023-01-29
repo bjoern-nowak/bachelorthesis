@@ -5,6 +5,7 @@
 Für die im \Kapitel{sec:zielsetzung} genannten technischen Herausforderungen muss eine geeignete Lösung (Framework/Algorithmus) ermittelt werden.
 Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel-basierten Systemen und (Bedingungs-basierten) Logiksystemen vorgestellt und nach einer Gegenüberstellung dieser eins ausgewählt.
 
+
 \subsection{\AbkL{Prolog}}
 \label{subsec:prolog}
 
@@ -19,18 +20,20 @@ Außerdem kommt auch ein \sog Backtracking-Mechanismus zum Einsatz, bei dem zu e
 Indem also \Abk{Prolog} durch verschiedene Möglichkeiten navigiert, kann es komplexe Probleme lösen.
 \Vgl{PROLOG-Apt1997,PROLOG-Bratko2012}
 
+
 \subsection{\AbkL{SAT}}
 \label{subsec:sat}
 
-Das \Abk{SAT} ist ein Entscheidungsproblem, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene Boolean-Formel (eine Formel, die nur die Operatoren \textquote{und}, \textquote{oder} und \textquote{nicht} verwendet) gibt, welche die Formel als wahr evaluiert.
+Das \Abk{SAT} ist ein Erfüllbarkeitsproblem der Aussagenlogik, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene Boolean-Formel (eine Formel, die nur die Operatoren \textquote{und}, \textquote{oder} und \textquote{nicht} verwendet) gibt, welche die Formel als wahr evaluiert.
 Eine Boolean-Formel kann als Konjunktion von Disjunktionen von Literalen dargestellt werden, wobei ein Literal entweder eine Variable oder deren Negation ist.
 \Abk{SAT} ist ein NP-vollständiges Problem, was bedeutet, dass es keine effiziente algorithmische Lösung gibt, die für alle Fälle eine korrekte Lösung findet.
 Es gibt jedoch algorithmische Ansätze, die in vielen Fällen effizient arbeiten und erfolgreich eingesetzt werden.
-Wichtige und weit verbreitete Ansätze ist der Davis-Putnam-Logemann-Loveland (DPLL) Algorithmus und Backtracking-Algorithmen wie Conflict-Driven Clause Learning (CDCL).
+Wichtige und weit verbreitete Ansätze ist der \Abk{DPLL} Algorithmus und Backtracking-Algorithmen wie Conflict-Driven Clause Learning (CDCL).
 Letzterer vermeidet unnötige Backtracks, und erhöht damit die Effizients, indem es Konflikt- und Klausel-Lernstrategien nutzt.
 Das \Abk{SAT}-Solver-Verfahren wird häufig mit anderen Techniken, wie \zB Beweisverfahren und Formalisierungstechniken, kombiniert, um Probleme in einer formalen Sprache zu beschreiben und Lösungen effizient zu verifizieren.
-Es ist ein wichtiges und weitverbreitetes Problem in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und noch intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
+Es ist ein wichtiges und weitverbreitetes Problem (Entscheidungsproblem) in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und noch intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
 \Vgl{SAT-Zhang2002,SAT-MarquesSilva2008,SAT-Vizel2015}
+
 
 \subsection{\AbkL{ASP}}
 \label{subsec:asp}
@@ -58,6 +61,56 @@ Weitere Eigenschaften von \Abk{ASP} sind \uA:
 
 \subsection{Gegenüberstellung und Auswahl}
 \label{subsec:gegenuberstellung-und-auswahl}
+
 {\color{red} %% TODO
-tabelle
+In \Tabelle{tab:verfahrensgegenüberstellung} ist zu sehen
+
+
+\newTable{Verfahrensgegenüberstellung}{tab:verfahrensgegenüberstellung}{
+    \color{red} %% TODO
+    \begin{tabulary}{\textwidth}{CJJJ}
+
+        & \textbf{\Abk{Prolog}}
+        & \textbf{\Abk{SAT}}
+        & \textbf{\Abk{ASP}}
+        \\\midrule
+        \verticalcell{\textbf{Prinzip}}
+        & Logikprogrammierung
+        & Finden einer Wahrheitsbelegung für boolesche Variablen
+        & Finden von Lösungen, die eine Menge von Bedingungen\Englisch{constraints} erfüllen
+        \\\midrule
+        \verticalcell{\textbf{Zweck}}
+        & Künstliche Intelligenz, Expertensysteme
+        & Logische Schaltungen, Beweisverfahren, kombinatorische Optimierung
+        & Bedingungs-basierte Modellierung, kombinatorische Optimierung, Entscheidungsunterstützung
+        \\\midrule
+        \verticalcell{\textbf{Logik}}
+        & Horn-Klauseln
+        & boolesche Formeln
+        & normal Form (NF) Horn-Klauseln
+        \\\midrule
+        \verticalcell{\textbf{Technik}}
+        & Unifikation, Backtracking
+        & Backtracking, \Abk{DPLL} Algorithmus
+        & Stable Model Semantics, Grounder, Solver
+        \\\midrule
+        \verticalcell{\textbf{Anwendungen}}
+        & Expertensysteme, natürliche Sprache
+        & Schaltungsentwurf, Beweisverfahren, kombinatorische Optimierung
+        & kombinatorische Optimierung, Scheduling, Ressourcenplanung, Entscheidungsunterstützung
+        \\\midrule
+        \verticalcell{\textbf{Stärken}}
+        & Natürliche Ausdrucksweise, einfache Handhabung von Unsicherheiten
+        & Effiziente Lösungstechniken, geeignet für große Probleme
+        & Präzise und vollständige Repräsentation von Wissen, Unterstützung von Negation und Unbestimmtheit
+        \\\midrule
+        \verticalcell{\textbf{Schwächen}\footnotemark}
+        & Ineffiziente Lösungstechniken, begrenzte Skalierbarkeit
+        & Schwierigkeit bei der Handhabung von Unsicherheiten und Kontrollstrukturen
+        & Komplexe Syntax und Semantik, schwierig zu debuggen
+        \\
+    \end{tabulary}
+}
+%% FIXME footnote is on wrong page after table float on next page
+\footnotetext{Hinweis: diese Verfahren werden oft anderen kombiniert um die Schwächen zu kompensieren.}
 }

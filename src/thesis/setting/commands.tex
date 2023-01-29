@@ -1,7 +1,7 @@
 %% ----- develop commands -----------------------------------------------------
 \newcommand{\dummyText}[2]{%
     \ifthenelse{\boolean{isDummyText}}{
-        {\color{#1}\lipsum[#2]}
+            {\color{#1}\lipsum[#2]}
     }{}
 }
 
@@ -44,13 +44,14 @@
 
 
 %% ----- Tables ---------------------------------------------------------------
-\newcommand{\newTable}[3] % Parameter: caption (in text), label (for reference), file (.tex under table folder)
-{\begin{table}[htb]
-     \centering
-     \singlespacing
-     \input{table/#3}
-     \caption{#1}
-     \label{#2}
+\newcommand{\newTable}[3] % Parameter: caption (in text), label (for reference), table env
+{\begin{table}[hbp]
+     \onehalfspacing
+     %\setlength{\abovecaptionskip}{-.5em}
+     \caption{#1}\label{#2}
+     \begin{center}
+         #3
+     \end{center}
 \end{table}}
 
 \newcommand{\newTabelleAnhang}[1] % Parameter: file (.tex under table folder)
@@ -59,14 +60,25 @@
      \input{table/#1}
 \end{Center}}
 
+\newcommand{\verticalcell}[1]{%
+    \vspace*{-.7em}\rotatebox[origin=c]{90}{#1}\vspace*{.3em}%
+%\rotatebox{90}{#1}%
+%\rotatebox[origin=c]{90}{\parbox[t]{1em}{#1}}%
+%\rotatebox[origin=c]{90}{\centering\hfill#1\hfill}%
+%\rotatebox{90}{\centering\hfill#1\hfill}%
+%\rotatebox{90}{\hfill#1\hfill}%
+%\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{#1}}}%
+%\begin{tabular}{@{}c@{}}\rotatebox[origin=c]{#1}\end{tabular}&
+}
+
 
 %% ----- Graphics -------------------------------------------------------------
 \newcommand{\Image}[2][]{%
-    %% usage like \includegraphics : \Image[<includegraphics-options>]{<path>}
+%% usage like \includegraphics : \Image[<includegraphics-options>]{<path>}
     \includegraphics[#1]{#2}%
 }
 \newcommand{\ImageInRatio}[3][]{%
-    %% usage: \ImageInRatio[<includegraphics-options>]{<scale>}{<path>}
+%% usage: \ImageInRatio[<includegraphics-options>]{<scale>}{<path>}
     \Image[width=#2\textwidth,height=#2\textheight,keepaspectratio,#1]{#3}%
 }
 
@@ -117,7 +129,20 @@
 \newcommand{\Gleichung}[1]{\autoref{#1}}
 \newcommand{\Abbildung}[1]{\autoref{#1}}
 \newcommand{\Anhang}[1]{\autoref{#1}}
-\newcommand{\Tabelle}[1]{\autoref{#1}}
+
+\newcommand{\TabelleDefaultRef}{KNP}
+\ifthenelse{\boolean{isBookPrint}}{}{
+    \renewcommand{\TabelleDefaultRef}{KN}
+}
+\newcommand{\Tabelle}[2][\TabelleDefaultRef]{% K=Tabelle~<Nr> N=<Tabellenname> P='auf S.~<Seite>'
+    \IfStrEqCase{#1}{
+            {N}{\nameref{#2}}
+            {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
+            {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
+            {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
+            {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
+    }[\autoref{#2}]%
+}
 
 \newcommand{\KapitelDefaultRef}{KNP}
 \ifthenelse{\boolean{isBookPrint}}{}{
