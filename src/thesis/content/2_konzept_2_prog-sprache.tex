@@ -1,6 +1,6 @@
 \section{Auswahl der Programmiersprache}\label{sec:auswahl-der-programmiersprache}
 
-{\color{red} %% TODO
+
 Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im speziellen, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
 In den nachfolgenden Kapiteln werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre unterstützten Programmiersprachen vorgestellt und anschließend, unter Beachtung der Rahmenbedingungen/Herausforderungen der quelloffenen Software, bewertet und ausgewählt.
 %% TODO may say something about Alpha https://github.com/alpha-asp/Alpha or ASPARTIX https://www.dbai.tuwien.ac.at/proj/argumentation/systempage/
@@ -9,20 +9,21 @@ Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
-Beispiele sind Clorm\Note{https://github.com/potassco/clorm}, Clyngor\Note{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP\Note{https://github.com/sthiele/pyasp}), Asp4J\Note{https://github.com/hbeck/asp4j}.
+Beispiele sind Clorm\Note{\url{https://github.com/potassco/clorm}}, Clyngor\Note{\url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{\url{https://github.com/hbeck/asp4j}}.
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
 
+{\color{red} %% TODO
 \begin{description}
-    %% TODO erklaere https://potassco.org/clingo/
-    \item[\AbkK{Clingo} by \AbkK{Potassco}] \Abk{Clingo}\Note{https://github.com/potassco/clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des Herrstellers \Abk{Potassco} vereint.
-    \Abk{Clingo} bietet für Python\Note{https://potassco.org/clingo/python-api/5.6/clingo/} und C\Note{https://potassco.org/clingo/c-api/current/} eine \Abk{API} an.
+    \item[Clingo von \AbkK{Potassco}]\hspace*{-.4em} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
+    Clingo selbst und alle seine Komponenten sind quelloffen \Vgl{CLINGO-Github}.
+    Clingo bietet für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}} und C\Note{\url{https://potassco.org/clingo/c-api/current/}} eine \Abk{API} an.
 
     %% TODO erklaere https://www.dlvsystem.it/dlvsite/dlv/
-    \item[\AbkK{DLV} by DLVSYSTEM S.R.L.] \Abk{DLV} ist \Vgl{DLV-Leone2006}.
+    \item[\AbkK{DLV} von DLVSYSTEM S.R.L.] \Abk{DLV} ist \Vgl{DLV-Leone2006}.
     Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert.
-    Anbindung an Java mit JDLV\Note{https://www.dlvsystem.it/dlvsite/jdlv/}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
+    Anbindung an Java mit JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
 \end{description}
 
 
