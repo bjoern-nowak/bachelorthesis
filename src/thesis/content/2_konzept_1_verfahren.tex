@@ -35,6 +35,7 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
     Ein Beispiel wäre: \textquote{\textit{Wenn es regnet, dann nehme ich einen Regenschirm mit.}}.
     Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
     Fakten sind einfache logische Aussagen, die bereits als \Begriff{wahr} bekannt sind; sie haben keine Bedigung.
+    Aussagen die Unbekannt sind, werden gemäß der \Abk{CWA}, als \Begriff{falsch} gewertet.
     Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden die, unter den gegeben Regeln und Fakten, \Begriff{wahr} sind.
     Diese Menge von Aussagen wird als \Begriff{Answer Set} (auch \Begriff{stable models}) bezeichnet.
     Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Begriff{Answer Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
@@ -57,27 +58,12 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
 In der \Tabelle{tab:verfahrensgegenüberstellung} werden die vorgestellten Verfahren mit den folgenden Kriterien verglichen:
 \begin{itemize*}[label={}, itemjoin={,}, itemjoin*={{ sowie}}]
     \item das Prinzip des Verfahrens
-    \item der Logik Hintergrund
+    \item die Sprache, welche die grundlegende Syntax und Semantik vorgibt
     \item die Technik der Lösungssuche
     \item mögliche Anwendungsbereiche
     \item Relevanz in der Wissenschaft
     \item Stärken und Schwächen bei der Anwendung.
 \end{itemize*}
-
-Die Relevanz wird rudimentär über die Anzahl der gefundenen Ergebnisse über Google Scholar bestimmt.
-Es wird nach der expliziten (in Hochkommata gestellten) englischen Langform der Abkürzungen \Abk{Prolog}, \Abk{SAT} und \Abk{ASP} gesucht, wobei diese die Kurzform als Präfix hat.
-Das Suchformat entspricht damit: \Tech{<Kurzform> ''<englische Langform>''}.
-Besonderes hohe Bedeutung werden den Kriterien Relevanz, Stärken und Schwächen zugesprochen.
-Die Relevanz stellt ein sehr einfachen Indikator für die Verbreitung des Verfahrens und somit für das Finden möglicher hilfreicher Ressourcen dar.
-Dies ist auch im Hinblick der Langlebigkeit der Software relevant.
-Die beiden Kriterien Stärken und Schwächen hingegen zeigen \insb die Eignung des Verfahrens zur Formalisierung eines \Abk{PP}-Regelwerks und der Modellierung einer Charakterüberprüfung.
-
-Demnach ist \textbf{am geeignetsten} für die Umsetzung der Software \textbf{das Verfahren \Abk{ASP}} und somit auch zu wählen.
-\Abk{ASP} ist ein modernes und verbreitetes Verfahren.
-Es bringt die notwendige Effizients bei großen Problemen auf, welches dem umfangreichen \Abk{DSA}-Regelwerk gerecht wird.
-Es bringt ebenfalls ein großes Set an Möglichkeiten mit sich, wie \zB Negationen und komplexe Kontroll- und Flussstrukturen.
-Des Weiteren erlaubt es bereits vom Prinzip und der Technik her mehrere mögliche Lösungen, was der Realität, also dem Anwendungsbereich, am ehestem zutrifft.
-Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik kann und wird im Konzept beachtet und, durch umfangreiche Dokumentation, entgegen gewirkt.
 
 \hTable{Verfahrensgegenüberstellung}{tab:verfahrensgegenüberstellung}{
     \begin{tabulary}{\linewidth}{@{}CJJJ@{}}
@@ -92,7 +78,7 @@ Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik
         & Wahrheitsbelegung für boolesche Variablen finden
         & Lösungen nicht-deterministisch finden, die Bedingungen\Englisch{constraints} erfüllen
         \\\rowcolor{evenRow}
-        \vCell{\textbf{Logik}}
+        \vCell{\textbf{Sprache}}
         & Horn-Klauseln
         & boolesche Formeln
         & normal Form Horn-Klauseln
@@ -128,3 +114,18 @@ Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik
         \item[(2)] wie Schleifen und bedingte Anweisungen.
     \end{tablenotes}
 }
+
+Die Relevanz wird rudimentär über die Anzahl der gefundenen Ergebnisse über Google Scholar bestimmt.
+Es wird nach der expliziten (in Hochkommata gestellten) englischen Langform der Abkürzungen \Abk{Prolog}, \Abk{SAT} und \Abk{ASP} gesucht, wobei diese die Kurzform als Präfix hat.
+Das Suchformat entspricht damit: \Tech{<Kurzform> ''<englische Langform>''}.
+Besonderes hohe Bedeutung werden den Kriterien Relevanz, Stärken und Schwächen zugesprochen.
+Die Relevanz stellt ein sehr einfachen Indikator für die Verbreitung des Verfahrens und somit für das Finden möglicher hilfreicher Ressourcen dar.
+Dies ist auch im Hinblick der Langlebigkeit der Software relevant.
+Die beiden Kriterien Stärken und Schwächen hingegen zeigen \insb die Eignung des Verfahrens zur Formalisierung eines \Abk{PP}-Regelwerks und der Modellierung einer Charakterüberprüfung.
+
+Demnach ist \textbf{am geeignetsten} für die Umsetzung der Software \textbf{das Verfahren \Abk{ASP}} und somit auch zu wählen.
+\Abk{ASP} ist ein modernes und verbreitetes Verfahren.
+Es bringt die notwendige Effizients bei großen Problemen auf, welches dem umfangreichen \Abk{DSA}-Regelwerk gerecht wird.
+Es bringt ebenfalls ein großes Set an Möglichkeiten mit sich, wie \zB Negationen und komplexe Kontroll- und Flussstrukturen.
+Des Weiteren erlaubt es bereits vom Prinzip und der Technik her mehrere mögliche Lösungen, was der Realität, also dem Anwendungsbereich, am ehestem zutrifft.
+Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik kann und wird im Konzept beachtet und, durch umfangreiche Dokumentation, entgegen gewirkt.

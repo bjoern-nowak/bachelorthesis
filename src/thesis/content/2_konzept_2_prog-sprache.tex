@@ -9,47 +9,76 @@ Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
-Beispiele sind Clorm\Note{\url{https://github.com/potassco/clorm}}, Clyngor\Note{\url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{\url{https://github.com/hbeck/asp4j}}.
+Beispiele sind Clorm\Note{Python \Abk{ORM} Interface: \url{https://github.com/potassco/clorm}}, Clyngor\Note{Python Wrapper-\Abk{API}: \url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
 
 {\color{red} %% TODO
 \begin{description}
-    \item[Clingo von \AbkK{Potassco}]\hspace*{-.4em} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
+    %% TODO erklaere https://www.dlvsystem.it/dlvsite/dlv/
+    \item[\Abk{DLV}] von DLVSYSTEM S.R.L. ist \Vgl{DLV-Leone2006}
+    %% TODO add https://dlv.demacs.unical.it/ https://dlv.demacs.unical.it/i-dlv https://dlv.demacs.unical.it/wasp.
+    Stark mit Datenbanken mit fokus auf Unternehmen zur Entscheidungsfindung.
+    Möglich per CLI oder Aufruf dieser mit beliebiger Programmiersprache, wobei die naheliegenste C++ ist.
+    Es existiert zu dem eine Java Schnittstelle\Englisch{interface} JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
+
+    \item[Clingo] von \Abk{Potassco} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
     Clingo selbst und alle seine Komponenten sind quelloffen \Vgl{CLINGO-Github}.
     Clingo bietet für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}} und C\Note{\url{https://potassco.org/clingo/c-api/current/}} eine \Abk{API} an.
-
-    %% TODO erklaere https://www.dlvsystem.it/dlvsite/dlv/
-    \item[\AbkK{DLV} von DLVSYSTEM S.R.L.] \Abk{DLV} ist \Vgl{DLV-Leone2006}.
-    Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert.
-    Anbindung an Java mit JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
 \end{description}
+}
 
 
 \subsection{Unterstützte Programmiersprachen}\label{subsec:unterstutzte-programmiersprachen}
 
 \begin{description}
-    \item[Python] ist eine hochlevel-Programmiersprache, die ursprünglich von Guido van Rossum im Jahr 1989 entwickelt wurde.
-    Sie hat sich seitdem zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
-    Eines der wichtigsten Merkmale von Python ist seine Lesbarkeit und Schreibbarkeit, die es Entwicklern ermöglicht, ihre Codezeilen einfacher und verständlicher zu gestalten.
-    Es verwendet eine natürliche und lesbare Syntax, die ähnlich wie Englisch ist, was es erleichtert, den Code zu verstehen und zu pflegen.
+{\color{red} %% TODO refactor
+    \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (jetzt Teil von Oracle) entwickelt wurde.
+    Sie ist eine kompilierte Sprache, \dahe Java-Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor es ausgeführt werden kann.
+    Java ist plattformunabhängig, es kann daher auf vielen \Abk{OS} und Geräten ausgeführt werden.
+    Dazu bedarf es jedoch eine installierte \Abk{JRE}.
+    Diese beinhaltet \uA die \Abk{JVM}, welche das Java-Programm in Maschinensprache, die vom jeweiligen Computer verstanden werden kann, übersetzt.
+    Java unterstützt eine Vielzahl von Programmierkonzepten, darunter Objektorientierung, Nebenläufigkeit\Englisch{multithreading} und Ausnahmebehandlung\Englisch{exception handling}.
+    Diese Funktionalitäten ermöglichen es Entwickelnden, große und komplexe Anwendungen zu erstellen.
+    Es ist dahingegend eine sichere Sprache, dass sie verhindert, dass ein Programm unbeabsichtigt andere Teile des Systems beeinflusst.
+    Als weitesgehend (stark, statisch und explizit) typisierte Sprache bietet Java den Entwicklenden bereits bei der Komplierung eine frühe Fehlererkennung bei unzulässigen Wertetypen an, eine Verlässlichkeit bei der Entwicklung und eine bessere Performance im Vergleich zu dynamischen Typisierung.
+    Java wird in sehr vielen Bereichen und Anwendungen eingesetzt, darunter fallen webbasierte, mobile und wissenschaftliche Anwendungen sowie Backendsysteme, \Abk{GUI}-Anwendungen und Spiele.
+}{\color{red} %% TODO refactor
+    \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup entwickelt wurde.
+    Sie wurde ursprünglich als Erweiterung der Programmiersprache C entwickelt, um dessen Mängel in Bezug auf objektorientierte Programmierung und die Wiederverwendbarkeit von Code zu beheben.
+    C++ unterstützt die Konzepte von Klassen, Vererbung, Polymorphismus und Abstraktion, die es Entwicklern ermöglichen, komplexe Anwendungen effizient und übersichtlich zu organisieren und zu entwickeln.
+    Es verfügt auch über die Möglichkeit, Vorlagen (Templates) zu erstellen, die es ermöglichen, Code generisch und wiederverwendbar zu schreiben.
+    C++ unterstützt auch mehrere Programmierparadigmen wie strukturiertes, objektorientiertes und generisches Programmieren, was es zu einer vielseitigen Sprache macht, die für eine Vielzahl von Anwendungen und Projekten eingesetzt werden kann.
+    C++ ist eine kompilierte Sprache, was bedeutet, dass der Code in eine binäre Form kompiliert wird, die direkt vom Computer ausgeführt werden kann.
+    Ein wichtiger Aspekt von C++ ist seine enge Integration mit der Hardware-Ebene, die es ermöglicht, sehr effiziente Anwendungen zu entwickeln.
+    Dies macht C++ besonders für System- und Anwendungsentwicklung, Spielentwicklung, Computer-Grafik, Datenbankanwendungen und vieles mehr geeignet.
+    Zusammenfassend ist C++ eine leistungsstarke und vielseitige Programmiersprache, die eine enge Integration mit der Hardware-Ebene und die Möglichkeit, objektorientierte Konzepte effizient zu implementieren, ermöglicht.
+    Es ist eine wichtige Sprache in der Computerbranche und wird weit verbreitet eingesetzt.
+}
+    \item[Python] ist eine High-Level-Programmiersprache, die ursprünglich 1989 von Guido van Rossum entwickelt wurde.
+    Seitdem hat sie sich zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
+    Eines der wichtigsten Merkmale ist seine Les- und Schreibbarkeit, die es Entwickelnden ermöglicht Code einfach, verständlich und schnell zu schreiben.
+    Es verwendet eine natürliche und lesbare Syntax, welche zugleich sparsam ist.
+    Für Englisch-sprachige ist sie besonders angenehm, beim Verstehen und Pflegen, aufgrund der Ähnlichkeiten der Schlüsselwörter und Aufbau von Kontrollstrukturen.
     Python ist eine interpretierte Sprache, was bedeutet, dass der Code nicht vor der Ausführung kompiliert werden muss.
-    Dies ermöglicht es Entwicklern, schnell Änderungen am Code vorzunehmen und zu testen, ohne dass ein langwieriger Kompilierungsprozess erforderlich ist.
+    Dieser wird stattdessen zur Laufzeit vom \sog Interpretierer\Englisch{interpreter} Befehl für Befehl ausgeführt.
+    Ein \ggf langwieriger Kompilierungsprozess entfällt daher.
     Ein weiteres wichtiges Merkmal von Python ist seine Dynamik.
-    Es ermöglicht es Entwicklern, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie zu kompilieren und zu deklarieren.
+    Es ermöglicht Entwickelnden, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie vorab deklarieren und kompilieren zu müssen.
     Dies erleichtert die Entwicklung von Prototypen und ermöglicht es, flexibler auf Änderungen im Code zu reagieren.
-    Python hat auch eine große und aktive Community, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die Entwicklern das Schreiben von Code erleichtern und die Entwicklung von Anwendungen beschleunigen.
-    Beispiele für solche Bibliotheken sind NumPy und Pandas für Datenanalyse, TensorFlow für künstliche Intelligenz und Django für Webentwicklung.
-    Insgesamt ist Python eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Anfänger als auch für erfahrene Entwickler eignet und in einer Vielzahl von Anwendungen eingesetzt werden kann.
-    Es erleichtert die Entwicklung von Code durch seine lesbare und schreibbare Syntax, die Dynamik und die Verfügbarkeit von Bibliotheken und Modulen.
+    Als Nachteil gegenüber kompilierten Sprache ist für gewöhnlich eine längere/langsamere Ausführungszeit/Laufzeit.
+    Python hat eine große und aktive Gemeinschaft, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die es Entwickelnden erlaubt sich beim Programmieren auf ihren Anwendungsfall (ihre Problemstellung) zu fokussieren und so leichter und schneller fertig zu werden.
+    Beispiele für solche Bibliotheken sind NumPy\Note{\url{https://numpy.org/}} und Pandas\Note{\url{https://pandas.pydata.org/}} für Datenanalyse, TensorFlow\Note{\url{https://www.tensorflow.org/}} für künstliche Intelligenz und Django\Note{\url{https://www.djangoproject.com/}} für Webentwicklung.
+    Python ist eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Personen ohne Vorkenntnisse als auch für erfahrene Entwickelnden eignet und in einer Vielzahl von Bereichen eingesetzt werden kann.
     \Vgl{PYTHON-Oliphant2007,PYTHON-Millman2011,PYTHON-Jaworski2021}
-
-    \item[C] ist super duooper.
 \end{description}
-
 
 
 \subsection{Auswahl Framework-Sprachen-Kombination}\label{subsec:auswahl-framework-sprachen-kombination}
 
+{\color{red} %% TODO
+Beide Frameworks sind für den nicht-kommerziellen Gebrauch frei verfügbar.
+Clingo hat die deutlich besseren Programmiersprachen-Integration.
+Von den beiden, von Clingo native unterstützend, Programmiersprachen ist Python die Anfänger-freundlichste.
 }
