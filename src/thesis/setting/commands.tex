@@ -44,16 +44,26 @@
 
 
 %% ----- Tables ---------------------------------------------------------------
-\newcommand{\hTable}[4][htb]
-%% Optional: placement by h=here H='excatly here' t='page top' b='page bottom' p='extra page'
+\newcommand{\hTable}[4][!htb]{%
+%% Optional: placement by h=here t='top' b='bottom' p='extra page', enforce with '!'
 %% Required: caption (in text), label (for reference), table env
-{\begin{table}[#1]
-     \onehalfspacing
-     \setlength{\abovecaptionskip}{0em plus 2em minus 2em}
-     \caption{#2}\label{#3}
-     \begin{center}#4\end{center}
-\end{table}}
-\newcommand{\vTable}[3]{\begin{landscape}\hTable{#1}{#2}{#3}\end{landscape}}
+    \begin{table}[#1]
+        \begin{threeparttable}[b]
+            \small
+            \onehalfspacing
+            \setlength{\abovecaptionskip}{0em plus 2em minus 2em}
+            \caption{#2}\label{#3}
+            \begin{center}
+                #4
+            \end{center}
+        \end{threeparttable}
+    \end{table}
+}
+\newcommand{\vTable}[3]{%
+    \begin{landscape}
+        \hTable{#1}{#2}{#3}
+    \end{landscape}
+}
 
 \newcommand{\vCell}[2][]{% %% Optional: text lines to span/center text
     \ifthenelse{\isempty{#1}}{%

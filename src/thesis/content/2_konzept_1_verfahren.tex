@@ -63,6 +63,7 @@ In der \Tabelle{tab:verfahrensgegenüberstellung} werden die vorgestellten Verfa
     \item Relevanz in der Wissenschaft
     \item Stärken und Schwächen bei der Anwendung.
 \end{itemize*}
+
 Die Relevanz wird rudimentär über die Anzahl der gefundenen Ergebnisse über Google Scholar bestimmt.
 Es wird nach der expliziten (in Hochkommata gestellten) englischen Langform der Abkürzungen \Abk{Prolog}, \Abk{SAT} und \Abk{ASP} gesucht, wobei diese die Kurzform als Präfix hat.
 Das Suchformat entspricht damit: \Tech{<Kurzform> ''<englische Langform>''}.
@@ -79,7 +80,6 @@ Des Weiteren erlaubt es bereits vom Prinzip und der Technik her mehrere möglich
 Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik kann und wird im Konzept beachtet und, durch umfangreiche Dokumentation, entgegen gewirkt.
 
 \hTable{Verfahrensgegenüberstellung}{tab:verfahrensgegenüberstellung}{
-    \small
     \begin{tabulary}{\linewidth}{@{}CJJJ@{}}
         \toprule
         %% empty
@@ -117,13 +117,14 @@ Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik
         & Effiziente Lösungstechniken, geeignet konsistente Lösungen zu finden
         & Präzise und vollständige Repräsentation von Wissen, unterstützt Negation und Unbestimmtheit, komplexe Programmflusskontrolle
         \\
-        \vCell{\textbf{Schwächen}\footnotemark}
-        & Ineffizient, begrenzte Skalierbarkeit, ungeeignet für komplexe Kontrollstrukturen\footnotemark
-        & Schwierigkeiten bei Unsicherheiten und Wissens-Abhängigkeiten, konstante Lösungssuche \ggf ineffizient
+        \vCell{\textbf{Schwächen}\tnote{(1)}\hspace*{1em}}
+        & Ineffizient Lösungstechniken, begrenzte Skalierbarkeit, ungeeignet für komplexe Kontrollstrukturen\tnote{(2)}
+        & Schwierigkeiten bei Unsicherheiten und Wissens-Abhängigkeiten, konstante Lösungssuche \ggf ineffizient bei großen Problemen
         & Komplexe Syntax und Semantik (Lernkurve)
         \\\bottomrule
     \end{tabulary}
+    \begin{tablenotes}
+        \item[(1)] um die Schwächen zu kompensieren, werden diese Verfahren oft mit Anderen kombiniert.
+        \item[(2)] wie Schleifen und bedingte Anweisungen.
+    \end{tablenotes}
 }
-%% FIXME footnote is on wrong page after table float on next page
-\footnotetext{Hinweis: diese Verfahren werden oft anderen kombiniert um die Schwächen zu kompensieren.}
-\footnotetext{wie Schleifen und bedingte Anweisungen.}

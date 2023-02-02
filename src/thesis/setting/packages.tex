@@ -55,9 +55,13 @@
 \usepackage{array} %% extends table column definitions
 \usepackage{makecell} %% cellen formatierung mit \makecell
 %\usepackage[singlelinecheck=false]{caption} %% do not center single line captions
-\usepackage{tablefootnote} %% erlaubt fotenotes in tabellen ohne tricks mit \tablefootnote
+\usepackage{tablefootnote} %% erlaubt fotenotes in tabellen ohne tricks mit \tablefootnote (NOTE: does hardly work in floating tables)
 \newcolumntype{f}[1]{>{\raggedleft\hspace{0pt}}p{#1}} %% Spaltendefinition: rechtsbündig mit definierter Breite
-
+\usepackage{threeparttable} %% handle 'table footnotes' separatly
+%\usepackage{footnote} %% provides a 'savenotes' envirnoment, which doesnt rlly work
+%\usepackage{footnotehyper} %% same as 'footnote' package
+%\makesavenoteenv{tabular}
+%\makesavenoteenv{tabulary}
 
 %% ----- Graphics and Media ---------------------------------------------------
 \usepackage[dvips,final]{graphicx} %% Einbinden von JPG-Grafiken (in PDF) ermöglichen
@@ -141,7 +145,7 @@
     %backref, %% add '(siehe S. <pages>)' at end of each bib entry, for the usages
     backend=biber, %%is default
     style=numeric, %% numeric, alphabetic, authoryear, authortitle, science, ieee
-    sorting=nyt
+    sorting=none
 ]{biblatex}
 %% nty   Sort by name, title, year.
 %% nyt   Sort by name, year, title.
