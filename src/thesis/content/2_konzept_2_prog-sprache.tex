@@ -9,37 +9,46 @@ Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
-Beispiele sind Clorm\Note{\AbkK{Clingo} ORM: https://github.com/potassco/clorm}, Clyngor\Note{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP\Note{https://github.com/sthiele/pyasp}), Asp4J\Note{https://github.com/hbeck/asp4j}.
+Beispiele sind Clorm\Note{https://github.com/potassco/clorm}, Clyngor\Note{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP\Note{https://github.com/sthiele/pyasp}), Asp4J\Note{https://github.com/hbeck/asp4j}.
 
 
-\subsection{\AbkK{Clingo} by \AbkK{Potassco}}\label{subsec:clingo-by-potassco}
+\subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
 
-\Abk{Clingo}\Note{https://github.com/potassco/clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des Herrstellers \Abk{Potassco} vereint.
-\Abk{Clingo} bietet für Python\Note{https://potassco.org/clingo/python-api/5.6/clingo/} und C\Note{https://potassco.org/clingo/c-api/current/} eine \Abk{API} an. %% TODO erklaere clingo.
-%% TODO add homepage as reference
+\begin{description}
+    %% TODO erklaere https://potassco.org/clingo/
+    \item[\AbkK{Clingo} by \AbkK{Potassco}] \Abk{Clingo}\Note{https://github.com/potassco/clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des Herrstellers \Abk{Potassco} vereint.
+    \Abk{Clingo} bietet für Python\Note{https://potassco.org/clingo/python-api/5.6/clingo/} und C\Note{https://potassco.org/clingo/c-api/current/} eine \Abk{API} an.
+
+    %% TODO erklaere https://www.dlvsystem.it/dlvsite/dlv/
+    \item[\AbkK{DLV} by DLVSYSTEM S.R.L.] \Abk{DLV} ist \Vgl{DLV-Leone2006}.
+    Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert.
+    Anbindung an Java mit JDLV\Note{https://www.dlvsystem.it/dlvsite/jdlv/}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
+\end{description}
 
 
-\subsection{\AbkK{DLV} by DLVSYSTEM S.R.L.}\label{subsec:dlv-by-dlvsystem}
+\subsection{Unterstützte Programmiersprachen}\label{subsec:unterstutzte-programmiersprachen}
 
-\Abk{DLV} ist \Vgl{DLV-Leone2006}. %% TODO erklaere DLV https://www.dlvsystem.it/dlvsite/dlv/
-Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert.
-Anbindung an Java mit JDLV\Note{https://www.dlvsystem.it/dlvsite/jdlv/}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
-%% TODO add homepage as reference
+\begin{description}
+    \item[Python] ist eine hochlevel-Programmiersprache, die ursprünglich von Guido van Rossum im Jahr 1989 entwickelt wurde.
+    Sie hat sich seitdem zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
+    Eines der wichtigsten Merkmale von Python ist seine Lesbarkeit und Schreibbarkeit, die es Entwicklern ermöglicht, ihre Codezeilen einfacher und verständlicher zu gestalten.
+    Es verwendet eine natürliche und lesbare Syntax, die ähnlich wie Englisch ist, was es erleichtert, den Code zu verstehen und zu pflegen.
+    Python ist eine interpretierte Sprache, was bedeutet, dass der Code nicht vor der Ausführung kompiliert werden muss.
+    Dies ermöglicht es Entwicklern, schnell Änderungen am Code vorzunehmen und zu testen, ohne dass ein langwieriger Kompilierungsprozess erforderlich ist.
+    Ein weiteres wichtiges Merkmal von Python ist seine Dynamik.
+    Es ermöglicht es Entwicklern, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie zu kompilieren und zu deklarieren.
+    Dies erleichtert die Entwicklung von Prototypen und ermöglicht es, flexibler auf Änderungen im Code zu reagieren.
+    Python hat auch eine große und aktive Community, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die Entwicklern das Schreiben von Code erleichtern und die Entwicklung von Anwendungen beschleunigen.
+    Beispiele für solche Bibliotheken sind NumPy und Pandas für Datenanalyse, TensorFlow für künstliche Intelligenz und Django für Webentwicklung.
+    Insgesamt ist Python eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Anfänger als auch für erfahrene Entwickler eignet und in einer Vielzahl von Anwendungen eingesetzt werden kann.
+    Es erleichtert die Entwicklung von Code durch seine lesbare und schreibbare Syntax, die Dynamik und die Verfügbarkeit von Bibliotheken und Modulen.
+    \Vgl{PYTHON-Oliphant2007,PYTHON-Millman2011,PYTHON-Jaworski2021}
 
-\subsection{Python}\label{subsec:python}
+    \item[C] ist super duooper.
+\end{description}
 
-Python ist eine hochlevel-Programmiersprache, die ursprünglich von Guido van Rossum im Jahr 1989 entwickelt wurde.
-Sie hat sich seitdem zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
-Eines der wichtigsten Merkmale von Python ist seine Lesbarkeit und Schreibbarkeit, die es Entwicklern ermöglicht, ihre Codezeilen einfacher und verständlicher zu gestalten.
-Es verwendet eine natürliche und lesbare Syntax, die ähnlich wie Englisch ist, was es erleichtert, den Code zu verstehen und zu pflegen.
-Python ist eine interpretierte Sprache, was bedeutet, dass der Code nicht vor der Ausführung kompiliert werden muss.
-Dies ermöglicht es Entwicklern, schnell Änderungen am Code vorzunehmen und zu testen, ohne dass ein langwieriger Kompilierungsprozess erforderlich ist.
-Ein weiteres wichtiges Merkmal von Python ist seine Dynamik.
-Es ermöglicht es Entwicklern, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie zu kompilieren und zu deklarieren.
-Dies erleichtert die Entwicklung von Prototypen und ermöglicht es, flexibler auf Änderungen im Code zu reagieren.
-Python hat auch eine große und aktive Community, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die Entwicklern das Schreiben von Code erleichtern und die Entwicklung von Anwendungen beschleunigen.
-Beispiele für solche Bibliotheken sind NumPy und Pandas für Datenanalyse, TensorFlow für künstliche Intelligenz und Django für Webentwicklung.
-Insgesamt ist Python eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Anfänger als auch für erfahrene Entwickler eignet und in einer Vielzahl von Anwendungen eingesetzt werden kann.
-Es erleichtert die Entwicklung von Code durch seine lesbare und schreibbare Syntax, die Dynamik und die Verfügbarkeit von Bibliotheken und Modulen.
-\Vgl{PYTHON-Oliphant2007,PYTHON-Millman2011,PYTHON-Jaworski2021}
+
+
+\subsection{Auswahl Framework-Sprachen-Kombination}\label{subsec:auswahl-framework-sprachen-kombination}
+
 }
