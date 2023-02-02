@@ -1,51 +1,49 @@
-\section{Verfahrens-Evaluation}
-\label{sec:verfahrens-evaluation}
+\section{Verfahrens-Evaluation}\label{sec:verfahrens-evaluation}
 
 
 Für die im \Kapitel{sec:zielsetzung} genannten technischen Herausforderungen muss eine geeignete Lösung (Framework/Algorithmus) ermittelt werden.
 Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel-basierten Systemen und (Bedingungs-basierten) Logiksystemen vorgestellt und nach einer Gegenüberstellung dieser eins ausgewählt.
 
 
-\subsection{\AbkL{Prolog}}
-\label{subsec:prolog}
+\subsection{\AbkL{Prolog}}\label{subsec:prolog}
 
 Die Grundlage von \Abk{Prolog} ist die formalisierte Darstellung von Wissen und die Verwendung von logischen Regeln, um dieses Wissen zu verarbeiten und Probleme zu lösen.
-\Abk{Prolog} basiert auf der \Begriff{Horn-Klausel}-Semantik (Logikprogrammierung), bei der eine Aussage durch eine Menge von, einer bestimmten Form von, Horn-Klauseln dargestellt wird und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
-Eine Horn-Klausel ist eine logische Formel, die aus einem Kopf und einer Menge von Füßen besteht, wobei der Kopf eine positive Literal ist und die Füße negative Literale sind.
+\Abk{Prolog} basiert auf der \Begriff{Horn-Klausel}-Semantik, bei der eine Aussage durch eine Menge von Horn-Klauseln dargestellt und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
+Eine Horn-Klausel ist eine logische Formel, die aus einem \Begriff{Kopf} und einer Menge von \Begriff{Füßen} besteht, wobei der Kopf ein positives Literal ist und die Füße negative Literale sind.
 Eine Aussage ist dann wahr, wenn es eine Übereinstimmung (Unifikation) zwischen dem Kopf und einer der Füße gibt.
 Um die Horn-Klauseln zu verarbeiten wird ein Übereinstimmung-Algorithmus genutzt.
 Dieser versucht die Variablen in den Horn-Klauseln so zu substituieren, dass der Kopf und einer der Füße übereinstimmen.
-Nur wenn eine solche Substitution möglich ist, wird die Horn-Klausel als wahr betrachtet.
-Außerdem kommt auch ein \sog Backtracking-Mechanismus zum Einsatz, bei dem zu einem früheren Punkt im Suchprozess zurückgekehrt wird, um alternative Lösungen zu finden oder wenn keine Übereinstimmung möglich ist.
-Indem also \Abk{Prolog} durch verschiedene Möglichkeiten navigiert, kann es komplexe Probleme lösen.
+Nur wenn eine solche Substitution möglich ist, gilt die Horn-Klausel als wahr.
+Dabei kommt ein \sog Backtracking-Mechanismus zum Einsatz, bei dem zu einem früheren Punkt im Suchprozess zurückgekehrt wird, um alternative Lösungen zu finden oder wenn keine Übereinstimmung möglich ist.
+Durch das Navigieren durch verschiedene Möglichkeiten kann \Abk{Prolog} komplexe Probleme lösen.
 \Vgl{PROLOG-Apt1997,PROLOG-Bratko2012}
 
 
-\subsection{\AbkL{SAT}}
-\label{subsec:sat}
+\subsection{\AbkL{SAT}}\label{subsec:sat}
 
-Das \Abk{SAT} ist ein Erfüllbarkeitsproblem der Aussagenlogik, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene Boolean-Formel (eine Formel, die nur die Operatoren \textquote{und}, \textquote{oder} und \textquote{nicht} verwendet) gibt, welche die Formel als wahr evaluiert.
-Eine Boolean-Formel kann als Konjunktion von Disjunktionen von Literalen dargestellt werden, wobei ein Literal entweder eine Variable oder deren Negation ist.
+Das \Abk{SAT} ist ein Erfüllbarkeitsproblem der Aussagenlogik, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene \Begriff{Boolean-Formel} gibt, welche die Formel als wahr evaluiert.
+Eine Boolean-Formel besteht nur aus den Operatoren \textquote{\Tech{und}}, \textquote{\Tech{oder}} und \textquote{\Tech{nicht}}.
+Sie kann als Konjunktion von Disjunktionen von Literalen dargestellt werden, wobei ein Literal entweder eine Variable oder deren Negation ist.
 \Abk{SAT} ist ein NP-vollständiges Problem, was bedeutet, dass es keine effiziente algorithmische Lösung gibt, die für alle Fälle eine korrekte Lösung findet.
 Es gibt jedoch algorithmische Ansätze, die in vielen Fällen effizient arbeiten und erfolgreich eingesetzt werden.
-Wichtige und weit verbreitete Ansätze ist der \Abk{DPLL} Algorithmus und Backtracking-Algorithmen wie Conflict-Driven Clause Learning (CDCL).
-Letzterer vermeidet unnötige Backtracks, und erhöht damit die Effizients, indem es Konflikt- und Klausel-Lernstrategien nutzt.
-Das \Abk{SAT}-Solver-Verfahren wird häufig mit anderen Techniken, wie \zB Beweisverfahren und Formalisierungstechniken, kombiniert, um Probleme in einer formalen Sprache zu beschreiben und Lösungen effizient zu verifizieren.
-Es ist ein wichtiges und weitverbreitetes Problem (Entscheidungsproblem) in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und noch intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
+Nennenswerte und weit verbreitete Ansätze sind der \Abk{DPLL} Algorithmus und Backtracking-Algorithmen wie Conflict-Driven Clause Learning (CDCL).
+Letzterer vermeidet unnötiges Backtracking, und verkürzt damit die Laufzeit des Algorithmus, indem es Konflikt- und Klausel-Lernstrategien nutzt.
+Das \Abk{SAT}-Solver-Verfahren wird häufig mit anderen Techniken, wie \zB Formalisierungs- und Beweisverfahren, kombiniert, so dass Probleme in einer formalen Sprache beschrieben und mögliche Lösungen effizient verifiziert werden können.
+Es ist ein wichtiges und weitverbreitetes Problem (Entscheidungsproblem) in der theoretischen Informatik und der künstlichen Intelligenz, dass viel Anwendung findet und weiterhin intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
 \Vgl{SAT-Zhang2002,SAT-MarquesSilva2008,SAT-Vizel2015}
 
 
-\subsection{\AbkL{ASP}}
-\label{subsec:asp}
+\subsection{\AbkL{ASP}}\label{subsec:asp}
 
-\Abk{ASP} ist ein deklaratives Problemlösungsparadigma, es basiert auf der Logikprogrammierung (\AbkK{Prolog}), Wissensrepräsentation und Argumentation, sowie dem Erfüllbarkeitsproblem der Aussagenlogik (\AbkK{SAT}).
-Ein \Abk{ASP}-Programm besteht aus einer Menge von \Begriff{Regeln} und \Begriff{Fakten}.
+\Abk{ASP} ist ein deklaratives Problemlösungsparadigma, es basiert auf der Logikprogrammierung (\AbkK{Prolog}), dem Erfüllbarkeitsproblem der Aussagenlogik (\AbkK{SAT}) sowie der Wissensrepräsentation und Argumentation\Englisch{knowledge representation and reasoning}.
+Ein \Abk{ASP}-System besteht aus einer Menge von \Begriff{Regeln} und \Begriff{Fakten}.
 Die Regeln sind logische Implikationen in der Form \textquote{\textit{wenn A dann B}}, wobei \Begriff{A} und \Begriff{B} logische \Begriff{Aussagen} sind.
-Ein Beispiel wäre: \textquote{\textit{Wenn es regnet, dann nehme ich einen Regenschirm mit.}}. Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
-Die Fakten sind einfach logische Aussagen, die bereits als \Begriff{wahr} bekannt sind.
-Das Ziel des \Abk{ASP}-Programms ist es, eine Menge von Aussagen zu finden die, unter den gegeben Regeln und Fakten, \Begriff{wahr} sind.
-Diese Menge von Aussagen wird als \Begriff{Answer Set} (oder \Begriff{stable models}) bezeichnet.
-Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Begriff{Answert Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
+Ein Beispiel wäre: \textquote{\textit{Wenn es regnet, dann nehme ich einen Regenschirm mit.}}.
+Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
+Fakten sind einfache logische Aussagen, die bereits als \Begriff{wahr} bekannt sind; sie haben keine Bedigung.
+Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden die, unter den gegeben Regeln und Fakten, \Begriff{wahr} sind.
+Diese Menge von Aussagen wird als \Begriff{Answer Set} (auch \Begriff{stable models}) bezeichnet.
+Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Begriff{Answer Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
 Es beginnt mit der Menge der Fakten und wendet die Regeln an, um zu sehen, welche anderen Aussagen logisch aus ihnen abgeleitet werden können.
 Wenn ein Widerspruch gefunden wird, geht das System zurück und versucht einen anderen Weg.
 Wenn es keine weiteren Schlussfolgerungen mehr findet, gibt es die Menge der abgeleiteten Aussagen als Answer Set zurück.
@@ -59,58 +57,78 @@ Weitere Eigenschaften von \Abk{ASP} sind \uA:
 \Vgl{ASP-Eiter2009,ASP-Brewka2011}
 
 
-\subsection{Gegenüberstellung und Auswahl}
-\label{subsec:gegenuberstellung-und-auswahl}
+\subsection{Gegenüberstellung und Auswahl}\label{subsec:gegenuberstellung-und-auswahl}
 
-{\color{red} %% TODO
-In \Tabelle{tab:verfahrensgegenüberstellung} ist zu sehen
+In der \Tabelle{tab:verfahrensgegenüberstellung} werden die vorgestellten Verfahren mit den folgenden Kriterien verglichen:
+\begin{itemize*}[label={}, itemjoin={,}, itemjoin*={{ sowie}}]
+    \item das Prinzip des Verfahrens
+    \item der Logik Hintergrund
+    \item die Technik der Lösungssuche
+    \item mögliche Anwendungsbereiche
+    \item Relevanz in der Wissenschaft
+    \item Stärken und Schwächen bei der Anwendung.
+\end{itemize*}
+Die Relevanz wird rudimentär über die Anzahl der gefundenen Ergebnisse über Google Scholar bestimmt.
+Es wird nach der expliziten (in Hochkommata gestellten) englischen Langform der Abkürzungen \Abk{Prolog}, \Abk{SAT} und \Abk{ASP} gesucht, wobei diese die Kurzform als Präfix hat.
+Das Suchformat entspricht damit: \Tech{<Kurzform> ''<englische Langform>''}.
+Besonderes hohe Bedeutung werden den Kriterien Relevanz, Stärken und Schwächen zugesprochen.
+Die Relevanz stellt ein sehr einfachen Indikator für die Verbreitung des Verfahrens und somit für das Finden möglicher hilfreicher Ressourcen dar.
+Dies ist auch im Hinblick der Langlebigkeit der Software relevant.
+Die beiden Kriterien Stärken und Schwächen hingegen zeigen \insb die Eignung des Verfahrens zur Formalisierung eines \Abk{PP}-Regelwerks und der Modellierung einer Charakterüberprüfung.
 
+Demnach ist \textbf{am geeignetsten} für die Umsetzung der Software \textbf{das Verfahren \Abk{ASP}} und somit auch zu wählen.
+\Abk{ASP} ist ein modernes und verbreitetes Verfahren.
+Es bringt die notwendige Effizients bei großen Problemen auf, welches dem umfangreichen \Abk{DSA}-Regelwerk gerecht wird.
+Es bringt ebenfalls ein großes Set an Möglichkeiten mit sich, wie \zB Negationen und komplexe Kontroll- und Flussstrukturen.
+Des Weiteren erlaubt es bereits vom Prinzip und der Technik her mehrere mögliche Lösungen, was der Realität, also dem Anwendungsbereich, am ehestem zutrifft.
+Der Schwäche einer steilen Lernkurve aufgrund der komplexen Syntax und Semantik kann und wird im Konzept beachtet und, durch umfangreiche Dokumentation, entgegen gewirkt.
 
-\newTable{Verfahrensgegenüberstellung}{tab:verfahrensgegenüberstellung}{
-    \color{red} %% TODO
-    \begin{tabulary}{\textwidth}{CJJJ}
-
+\hTable{Verfahrensgegenüberstellung}{tab:verfahrensgegenüberstellung}{
+    \small
+    \begin{tabulary}{\linewidth}{@{}CJJJ@{}}
+        \toprule
+        %% empty
         & \textbf{\Abk{Prolog}}
         & \textbf{\Abk{SAT}}
         & \textbf{\Abk{ASP}}
         \\\midrule
-        \verticalcell{\textbf{Prinzip}}
+        \vCell{\textbf{Prinzip}}
         & Logikprogrammierung
-        & Finden einer Wahrheitsbelegung für boolesche Variablen
-        & Finden von Lösungen, die eine Menge von Bedingungen\Englisch{constraints} erfüllen
-        \\\midrule
-        \verticalcell{\textbf{Zweck}}
-        & Künstliche Intelligenz, Expertensysteme
-        & Logische Schaltungen, Beweisverfahren, kombinatorische Optimierung
-        & Bedingungs-basierte Modellierung, kombinatorische Optimierung, Entscheidungsunterstützung
-        \\\midrule
-        \verticalcell{\textbf{Logik}}
+        & Wahrheitsbelegung für boolesche Variablen finden
+        & Lösungen nicht-deterministisch finden, die Bedingungen\Englisch{constraints} erfüllen
+        \\\rowcolor{evenRow}
+        \vCell{\textbf{Logik}}
         & Horn-Klauseln
         & boolesche Formeln
-        & normal Form (NF) Horn-Klauseln
-        \\\midrule
-        \verticalcell{\textbf{Technik}}
+        & normal Form Horn-Klauseln
+        \\
+        \vCell{\textbf{Technik}}
         & Unifikation, Backtracking
         & Backtracking, \Abk{DPLL} Algorithmus
         & Stable Model Semantics, Grounder, Solver
-        \\\midrule
-        \verticalcell{\textbf{Anwendungen}}
-        & Expertensysteme, natürliche Sprache
-        & Schaltungsentwurf, Beweisverfahren, kombinatorische Optimierung
-        & kombinatorische Optimierung, Scheduling, Ressourcenplanung, Entscheidungsunterstützung
-        \\\midrule
-        \verticalcell{\textbf{Stärken}}
-        & Natürliche Ausdrucksweise, einfache Handhabung von Unsicherheiten
-        & Effiziente Lösungstechniken, geeignet für große Probleme
-        & Präzise und vollständige Repräsentation von Wissen, Unterstützung von Negation und Unbestimmtheit
-        \\\midrule
-        \verticalcell{\textbf{Schwächen}\footnotemark}
-        & Ineffiziente Lösungstechniken, begrenzte Skalierbarkeit
-        & Schwierigkeit bei der Handhabung von Unsicherheiten und Kontrollstrukturen
-        & Komplexe Syntax und Semantik, schwierig zu debuggen
+        \\\rowcolor{evenRow}
+        \vCell{\textbf{Anwendung}}
+        & Künstliche Intelligenz, Expertensysteme, natürliche Sprache
+        & Logische Schaltungen, Beweisverfahren, Scheduling- und Optimierungsprobleme
+        & Bedingungs-basierte Modellierung, kombinatorische Optimierung, Planungsprobleme, Entscheidungsunterstützung
         \\
+        \vCell{\textbf{Relevanz}}
+        & 4320 Google Scholar Treffer mit: \Tech{PROLOG ''programming in logic''}
+        & 5170 Google Scholar Treffer mit: \Tech{SAT ''boolean satisfiability problem''}
+        & 7970 Google Scholar Treffer mit: \Tech{ASP ''answer set programming''}
+        \\\rowcolor{evenRow}
+        \vCell{\textbf{Stärken}}
+        & Natürliche Ausdrucksweise, einfache Handhabung von Unsicherheiten
+        & Effiziente Lösungstechniken, geeignet konsistente Lösungen zu finden
+        & Präzise und vollständige Repräsentation von Wissen, unterstützt Negation und Unbestimmtheit, komplexe Programmflusskontrolle
+        \\
+        \vCell{\textbf{Schwächen}\footnotemark}
+        & Ineffizient, begrenzte Skalierbarkeit, ungeeignet für komplexe Kontrollstrukturen\footnotemark
+        & Schwierigkeiten bei Unsicherheiten und Wissens-Abhängigkeiten, konstante Lösungssuche \ggf ineffizient
+        & Komplexe Syntax und Semantik (Lernkurve)
+        \\\bottomrule
     \end{tabulary}
 }
 %% FIXME footnote is on wrong page after table float on next page
 \footnotetext{Hinweis: diese Verfahren werden oft anderen kombiniert um die Schwächen zu kompensieren.}
-}
+\footnotetext{wie Schleifen und bedingte Anweisungen.}

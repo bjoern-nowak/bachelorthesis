@@ -44,24 +44,23 @@
 
 
 %% ----- Tables ---------------------------------------------------------------
-\newcommand{\newTable}[3] % Parameter: caption (in text), label (for reference), table env
-{\begin{table}[hbp]
+\newcommand{\hTable}[4][htb]
+%% Optional: placement by h=here H='excatly here' t='page top' b='page bottom' p='extra page'
+%% Required: caption (in text), label (for reference), table env
+{\begin{table}[#1]
      \onehalfspacing
-     %\setlength{\abovecaptionskip}{-.5em}
-     \caption{#1}\label{#2}
-     \begin{center}
-         #3
-     \end{center}
+     \setlength{\abovecaptionskip}{0em plus 2em minus 2em}
+     \caption{#2}\label{#3}
+     \begin{center}#4\end{center}
 \end{table}}
+\newcommand{\vTable}[3]{\begin{landscape}\hTable{#1}{#2}{#3}\end{landscape}}
 
-\newcommand{\newTabelleAnhang}[1] % Parameter: file (.tex under table folder)
-{\begin{Center}
-     \singlespacing
-     \input{table/#1}
-\end{Center}}
-
-\newcommand{\verticalcell}[1]{%
-    \vspace*{-.7em}\rotatebox[origin=c]{90}{#1}\vspace*{.3em}%
+\newcommand{\vCell}[2][]{% %% Optional: text lines to span/center text
+    \ifthenelse{\isempty{#1}}{%
+        \vspace*{-.65em}\rotatebox[origin=c]{90}{#2}\vspace*{.3em}%
+    }{%
+        \multirow{#1}{*}{\rotatebox{90}{#2}}%
+    }
 %\rotatebox{90}{#1}%
 %\rotatebox[origin=c]{90}{\parbox[t]{1em}{#1}}%
 %\rotatebox[origin=c]{90}{\centering\hfill#1\hfill}%
@@ -100,6 +99,7 @@
 \newcommand{\Jahr}[1]{#1} % Datum nur als Jahr
 \newcommand{\Englisch}[1]{ (englisch: \textit{#1})} % englischer Begriff
 \newcommand{\Begriff}[1]{\textit{#1}}
+\newcommand{\Tech}[1]{\textsf{#1}}
 
 \newcommand{\Klasse}[1]{\texttt{#1}}
 \newcommand{\Methode}[1]{\texttt{#1}}
@@ -177,7 +177,7 @@
 %\newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}.}}
 
 
-%% ----- Abkürzungen, ggfs. mit korrektem Leerraum ----------------------------
+%% ----- Abkürzungen, ggf. mit korrektem Leerraum ----------------------------
 \newcommand{\bs}{$\backslash$\xspace}
 \newcommand{\bspw}{bspw.\xspace} % beispielsweiße
 \newcommand{\bzw}{bzw.\xspace} % beziehungsweiße
@@ -186,8 +186,8 @@
 \newcommand{\etc}{etc.\xspace} % etcetera (und so weiter (usw))
 \newcommand{\eur}[1]{\mbox{#1\,\texteuro}\xspace} % Euro Zeichen
 \newcommand{\evtl}{evtl.\xspace} % eventuell
-\newcommand{\ggfs}{ggf.\xspace} % gegebenenfalls
-\newcommand{\Ggfs}{Ggf.\xspace} % Gegebenenfalls
+\newcommand{\ggf}{ggf.\xspace} % gegebenenfalls
+\newcommand{\Ggf}{Ggf.\xspace} % Gegebenenfalls
 \newcommand{\gqq}[1]{\glqq{}#1\grqq{}}
 \newcommand{\inkl}{inkl.\xspace} % inklusive
 \newcommand{\insb}{insb.\xspace} % insbesondere

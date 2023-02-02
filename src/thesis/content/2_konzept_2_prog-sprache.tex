@@ -1,34 +1,32 @@
-\section{Programmiersprache}
-\label{sec:programmiersprache}
+\section{Auswahl der Programmiersprache}\label{sec:auswahl-der-programmiersprache}
 
 {\color{red} %% TODO
-Für Letzteres muss eine geeignete Programmiersprache, unter Beachtung der, zuvor beschriebenen, zu wählenden Lösung, gewählt und damit eine \textquote{saubere} Architektur implementiert und dokumentiert werden.
-Es gilt als zunächst die existierenden Frameworks für \Abk{ASP} zu ermitteln und zu bewerten.
+Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im speziellen, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
+In den nachfolgenden Kapiteln werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre unterstützten Programmiersprachen vorgestellt und anschließend, unter Beachtung der Rahmenbedingungen/Herausforderungen der quelloffenen Software, bewertet und ausgewählt.
+%% TODO may say something about Alpha https://github.com/alpha-asp/Alpha or ASPARTIX https://www.dbai.tuwien.ac.at/proj/argumentation/systempage/
 
-%% TODO add homepages as references
+Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weitere Programmiersprachen verfügbar machen oder die Nutzung vereinfachen, werden nicht beachtet.
+Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
+Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
+Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
+Beispiele sind Clorm\Note{\AbkK{Clingo} ORM: https://github.com/potassco/clorm}, Clyngor\Note{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP\Note{https://github.com/sthiele/pyasp}), Asp4J\Note{https://github.com/hbeck/asp4j}.
 
-Clingo by \Abk{Potassco}
-Clingo bietet für Python und C(++) eine \Abk{API}/Framework/Library an.
-%% TODO erklaere clingo.
 
-DLV by DLVSYSTEM S.R.L.
-%% TODO erklaere DLV
-https://www.dlvsystem.it/dlvsite/dlv/
-\Vgl{DLV-Leone2006}
+\subsection{\AbkK{Clingo} by \AbkK{Potassco}}\label{subsec:clingo-by-potassco}
 
-Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert
-Anbindung an Java mit JDLV (https://www.dlvsystem.it/dlvsite/jdlv/), jedoch über eine Meta-Spezification JASP \Vgl{DLV-Febbraro2012}.
+\Abk{Clingo}\Note{https://github.com/potassco/clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des Herrstellers \Abk{Potassco} vereint.
+\Abk{Clingo} bietet für Python\Note{https://potassco.org/clingo/python-api/5.6/clingo/} und C\Note{https://potassco.org/clingo/c-api/current/} eine \Abk{API} an. %% TODO erklaere clingo.
+%% TODO add homepage as reference
 
-Wrapper-Abk{API}s dritter die Clingo oder DLV für weitere Programmiersprachen verfügbar machen oder vereinfachen werden nicht beachtet.
-Der Grund ist, das diese eine weitere Komplexitätsschicht bringen würden, dies aber nicht mit dem Vorteilen dieser ausgleichbar ist. Ein weitere Grund ist ein Risiko wenn diese nicht mehr gewartet werden oder dies bereits der Fall ist.
-Beispiele sind PyASP\Note{https://github.com/sthiele/pyasp} (für Python), Asp4J\Note{https://github.com/hbeck/asp4j} (für Java)
 
-\subsection{Clingo by Potassco}
-\label{subsec:clingo-by-potassco}
-\Begriff{Clingo} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selben Herrstellers vereint.
+\subsection{\AbkK{DLV} by DLVSYSTEM S.R.L.}\label{subsec:dlv-by-dlvsystem}
 
-\subsection{Python}
-\label{subsec:python}
+\Abk{DLV} ist \Vgl{DLV-Leone2006}. %% TODO erklaere DLV https://www.dlvsystem.it/dlvsite/dlv/
+Möglich per CLI oder mit DLVHEX (https://github.com/hexhex/core und http://www.kr.tuwien.ac.at/research/systems/dlvhex/) in C (oder C++???) jedoch auf einer High-Level-\Abk{API} die auf HEX basiert.
+Anbindung an Java mit JDLV\Note{https://www.dlvsystem.it/dlvsite/jdlv/}, jedoch über eine Meta-Spezifikation JASP \Vgl{DLV-Febbraro2012}.
+%% TODO add homepage as reference
+
+\subsection{Python}\label{subsec:python}
 
 Python ist eine hochlevel-Programmiersprache, die ursprünglich von Guido van Rossum im Jahr 1989 entwickelt wurde.
 Sie hat sich seitdem zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
