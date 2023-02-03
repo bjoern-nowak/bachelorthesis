@@ -144,17 +144,19 @@
 \usepackage[
     %backref, %% add '(siehe S. <pages>)' at end of each bib entry, for the usages
     backend=biber, %%is default
+    maxnames=20, %% do not shorten author list with 'u.a.'
     style=numeric, %% numeric, alphabetic, authoryear, authortitle, science, ieee
     sorting=none
-]{biblatex}
-%% nty   Sort by name, title, year.
-%% nyt   Sort by name, year, title.
-%% nyvt  Sort by name, year, volume, title.
-%% anyt  Sort by alphabetic label, name, year, title.
-%% anyvt Sort by alphabetic label, name, year, volume, title.
-%% ynt   Sort by year, name, title.
-%% ydnt  Sort by year (descending), name, title.
-%% none  Do not sort at all. All entries are processed in citation order.
+    %%%% sorting values
+    %% nty   := Sort by name, title, year.
+    %% nyt   := Sort by name, year, title.
+    %% nyvt  := Sort by name, year, volume, title.
+    %% anyt  := Sort by alphabetic label, name, year, title.
+    %% anyvt := Sort by alphabetic label, name, year, volume, title.
+    %% ynt   := Sort by year, name, title.
+    %% ydnt  := Sort by year (descending), name, title.
+    %% none  := Do not sort at all. All entries are processed in citation order.
+]{biblatex} %% http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf
 
 %% ----- PDF ------------------------------------------------------------------
 \usepackage{pdflscape} % pdf-Grafiken quer auf eine Seite

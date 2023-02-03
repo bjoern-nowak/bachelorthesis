@@ -168,6 +168,20 @@
 \setcounter{secnumdepth}{4} %% Kapitel bis zum Level der paragraphen werden nummeriert
 %% \subsubsectionlevel = level 3
 
+%% ----- Literaturverzeichniss anpassen ---------------------------------------
+\renewcommand*{\finentrypunct}{} %% remove last/end dot from each bib entry
+\renewcommand*{\multinamedelim}[0]{\addcomma\space} %% delimiter authors
+\renewcommand*{\finalnamedelim}[0]{\addcomma\space} %% delimiter last author
+\DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space} %% delimiter between authors and title
+%% handle all kind of titles the same
+\DeclareFieldFormat*{title}{\textquote{#1}}
+\DeclareFieldFormat*{booktitle}{\textquote{#1}}
+\DeclareFieldFormat*{journaltitle}{\textquote{#1}}
+%% same for citations
+\DeclareFieldFormat*{citetitle}{\textquote{#1}}
+\DeclareFieldFormat*{citebooktitle}{\textquote{#1}}
+\DeclareFieldFormat*{citejournaltitle}{\textquote{#1}}
+
 
 %% ----- Aufzählungen anpassen ------------------------------------------------
 \counterwithout{footnote}{chapter} %% Fußnoten fortlaufend nummeriert
