@@ -2,49 +2,73 @@
 
 
 Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im speziellen, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
-In den nachfolgenden Kapiteln werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre unterstützten Programmiersprachen vorgestellt und anschließend, unter Beachtung der Rahmenbedingungen/Herausforderungen der quelloffenen Software, bewertet und ausgewählt.
+In diesem Kapitel werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre unterstützten Programmiersprachen vorgestellt und anschließend, unter Beachtung der Rahmenbedingungen (die Herausforderungen) der quelloffenen Software, bewertet und ausgewählt.
 %% TODO may say something about Alpha https://github.com/alpha-asp/Alpha or ASPARTIX https://www.dbai.tuwien.ac.at/proj/argumentation/systempage/
 
 Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weitere Programmiersprachen verfügbar machen oder die Nutzung vereinfachen, werden nicht beachtet.
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
-Beispiele sind Clorm\Note{Python \Abk{ORM} Interface: \url{https://github.com/potassco/clorm}}, Clyngor\Note{Python Wrapper-\Abk{API}: \url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
+Beispiele sind Clorm\Note{Python \AbkS{ORM}{Object Relational Mapping} Interface: \url{https://github.com/potassco/clorm}}, Clyngor\Note{Python Wrapper-\Abk{API}: \url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
 
-{\color{red} %% TODO
+
 \begin{description}
-    %% TODO erklaere https://www.dlvsystem.it/dlvsite/dlv/
-    \item[\Abk{DLV}] von DLVSYSTEM S.R.L. ist \Vgl{DLV-Leone2006}
-    %% TODO add https://dlv.demacs.unical.it/ https://dlv.demacs.unical.it/i-dlv https://dlv.demacs.unical.it/wasp.
-    Stark mit Datenbanken mit fokus auf Unternehmen zur Entscheidungsfindung.
-    Möglich per CLI oder Aufruf dieser mit beliebiger Programmiersprache, wobei die naheliegenste C++ ist.
+    \item[\Abk{DLV}] ist seit dem Jahr \Jahr{1996} verfügbar.
+    Über die Jahre wurde das System signifikant verbessert und die Sprache erweitert.
+    Wodurch es im Bereich \Abk{DLP} zum Standard wurde und vergleichbar, \insb hinsichtlich der Effizients, mit anderen fortgeschrittenen \Abk{ASP} Systemen ist.
+    \Vgl[Kapitel 1]{DLV-Leone2006}
+
+    Ein Vorteil von \Abk{DLV} im Vergleich ist die Breite der Anwendbarkeit.
+    Neben seiner Kernstärke in Datenbank-orientierte Anwendungen, mit großen Datenmengen, kann es mit ausreichender Effizients \Begriff{NP} Such- und Optimierungsproblemen bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
+    Andere Systeme hingehen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
+    \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
+
+    Aktuell wird \Abk{DLV} fokusiert von DLVSYSTEM S.R.L. beworben und vertrieben, mit dem Fokus auf industrielle Bereiche.
+    Sie wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
+    \Vgl{DLV-Calimeri2012, DLV-dlvsystem-histroy}
+
+    Ein \Abk{DLV}-Programm kann ausgeführt werden, in dem es über das \AbkS{CLI}{Command-line Interface} ausgerufen wird.
+    Dies kann direkt oder gesteuert durch eine Software, beliebiger Programmiersprache, geschehen;
+    die naheliegendste ist C++, da das Framework in C implementiert wurde.
+    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{Integrated development environment} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{Graphical user interface}, wichtige Funktionen wie \textquote{unit testing}, Datenbank-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
+    \Vgl{DLV-Leone2015}
+
     Es existiert zu dem eine Java Schnittstelle\Englisch{interface} JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
 
+    \Abk{DLV} wird auch weiterhin direkt von der Universtität von Calabria veröffentlicht.
+    Sie bieten zusätzlich eine Variante an, die den Aufruf von Python Funktionen als \Begriff{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
+    \Vgl{DLV-unical-home}
+
+{\color{red}
     \item[Clingo] von \Abk{Potassco} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
     Clingo selbst und alle seine Komponenten sind quelloffen \Vgl{CLINGO-Github}.
     Clingo bietet für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}} und C\Note{\url{https://potassco.org/clingo/c-api/current/}} eine \Abk{API} an.
-\end{description}
 }
+\end{description}
+
 
 
 \subsection{Unterstützte Programmiersprachen}\label{subsec:unterstutzte-programmiersprachen}
 
 \begin{description}
-{\color{red} %% TODO refactor
-    \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (jetzt Teil von Oracle) entwickelt wurde.
-    Sie ist eine kompilierte Sprache, \dahe Java-Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor es ausgeführt werden kann.
+    \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (seit 2010 Teil von Oracle) entwickelt wurde. Mit OpenJDK\Note{\url{https://openjdk.org/}} gibt existiert auch eine quelloffene Implementierung.
+    Es ist eine kompilierte Sprache, \dahe der Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor er ausgeführt werden kann.
     Java ist plattformunabhängig, es kann daher auf vielen \Abk{OS} und Geräten ausgeführt werden.
-    Dazu bedarf es jedoch eine installierte \Abk{JRE}.
-    Diese beinhaltet \uA die \Abk{JVM}, welche das Java-Programm in Maschinensprache, die vom jeweiligen Computer verstanden werden kann, übersetzt.
+    Dazu bedarf es jedoch eine installierte \AbkS{JRE}{Java Runtime Environment}.
+    Diese beinhaltet \uA die \AbkS{JVM}{Java Virtual Machine}, welche das Java-Programm in Maschinensprache, die vom jeweiligen Computer verstanden werden kann, übersetzt.
+    Für eine noch bessere Ausführungszeit existieren \AbkS{JIT}{Just-in-time} Übersetzer, bei denen der Code nicht vorab, sondern erst bei Gebrauch übersetzt wird, und \Abk{OS} \textquote{Native}, wonach der Maschienencode nur noch unter spezifischen Bedingungen ausgeführt werden kann.
     Java unterstützt eine Vielzahl von Programmierkonzepten, darunter Objektorientierung, Nebenläufigkeit\Englisch{multithreading} und Ausnahmebehandlung\Englisch{exception handling}.
-    Diese Funktionalitäten ermöglichen es Entwickelnden, große und komplexe Anwendungen zu erstellen.
-    Es ist dahingegend eine sichere Sprache, dass sie verhindert, dass ein Programm unbeabsichtigt andere Teile des Systems beeinflusst.
-    Als weitesgehend (stark, statisch und explizit) typisierte Sprache bietet Java den Entwicklenden bereits bei der Komplierung eine frühe Fehlererkennung bei unzulässigen Wertetypen an, eine Verlässlichkeit bei der Entwicklung und eine bessere Performance im Vergleich zu dynamischen Typisierung.
-    Java wird in sehr vielen Bereichen und Anwendungen eingesetzt, darunter fallen webbasierte, mobile und wissenschaftliche Anwendungen sowie Backendsysteme, \Abk{GUI}-Anwendungen und Spiele.
-}{\color{red} %% TODO refactor
+    Diese Funktionalitäten und die konzeptionell eingebauten Eigenschaften wie Einfachheit (\zB automatische Speicherverwaltung), Robustheit (\zB Typisierung), Verteilheit (Anbindung verschiedener Netzwerke) und Dynamik (zur Laufzeit: Austausch von Resourcen) ermöglichen es Entwickelnden, große und komplexe Anwendungen zu erstellen.
+    Es ist dahingehend eine sichere Sprache, dass sie verhindert, dass ein Programm unbeabsichtigt andere Teile des Systems beeinflusst oder der Code selbst manipuliert werden kann.
+    Als weitestgehend (stark, statisch und explizit) typisierte Sprache bietet Java den Entwicklenden bereits bei der Kompilierung eine frühe Fehlererkennung bei unzulässigen Wertetypen an, eine Verlässlichkeit bei der Entwicklung und eine bessere Performance im Vergleich zu dynamischen Typisierung.
+    Java wird in sehr vielen Bereichen und Anwendungen eingesetzt;
+    von Geschäfts- und Industrie-Bereich bis zur Wissenschaft, darunter fallen eingebettete (in Geräten), webbasierte, mobile und Desktop Anwendungen sowie Backendsysteme und Spiele.
+    \Vgl{JAVA-Parsons2020}
+
+{\color{red} %% TODO refactor, check sources
     \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup entwickelt wurde.
     Sie wurde ursprünglich als Erweiterung der Programmiersprache C entwickelt, um dessen Mängel in Bezug auf objektorientierte Programmierung und die Wiederverwendbarkeit von Code zu beheben.
     C++ unterstützt die Konzepte von Klassen, Vererbung, Polymorphismus und Abstraktion, die es Entwicklern ermöglichen, komplexe Anwendungen effizient und übersichtlich zu organisieren und zu entwickeln.
@@ -55,7 +79,9 @@ Beispiele sind Clorm\Note{Python \Abk{ORM} Interface: \url{https://github.com/po
     Dies macht C++ besonders für System- und Anwendungsentwicklung, Spielentwicklung, Computer-Grafik, Datenbankanwendungen und vieles mehr geeignet.
     Zusammenfassend ist C++ eine leistungsstarke und vielseitige Programmiersprache, die eine enge Integration mit der Hardware-Ebene und die Möglichkeit, objektorientierte Konzepte effizient zu implementieren, ermöglicht.
     Es ist eine wichtige Sprache in der Computerbranche und wird weit verbreitet eingesetzt.
+    \Vgl{C++-Seed2001, C++-Sharma2019, C++-Ateeq2014}
 }
+
     \item[Python] ist eine High-Level-Programmiersprache, die ursprünglich 1989 von Guido van Rossum entwickelt wurde.
     Seitdem hat sie sich zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
     Eines der wichtigsten Merkmale ist seine Les- und Schreibbarkeit, die es Entwickelnden ermöglicht Code einfach, verständlich und schnell zu schreiben.
