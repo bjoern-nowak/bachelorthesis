@@ -53,9 +53,9 @@
             \onehalfspacing
             \setlength{\abovecaptionskip}{0em plus 2em minus 2em}
             \caption{#2}\label{#3}
-            \begin{center}
+            {\centering
                 #4
-            \end{center}
+            }
         \end{threeparttable}
     \end{table}
 }
@@ -209,4 +209,10 @@
 \newcommand{\zB}{\mbox{z.\,B.}\xspace} % zum Beispiel
 \newcommand{\ZB}{\mbox{Z.\,B.}\xspace} % zum Beispiel
 \newcommand{\og}{\mbox{o.\,g.}\xspace} % oben genannt
-\newcommand{\sog}{sog.\xspace} % sogenannt
+\newcommand{\sog}[1][]{ % sogenannt
+    \ifthenelse{\isempty{#1}}{%
+        sog.\xspace%
+    }{%
+        sog.\xspace\textquote{#1}%
+    }
+}

@@ -9,7 +9,7 @@ Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
-Beispiele sind Clorm\Note{Python \AbkS{ORM}{Object Relational Mapping} Interface: \url{https://github.com/potassco/clorm}}, Clyngor\Note{Python Wrapper-\Abk{API}: \url{https://github.com/Aluriak/clyngor}} (Nachfolger von PyASP\Note{\url{https://github.com/sthiele/pyasp}}), Asp4J\Note{High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
+Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für Clingos Python \Abk{API}: \url{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP: \url{https://github.com/sthiele/pyasp})}, Asp4J\Note{Clingo High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{Clingo Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{Clingo \Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
@@ -30,10 +30,10 @@ Beispiele sind Clorm\Note{Python \AbkS{ORM}{Object Relational Mapping} Interface
     Sie wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
     \Vgl{DLV-Calimeri2012, DLV-dlvsystem-histroy}
 
-    Ein \Abk{DLV}-Programm kann ausgeführt werden, in dem es über das \AbkS{CLI}{Command-line Interface} ausgerufen wird.
+    Ein \Abk{DLV}-Programm kann ausgeführt werden, in dem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
     Dies kann direkt oder gesteuert durch eine Software, beliebiger Programmiersprache, geschehen;
     die naheliegendste ist C++, da das Framework in C implementiert wurde.
-    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{Integrated development environment} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{Graphical user interface}, wichtige Funktionen wie \textquote{unit testing}, Datenbank-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
+    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{\textquote{integrated development environment}} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, Datenbank-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
     \Vgl{DLV-Leone2015}
 
     Es existiert zu dem eine Java Schnittstelle\Englisch{interface} JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
@@ -42,11 +42,23 @@ Beispiele sind Clorm\Note{Python \AbkS{ORM}{Object Relational Mapping} Interface
     Sie bieten zusätzlich eine Variante an, die den Aufruf von Python Funktionen als \Begriff{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
     \Vgl{DLV-unical-home}
 
-{\color{red}
-    \item[Clingo] von \Abk{Potassco} ist ein \Abk{ASP}-System das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
-    Clingo selbst und alle seine Komponenten sind quelloffen \Vgl{CLINGO-Github}.
-    Clingo bietet für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}} und C\Note{\url{https://potassco.org/clingo/c-api/current/}} eine \Abk{API} an.
-}
+    \item[Clingo] ist ein \Abk{ASP}-System von \Abk{Potassco}, ein Projekt der Universtität Potsdam, das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
+    Clingo selbst und alle seine Komponenten sind, seit \Jahr{2008}, quelloffen;
+    seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
+    Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
+    Aus einem Clingo Logik-Programm kann man außerdem sehr einfach externe Funktionen, \zB Python Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
+
+    Zwei wichtige Feature (eingeführt mit der Clingo Version 4), für die Modellierung von komplexen Problemen, sind:
+    \begin{inparaenum}[\bfseries(a)]
+        \item die Möglichkeit Teile des Logik-Programms in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
+        \item Regeln/Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden
+    \end{inparaenum}
+    \Vgl{CLINGO-Gebser2014}.
+    Ebenfalls nennenswert ist die Unterstützung, ab Version 5, von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular innerhalb einer Theorie definiert und entstehende Aussagen außerhalb dieser wiederverwenden werden können \Vgl{CLINGO-Gebser2016}.
+    Und das \sog[multi-shot solving] (aus Version 4), bei dem ein Logik-Programm nicht einmal in Gänze gelöst/durchlaufen wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend, gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
+
+    Mit der Clingo Erweiterung clingcon (\textquote{con} für Bedingung\Englisch{constraint}) können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachten werden \Vgl{CLINGO-Clingcon}.
+    Hingehen die Erweiterung \AbkS{clorm}{Clingo ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
 \end{description}
 
 
