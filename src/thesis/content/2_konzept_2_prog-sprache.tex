@@ -22,7 +22,7 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
     \Vgl[Kapitel 1]{DLV-Leone2006}
 
     Ein Vorteil von \Abk{DLV} im Vergleich ist die Breite der Anwendbarkeit.
-    Neben seiner Kernstärke in Datenbank-orientierte Anwendungen, mit großen Datenmengen, kann es mit ausreichender Effizients \Begriff{NP} Such- und Optimierungsproblemen bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
+    Neben seiner Kernstärke in \Abk{DB}-orientierte Anwendungen, mit großen Datenmengen, kann es mit ausreichender Effizients \Begriff{NP} Such- und Optimierungsproblemen bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
     Andere Systeme hingehen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
     \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
 
@@ -33,7 +33,7 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
     Ein \Abk{DLV}-Programm kann ausgeführt werden, in dem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
     Dies kann direkt oder gesteuert durch eine Software, beliebiger Programmiersprache, geschehen;
     die naheliegendste ist C++, da das Framework in C implementiert wurde.
-    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{\textquote{integrated development environment}} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, Datenbank-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
+    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{\textquote{integrated development environment}} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, \Abk{DB}-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
     \Vgl{DLV-Leone2015}
 
     Es existiert zu dem eine Java Schnittstelle\Englisch{interface} JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
@@ -80,19 +80,28 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
     von Geschäfts- und Industrie-Bereich bis zur Wissenschaft, darunter fallen eingebettete (in Geräten), webbasierte, mobile und Desktop Anwendungen sowie Backendsysteme und Spiele.
     \Vgl{JAVA-Parsons2020}
 
-{\color{red} %% TODO refactor, check sources
-    \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup entwickelt wurde.
-    Sie wurde ursprünglich als Erweiterung der Programmiersprache C entwickelt, um dessen Mängel in Bezug auf objektorientierte Programmierung und die Wiederverwendbarkeit von Code zu beheben.
-    C++ unterstützt die Konzepte von Klassen, Vererbung, Polymorphismus und Abstraktion, die es Entwicklern ermöglichen, komplexe Anwendungen effizient und übersichtlich zu organisieren und zu entwickeln.
-    Es verfügt auch über die Möglichkeit, Vorlagen (Templates) zu erstellen, die es ermöglichen, Code generisch und wiederverwendbar zu schreiben.
-    C++ unterstützt auch mehrere Programmierparadigmen wie strukturiertes, objektorientiertes und generisches Programmieren, was es zu einer vielseitigen Sprache macht, die für eine Vielzahl von Anwendungen und Projekten eingesetzt werden kann.
-    C++ ist eine kompilierte Sprache, was bedeutet, dass der Code in eine binäre Form kompiliert wird, die direkt vom Computer ausgeführt werden kann.
-    Ein wichtiger Aspekt von C++ ist seine enge Integration mit der Hardware-Ebene, die es ermöglicht, sehr effiziente Anwendungen zu entwickeln.
-    Dies macht C++ besonders für System- und Anwendungsentwicklung, Spielentwicklung, Computer-Grafik, Datenbankanwendungen und vieles mehr geeignet.
-    Zusammenfassend ist C++ eine leistungsstarke und vielseitige Programmiersprache, die eine enge Integration mit der Hardware-Ebene und die Möglichkeit, objektorientierte Konzepte effizient zu implementieren, ermöglicht.
-    Es ist eine wichtige Sprache in der Computerbranche und wird weit verbreitet eingesetzt.
-    \Vgl{C++-Seed2001, C++-Sharma2019, C++-Ateeq2014}
-}
+    \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991}, als eine Allzweck (Allgemein brauchbare) Programmiersprache, entwickelt wurde.
+    Es ist eine Erweiterung, oder Nachfolger, der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und die Wiederverwendbarkeit von Code zu beheben.
+    So wurden klassische \Abk{OOP}-Konzepte wie Klassen, Vererbung, Polymorphismus und Abstraktion, als auch Paradigmen wie generische Typen, eingebaut, die es Entwickelnden ermöglicht, komplexe Software effizient zu entwickeln und übersichtlich zu organisieren.
+    \Vgl{C++-Stroustrup2007}
+
+    Besondere Eigenschaft sind \uA:
+    \begin{inparaenum}[\bfseries(a)]
+        \item die Möglichkeit Vorlagen\Englisch{templates} zu erstellen, um Code, welches \zB oft ähnlich wiederholt, generisch zu schreiben und wiederverwendbar zu machen;
+        \item die \AbkS{STL}{Standard Template Library}, eine umfangreiche Sammlung gebrauchsfertiger Vorlagen;
+        \item Mehrfachvererbung, bei der eine Klasse mehr als eine Elternklasse haben kann;
+        \item die möglichkeit die Vererbungshierarchie zur Laufzeit zu verändern;
+    \end{inparaenum}
+    \Vgl{C++-Seed2001}
+
+    Wie Java und der Vorgänger C ist C++ eine kompilierte Sprache.
+    Es ist aber nicht so einfach portable wie Java, da je nach ausführender Maschine und \Abk{OS} sind andere Kompilatoren und Bibliotheken zu nutzen.
+    Dabei wird C++, aufgrund der als oft bezeichneten \textquote{Nähe zur Maschine/Hardware}, aufgrund der vielen Möglichkeiten die Software ins kleinste Detail zu steuern und zu optimieren, wie \zB die Speicherverwaltung, als Programmiersprache niederer Ebene betrachtet.
+    Diese Vielseitigkeit macht es zugleich anfälliger für Fehler durch Entwickelnde.
+    \Vgl{C++-Sharma2019}
+
+    Aufgrund der langen Historie und vielseitigen Spracheigenschaften von C++ wurde und wird es in nahezu sämtlichen erdenkbaren Bereichen eingesetzt;
+    einige Beispiele sind Banken und Finanzwesen, Systementwicklung von \Abk{OS}, \Abk{DB} und Kompilatoren, eingebettete Systeme, wie in Kameras, Flugzeugen und medizinischen Geräten, Spiele und wissenschaftlichen Simulationen \Vgl{C++-Stroustrup2007}.
 
     \item[Python] ist eine High-Level-Programmiersprache, die ursprünglich 1989 von Guido van Rossum entwickelt wurde.
     Seitdem hat sie sich zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
@@ -119,4 +128,6 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 Beide Frameworks sind für den nicht-kommerziellen Gebrauch frei verfügbar.
 Clingo hat die deutlich besseren Programmiersprachen-Integration.
 Von den beiden, von Clingo native unterstützend, Programmiersprachen ist Python die Anfänger-freundlichste.
+
+Das Python für ungeübte und angehende Programmierende als Einstieg leichter ist als C++ wurde bereits in Ansätzen in \Vgl{C++-Ateeq2014} aufgezeigt.
 }
