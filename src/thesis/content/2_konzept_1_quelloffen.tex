@@ -1,6 +1,6 @@
 \section{Anforderungen an quelloffene Software}\label{sec:anforderungen-an-quelloffene-software}
 
-In diesem Kapitel werden zunächst die wissenschaftlich belegten Motivationsfaktoren von an quelloffener Software Mitwirkenden dargelegt und anschließend darauf ableitbare technische Bedingungen an eine quelloffene Software aufgezeigt, damit dieser diesen Motivationsfaktoren nicht entgegensteht.
+In diesem Kapitel werden nur kurz die wissenschaftlich belegten Motivationsfaktoren von an quelloffener Software Mitwirkenden dargelegt, sodass anschließend, \uA aus diesen, technische Bedingungen an eine quelloffene Software abgeleitet werden können.
 
 %% TODO may use
 %%
@@ -39,15 +39,22 @@ Die in \Zitat{OS-Motiv-Luthiger} zusammengefassten Motivationsfaktoren, ermittel
 \subsection{Abgeleitete technische Anforderungen}\label{subsec:abgeleitete-technische-anforderungen}
 
 Aus den in \Kapitel{sec:zielsetzung} genannten Herausforderungen für quelloffene Software-Projekte und den zuvor genannten \Kapitel[N]{subsec:motivationsfaktoren-der-mitwirkenden} lassen sich einige wichtige technische Anforderungen ableiten und stellen damit wichtige Voraussetzungen für ein langfristig erfolgreiches quelloffenes Software-Projekt dar.
+In der frühen Phase eines quelloffenen Software, unter Beachtung des vorliegenden, eher kleineren, Kreis möglicher Mitwirkenden, ist es von Bedeutung die Einstiegshürden für Mitwirkende möglichst gering zu halten, sodass eine möglichst große Basis an Mitwirkenden gewonnen werden kann.
+Die Motivationsfaktoren \Begriff{Nutzen} und \Begriff{Identifikation} ist, aus Projektsicht, nicht steuerbar, sondern als gegeben zu sehen, da zugehen ist, dass vorwiegend Mitwirkende aus der \Abk{PP} Gemeinschaft kommen werden.
+Als gegeben kann ebenfalls der Faktor \Begriff{Ansehen}, aufgrund der Verwendung eines wissenschaftlich basierten Verfahrens, gewertet werden.
+Wodurch ebenfalls der Motivationsfaktoren \Begriff{Wissen} bedient werden kann, aber auch durch die dann, für den jeweiligen neu, zu erlernenden Sprachen und Frameworks.
+Der Faktor \Begriff{Freude} ist zu teilen bereits dadurch vorgesorgt, das es sich bei der Fachlichkeit, also dem Anwendungsbereich der Software, um etwas grundsätzlich kreativen handelt und zumal es außer dem festen \Abk{DSA}-Regelwerk kaum eingrenzenden Rahmenbedingungen gibt.
 
-Die Einstiegshürden für Mitwirkende sind möglichst gering zu halten.
-Dies kann erreicht werden, wenn \uA folgendes eingehalten \bzw gegeben ist:
+
+Folgende technische Anforderungen werden daher abgeleitet definiert:
 \begin{inparaenum}[\bfseries(a)]
-    \item die Dokumentationen müssen stets aktuell, leicht auffindbar und verständlich sein;
-    dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen und Richtlinien zur Mitwirkung, Einrichtung der Entwicklungsumgebung und Testdurchführung;
-    umso prägnanter diese sind, umso zuträglicher für die Wartbarkeit und \insb neuen Mitwirkenden, sodass diese nicht erschlagend wirken;
-    \item die Projektstruktur, der Quellcode und die Architektur entsprechen weites gehend den \textquote{Branchen-} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}), Programmiersprachen- und Frameworks-Standards;
-    abweichungen sind überall erlaubt, wo es \insb dem Verständnis und der Wartbarkeit hilft;
-    \item es existiert eine hohe und vor allem qualitative Testabdeckung, durch diese \insb neue Mitwirkende frühzeitig Fehler während der Entwicklung erkennen können;
-    \item es werden nach Möglichkeit weitverbreitete Programmiersprachen und Frameworks genutzt, um die Zugänglichkeit, also das Finden von Hilfsmaterialien (\zB Dokumentationen und Anleitungen\Englisch{guides}) und Hilfestellungen Dritter, des Projekts indirekt zu erhöhen, als auch eine gewisse Langlebigkeit dieser und damit einen einhergehenden niedrigeren Wartungsaufwand sicherzustellen.
+    \item Die Dokumentationen müssen stets aktuell, leicht auffindbar und verständlich sein;
+    Dazu gehören \uA Code- und Architektur-Dokumentationen sowie Anleitungen und Richtlinien zur Mitwirkung, Einrichtung der Entwicklungsumgebung und Testdurchführung;
+    umso prägnanter diese sind, umso zuträglicher für die Wartbarkeit und \insb neuen Mitwirkenden, sodass diese nicht erschlagend wirken.
+    \item Die Projektstruktur, der Quellcode und die Architektur entsprechen weites gehend den \textquote{Branchen-} (\zB CleanCode\Note{\url{https://clean-code-developer.de/}}), Programmiersprachen- und Frameworks-Standards;
+    abweichungen sind überall erlaubt, wo es \insb dem Verständnis und der Wartbarkeit hilft.
+    Dies soll einen leichteren Wissensaufbau ermöglichen, welches \zB durch den Wiedererkennungswert zwischen Framework-Dokumentation und der Verwendung im Code, durch Nutzen gleicher Benamungen, gegeben wird.
+    \item Es existiert eine hohe und vor allem qualitative Testabdeckung, durch diese \insb neue Mitwirkende frühzeitig Fehler während der Entwicklung erkennen können.
+    \item Es werden nach Möglichkeit weitverbreitete Programmiersprachen und Frameworks genutzt, um die Zugänglichkeit des Projekts indirekt zu erhöhen, als auch eine gewisse Langlebigkeit dieser und damit einen einhergehenden niedrigeren Wartungsaufwand sicherzustellen.
+    Die Zugänglichkeit wird hier als das Finden von Hilfsmaterialien (\zB Dokumentationen und Anleitungen\Englisch{guides}) und Hilfestellungen Dritter definiert.
 \end{inparaenum}

@@ -1,8 +1,8 @@
 \section{Auswahl der Programmiersprache}\label{sec:auswahl-der-programmiersprache}
 
-
-Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im speziellen, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
-In diesem Kapitel werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre unterstützten Programmiersprachen vorgestellt und anschließend, unter Beachtung der Rahmenbedingungen (die Herausforderungen) der quelloffenen Software, bewertet und ausgewählt.
+Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im Speziellen, wie im Folgenden gezeigt wird, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
+In diesem Kapitel werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre wichtigsten unterstützten Programmiersprachen vorgestellt.
+Anschließend, unter Beachtung der Rahmenbedingungen der quelloffenen Software, wie die aus \Kapitel[KP]{subsec:abgeleitete-technische-anforderungen}, bewertet und ausgewählt.
 %% TODO may say something about Alpha https://github.com/alpha-asp/Alpha or ASPARTIX https://www.dbai.tuwien.ac.at/proj/argumentation/systempage/
 
 Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weitere Programmiersprachen verfügbar machen oder die Nutzung vereinfachen, werden nicht beachtet.
@@ -13,7 +13,6 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
-
 
 \begin{description}
     \item[\Abk{DLV}] ist seit dem Jahr \Jahr{1996} verfügbar.
@@ -66,6 +65,7 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 \subsection{Unterstützte Programmiersprachen}\label{subsec:unterstutzte-programmiersprachen}
 
 \begin{description}
+{\color{red}
     \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (seit 2010 Teil von Oracle) entwickelt wurde. Mit OpenJDK\Note{\url{https://openjdk.org/}} gibt existiert auch eine quelloffene Implementierung.
     Es ist eine kompilierte Sprache, \dahe der Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor er ausgeführt werden kann.
     Java ist plattformunabhängig, es kann daher auf vielen \Abk{OS} und Geräten ausgeführt werden.
@@ -79,6 +79,7 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
     Java wird in sehr vielen Bereichen und Anwendungen eingesetzt;
     von Geschäfts- und Industrie-Bereich bis zur Wissenschaft, darunter fallen eingebettete (in Geräten), webbasierte, mobile und Desktop Anwendungen sowie Backendsysteme und Spiele.
     \Vgl{JAVA-Parsons2020}
+}
 
     \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991}, als eine Allzweck (Allgemein brauchbare) Programmiersprache, entwickelt wurde.
     Es ist eine Erweiterung, oder Nachfolger, der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und die Wiederverwendbarkeit von Code zu beheben.
@@ -124,10 +125,18 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 
 \subsection{Auswahl Framework-Sprachen-Kombination}\label{subsec:auswahl-framework-sprachen-kombination}
 
-{\color{red} %% TODO
-Beide Frameworks sind für den nicht-kommerziellen Gebrauch frei verfügbar.
-Clingo hat die deutlich besseren Programmiersprachen-Integration.
-Von den beiden, von Clingo native unterstützend, Programmiersprachen ist Python die Anfänger-freundlichste.
+Zunächst am entschiedensten ist die Wahl des Frameworks, bevor eine Programmiersprache ausgewählt werden kann.
+Beide der genannten Frameworks sind für den nicht-kommerziellen Gebrauch, bezogen auf die Lizenz, frei verfügbar.
+Clingo bietet im Vergleich zu \Abk{DLV} eine größere Anzahl relevanter Features (inkl. der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des Logik-Programms.
+Auch die breitere Unterstützung von Programmiersprachen und deutlich bessere Integration in diesen spricht für Clingo.
+Die genannten Erweiterungen und ungenannten Projekte, welche auf Clingos Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft, relevante Erweiterungen und weitere solide Integrationen versprechen.
+Ebenfalls entscheiden ist die Verfügbarkeit und Qualität von Dokumentationen, hier bietet Clingo, aufgrund der veröffentlichen Materialien, welche in einem Universitären Kontext zur Bildung genutzt werden, eine bessere Grundlage.
+\textbf{Clingo ist} daher \textbf{das geeignetere Framework}.
 
-Das Python für ungeübte und angehende Programmierende als Einstieg leichter ist als C++ wurde bereits in Ansätzen in \Vgl{C++-Ateeq2014} aufgezeigt.
-}
+Die von Clingo native, also offiziell (out-of-the-box), unterstützten Programmiersprachen, von Relevanz (aufgrund der Popularität), sind C(++) und Python.
+Die freundlichste für ungeübte und angehende Programmierende ist Python.
+Dies, also der Einstieg in die Programmierung abhängig der Sprache, wurde in Ansätzen in \Vgl{C++-Ateeq2014} für Python und C++ aufgezeigt.
+Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwicklenden bestimmte Aufgabenbereiche abnimmt.
+Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von Clingos Logik-Programmen passt.
+Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem Clingo Logik-Programm heraus externe und kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
+Somit stellt \textbf{Python} die \textbf{sinnvollste Wahl} der Programmiersprache dar.
