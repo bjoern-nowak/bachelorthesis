@@ -137,21 +137,25 @@
 %% https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix
 
 %% automatic naming with \autoref, using custom command for better readability in source
-\newcommand{\Gleichung}[1]{\autoref{#1}}
-\newcommand{\Abbildung}[1]{\autoref{#1}}
-\newcommand{\Anhang}[1]{\autoref{#1}}
 
-\newcommand{\TabelleDefaultRef}{KNP}
+
+\newcommand{\DefaultRefCase}{KNP}
 \ifthenelse{\boolean{isBookPrint}}{}{
-    \renewcommand{\TabelleDefaultRef}{KN}
+    \renewcommand{\DefaultRefCase}{KN}
 }
-\newcommand{\Tabelle}[2][\TabelleDefaultRef]{% K=Tabelle~<Nr> N=<Tabellenname> P='auf S.~<Seite>'
+\newcommand{\Gleichung}[2][K]{\RefByCase{#1}{#2}}
+\newcommand{\Abbildung}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Listing}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Anhang}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Tabelle}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\RefByCase}[2]{% K=Tabelle~<Nr> N=<Tabellenname> P='auf S.~<Seite>'
     \IfStrEqCase{#1}{
-            {N}{\nameref{#2}}
-            {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
-            {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
-            {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
-            {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
+        {N}{\nameref{#2}}
+        {K}{\hyperref[#2]{\autoref{#2}}}
+        {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
+        {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
+        {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
+        {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
     }[\autoref{#2}]%
 }
 

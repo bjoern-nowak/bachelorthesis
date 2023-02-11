@@ -1,0 +1,184 @@
+openapi: 3.0.2
+info:
+  title: FastAPI
+  version: 0.1.0
+servers:
+  - url: /api/v1
+paths:
+  /:
+    get:
+      tags:
+        - root
+      summary: Index
+      operationId: index__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: { }
+  /held/validate:
+    post:
+      tags:
+        - held
+      summary: Validate
+      operationId: validate_held_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_validate_held_validate_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Validate Held Validate Post
+                type: boolean
+        '500':
+          description: Bei unerwarteten Fehlern.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerFehler'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Body_validate_held_validate_post:
+      title: Body_validate_held_validate_post
+      required:
+        - held
+        - context
+      type: object
+      properties:
+        held:
+          $ref: '#/components/schemas/Held'
+        context:
+          $ref: '#/components/schemas/Context'
+    Context:
+      title: Context
+      required:
+        - regelsets
+      type: object
+      properties:
+        regelsets:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegelSet'
+      additionalProperties: false
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Held:
+      title: Held
+      required:
+        - name
+        - spezies
+        - kultur
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        spezies:
+          $ref: '#/components/schemas/Spezies'
+        kultur:
+          $ref: '#/components/schemas/Kultur'
+      additionalProperties: false
+    Kultur:
+      title: Kultur
+      enum:
+        - Auelfen
+        - Firnelfen
+        - Steppenelfen
+        - Waldelfen
+        - Andergaster
+        - Aranier
+        - Bornländer
+        - Ferkinas
+        - Fjarninger
+        - Gjalsker
+        - Horasier
+        - Koboldweltler
+        - Maraskaner
+        - Mhanadistani
+        - Mittelreicher
+        - Mohas
+        - Nivesen
+        - Norbarden
+        - Nordaventurier
+        - Nostrier
+        - Novadis
+        - Svellttaler
+        - Südaventurier
+        - Thorwaler
+        - Trollzacker
+        - Zahori
+        - Zyklopäer
+        - Ambosszwerge
+        - Brillantzwerge
+        - Erzzwerge
+        - Hügelzwerge
+        - Wildzwerge
+      type: string
+      description: An enumeration.
+    RegelSet:
+      title: RegelSet
+      enum:
+        - DSA5_Grund
+        - DSA5_Optional
+      type: string
+      description: An enumeration.
+    ServerFehler:
+      title: ServerFehler
+      required:
+        - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+      additionalProperties: false
+    Spezies:
+      title: Spezies
+      enum:
+        - Elfen
+        - Halbelfen
+        - Mensch
+        - Zwerg
+      type: string
+      description: An enumeration.
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

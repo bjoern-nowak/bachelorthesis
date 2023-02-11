@@ -158,11 +158,6 @@
 %\widowpenalty=10000
 
 
-%% ----- Quellcode-Ausgabe formatieren ----------------------------------------
-\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
-\lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
-
-
 %% ----- Inhaltsverzeichniss anpassen -----------------------------------------
 \setcounter{tocdepth}{2} %% im Inhaltsverzeichnis werden die Kapitel bis zum Level der paragraphen übernommen
 \setcounter{secnumdepth}{4} %% Kapitel bis zum Level der paragraphen werden nummeriert
@@ -198,8 +193,54 @@
     \renewcommand{\sectionautorefname}{\sectionPrefix}
     \renewcommand{\subsectionautorefname}{\sectionPrefix}
     \renewcommand{\subsubsectionautorefname}{\sectionPrefix}
+    \renewcommand{\appendixautorefname}{\appendixPrefix}
 }
+
+%% ----- begin appendix autoref patch
+%% source: https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix
+%% referes: https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\hyper@makecurrent}{%
+    \ifx\Hy@param\Hy@chapterstring
+    \let\Hy@param\Hy@chapapp
+    \fi
+}{%
+    \iftoggle{inappendix}{% true-branch: list the names of all sectioning counters here
+        \@checkappendixparam{chapter}%
+        \@checkappendixparam{section}%
+        \@checkappendixparam{subsection}%
+        \@checkappendixparam{subsubsection}%
+        \@checkappendixparam{paragraph}%
+        \@checkappendixparam{subparagraph}%
+    }{}%
+}{}{\errmessage{failed to patch}}
+\newcommand*{\@checkappendixparam}[1]{%
+    \def\@checkappendixparamtmp{#1}%
+    \ifx\Hy@param\@checkappendixparamtmp
+    \let\Hy@param\Hy@appendixstring
+    \fi
+}
+\makeatletter
+\newtoggle{inappendix}
+\togglefalse{inappendix}
+\apptocmd{\appendix}{\toggletrue{inappendix}}{}{\errmessage{failed to patch}}
+\apptocmd{\subappendices}{\toggletrue{inappendix}}{}{\errmessage{failed to patch}}
+%% ----- end appendix autoref patch
 
 
 %% ----- Farben ---------------------------------------------------------------
-\input{setting/style_colors.tex}
+\newcommand{\colorLinks}{true}
+\newcommand{\linkColor}{linkColor}
+\ifthenelse{\boolean{isBookPrint}}{
+    \renewcommand{\linkColor}{linkColorBook}
+}{}
+
+\definecolor{main}{RGB}{0, 64, 108}
+\definecolor{linkColor}{RGB}{0, 64, 108}
+\definecolor{linkColorBook}{RGB}{0, 37, 61}
+\definecolor{evenRow}{rgb}{0.9, 0.9, 0.9}
+
+
+%% ----- Quellcode-Ausgabe formatieren ----------------------------------------
+\input{setting/style_listings.tex}
