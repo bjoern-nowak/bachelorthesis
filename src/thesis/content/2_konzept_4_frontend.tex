@@ -1,7 +1,7 @@
 \section{Frontend-Schnittstelle}\label{sec:frontend-schnittstelle}
 
-In diesem Kapitel wird der Schnittstellenvertrag zwischen Front- und Backend, also eine reine interne \Abk{API} beschrieben.
-Dieses spiegelt die konkreten Aufgaben der zu entwickelnden Software wider.
+In diesem Kapitel wird der Schnittstellenvertrag zwischen Front- und Backend, also eine interne \Abk{API} beschrieben.
+Dieser spiegelt die konkreten Aufgaben der zu entwickelnden Software wider.
 Es beinhaltet \uA die konkreten Endpunkte, die Pflicht- und optionalen Parameter (\inkl des Wertetyps und -bereichs), die erwarteten Antworten (\inkl Wertetypen und -bereiche), eine Beschreibung und Beispielwerte der Parameter.
 Durch den Umfang ist es zugleich eine gute Dokumentation der Schnittstelle.
 Dazu wird das populärste Framework \textbf{Swagger} eingesetzt und das Format \textbf{\Abk{YAML}} genutzt, da es eine gut lesbare Syntax hat und Kommentare erlaubt \Vgl[Kapitel 4]{KONZEPT-De2017}.
@@ -10,7 +10,7 @@ Der Vorteil einer frühzeitigen Definition ist, dass man unabhängig \textquote{
 Basierend auf den Schnittstellenvertrag können dann \sog Mocks zur Entkopplung erstellt werden.
 Diese sind Nachbildungen der jeweils anderen Schnittstellen-Seite, welche das gewünschte \bzw erwartete Verhalten imitiert und so ermöglicht das eigene System \textquote{gegen} die Schnittstelle zu testen.
 
-Im Laufe der Zeit werden verschiedene Versionen dieses Schnittstellenvertrags entstehen, dabei kann es vorkommen, dass zu einem Zeitpunkt mehrere, also nicht nur die Neuste, Versionen unterstützt werden müssen \Vgl[Kapitel 6]{KONZEPT-De2017}.
+Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, werden verschiedene Versionen dieses Schnittstellenvertrags entstehen, dabei kann es vorkommen, dass zu einem Zeitpunkt mehrere, also nicht nur die Neuste, Versionen unterstützt werden müssen \Vgl[Kapitel 6]{KONZEPT-De2017}.
 Daher ist es wichtig die Schnittstellenverträge in der Entwicklung und vom Endpunktpfad explizit versioniert zu behandeln.
 
 {\color{red}
