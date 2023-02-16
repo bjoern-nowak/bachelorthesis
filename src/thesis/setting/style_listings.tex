@@ -2,7 +2,7 @@
 \lstset{
     backgroundcolor=\color{white},
     rulecolor=\color{black},
-    basicstyle=\ttfamily\tiny,
+    basicstyle=\ttfamily\small,
     breaklines=true,
     %breakatwhitespace=false, %% automatic breaks only at whitespace
     %escapeinside={\%*}{*)} %% if you want to add LaTeX within your code
@@ -28,9 +28,9 @@
 
 %% ----- YAML ------
 %% source: https://tex.stackexchange.com/questions/152829/how-can-i-highlight-yaml-code-in-a-pretty-way-with-listings
-\newcommand\YAMLcolonstyle{\color{red}\mdseries\small}
-\newcommand\YAMLkeystyle{\color{black}\ttfamily\small}
-\newcommand\YAMLvaluestyle{\color{blue}\mdseries\small}
+\newcommand\YAMLcolonstyle{\color{red}\mdseries\scriptsize}
+\newcommand\YAMLkeystyle{\color{black}\ttfamily\scriptsize}
+\newcommand\YAMLvaluestyle{\color{blue}\mdseries\scriptsize}
 \makeatletter
 % here is a macro expanding to the name of the language
 % (handy if you decide to change it further down the road)
@@ -60,3 +60,45 @@
 \lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
 \makeatother
 \newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
+
+
+%% ----- LP : logik programm ------
+%% python  keyword 401C8F   boolean 2B1DF9    string 4A904C    method B62DB5    self 9E6796
+%% clingo first 1632B8   second FE9720    thrid F92772  firth 46B13E     string-escapes E2D856
+\newcommand\CLINGObasicstyle{\scriptsize\ttfamily\color{black}}
+\newcommand\CLINGOkeywordstyle{\color[HTML]{1632B8}\bfseries}
+\newcommand\CLINGOcommentstyle{\color{gray}}
+\newcommand\CLINGOstringstyle{\color[HTML]{1E9B24}}
+\lstdefinelanguage{clingo}{
+    basicstyle=\CLINGObasicstyle, % assuming a key comes first
+%
+    alsodigit={+,-,*},
+    alsoletter={\#,:,),(,.,!,<,=,>,?,\&,^,~,|,/,'},
+    sensitive=true, %% keywords case sensitivity
+    keywordstyle=\CLINGOkeywordstyle,
+%    morekeywords=[1]{(,),.,:-,[,],\{,\}},
+    morekeywords=[1]{:-,),(,.},
+%    morekeywords=[2]{\!,\!\=,\&,',\*,\**,\+,\-,\/,\<,\<\=,\>,\>\=,\?,\\,^,\_,not,\|,\~},
+    morekeywords=[2]{!,!=,\&,',*,**,+,-,/,<,<=,>,>=,?,\\,^,_,not,|,~},
+%    morekeywords=[3]{\.\.,\:,\;,\=},
+    morekeywords=[4]{:~,\#count,\#false,\#inf,\#max,\#maximize,\#min,\#minimize,\#program,\#show,\#sum,\#sum+,\#sup,\#true},
+    keywordstyle=[1]\CLINGOkeywordstyle\color[HTML]{1632B8}, %% 1632B8
+    keywordstyle=[3]\CLINGOkeywordstyle\color[HTML]{FE9720}, %% FE9720
+    keywordstyle=[2]\CLINGOkeywordstyle\color[HTML]{F92772}, %% F92772
+    keywordstyle=[4]\CLINGOkeywordstyle\color[HTML]{46B13E}, %% 46B13E
+%
+    comment=[l]{\%}, % l is for line comment
+    morecomment=[s]{\%*}{*\%}, % s is for start and end delimiter
+    commentstyle=\CLINGOcommentstyle,
+%
+    string=[b]{\"}, % defines that strings are enclosed in double quotes
+    stringstyle=\CLINGOstringstyle,
+%
+%
+%    moredelim=[s][\CLINGOkeywordstyle]{(}{)},
+%    moredelim=*[l][\CLINGOkeywordstyle]{)},
+%    moredelim=[l][\color{magenta}]{*},
+%    moredelim=**[il][\CLINGOkeywordstyle{}(\CLINGObasicstyle{}]{(},
+%    moredelim=**[il][\CLINGOkeywordstyle{},\CLINGObasicstyle{}]{,},
+%    moredelim=**[il][\CLINGOkeywordstyle{})\CLINGObasicstyle{}]{)},
+}
