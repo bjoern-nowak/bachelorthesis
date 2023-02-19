@@ -12,7 +12,7 @@
 
 %% ----- Language -------------------------------------------------------------
 \usepackage[ngerman]{babel} %% set language; new german
-\usepackage[strict]{csquotes} %% required by babel to ensure qoutes are typeset to language
+%% csquotes loaded at very end of file (preamble): prevent warning
 
 
 %% ----- Font Family ----------------------------------------------------------
@@ -82,10 +82,24 @@
 \usepackage{amsfonts} %% Font fuer amsmath %% TODO evtl auto-loaded by amssymb
 
 
-%% ----- Styling --------------------------------------------------------------
-\usepackage{listings} %% pretty print source code; define with \lstset and print with \lstinputlisting
-\usepackage{scrhack} %% remove warning from srcreprt due to listings using deprecated '\float@addtolists'
+%% ----- Listings -------------------------------------------------------------
+\usepackage[
+    newfloat, %% use 'newfloat' environment
+    chapter, %% make listing numbers per chapter
+    outputdir={../../out/thesis/} %% move tmp files to output folder
+]{minted} %% define with \setminted and print with \inputminted (need latex cmd arg '-shell-escape')
 
+%% or use
+%\usepackage{listings} %% define with \lstset and print with \lstinputlisting
+%\usepackage{scrhack} %% remove warning from srcreprt due to listings using deprecated '\float@addtolists'
+
+%%% simulatinous usages is not recommended, also may required following fixes:
+%% reuse lstlisting counter
+%\AtBeginEnvironment{listing}{\setcounter{listing}{\value{lstlisting}}}
+%\AtEndEnvironment{listing}{\stepcounter{lstlisting}}
+
+
+%% ----- Styling --------------------------------------------------------------
 \usepackage{xcolor} %% predefined color names
 \usepackage{lscape} %% rotates specific page in landscape
 
@@ -164,3 +178,7 @@
 \usepackage{pdfpages} %% import of PDFs into a PDF
 \usepackage{hyperref} %% creates links within a document and outside
 \usepackage{hypcap} %% ensures hyperref's links to e.x. tables point to that and not the label below
+
+
+%% ----- END OF FILE (PREAMBLE) -----------------------------------------------
+\usepackage[strict]{csquotes} %% required by babel to ensure qoutes are typeset to language

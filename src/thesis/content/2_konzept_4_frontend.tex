@@ -14,16 +14,19 @@ Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, we
 Daher ist es wichtig die Schnittstellenverträge in der Entwicklung und vom Endpunktpfad explizit versioniert zu behandeln.
 
 {\color{red}
-Der gesamte Schnittstellenvertrag liegt im \Kapitel[KP]{sec:api-contract.yaml} vor;
+Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:api-contract.yaml} vor;
 nachfolgend wird dieser exemplarisch an einem Endpunkt erklärt.
 Wie in \Listing{lst:apicontractyaml} zu sehen ist, dass....
-
-\lstinputlisting[
-label=lst:apicontractyaml,
-caption={api-contract.yaml (bis Zeile 20)},
-lastline=20,
-language=yaml,
-float=tbp
-]{appendix/api-contract.yaml}
-
 }
+
+%\lstinputlisting[
+%label=lst:apicontractyaml,
+%caption={api-contract.yaml (bis Zeile 20)},
+%lastline=20,
+%language=yaml,
+%float=tbp
+%]{appendix/api-contract.yaml}
+\begin{listing}[htbp]
+    \caption{api-contract.yaml (bis Zeile 20)}\label{lst:apicontractyaml}
+    \inputminted[lastline=20]{yaml}{appendix/api-contract.yaml}
+\end{listing}

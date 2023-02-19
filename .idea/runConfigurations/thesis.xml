@@ -6,7 +6,7 @@
       <sumatra-path />
       <pdf-viewer>NONE</pdf-viewer>
       <viewer-command />
-      <compiler-arguments />
+      <compiler-arguments>-shell-escape</compiler-arguments>
       <envs>
         <env name="max_print_line" value="9999" />
         <env name="error_line" value="9999" />
@@ -16,7 +16,7 @@
       <auxil-path>{projectDir}/auxil</auxil-path>
       <compile-twice>false</compile-twice>
       <output-format>PDF</output-format>
-      <latex-distribution>PROJECT_SDK</latex-distribution>
+      <latex-distribution>TEXLIVE</latex-distribution>
       <has-been-run>true</has-been-run>
       <bib-run-config>[BibTeX.thesis bib]</bib-run-config>
       <makeindex-run-config>[]</makeindex-run-config>
