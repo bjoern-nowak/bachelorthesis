@@ -3,15 +3,15 @@
 %%  it is not complete nor states all restrictions
 %%  but it gives a good and quick overview/understanding
 %%
-%% See 'Potassco: User Guide' (source of some test and examples) for a complete guide.
+%% See 'Potassco: User Guide' (source of some text and examples) for a complete guide.
 %%  https://github.com/potassco/guide/releases/tag/v2.2.0
 %%
 
 
 
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 %% PART: basic semantic
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 
 %% --- ATOM
 %% is a constant or function (see 'language basics' part below)
@@ -36,9 +36,9 @@ rain.
 
 
 
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 %% PART: language basics
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 
 %% line comment start with an %
 %% block and inline comments starts with %* and ends with *%
@@ -104,9 +104,9 @@ grid(X,Y) :- X = 1..S, Y = 1..S, size(S).
 
 
 
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 %% PART: evaluations and controls
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 
 
 %% --- DISJUNCTION
@@ -181,7 +181,7 @@ non(X,Y) :- X/X > Y*Y, num(X), num(Y).
 %% --- UNIFICATION or SHORTHANDS for terms.
 %% Also possible for functions and tuples.
 squares(XX,YY) :- XX  = X*X,   Y*Y = YY,
-                  Y'-1 = Y,    Y'*Y' = XX+YY,
+                  Y’-1 = Y,    Y’*Y’ = XX+YY,
                   X<Y, num(X), num(Y).
 %% having: num(1). num(2). num(3). num(4). num(5).
 
@@ -220,19 +220,21 @@ next(X,Z) :- set(X), #false : X < Y, Y < Z, set(Y); set(Z), X < Z.
 
 
 
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 %% PART: aggregates
-%%---------------------------------------------------------------
-
+%%-----------------------------------------------------------------------------
+%% see example 3.15 from 'Potassco: user guide' for a complex problem
 
 %% --- BODY AGGREGATES
-%% lowerBound <= aggregate-function { terms } <= upperBound
+%% lowerBound <= aggregate-function { elements } <= upperBound
 %% '<=' is default and can be omitted or replaced by other comparison predicates
 %% 'aggregate-function' default is '#count' and can be omitted or replaced
+%% '{ elements }' represent a set, hence duplicate elements are ignored
+%%  elements are separated by an ; (semicolon)
+%%  an element is: <terms tuple>:<conditional literals tuple>
+%%  the 'conditional literals tuple' is optional (colon must be omitted then)
 %%
-%% '{ terms }' represent a set of terms, hence duplicate terms are ignored
-%%
-%% aggregate functions are:
+%% aggregate functions are applied to terms (weight) only and are:
 #count %% number of elements; used for expressing cardinality constraints
 #sum   %% sum of weights; used for expressing weight constraints
 #sum+  %% sum of positive weights
@@ -246,10 +248,10 @@ next(X,Z) :- set(X), #false : X < Y, Y < Z, set(Y); set(Z), X < Z.
 %%
 %% example with conditional literal:
 %%  the sum of credits (weight) by passed modules (mod) must be at least 20
-20 #sum{ 4 : mod(a) ; 4 : mod(b) ; 6 : mod(c) ; 6 : mod(d) }
+20 #sum{ 4 : mod(a) ; 4 : mod(b) ; 6 : mod(c) ; 6 : mod(d),mod(dExtra) }
 %%  the 'sum' will be '10', due to duplicate terms and hence does not satisfy the constraint
 %%  hence non-single tuples can be used make weights (credits) unique (per mod)
-20 #sum{ 4,a : mod(a) ; 4,b : mod(b) ; 6,c : mod(c) ; 6,d : mod(d) }
+20 #sum{ 4,a : mod(a) ; 4,b : mod(b) ; 6,c : mod(c) ; 6,d : mod(d),mod(dExtra) }
 %%
 %% usage of unification/shorthands is possible but
 %%  discouraged due to potential excessive unwrap of possibilities
@@ -259,75 +261,210 @@ sum(X) :- X = #sum   { 2:a ; 3:a }. %% if a hold 'sum(5)' else 'sum(0)'
 pos(X) :- X = #sum+  { 2:a ; 3:a }. %% if a hold 'pos(5)' else 'pos(0)'
 min(X) :- X = #min   { 2:a ; 3:a }. %% if a hold 'min(2)' else 'min(#sup)'
 max(X) :- X = #max   { 2:a ; 3:a }. %% if a hold 'max(3)' else 'max(#inf)'
-
-
 %%
+%% #min and #max can be also expressed without aggregation:
+:- #min { X,Y : condition_a(Y), condition_b(Y,X) } 2.
+%% is same as
+:- condition_a(Y), condition_b(Y,X), X <= 2.
+
+
 %% --- HEAD AGGREGATES
+%% syntax is same as with body aggregates
+%%  but elements have an 'head literal to be derived' when constraint(s) holds.
+%%  hence of form: <terms tuple>:<derivable literal>:<conditional literals tuple>
+%%  the 'conditional literals tuple' is still optional
 %%
-%% TODO coming soon
+%% get edges having a cost which is higher then 10
+10 < #sum { C,X,Y : edge(X,Y) : cost(X,Y,C) }.
 
 
-%%
-%% --- NON-GROUNDED AGGREGATES
-%%
-%% TODO coming soon
 
-
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 %% PART: optimization problems
-%%---------------------------------------------------------------
+%%-----------------------------------------------------------------------------
 
 
+%% --- WEAK CONSTRAINTS
+%% syntax is similar to integrity constraints
+%%  but associates a weighted term tuple if the body holds
+%%  hence answer sets are comparable and will be weight optimized
 %%
-%% weak constraints
+%% it has the form: (L literal, w weight, p priority, t term)
+%%   :~ L1, ..., Ln. [w@p,t1,...,tn]
 %%
-:~ %% TODO coming soon
-
-
+%% the priority is optional, hence '@p' can be omitted and defaults to 0 (zero)
+%%  the greater the p the more important it is
+%% the weight can be a term but must be an integer
 %%
-%% optimization directives
+%% a abstract example:
+:~ funcA(X), cost(X,C). [C,X] %% cost C and priority 0 (zero)
+:~ funcA(X), funcB(X,Y). [3@1,X,Y] %% cost 3 and a higher priority of 1
+
+
+%% --- OPTIMIZATION DIRECTIVES
+%% above can also be represented like:
+#minimize{  C,X : funcA(X), cost(X,C) ,  3@1,X,Y : funcA(X), funcB(X,Y) }.
+%% and
+#maximize{ -C,X : funcA(X), cost(X,C) , -3@1,X,Y : funcA(X), funcB(X,Y) }.
+%% thus multiple weak constraints can be written within one statement
+
+
+%% --- example 3.16 of 'Potassco: User Guide'
+%% given five hotels, find optimal
+{ hotel(1..5) } = 1.
+%% with information about their stars, cost per night and possible noisiness:
+star(1,5). cost(1,170).
+star(2,4). cost(2,140).
+star(3,3). cost(3,90).
+star(4,3). cost(4,75). main_street(4).
+star(5,2). cost(5,60).
+noisy :- hotel(X), main_street(X).
+%% choose by following prioritization (remember: higher '@p' is more important):
+#maximize { Y@1,X : hotel(X), star(X,Y) }. %% (1) the highest stars
+#minimize { Y/Z@2,X : hotel(X), cost(X,Y), star(X,Z) }. %% (2) the lowest cost per star
+:~ noisy. [ 1@3 ] %% (3) it must not be noisy
+%% result: hotel 3 is optimal
+
+
+%%-----------------------------------------------------------------------------
+%% PART: more features
+%%-----------------------------------------------------------------------------
+
+
+%% --- OUTPUT CONTROL
+%% control output by suppress irrelevant terms and atoms from answer set
 %%
-%% TODO coming soon
-#minimize
-#maximize
-
-
-%%---------------------------------------------------------------
-%% PART: meta
-%%---------------------------------------------------------------
-
-
-%%
-%% #show directive
-%%
-%% ONLY show atom: #show p/n
+%% ONLY show atom n: #show p/n
 #show name/2. %% having name(X, Y) show atoms Y
-%% ADDITIONALLY show terms: #show t : L1, , Ln.
+%% ADDITIONALLY show term t if literals hold: #show t : L1, ..., Ln.
 #show correct : finished, not error.
 %% (optionally) show nothing (except other #show)
 #show.
 
 
+%% --- PROGRAM PARTS
+%% a logic programm can be separated into multiple parts
+%% per default everything is under the program 'base'
+%%  (if not under a '#program <name>' directive other than 'base')
+%%  wich is executed per default
+a. %% under 'base' program,
+#program check_a.
+valid_a :- #true. %% under program 'check_a'; not executed per default
+#program base. %% below this: rules would be executed by default again
+b.
+%% result per default to: {a,b}
 %%
-%% #const directive
+%% a program can have parameters
+#program check_b(x,y).
+valid_b :- check(x,y).
 %%
-%% TODO coming soon
+%% calling such sub programs:
+%%  use parameter 'parts' of 'clingo.Control().ground()'
+%%  a list of '(<program>,<list of parameters>)' tuples
+%%  e.g.: 'clingo.Control().ground( [ ("check_a",[]) , ("check_b",[2,5]) ] )'
 
 
+%% --- INCLUDE other logic programs
+%% a logic programm can be split into multiple files
+%% using '#include <file_path>'
+#include held_fakten.lp
+%% looks up 'held_fakten.lp' file path in following order:
+%%  1. relative to current working folder
+%%  2. relative to the file containing the #include statement
 %%
-%% #external directive
-%%
-%% TODO coming soon
+%% it its not affected by #program directive (see above)
 
 
+%% --- EXTERNAL FUNCTIONS (scripting)
+%% (implement and) use simple Python functions out of the logic program
+%%  their result MUST BE deterministic
 %%
-%% #program directive
+%% on any error the current callee rule is dropped with a warning
 %%
-%% TODO coming soon
+%% function parameters are terms of the type 'clingo.Symbol' and are generic
+%%  which provide properties for different representations:
+%%   number: <parameter>.number
+%%   string: <parameter>.string
+%%   function: <parameter>.name
+%%   function arguments: <parameter>.arguments
+%%
+%% constants and tuples act like functions here:
+%%  constants have an empty argument list
+%%  tuples a empty name
+%%
+%% #sub and #inf are concrete and unique objects: clingo.Sup and clingo.Inf
+%%
+%% first declare such function
+#script(python) %% till #end everything will be interpreted as python code
+import clingo
+N = clingo.Number
+def increase(a):
+    return N(a.number + 1)
+#end
+%% then use it: get highest step and add one
+step(1).
+step(@increase(S)) :- #maximize{ S : step(S)}.
+%% result: step(2).
+%%
+%% the python function could also return a list
+%%  each element will then be successively inserted.
+%% function f with 'return [ N(3) , N(4) ]'
+%%  would make 'step(@f())' to 'step(3,4)' (so behave like 3..4)
+%%
+%% also returnable are:
+%%  strings with 'clingo.String(<string>)'
+%%  functions with 'clingo.Function(<name>,<arguments>)'
+%%
+%%
+%% python code must not be implemented within a '#script'; using the python api
+%%  the 'clingo.Control().ground()' method provides a parameter 'context'
+%%  which would be a class instance
+%%  which methods can be called by '@' (as before)
 
 
-%%
-%% #script and #end directive
-%%
-%% TODO coming soon
+%% --- SOLVING UNDER ASSUMPTIONS
+%% an answer set is only valid if the assumption holds (contains the atom)
+%%  the 'clingo.Control().solve()' method provides a parameter 'assumptions'
+%%  which is a list of '(atom, boolean)' tuples or literals
+%%   e.g.: '[(clingo.Function("valid"), True)]'
+%%   hence the function valid(<any elements>) must be derived True
 
+
+
+%%-----------------------------------------------------------------------------
+%% PART: notes about further features not relevant for our use case
+%%-----------------------------------------------------------------------------
+
+
+%% --- EXTERNAL STATEMENTS
+%% prevents atoms to be discarded for simplifications; if they are
+%%  in the body (of an rule, condition, ...)
+%%  but not in any rule head
+%%
+%% form: '#external A:L1,...,Ln'
+#external q(X) : p(X). %% q is the external atom, p the condition
+%%
+%% its main usage is in extending plain ASP solving like multi-shot solving
+%% hence will not be descripted here, more details in 'Potassco: User Guide'
+%% under part 'External Statements' in chapter 3.1.15 'Meta-Statements'
+
+
+%% --- CONSTANTS WITH PARSABLE DEFAULT VALUES
+%% a constant having a default value but can be overridden before grounding
+%%
+%% form: '#const <constant> = <term without variables, pools or intervals>.'
+#const x = 42.
+#const y = f(x,z).
+p(x,y). %% result in p(42,f(42,z))
+%% TODO how do override the const using the python api?
+
+
+%% --- MULTI-SHOT SOLVING
+%% TODO may be more to come
+
+
+%% --- THEORY SOLVING
+%% TODO may be more to come
+
+%% --- HEURISTIC-DRIVEN SOLVING
+%% TODO may be more to come

@@ -1,4 +1,4 @@
-from pygments.lexer import RegexLexer
+from pygments.lexer import RegexLexer, bygroups
 from pygments.token import *
 
 __all__ = ['ClingoLexer']
@@ -19,25 +19,30 @@ class ClingoLexer(RegexLexer):
         'root': [
             (r"\s+", Whitespace),
             # (r"\w+", Text),
-            (r'"', String.Double, "simple-string"),  # start string
+            (r'"', String.Double, "simple-string"),
             (r'\d+', Number.Integer),
             (r'[\[\](){}.,]', Keyword),
             (r':-', Keyword),
-            (r'[:;=]', Keyword.Type),
+            (r'[:;=@]', Keyword.Type),
             (r'\.\.', Keyword.Type),
             (r'(!=?|&|\*|\+|-|\/|\\|\||<=?|>=?|\?|\^|not|~|\')', Operator),
-            (r'(:~|#(count|false|inf|max(imize)?|min(imize)?|program|show|sum\+?|sup|true))', Operator.Word),
-            (r'_?[A-Z]\w*', Name.Variable),
+            (r'(:~|#(count|false|inf|max(imize)?|min(imize)?|program|show|sum\+?|sup|true|external|script|end|const|include))', Operator.Word),
+            # (r'_?[A-Z]\w*', Name.Variable),
             # (r'(_?[a-z]\w*)(?!\()', Name.Constant),
             (r'(_?[a-z]\w*)(?=\()', Name.Function),
+            (r'%\*', Comment.Multiline, 'multiline-comment'),
+            (r'(%.*)(TODO(?: [\w \t]*)?)',
+             bygroups(Comment.Single, Comment.Special)
+             ),
             (r'%.*', Comment.Single),
-            (r'%\*', Comment.Multiline, 'nested-comment'),
         ],
-        'nested-comment': [
+        'multiline-comment': [
             (r'%\*', Comment.Multiline, '#push'),
             (r'\*%', Comment.Multiline, '#pop'),
+            (r'([^*%]+)(TODO(?: [\w \t]*)?)([^*%]+)',
+             bygroups(Comment.Multiline, Comment.Special,Comment.Multiline)
+            ),
             (r'[^*%]+', Comment.Multiline),
-            (r'[*%]', Comment.Multiline),
         ],
         'simple-string': [
             (r'\\\\', String.Escape),  # Escaped \

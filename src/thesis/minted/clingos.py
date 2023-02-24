@@ -36,7 +36,7 @@ class ClingosStyle(Style):
         # Keyword.Namespace: '',
         # Keyword.Pseudo: '',
         # Keyword.Reserved: '',
-        Keyword.Type: 'bold #FE9720',  # orange @@@ .. : ; =
+        Keyword.Type: 'bold #CC6620',  # orange @@@ .. : ; = @
 
         # Name: '',
         # Name.Attribute: '',
@@ -99,7 +99,7 @@ class ClingosStyle(Style):
         # Comment.Preproc: '',
         # Comment.PreprocFile: '',
         # Comment.Single: '',
-        # Comment.Special: '',
+        Comment.Special: 'bold #B4B400',  # yellow
 
         # Generic: '',
         # Generic.Deleted: '',
