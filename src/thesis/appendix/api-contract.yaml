@@ -16,18 +16,26 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: { }
-  /held/validate:
+              schema: {}
+  /hero/validate:
     post:
       tags:
-        - held
+        - hero
       summary: Validate
-      operationId: validate_held_validate_post
+      operationId: validate_hero_validate_post
+      parameters:
+        - required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Rulebook'
+          name: rulebooks
+          in: query
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_validate_held_validate_post'
+              $ref: '#/components/schemas/Hero'
         required: true
       responses:
         '200':
@@ -35,14 +43,58 @@ paths:
           content:
             application/json:
               schema:
-                title: Response Validate Held Validate Post
-                type: boolean
+                $ref: '#/components/schemas/HeroValidationResult'
         '500':
-          description: Bei unerwarteten Fehlern.
+          description: Unexpected server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerFehler'
+                $ref: '#/components/schemas/ServerError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /meta/list:
+    get:
+      tags:
+        - meta
+      summary: List Feature
+      description: Get list of possible values for a feature under given context (like
+        active rulebooks).
+      operationId: list_feature_meta_list_get
+      parameters:
+        - required: true
+          schema:
+            $ref: '#/components/schemas/Feature'
+          name: feature
+          in: query
+        - required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Rulebook'
+          name: rulebooks
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response List Feature Meta List Get
+                anyOf:
+                  - type: array
+                    items:
+                      type: string
+                  - $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
         '422':
           description: Validation Error
           content:
@@ -51,28 +103,43 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Body_validate_held_validate_post:
-      title: Body_validate_held_validate_post
+    ClientError:
+      title: ClientError
       required:
-        - held
-        - context
+        - detail
       type: object
       properties:
-        held:
-          $ref: '#/components/schemas/Held'
-        context:
-          $ref: '#/components/schemas/Context'
-    Context:
-      title: Context
-      required:
-        - regelsets
-      type: object
-      properties:
-        regelsets:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegelSet'
+        detail:
+          title: Detail
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/ExceptionDetails'
       additionalProperties: false
+    ExceptionDetails:
+      title: ExceptionDetails
+      required:
+        - type
+        - message
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+        message:
+          title: Message
+          type: string
+      additionalProperties: false
+    Feature:
+      title: Feature
+      enum:
+        - Species
+        - Culture
+        - Profession
+        - Advantage
+        - Disadvantage
+        - Skill
+      type: string
+      description: An enumeration.
     HTTPValidationError:
       title: HTTPValidationError
       type: object
@@ -82,85 +149,64 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    Held:
-      title: Held
+    Hero:
+      title: Hero
       required:
         - name
-        - spezies
-        - kultur
+        - species
+        - culture
+        - profession
       type: object
       properties:
         name:
           title: Name
           type: string
-        spezies:
-          $ref: '#/components/schemas/Spezies'
-        kultur:
-          $ref: '#/components/schemas/Kultur'
+        species:
+          title: Species
+          type: string
+        culture:
+          title: Culture
+          type: string
+        profession:
+          title: Profession
+          type: string
       additionalProperties: false
-    Kultur:
-      title: Kultur
+    HeroValidationResult:
+      title: HeroValidationResult
+      required:
+        - valid
+        - errors
+      type: object
+      properties:
+        valid:
+          title: Valid
+          type: boolean
+        errors:
+          title: Errors
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    Rulebook:
+      title: Rulebook
       enum:
-        - Auelfen
-        - Firnelfen
-        - Steppenelfen
-        - Waldelfen
-        - Andergaster
-        - Aranier
-        - Bornländer
-        - Ferkinas
-        - Fjarninger
-        - Gjalsker
-        - Horasier
-        - Koboldweltler
-        - Maraskaner
-        - Mhanadistani
-        - Mittelreicher
-        - Mohas
-        - Nivesen
-        - Norbarden
-        - Nordaventurier
-        - Nostrier
-        - Novadis
-        - Svellttaler
-        - Südaventurier
-        - Thorwaler
-        - Trollzacker
-        - Zahori
-        - Zyklopäer
-        - Ambosszwerge
-        - Brillantzwerge
-        - Erzzwerge
-        - Hügelzwerge
-        - Wildzwerge
+        - dsa5
+        - dsa5_expansion
+        - dsa5_expansion2
       type: string
       description: An enumeration.
-    RegelSet:
-      title: RegelSet
-      enum:
-        - DSA5_Grund
-        - DSA5_Optional
-      type: string
-      description: An enumeration.
-    ServerFehler:
-      title: ServerFehler
+    ServerError:
+      title: ServerError
       required:
         - detail
       type: object
       properties:
         detail:
           title: Detail
-          type: string
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/ExceptionDetails'
       additionalProperties: false
-    Spezies:
-      title: Spezies
-      enum:
-        - Elfen
-        - Halbelfen
-        - Mensch
-        - Zwerg
-      type: string
-      description: An enumeration.
     ValidationError:
       title: ValidationError
       required:
