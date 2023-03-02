@@ -1,14 +1,14 @@
 \section{Auswahl der Programmiersprache}\label{sec:auswahl-der-programmiersprache}
 
-Mit der Wahl des Verfahrens grenzt sich, im allgemeinen und stark im Speziellen, wie im Folgenden gezeigt wird, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
+Mit der Wahl des Verfahrens grenzt sich, im Allgemeinen und \insb im Speziellen, wie im Folgenden gezeigt wird, die Auswahl möglicher Programmiersprachen für die quelloffene Software ein.
 In diesem Kapitel werden zunächst die populärsten Frameworks für \Abk{ASP} und ihre wichtigsten unterstützten Programmiersprachen vorgestellt.
 Anschließend, unter Beachtung der Rahmenbedingungen der quelloffenen Software, wie die aus \Kapitel[KP]{subsec:abgeleitete-technische-anforderungen}, bewertet und ausgewählt.
 %% TODO may say something about Alpha https://github.com/alpha-asp/Alpha or ASPARTIX https://www.dbai.tuwien.ac.at/proj/argumentation/systempage/
 
-Wrapper- und High-Level-\Abk{API}s (dritter), welche diese Frameworks für weitere Programmiersprachen verfügbar machen oder die Nutzung vereinfachen, werden nicht beachtet.
-Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist, als die erlangten Vorteilen.
-Wenn es \zB relevante Updates des eigentlichen Frameworks gibt aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützt, so wäre man in der Entwicklung blockiert.
-Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffene Software sind, nicht mehr gewartet wird und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu erheblichen Mehraufwand führen würde.
+Wrapper- und High-Level-\Abk{API}s (Dritter), welche diese Frameworks für weitere Programmiersprachen verfügbar machen oder die Nutzung vereinfachen, werden nicht beachtet.
+Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist als die erlangten Vorteile.
+Wenn es \zB relevante Updates des eigentlichen Frameworks gibt, aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützten, kann die Entwicklung blockiert sein.
+Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffen sind, nicht mehr gewartet werden und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu (erheblichen) Mehraufwand führen würde.
 Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für Clingos Python \Abk{API}: \url{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP: \url{https://github.com/sthiele/pyasp})}, Asp4J\Note{Clingo High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{Clingo Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{Clingo \Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
 
 
@@ -16,48 +16,48 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 
 \begin{description}
     \item[\Abk{DLV}] ist seit dem Jahr \Jahr{1996} verfügbar.
-    Über die Jahre wurde das System signifikant verbessert und die Sprache erweitert.
-    Wodurch es im Bereich \Abk{DLP} zum Standard wurde und vergleichbar, \insb hinsichtlich der Effizients, mit anderen fortgeschrittenen \Abk{ASP} Systemen ist.
+    Über die Jahre wurde das System signifikant verbessert und die Sprache erweitert, wodurch es im Bereich \Abk{DLP} zum Standard wurde und vergleichbar, \insb hinsichtlich der Effizienz, mit anderen fortgeschrittenen \Abk{ASP}-Systemen ist.
     \Vgl[Kapitel 1]{DLV-Leone2006}
 
-    Ein Vorteil von \Abk{DLV} im Vergleich ist die Breite der Anwendbarkeit.
-    Neben seiner Kernstärke in \Abk{DB}-orientierte Anwendungen, mit großen Datenmengen, kann es mit ausreichender Effizients \Begriff{NP} Such- und Optimierungsproblemen bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
-    Andere Systeme hingehen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
+    Ein Vorteil von \Abk{DLV}, im Vergleich, ist die Breite der Anwendbarkeit.
+    Neben seiner Kernstärke in \Abk{DB}-orientierten Anwendungen mit großen Datenmengen, kann es mit ausreichender Effizienz \Begriff{NP} Such- und Optimierungsprobleme bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
+    Andere Systeme hingegen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
     \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
 
-    Aktuell wird \Abk{DLV} fokusiert von DLVSYSTEM S.R.L. beworben und vertrieben, mit dem Fokus auf industrielle Bereiche.
+    Aktuell wird \Abk{DLV} fokussiert von DLVSYSTEM S.R.L. beworben und mit dem Fokus auf industrielle Bereiche vertrieben.
     Sie wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
     \Vgl{DLV-Calimeri2012, DLV-dlvsystem-histroy}
 
-    Ein \Abk{DLV}-Programm kann ausgeführt werden, in dem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
-    Dies kann direkt oder gesteuert durch eine Software, beliebiger Programmiersprache, geschehen;
+    Ein \Abk{DLV}-Programm kann ausgeführt werden, indem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
+    Dies kann manuell oder gesteuert durch eine Software beliebiger Programmiersprache geschehen;
     die naheliegendste ist C++, da das Framework in C implementiert wurde.
-    Um die Entwicklung zu vereinfachen wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{\textquote{integrated development environment}} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, \Abk{DB}-Integration und eine Platform zum Austausch von Plugins, erstellt von anderen Benutzern.
+    Um die Entwicklung zu vereinfachen, wurde von DLVSYSTEM S.R.L. eine eigene \AbkS{IDE}{\textquote{integrated development environment}} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet, neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, \Abk{DB}-Integration und eine Plattform zum Austausch von Plugins, erstellt von anderen Benutzern.
     \Vgl{DLV-Leone2015}
 
-    Es existiert zu dem eine Java Schnittstelle\Englisch{interface} JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}, wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
+    Es existiert zudem eine Java-Schnittstelle\Englisch{interface} (JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}), wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
+    % TODO add JASP link
 
     \Abk{DLV} wird auch weiterhin direkt von der Universtität von Calabria veröffentlicht.
-    Sie bieten zusätzlich eine Variante an, die den Aufruf von Python Funktionen als \Begriff{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
+    Sie bieten zusätzlich eine Variante an, die den Aufruf von Python-Funktionen als \Begriff{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
     \Vgl{DLV-unical-home}
 
     \item[Clingo] ist ein \Abk{ASP}-System von \Abk{Potassco}, ein Projekt der Universtität Potsdam, das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
-    Clingo selbst und alle seine Komponenten sind, seit \Jahr{2008}, quelloffen;
-    seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
+    Clingo selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen;
+    und seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
     Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
-    Aus einem Clingo Logik-Programm kann man außerdem sehr einfach externe Funktionen, \zB Python Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
+    Aus einem Clingo-Logik-Programm kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
 
-    Zwei wichtige Feature (eingeführt mit der Clingo Version 4), für die Modellierung von komplexen Problemen, sind:
+    Zwei wichtige Features (eingeführt mit der Clingo Version 4), für die Modellierung von komplexen Problemen, sind:
     \begin{inparaenum}[\bfseries(a)]
         \item die Möglichkeit Teile des Logik-Programms in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
         \item Regeln/Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden
     \end{inparaenum}
     \Vgl{CLINGO-Gebser2014}.
-    Ebenfalls nennenswert ist die Unterstützung, ab Version 5, von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular innerhalb einer Theorie definiert und entstehende Aussagen außerhalb dieser wiederverwenden werden können \Vgl{CLINGO-Gebser2016}.
-    Und das \sog[multi-shot solving] (aus Version 4), bei dem ein Logik-Programm nicht einmal in Gänze gelöst/durchlaufen wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend, gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
+    Ebenfalls nennenswert ist die Unterstützung, ab Version 5, von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
+    Auch zu nennen ist das \sog[multi-shot solving] (aus Version 4), bei dem ein Logik-Programm nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
 
-    Mit der Clingo Erweiterung clingcon (\textquote{con} für Bedingung\Englisch{constraint}) können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachten werden \Vgl{CLINGO-Clingcon}.
-    Hingehen die Erweiterung \AbkS{clorm}{Clingo ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
+    Mit der Clingo Erweiterung clingcon (\textquote{con} für Bedingung\Englisch{constraint}) können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
+    Hingegen die Erweiterung \AbkS{clorm}{Clingo ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
 \end{description}
 
 
@@ -65,78 +65,81 @@ Beispiele sind clingo-haskell\Note{Clingo \Abk{API} für Haskell: \url{https://g
 \subsection{Unterstützte Programmiersprachen}\label{subsec:unterstutzte-programmiersprachen}
 
 \begin{description}
-{\color{red}
-    \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (seit 2010 Teil von Oracle) entwickelt wurde. Mit OpenJDK\Note{\url{https://openjdk.org/}} gibt existiert auch eine quelloffene Implementierung.
-    Es ist eine kompilierte Sprache, \dahe der Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor er ausgeführt werden kann.
-    Java ist plattformunabhängig, es kann daher auf vielen \Abk{OS} und Geräten ausgeführt werden.
-    Dazu bedarf es jedoch eine installierte \AbkS{JRE}{Java Runtime Environment}.
-    Diese beinhaltet \uA die \AbkS{JVM}{Java Virtual Machine}, welche das Java-Programm in Maschinensprache, die vom jeweiligen Computer verstanden werden kann, übersetzt.
-    Für eine noch bessere Ausführungszeit existieren \AbkS{JIT}{Just-in-time} Übersetzer, bei denen der Code nicht vorab, sondern erst bei Gebrauch übersetzt wird, und \Abk{OS} \textquote{Native}, wonach der Maschienencode nur noch unter spezifischen Bedingungen ausgeführt werden kann.
-    Java unterstützt eine Vielzahl von Programmierkonzepten, darunter Objektorientierung, Nebenläufigkeit\Englisch{multithreading} und Ausnahmebehandlung\Englisch{exception handling}.
-    Diese Funktionalitäten und die konzeptionell eingebauten Eigenschaften wie Einfachheit (\zB automatische Speicherverwaltung), Robustheit (\zB Typisierung), Verteilheit (Anbindung verschiedener Netzwerke) und Dynamik (zur Laufzeit: Austausch von Resourcen) ermöglichen es Entwickelnden, große und komplexe Anwendungen zu erstellen.
-    Es ist dahingehend eine sichere Sprache, dass sie verhindert, dass ein Programm unbeabsichtigt andere Teile des Systems beeinflusst oder der Code selbst manipuliert werden kann.
-    Als weitestgehend (stark, statisch und explizit) typisierte Sprache bietet Java den Entwicklenden bereits bei der Kompilierung eine frühe Fehlererkennung bei unzulässigen Wertetypen an, eine Verlässlichkeit bei der Entwicklung und eine bessere Performance im Vergleich zu dynamischen Typisierung.
-    Java wird in sehr vielen Bereichen und Anwendungen eingesetzt;
-    von Geschäfts- und Industrie-Bereich bis zur Wissenschaft, darunter fallen eingebettete (in Geräten), webbasierte, mobile und Desktop Anwendungen sowie Backendsysteme und Spiele.
-    \Vgl{JAVA-Parsons2020}
-}
+% TODO java
+%{\color{red}
+%    \item[Java] ist eine \Abk{OOP}-Sprache, die in den 1990er Jahren von Sun Microsystems (seit 2010 Teil von Oracle) entwickelt wurde. Mit OpenJDK\Note{\url{https://openjdk.org/}} gibt existiert auch eine quelloffene Implementierung.
+%    Es ist eine kompilierte Sprache, \dahe der Programmcode muss erst in Maschinensprache übersetzt\Englisch{compiled} werden, bevor er ausgeführt werden kann.
+%    Java ist plattformunabhängig, es kann daher auf vielen \Abk{OS} und Geräten ausgeführt werden.
+%    Dazu bedarf es jedoch eine installierte \AbkS{JRE}{Java Runtime Environment}.
+%    Diese beinhaltet \uA die \AbkS{JVM}{Java Virtual Machine}, welche das Java-Programm in Maschinensprache, die vom jeweiligen Computer verstanden werden kann, übersetzt.
+%    Für eine noch bessere Ausführungszeit existieren \AbkS{JIT}{Just-in-time} Übersetzer, bei denen der Code nicht vorab, sondern erst bei Gebrauch übersetzt wird, und \Abk{OS} \textquote{Native}, wonach der Maschienencode nur noch unter spezifischen Bedingungen ausgeführt werden kann.
+%    Java unterstützt eine Vielzahl von Programmierkonzepten, darunter Objektorientierung, Nebenläufigkeit\Englisch{multithreading} und Ausnahmebehandlung\Englisch{exception handling}.
+%    Diese Funktionalitäten und die konzeptionell eingebauten Eigenschaften wie Einfachheit (\zB automatische Speicherverwaltung), Robustheit (\zB Typisierung), Verteilheit (Anbindung verschiedener Netzwerke) und Dynamik (zur Laufzeit: Austausch von Resourcen) ermöglichen es Entwickelnden, große und komplexe Anwendungen zu erstellen.
+%    Es ist dahingehend eine sichere Sprache, dass sie verhindert, dass ein Programm unbeabsichtigt andere Teile des Systems beeinflusst oder der Code selbst manipuliert werden kann.
+%    Als weitestgehend (stark, statisch und explizit) typisierte Sprache bietet Java den Entwicklenden bereits bei der Kompilierung eine frühe Fehlererkennung bei unzulässigen Wertetypen an, eine Verlässlichkeit bei der Entwicklung und eine bessere Performance im Vergleich zu dynamischen Typisierung.
+%    Java wird in sehr vielen Bereichen und Anwendungen eingesetzt;
+%    von Geschäfts- und Industrie-Bereich bis zur Wissenschaft, darunter fallen eingebettete (in Geräten), webbasierte, mobile und Desktop Anwendungen sowie Backendsysteme und Spiele.
+%    \Vgl{JAVA-Parsons2020}
+%}
 
-    \item[C++] ist eine objektorientierte, imperative und template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991}, als eine Allzweck (Allgemein brauchbare) Programmiersprache, entwickelt wurde.
-    Es ist eine Erweiterung, oder Nachfolger, der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und die Wiederverwendbarkeit von Code zu beheben.
+    \item[C++] ist eine Objekt-orientierte, imperative und Template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991}, als eine Allzweck-Programmiersprache, entwickelt wurde.
+    Es ist eine Erweiterung oder Nachfolger der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und Wiederverwendbarkeit von Code zu beheben.
     So wurden klassische \Abk{OOP}-Konzepte wie Klassen, Vererbung, Polymorphismus und Abstraktion, als auch Paradigmen wie generische Typen, eingebaut, die es Entwickelnden ermöglicht, komplexe Software effizient zu entwickeln und übersichtlich zu organisieren.
     \Vgl{C++-Stroustrup2007}
 
     Besondere Eigenschaft sind \uA:
     \begin{inparaenum}[\bfseries(a)]
-        \item die Möglichkeit Vorlagen\Englisch{templates} zu erstellen, um Code, welches \zB oft ähnlich wiederholt, generisch zu schreiben und wiederverwendbar zu machen;
+        \item die Möglichkeit Vorlagen\Englisch{templates} zu erstellen, um \zB einen sich oft ähnlich wiederholenden Code generisch zu schreiben und wiederverwendbar zu machen;
         \item die \AbkS{STL}{Standard Template Library}, eine umfangreiche Sammlung gebrauchsfertiger Vorlagen;
         \item Mehrfachvererbung, bei der eine Klasse mehr als eine Elternklasse haben kann;
-        \item die möglichkeit die Vererbungshierarchie zur Laufzeit zu verändern;
+        \item die Möglichkeit die Vererbungshierarchie zur Laufzeit zu verändern.
     \end{inparaenum}
     \Vgl{C++-Seed2001}
 
-    Wie Java und der Vorgänger C ist C++ eine kompilierte Sprache.
-    Es ist aber nicht so einfach portable wie Java, da je nach ausführender Maschine und \Abk{OS} sind andere Kompilatoren und Bibliotheken zu nutzen.
-    Dabei wird C++, aufgrund der als oft bezeichneten \textquote{Nähe zur Maschine/Hardware}, aufgrund der vielen Möglichkeiten die Software ins kleinste Detail zu steuern und zu optimieren, wie \zB die Speicherverwaltung, als Programmiersprache niederer Ebene betrachtet.
+    Wie Java und der Vorgänger C, ist C++ eine kompilierte Sprache.
+    Es ist aber nicht so einfach portabel wie Java, da, je nach ausführender Maschine und \Abk{OS}, andere Kompilatoren und Bibliotheken zu nutzen sind.
+    C++ wird als Programmiersprache niederer Ebene betrachtet.
+    Grund dafür sind die vielen Möglichkeiten die Software ins kleinste Detail zu steuern und zu optimieren, wie \zB die Speicherverwaltung, welches oft als \textquote{Nähe zur Maschine/Hardware} bezeichnet wird.
     Diese Vielseitigkeit macht es zugleich anfälliger für Fehler durch Entwickelnde.
     \Vgl{C++-Sharma2019}
 
-    Aufgrund der langen Historie und vielseitigen Spracheigenschaften von C++ wurde und wird es in nahezu sämtlichen erdenkbaren Bereichen eingesetzt;
-    einige Beispiele sind Banken und Finanzwesen, Systementwicklung von \Abk{OS}, \Abk{DB} und Kompilatoren, eingebettete Systeme, wie in Kameras, Flugzeugen und medizinischen Geräten, Spiele und wissenschaftlichen Simulationen \Vgl{C++-Stroustrup2007}.
+    Aufgrund der langen Historie und vielseitigen Spracheigenschaften von C++, wurde und wird es in nahezu sämtlichen erdenkbaren Bereichen eingesetzt;
+    einige Beispiele sind Banken und das Finanzwesen, die Systementwicklung von \Abk{OS}, \Abk{DB} und Kompilatoren, eingebettete Systeme, wie in Kameras, Flugzeugen und medizinischen Geräten, Spiele und wissenschaftliche Simulationen \Vgl{C++-Stroustrup2007}.
 
     \item[Python] ist eine High-Level-Programmiersprache, die ursprünglich 1989 von Guido van Rossum entwickelt wurde.
-    Seitdem hat sie sich zu einer der am häufigsten verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlicher Intelligenz und Webentwicklung entwickelt.
+    Seitdem hat sie sich zu einer der am häufigst verwendeten Sprachen in der Wissenschaft, Datenanalyse, künstlichen Intelligenz und Webentwicklung entwickelt.
     Eines der wichtigsten Merkmale ist seine Les- und Schreibbarkeit, die es Entwickelnden ermöglicht Code einfach, verständlich und schnell zu schreiben.
     Es verwendet eine natürliche und lesbare Syntax, welche zugleich sparsam ist.
-    Für Englisch-sprachige ist sie besonders angenehm, beim Verstehen und Pflegen, aufgrund der Ähnlichkeiten der Schlüsselwörter und Aufbau von Kontrollstrukturen.
+    Für Englisch-sprachige ist sie besonders angenehm beim Verstehen und Pflegen, aufgrund der Ähnlichkeiten der Schlüsselwörter und des Aufbaus von Kontrollstrukturen.
     Python ist eine interpretierte Sprache, was bedeutet, dass der Code nicht vor der Ausführung kompiliert werden muss.
     Dieser wird stattdessen zur Laufzeit vom \sog Interpretierer\Englisch{interpreter} Befehl für Befehl ausgeführt.
     Ein \ggf langwieriger Kompilierungsprozess entfällt daher.
     Ein weiteres wichtiges Merkmal von Python ist seine Dynamik.
     Es ermöglicht Entwickelnden, Variablen und Datentypen während der Laufzeit des Programms zu ändern, anstatt sie vorab deklarieren und kompilieren zu müssen.
     Dies erleichtert die Entwicklung von Prototypen und ermöglicht es, flexibler auf Änderungen im Code zu reagieren.
-    Als Nachteil gegenüber kompilierten Sprache ist für gewöhnlich eine längere/langsamere Ausführungszeit/Laufzeit.
+    Ein Nachteil gegenüber kompilierten Sprachen ist, für gewöhnlich, eine längere/langsamere Ausführungszeit/Laufzeit.
     Python hat eine große und aktive Gemeinschaft, die eine Vielzahl von Bibliotheken und Modulen bereitstellt, die es Entwickelnden erlaubt sich beim Programmieren auf ihren Anwendungsfall (ihre Problemstellung) zu fokussieren und so leichter und schneller fertig zu werden.
     Beispiele für solche Bibliotheken sind NumPy\Note{\url{https://numpy.org/}} und Pandas\Note{\url{https://pandas.pydata.org/}} für Datenanalyse, TensorFlow\Note{\url{https://www.tensorflow.org/}} für künstliche Intelligenz und Django\Note{\url{https://www.djangoproject.com/}} für Webentwicklung.
-    Python ist eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Personen ohne Vorkenntnisse als auch für erfahrene Entwickelnden eignet und in einer Vielzahl von Bereichen eingesetzt werden kann.
+    Python ist eine vielseitige und leistungsfähige Programmiersprache, die sich sowohl für Personen ohne Vorkenntnisse als auch für erfahrene Entwickelnde eignet und in einer Vielzahl von Bereichen eingesetzt werden kann.
     \Vgl{PYTHON-Oliphant2007,PYTHON-Millman2011,PYTHON-Jaworski2021}
 \end{description}
 
 
 \subsection{Auswahl Framework-Sprachen-Kombination}\label{subsec:auswahl-framework-sprachen-kombination}
 
-Zunächst am entschiedensten ist die Wahl des Frameworks, bevor eine Programmiersprache ausgewählt werden kann.
+Am entschiedensten ist zunächst die Wahl des Frameworks, bevor eine Programmiersprache ausgewählt werden kann.
 Beide der genannten Frameworks sind für den nicht-kommerziellen Gebrauch, bezogen auf die Lizenz, frei verfügbar.
 Clingo bietet im Vergleich zu \Abk{DLV} eine größere Anzahl relevanter Features (inkl. der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des Logik-Programms.
 Auch die breitere Unterstützung von Programmiersprachen und deutlich bessere Integration in diesen spricht für Clingo.
-Die genannten Erweiterungen und ungenannten Projekte, welche auf Clingos Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft, relevante Erweiterungen und weitere solide Integrationen versprechen.
-Ebenfalls entscheiden ist die Verfügbarkeit und Qualität von Dokumentationen, hier bietet Clingo, aufgrund der veröffentlichen Materialien, welche in einem Universitären Kontext zur Bildung genutzt werden, eine bessere Grundlage.
+Die genannten Erweiterungen und ungenannten Projekte, welche auf Clingos Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft relevante Erweiterungen und weitere solide Integrationen versprechen.
+Ebenfalls entscheidend ist die Verfügbarkeit und Qualität von Dokumentationen.
+Hier bietet Clingo, aufgrund der veröffentlichten Materialien, welche in einem universitären Kontext zur Bildung genutzt werden, eine bessere Grundlage.
 \textbf{Clingo ist} daher \textbf{das geeignetere Framework}.
 
-Die von Clingo native, also offiziell (out-of-the-box), unterstützten Programmiersprachen, von Relevanz (aufgrund der Popularität), sind C(++) und Python.
+Die von Clingo nativ, also offiziell (out-of-the-box), unterstützten und relevanten (aufgrund der Popularität) Programmiersprachen sind C(++) und Python.
 Die freundlichste für ungeübte und angehende Programmierende ist Python.
 Dies, also der Einstieg in die Programmierung abhängig der Sprache, wurde in Ansätzen in \Vgl{C++-Ateeq2014} für Python und C++ aufgezeigt.
 Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwicklenden bestimmte Aufgabenbereiche abnimmt.
 Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von Clingos Logik-Programmen passt.
 Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem Clingo Logik-Programm heraus externe und kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
-Somit stellt \textbf{Python} die \textbf{sinnvollste Wahl} der Programmiersprache dar.
+Somit stellt \textbf{Python} die \textbf{sinnvollste} Wahl der \textbf{Programmiersprache} dar.
