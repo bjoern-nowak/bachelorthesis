@@ -2,4 +2,8 @@
 
 {\color{red} %% TODO
 - notwendige konvertierung von python datentypen in clingo symbol typen
+%- erzeugen von fakten aus einer Liste aus python ohne Hilfsfakten zum entpacken
+%- 'conditional literal' im head verhalten sich anders als im body: sie dienen nur dem mapping über ein atom. unten stehendes geht nicht:
+%profession_unusable(species) : species(S), not profession_requires_species(P,S) :- profession(P), profession_requires_species(P,_).
+%profession_unusable(culture) : culture(C), not profession_requires_culture(P,C) :- profession(P), profession_requires_culture(P,_).
 }
