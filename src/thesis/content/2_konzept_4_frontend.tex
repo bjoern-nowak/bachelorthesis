@@ -4,29 +4,99 @@ In diesem Kapitel wird der Schnittstellenvertrag zwischen Front- und Backend, al
 Dieser spiegelt die konkreten Aufgaben der zu entwickelnden Software wider.
 Es beinhaltet \uA die konkreten Endpunkte, die Pflicht- und optionalen Parameter (\inkl des Wertetyps und -bereichs), die erwarteten Antworten (\inkl Wertetypen und -bereiche), eine Beschreibung und Beispielwerte der Parameter.
 Durch den Umfang ist es zugleich eine gute Dokumentation der Schnittstelle.
-Dazu wird das populärste Framework \textbf{Swagger} eingesetzt und das Format \textbf{\Abk{YAML}} genutzt, da es eine gut lesbare Syntax hat und Kommentare erlaubt \Vgl[Kapitel 4]{KONZEPT-De2017}.
+Dazu wird eine der populärsten Spezifikationen \textbf{OpenAPI} eingesetzt und im Format \textbf{\Abk{YAML}} bereitgestellt, da es eine gut lesbare Syntax hat und Kommentare erlaubt \Vgl[Kapitel 4]{KONZEPT-De2017}.
 
 Der Vorteil einer frühzeitigen Definition ist, dass man unabhängig \textquote{gegen} diesen Schnittstellenvertrag entwickeln kann, sodass mögliche (zeitliche) Entwicklungsabhängigkeiten zwischen Front- und Backend nicht entstehen \Vgl[Kapitel 3]{KONZEPT-De2017}.
-Basierend auf den Schnittstellenvertrag können dann \sog Mocks zur Entkopplung erstellt werden.
-Diese sind Nachbildungen der jeweils anderen Schnittstellen-Seite, welche das gewünschte \bzw erwartete Verhalten imitiert und so ermöglicht das eigene System \textquote{gegen} die Schnittstelle zu testen.
+Basierend auf den Schnittstellenvertrag können \sog Mocks zur Entkopplung erstellt werden.
+Dies sind Nachbildungen der jeweils anderen Schnittstellen-Seite, welche das erwartete Verhalten imitiert und so ermöglicht das eigene System \textquote{gegen} die Schnittstelle zu testen.
 
-Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, werden verschiedene Versionen dieses Schnittstellenvertrags entstehen; dabei kann es vorkommen, dass zu einem Zeitpunkt mehrere, also nicht nur die Neuste, Versionen unterstützt werden müssen \Vgl[Kapitel 6]{KONZEPT-De2017}.
-Daher ist es wichtig die Schnittstellenverträge in der Entwicklung und vom Endpunktpfad explizit versioniert zu behandeln.
+Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, wird es vorkommen, dass Anpassungen am Schnittstellenvertrag gemacht werden und so verschiedene Versionen entstehen \Vgl[Kapitel 6]{KONZEPT-De2017}.
+Um den Wartungsaufwand, \zB durch API Versionierung im Pfad, gering zu halten und weil es sich hierbei um keine öffentliche API handelt mit einer großen Anwenderzahl, wird stets nur die aktuellste Version vom Backend unterstützt.
+Dies bedeutet, dass eine neue API-Version nur veröffentlicht werden kann, wenn diese mit der aktuell veröffentlichten Frontend-Version kompatibel ist.
 
-{\color{red}
-Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:api-contract.yaml} vor;
-nachfolgend wird dieser exemplarisch an einem Endpunkt erklärt.
-Wie in \Listing{lst:apicontractyaml} zu sehen ist, dass....
-}
 
-%\lstinputlisting[
-%label=lst:apicontractyaml,
-%caption={api-contract.yaml (bis Zeile 20)},
-%lastline=20,
-%language=yaml,
-%float=tbp
-%]{appendix/api-contract.yaml}
+Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:api-contract.yaml} vor.
+Im generellen sind die Anfrage-Körper\Englisch{request bodies} und Antworten\Englisch{responses} im Format \textbf{\AbkK{JSON}}\@.
+Nachfolgend werden die vorgesehenen Endpunkte erklärt, dabei wird unter Regelbuch auch Regelbuch-Erweiterungen verstanden:
+\begin{description}
+    \setlength\tabcolsep{1pt} %% shrink space between column, set cell text start like normal paragraph
+
+    \item[/api/meta/rulebook/list] Gibt die Liste der verfügbaren Regelbücher zurück.
+    Diese Information soll dynamisch ermittelt werden, um den Wartungsaufwand manueller Pflege fester Listen zu verhindern und um \insb zur Laufzeit \textquote{Kaputte} rauszufiltern.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \HttpInline{GET /api/meta/rulebook/list}
+        & \CodeInline{\verb|["dsa5","dsa5_aventurisches_kompendium_2"]|} \\
+    \end{tabularx}
+
+    \item[/api/meta/feature/list] Gibt für ein Merkmal die Liste der verfügbaren Ausprägungen, unter Beachtung zu verwendender Regelbücher, zurück.
+    Diese Information muss dynamisch entsprechend der auszuwertenden Regelbücher ermittelt werden.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \makecell[l]{%
+            \HttpInline{GET /api/meta/feature/list?feature=species\&}\\%
+            \HttpInline{rulebooks=dsa5}%
+        }
+        & \CodeInline{\verb|["Elfen","Halbelfen","Mensch","Zwerg"]|} \\
+    \end{tabularx}
+
+    \item[/api/hero/validate] Dies stellt den wichtigsten Endpunkt dar.
+    Es wird geprüft ob, der gegebenen Charakter, unter Beachtung der zu verwendenden Regelbücher, gültig ist.
+    Dabei werden etwaige Regelverstöße detailliert als Fehler \bzw Warnung zurückgegeben.
+    Nur Fehler führen dazu, dads ein Charakter für ungültig erklärt wird.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \HttpInline{POST /api/hero/validate?rulebooks=dsa5}
+        & \CodeInline{<\Listing[KP]{lst:invalidheroresponseexamplejson}>} \\
+        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} & \\
+    \end{tabularx}
+\end{description}
+
+Nachfolgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, werden jedoch vom Backend nicht aus implementiert, da dies nicht Teil/Fokus dieser Arbeit ist:
+
+\begin{description}
+    \setlength\tabcolsep{1pt} %% shrink space between column, set cell text start like normal paragraph
+
+    \item[/api/hero/save] Persistiert den Charakter für den Benutzenden privat in der Datenbank.
+    Zur Identifikation dient das Paar aus den Namen des Charakters und Benutzenden.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \HttpInline{PUT /api/hero/save?rulebooks=dsa5}
+        & \CodeInline{<leeres HTTP OK>} \\[0em]
+        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} & \\
+    \end{tabularx}
+
+    \item[/api/hero/export] Exportiert einen gespeicherten Charakter in ein Format das auch von anderen Softwares unterstützt wird.
+    Das Antwort-Format is daher nicht \Abk{JSON}\@.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \HttpInline{GET /api/hero/export?hero\_name=UncleBob}
+        & \CodeInline{<Zielformat>} \\
+    \end{tabularx}
+
+    \item[/api/hero/delete] Löscht den Charakter des Benutzenden identifiziert beim Namen.
+
+    \begin{tabularx}{.95\textwidth}{XX}
+        Beispiel Anfrage: & Beispiel Antwort: \\
+        \HttpInline{DELETE /api/hero/delete/hero\_name=UncleBob}
+        & \CodeInline{<leeres HTTP OK>} \\
+    \end{tabularx}
+\end{description}
+
+\setlength\columnsep{20pt}
+\captionof{listing}{Beispiel Anfragekörper: invalider Held}\label{lst:invalidheroexamplejson}
+\vspace{-1em}
+\begin{multicols}{2}
+    \inputminted[style=colorful]{json}{appendix/invalid-hero-example.json}
+\end{multicols}
+
 \begin{listing}[htbp]
-    \caption{api-contract.yaml (bis Zeile 20)}\label{lst:apicontractyaml}
-    \inputminted[firstline=59,lastline=103]{yaml}{appendix/api-contract.yaml}
+    %% good json styles: trac, tango, colorful
+    \caption{Beispiel Antwort: zu invalidem Helden}\label{lst:invalidheroresponseexamplejson}
+    \inputminted[style=colorful]{json}{appendix/invalid-hero-response-example.json}
 \end{listing}

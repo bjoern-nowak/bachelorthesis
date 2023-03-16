@@ -92,6 +92,10 @@
 }
 
 
+%% ----- Listings -------------------------------------------------------------
+\newcommand{\mintedInline}[2]{\mintinline[breaklines,breakanywhere]{#1}{#2}}
+
+
 %% ----- Semantische Textverarbeitung -----------------------------------------
 \makeatletter
 \let\ACplacelabel\AC@placelabel %% required for hyperref, else warning about undefined ref
@@ -117,6 +121,8 @@
 \newcommand{\Methode}[1]{\texttt{#1}}
 \newcommand{\MethodenRef}[1]{\texttt{#1}}
 \newcommand{\Code}[1]{\textsf{#1}}
+\newcommand{\CodeInline}[1]{\scriptsize\texttt{#1}}
+\newcommand{\HttpInline}[1]{\scriptsize\texttt{#1}}
 
 %% ----- text sizes -----------------------------------------------------------
 %% \Huge
@@ -167,6 +173,7 @@
 \newcommand{\Kapitel}[2][\KapitelDefaultRef]{% K=Kapitel~<Nr> N=<Kapitelname> P='auf S.~<Seite>'
     \IfStrEqCase{#1}{
             {N}{\nameref{#2}}
+            {K}{\autoref{#2}}
             {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
             {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
             {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}

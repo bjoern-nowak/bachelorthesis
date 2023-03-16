@@ -2,8 +2,6 @@ openapi: 3.0.2
 info:
   title: FastAPI
   version: 0.1.0
-servers:
-  - url: /api/v1
 paths:
   /:
     get:
@@ -17,18 +15,119 @@ paths:
           content:
             application/json:
               schema: {}
-  /hero/validate:
+  /openapi.yaml:
+    get:
+      tags:
+        - root
+      summary: Read Openapi Yaml
+      operationId: read_openapi_yaml_openapi_yaml_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/meta/rulebook/list:
+    get:
+      tags:
+        - meta
+      summary: List Known Rulebooks
+      description: Get list of available rulebooks.
+      operationId: list_known_rulebooks_api_meta_rulebook_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response List Known Rulebooks Api Meta Rulebook List Get
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/meta/feature/list:
+    get:
+      tags:
+        - meta
+      summary: List Known Feature Values
+      description: Get list of possible values for a feature under given context (like
+        active rulebooks).
+      operationId: list_known_feature_values_api_meta_feature_list_get
+      parameters:
+        - required: true
+          schema:
+            $ref: '#/components/schemas/Feature'
+          name: feature
+          in: query
+        - required: true
+          schema:
+            title: Rulebooks
+            type: array
+            items:
+              type: string
+          example:
+            - dsa5
+          name: rulebooks
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response List Known Feature Values Api Meta Feature List Get
+                anyOf:
+                  - type: array
+                    items:
+                      maxItems: 3
+                      minItems: 3
+                      type: array
+                      items:
+                        - type: string
+                        - type: string
+                        - type: integer
+                  - type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/hero/validate:
     post:
       tags:
         - hero
       summary: Validate
-      operationId: validate_hero_validate_post
+      description: Validates hero against given rulebooks.
+      operationId: validate_api_hero_validate_post
       parameters:
         - required: true
           schema:
+            title: Rulebooks
             type: array
             items:
-              $ref: '#/components/schemas/Rulebook'
+              type: string
+          example:
+            - dsa5
           name: rulebooks
           in: query
       requestBody:
@@ -44,6 +143,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HeroValidationResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
         '500':
           description: Unexpected server error
           content:
@@ -56,39 +161,107 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /meta/list:
-    get:
+  /api/hero/save:
+    put:
       tags:
-        - meta
-      summary: List Feature
-      description: Get list of possible values for a feature under given context (like
-        active rulebooks).
-      operationId: list_feature_meta_list_get
+        - hero
+      summary: Save
+      description: Save hero as new or whenever given hero name exists for user override
+        it.
+      operationId: save_api_hero_save_post
       parameters:
         - required: true
           schema:
-            $ref: '#/components/schemas/Feature'
-          name: feature
-          in: query
-        - required: true
-          schema:
+            title: Rulebooks
             type: array
             items:
-              $ref: '#/components/schemas/Rulebook'
+              type: string
+          example:
+            - dsa5
           name: rulebooks
+          in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hero'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/hero/export:
+    get:
+      tags:
+        - hero
+      summary: Export
+      description: Export hero of user by given hero name.
+      operationId: export_api_hero_export_get
+      parameters:
+        - required: true
+          schema:
+            title: Hero Name
+            type: string
+          name: hero_name
           in: query
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
+              schema: {}
+        '500':
+          description: Unexpected server error
+          content:
+            application/json:
               schema:
-                title: Response List Feature Meta List Get
-                anyOf:
-                  - type: array
-                    items:
-                      type: string
-                  - $ref: '#/components/schemas/ClientError'
+                $ref: '#/components/schemas/ServerError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/hero/delete:
+    delete:
+      tags:
+        - hero
+      summary: Delete
+      description: Delete hero of user by given hero name.
+      operationId: delete_api_hero_delete_delete
+      parameters:
+        - required: true
+          schema:
+            title: Hero Name
+            type: string
+          name: hero_name
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
         '500':
           description: Unexpected server error
           content:
@@ -103,23 +276,18 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Addon:
+      title: Addon
+      enum:
+        - any_of
+      type: string
+      description: An enumeration.
     ClientError:
       title: ClientError
       required:
-        - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          anyOf:
-            - type: string
-            - $ref: '#/components/schemas/ExceptionDetails'
-      additionalProperties: false
-    ExceptionDetails:
-      title: ExceptionDetails
-      required:
         - type
         - message
+        - details
       type: object
       properties:
         type:
@@ -128,16 +296,33 @@ components:
         message:
           title: Message
           type: string
+        details:
+          title: Details
+          type: object
       additionalProperties: false
+    ExperienceLevel:
+      title: ExperienceLevel
+      enum:
+        - Inexperienced
+        - Average
+        - Experienced
+        - Competent
+        - Masterful
+        - Brilliant
+        - Legendary
+      type: string
+      description: An enumeration.
     Feature:
       title: Feature
       enum:
-        - Species
-        - Culture
-        - Profession
-        - Advantage
-        - Disadvantage
-        - Skill
+        - experience_level
+        - species
+        - culture
+        - profession
+        - advantage
+        - disadvantage
+        - talent
+        - combat_technique
       type: string
       description: An enumeration.
     HTTPValidationError:
@@ -153,14 +338,21 @@ components:
       title: Hero
       required:
         - name
+        - experience_level
         - species
         - culture
         - profession
+        - talents
+        - combat_techniques
+        - advantages
+        - disadvantages
       type: object
       properties:
         name:
           title: Name
           type: string
+        experience_level:
+          $ref: '#/components/schemas/ExperienceLevel'
         species:
           title: Species
           type: string
@@ -170,12 +362,75 @@ components:
         profession:
           title: Profession
           type: string
+        talents:
+          title: Talents
+          type: object
+          additionalProperties:
+            minimum: 0.0
+            type: integer
+        combat_techniques:
+          title: Combat Techniques
+          type: object
+          additionalProperties:
+            minimum: 0.0
+            type: integer
+        advantages:
+          title: Advantages
+          type: array
+          items:
+            maxItems: 3
+            minItems: 3
+            type: array
+            items:
+              - type: string
+              - type: string
+              - minimum: 0.0
+                type: integer
+        disadvantages:
+          title: Disadvantages
+          type: array
+          items:
+            maxItems: 3
+            minItems: 3
+            type: array
+            items:
+              - type: string
+              - type: string
+              - minimum: 0.0
+                type: integer
       additionalProperties: false
+      description: "This is quite a copy of the actual hero model.\nReasons this still\
+        \ exists:\n - layer separation since this model is used on the api\n - containing\
+        \ api documentation\n - simplified data structure for improved readability"
+    HeroValidationError:
+      title: HeroValidationError
+      required:
+        - type
+        - message
+        - parameter
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/app__models__hero_validation_error__HeroValidationError__Type'
+        addon:
+          $ref: '#/components/schemas/Addon'
+        message:
+          title: Message
+          type: string
+        parameter:
+          title: Parameter
+          type: object
+      additionalProperties: false
+      description: 'Represents a single hero validation error.
+        Field ''message'' uses single quote for used ''parameters''
+        Field ''parameters'' contains relevant evaluable data. May not all are used
+        in ''message''.'
     HeroValidationResult:
       title: HeroValidationResult
       required:
         - valid
         - errors
+        - warnings
       type: object
       properties:
         valid:
@@ -185,27 +440,51 @@ components:
           title: Errors
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/HeroValidationError'
+        warnings:
+          title: Warnings
+          type: array
+          items:
+            $ref: '#/components/schemas/HeroValidationWarning'
       additionalProperties: false
-    Rulebook:
-      title: Rulebook
-      enum:
-        - dsa5
-        - dsa5_expansion
-        - dsa5_expansion2
-      type: string
-      description: An enumeration.
+    HeroValidationWarning:
+      title: HeroValidationWarning
+      required:
+        - type
+        - message
+        - parameter
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/app__models__hero_validation_warning__HeroValidationWarning__Type'
+        message:
+          title: Message
+          type: string
+        parameter:
+          title: Parameter
+          type: object
+      additionalProperties: false
+      description: 'Represents a single hero validation warning.
+        Field ''message'' uses single quote for used ''parameters''
+        Field ''parameters'' contains relevant evaluable data. May not all are used
+        in ''message''.'
     ServerError:
       title: ServerError
       required:
-        - detail
+        - type
+        - message
+        - details
       type: object
       properties:
-        detail:
-          title: Detail
-          anyOf:
-            - type: string
-            - $ref: '#/components/schemas/ExceptionDetails'
+        type:
+          title: Type
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          type: object
       additionalProperties: false
     ValidationError:
       title: ValidationError
@@ -228,3 +507,20 @@ components:
         type:
           title: Error Type
           type: string
+    app__models__hero_validation_error__HeroValidationError__Type:
+      title: Type
+      enum:
+        - unknown
+        - unusable_by
+        - missing_level
+        - max_lvl_exceeded
+      type: string
+      description: An enumeration.
+    app__models__hero_validation_warning__HeroValidationWarning__Type:
+      title: Type
+      enum:
+        - missing_usual
+        - missing_typical
+        - atypical
+      type: string
+      description: An enumeration.

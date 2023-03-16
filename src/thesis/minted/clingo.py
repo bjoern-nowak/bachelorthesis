@@ -27,7 +27,7 @@ class ClingoLexer(RegexLexer):
             (r'#(program|include)', Keyword.Type),
             (r'\.\.', Keyword.Type),
             (r'(!=?|&|\*|\+|-|\/|\\|\||<=?|>=?|\?|\^|not|~|\')', Operator),
-            (r'(:~|#(count|false|inf|max(imize)?|min(imize)?|show|sum\+?|sup|true|external|script|end|const))', Operator.Word),
+            (r'(:~|#(count|false|inf|max(imize)?|min(imize)?|show|sum\+?|sup|true|external|script|end|const|defined|heuristic|project))', Operator.Word),
             # (r'_?[A-Z]\w*', Name.Variable),
             # (r'(_?[a-z]\w*)(?!\()', Name.Constant),
             (r'(_?[a-z]\w*)(?=\()', Name.Function),
@@ -40,9 +40,7 @@ class ClingoLexer(RegexLexer):
         'multiline-comment': [
             (r'%\*', Comment.Multiline, '#push'),
             (r'\*%', Comment.Multiline, '#pop'),
-            (r'([^*%]+)(TODO(?: [\w \t]*)?)([^*%]+)',
-             bygroups(Comment.Multiline, Comment.Special,Comment.Multiline)
-            ),
+            (r'([^*%]+)(TODO(?: [\w \t]*)?)([^*%]+)', bygroups(Comment.Multiline, Comment.Special,Comment.Multiline)),
             (r'[^*%]+', Comment.Multiline),
         ],
         'simple-string': [

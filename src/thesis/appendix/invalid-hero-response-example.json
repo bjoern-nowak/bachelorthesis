@@ -1,0 +1,17 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "type": "missing_level",
+      "message": "Heros 'profession' is missing minimum level '3' for 'talent' of 'Körperbeherrschung'.",
+      "parameter": {
+        "caused_feature": "profession",
+        "caused_feature_value": "Söldner",
+        "referred_feature": "talent",
+        "referred_feature_value": "Körperbeherrschung",
+        "min_level": 3
+      }
+    }
+  ],
+  "warnings": []
+}
