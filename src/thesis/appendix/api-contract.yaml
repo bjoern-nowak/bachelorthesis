@@ -168,7 +168,7 @@ paths:
       summary: Save
       description: Save hero as new or whenever given hero name exists for user override
         it.
-      operationId: save_api_hero_save_post
+      operationId: save_api_hero_save_put
       parameters:
         - required: true
           schema:
@@ -300,18 +300,6 @@ components:
           title: Details
           type: object
       additionalProperties: false
-    ExperienceLevel:
-      title: ExperienceLevel
-      enum:
-        - Inexperienced
-        - Average
-        - Experienced
-        - Competent
-        - Masterful
-        - Brilliant
-        - Legendary
-      type: string
-      description: An enumeration.
     Feature:
       title: Feature
       enum:
@@ -352,7 +340,8 @@ components:
           title: Name
           type: string
         experience_level:
-          $ref: '#/components/schemas/ExperienceLevel'
+          title: Experience Level
+          type: string
         species:
           title: Species
           type: string
@@ -399,9 +388,6 @@ components:
               - minimum: 0.0
                 type: integer
       additionalProperties: false
-      description: "This is quite a copy of the actual hero model.\nReasons this still\
-        \ exists:\n - layer separation since this model is used on the api\n - containing\
-        \ api documentation\n - simplified data structure for improved readability"
     HeroValidationError:
       title: HeroValidationError
       required:
@@ -423,8 +409,7 @@ components:
       additionalProperties: false
       description: 'Represents a single hero validation error.
         Field ''message'' uses single quote for used ''parameters''
-        Field ''parameters'' contains relevant evaluable data. May not all are used
-        in ''message''.'
+        Field ''parameters'' contains relevant evaluable data. May not all are used in ''message''.'
     HeroValidationResult:
       title: HeroValidationResult
       required:
@@ -466,8 +451,7 @@ components:
       additionalProperties: false
       description: 'Represents a single hero validation warning.
         Field ''message'' uses single quote for used ''parameters''
-        Field ''parameters'' contains relevant evaluable data. May not all are used
-        in ''message''.'
+        Field ''parameters'' contains relevant evaluable data. May not all are used in ''message''.'
     ServerError:
       title: ServerError
       required:

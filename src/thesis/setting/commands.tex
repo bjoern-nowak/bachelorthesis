@@ -94,8 +94,13 @@
 
 %% ----- Listings -------------------------------------------------------------
 \newcommand{\mintedInline}[2]{\mintinline{#1}{#2}}
+\newcommand{\mintedMultiInline}[2]{%
+    \mint[frame=none,linenos=false]{#1}{#2}%
+}
 \newcommand{\mintedTwoColsCaption}[2]{%
-    \captionof{listing}{#1}\label{#2}\vspace{1.1em}%
+    \vspace{1em plus 1em minus .25em}%
+    \captionof{listing}{#1}\label{#2}%
+    \vspace{1.1em}%
 }
 \newcommand{\mintedTwoCols}[3][]{%
     \setlength\columnsep{15pt}%
@@ -127,11 +132,7 @@
 \newcommand{\Englisch}[1]{ (englisch: \textit{#1})} % englischer Begriff
 \newcommand{\Begriff}[1]{\textit{#1}}
 \newcommand{\Tech}[1]{\textsf{#1}}
-
-\newcommand{\Klasse}[1]{\texttt{#1}}
-\newcommand{\Methode}[1]{\texttt{#1}}
-\newcommand{\MethodenRef}[1]{\texttt{#1}}
-\newcommand{\Code}[1]{\textsf{#1}}
+\newcommand{\Code}[1]{\texttt{#1}}
 \newcommand{\CodeInline}[1]{\scriptsize\texttt{#1}}
 \newcommand{\HttpInline}[1]{\scriptsize\texttt{#1}}
 

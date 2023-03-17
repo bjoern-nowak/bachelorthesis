@@ -14,32 +14,36 @@ Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, wi
 Um den Wartungsaufwand, \zB durch API Versionierung im Pfad, gering zu halten und weil es sich hierbei um keine öffentliche API handelt mit einer großen Anwenderzahl, wird stets nur die aktuellste Version vom Backend unterstützt.
 Dies bedeutet, dass eine neue API-Version nur veröffentlicht werden kann, wenn diese mit der aktuell veröffentlichten Frontend-Version kompatibel ist.
 
+\subsection{Endpunkte}\label{subsec:endpunkte}
 
 Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:api-contract.yaml} vor.
 Im generellen sind die Anfrage-Körper\Englisch{request bodies} und Antworten\Englisch{responses} im Format \textbf{\AbkK{JSON}}\@.
-Nachfolgend werden die vorgesehenen Endpunkte erklärt, dabei wird unter Regelbuch auch Regelbuch-Erweiterungen verstanden:
+Nachfolgend werden die vorgesehenen Endpunkte erklärt, dabei wird unter Regelbuch auch Regelbuch-Erweiterungen verstanden.
+
+Beim Entwurf wurde darauf geachtet, dass Eingabe-Parameter nach Möglichkeit stets am gleichen \textquote{Ort} anzugeben sind, um die Verwendung der API konsistent und einfach zu halten.
+So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Parameter anzugeben.
+
 \begin{description}
     \setlength\tabcolsep{1pt} %% shrink space between column, set cell text start like normal paragraph
+    \renewcommand{\arraystretch}{.75} %% inscrease
 
     \item[/api/meta/rulebook/list] Gibt die Liste der verfügbaren Regelbücher zurück.
     Diese Information soll dynamisch ermittelt werden, um den Wartungsaufwand manueller Pflege fester Listen zu verhindern und um \insb zur Laufzeit \textquote{Kaputte} rauszufiltern.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \HttpInline{GET /api/meta/rulebook/list}
-        & \CodeInline{\verb|["dsa5","dsa5_aventurisches_kompendium_2"]|} \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:          & \footnotesize Beispiel Antwort:                                \\
+        \HttpInline{GET /api/meta/rulebook/list} & \CodeInline{\verb|["dsa5","dsa5_aventurisches_kompendium_2"]|} \\
     \end{tabularx}
 
     \item[/api/meta/feature/list] Gibt für ein Merkmal die Liste der verfügbaren Ausprägungen, unter Beachtung zu verwendender Regelbücher, zurück.
     Diese Information muss dynamisch entsprechend der auszuwertenden Regelbücher ermittelt werden.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \makecell[l]{%
-            \HttpInline{GET /api/meta/feature/list?feature=species\&}\\%
-            \HttpInline{rulebooks=dsa5}%
-        }
-        & \CodeInline{\verb|["Elfen","Halbelfen","Mensch","Zwerg"]|} \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:                           & \footnotesize Beispiel Antwort:                            \\
+        \HttpInline{GET /api/meta/feature/list?feature=species\&} & \CodeInline{\verb|["Elfen","Halbelfen","Mensch","Zwerg"]|} \\
+        $\hookrightarrow$ \HttpInline{rulebooks=dsa5}             &                                                            \\
     \end{tabularx}
 
     \item[/api/hero/validate] Dies stellt den wichtigsten Endpunkt dar.
@@ -47,52 +51,90 @@ Nachfolgend werden die vorgesehenen Endpunkte erklärt, dabei wird unter Regelbu
     Dabei werden etwaige Regelverstöße detailliert als Fehler \bzw Warnung zurückgegeben.
     Nur Fehler führen dazu, dads ein Charakter für ungültig erklärt wird.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \HttpInline{POST /api/hero/validate?rulebooks=dsa5}
-        & \CodeInline{<\Listing[KP]{lst:invalidheroresponseexamplejson}>} \\
-        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} & \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:                              & \footnotesize Beispiel Antwort:                                 \\
+        \HttpInline{POST /api/hero/validate?rulebooks=dsa5}          & \CodeInline{<\Listing[KP]{lst:invalidheroresponseexamplejson}>} \\
+        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} &                                                                 \\
     \end{tabularx}
 \end{description}
 
-Nachfolgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, werden jedoch vom Backend nicht aus implementiert, da dies nicht Teil/Fokus dieser Arbeit ist:
+Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, werden jedoch vom Backend nicht aus implementiert, da diese nicht Fokus dieser Arbeit sind:
 
 \begin{description}
     \setlength\tabcolsep{1pt} %% shrink space between column, set cell text start like normal paragraph
+    \renewcommand{\arraystretch}{.75} %% inscrease
 
     \item[/api/hero/save] Persistiert den Charakter für den Benutzenden privat in der Datenbank.
     Zur Identifikation dient das Paar aus den Namen des Charakters und Benutzenden.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \HttpInline{PUT /api/hero/save?rulebooks=dsa5}
-        & \CodeInline{<leeres HTTP OK>} \\[0em]
-        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} & \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:                              & \footnotesize Beispiel Antwort: \\
+        \HttpInline{PUT /api/hero/save?rulebooks=dsa5}               & \CodeInline{<leeres HTTP OK>} \\[0em]
+        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} &                                 \\
+        \midrule
     \end{tabularx}
 
     \item[/api/hero/export] Exportiert einen gespeicherten Charakter in ein Format das auch von anderen Softwares unterstützt wird.
     Das Antwort-Format is daher nicht \Abk{JSON}\@.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \HttpInline{GET /api/hero/export?hero\_name=UncleBob}
-        & \CodeInline{<Zielformat>} \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:                       & \footnotesize Beispiel Antwort: \\
+        \HttpInline{GET /api/hero/export?hero\_name=UncleBob} & \CodeInline{<Zielformat>}       \\
     \end{tabularx}
 
-    \item[/api/hero/delete] Löscht den Charakter des Benutzenden identifiziert beim Namen.
+    \item[/api/hero/delete] Löscht den Charakter für den Benutzenden aus der Datenbank.
+    Zur Identifikation dient das Paar aus den Namen des Charakters und Benutzenden.
 
-    \begin{tabularx}{.95\textwidth}{XX}
-        Beispiel Anfrage: & Beispiel Antwort: \\
-        \HttpInline{DELETE /api/hero/delete/hero\_name=UncleBob}
-        & \CodeInline{<leeres HTTP OK>} \\
+    \begin{tabularx}{.936\textwidth}{XX}
+        \midrule
+        \footnotesize Beispiel Anfrage:                          & \footnotesize Beispiel Antwort: \\
+        \HttpInline{DELETE /api/hero/delete/hero\_name=UncleBob} & \CodeInline{<leeres HTTP OK>}   \\
     \end{tabularx}
 \end{description}
-
-\mintedTwoColsCaption{Beispiel Anfragekörper: invalider Held}{lst:invalidheroexamplejson}
-\mintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}
 
 \begin{listing}[htbp]
     %% good json styles: trac, tango, colorful
     \caption{Beispiel Antwort: zu invalidem Helden}\label{lst:invalidheroresponseexamplejson}
     \inputminted[style=colorful]{json}{appendix/invalid-hero-response-example.json}
 \end{listing}
+
+
+\subsection{Schemata}\label{subsec:schemata}
+
+Das Konzept der Schemata wird am wichtigsten Schema, das des Charakters, erklärt.
+Nachfolgende Zeilen-Referenzen beziehen sich, wenn nicht anders benannt, auf das \Listing{lst:characterSchema}.
+
+Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{species}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind, diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
+Das Konzept der Schemata sieht vor, dass sämtliche konkreten Werte, neben Zahlen, Zeichenfolgen (Text) sind.
+Grund ist, dass eben konkrete Werte nicht statisch modelliert werden können, da mögliche Werte sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbücher gemäß der Anfrage, ergeben.
+
+Auch die Merkmale \Code{talents} und \Code{combat\_techniques} geben die Merkmalsausprägung (Name) als Freitext an, dies ist jedoch schwerer abzulesen.
+Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Begriff{Wörterbuch}\Englisch{Dictionary} von Python, dies kann man als Map von Schlüssel-Wert-Paaren begreifen.
+Wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
+Der Wert ist bei diesen Merkmalen die Stufe.
+Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Tech{object}) existieren.
+Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
+
+\mintedTwoColsCaption{Charakter Schema in api-contract.yaml (Zeile 325 bis 390)}{lst:characterSchema}
+\mintedTwoCols[firstline=325,lastline=390]{yaml}{appendix/api-contract.yaml}
+
+Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
+Dies sind Listen von drei-elementigen Tuple, dargestellt durch eine zwei-dimensionale Liste, wobei die Verschachtelte mindestens und maximal drei Elemente verlangt.
+Das erste Element ist wie bisher der Name der Merkmalsausprägung.
+Das letzte Element ist die Stufe.
+Das Mittlere ist ein Text, welches \insb auch Leer sein darf.
+Dies wird benötigt da einige Vor- und Nachteile dahingegen mehrfach vorkommen können, dass sie auf andere Merkmalsausprägungen oder gar nicht modellierbare frei wählbare Definitionen referenzieren können und daher nur in der Kombination spezifisch sind \Vgl{RWiki-HassAuf,RWiki-ImmunitaetKrankheit,RWiki-Unfaehig,RWiki-SchlechteEigenschaft}.
+Auf eine tiefere Unterscheidung wird zunächst verzichtet.
+Dies führt zwar dazu, dass wenn ein Name einer Merkmalsausprägung auch in anderen Merkmalen vorkommt, nicht differenziert werden kann welches Merkmal referenziert wird.
+Diese Ausnahmefälle können jedoch leicht umgangen werden, indem das vermeindliche Duplikat bei der Modellerung im Regelbuch \zB als Präfix den Namen des Merkmals bekommt.
+
+{\color{red}
+In \Listing[K]{lst:invalidheroexamplejson} wird beispielhaft gezeigt wie das Charakter-Schema bei einer Anfrage ausgefüllt sein kann.
+\textquote{Invalide} bezieht sich in diesem Kontext auf ein Regelverstoß, nicht auf die Syntax oder der Struktur.
+}
+
+\mintedTwoColsCaption{Beispiel Anfragekörper: invalider Held}{lst:invalidheroexamplejson}
+\mintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}

@@ -5,4 +5,10 @@
     - Datenbank anbindung
 %    - Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession_requires_culture("<profession>","<culture>").' )
 %        anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde. Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
+
+Denkbar ist auch ein Endpunkt welcher für fehlende Werte mögliche Werte zurück gibt.
+\ZB wenn für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt
+Das muss das Schema des Charakters angepasst werden, so das diese Merkmale keine Pflichtfelder mehr sind (außer bei Listen)
+
+
 }
