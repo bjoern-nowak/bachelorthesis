@@ -3,15 +3,14 @@
 \begin{landscape}
     \chapter{Anhang}\label{ch:anhang}
 
-    \setlength\columnsep{15pt}
-
     \section{api-contract.yaml}\label{sec:api-contract.yaml}
     Beispiele innerhalb des Schnittstellenvertrags wurden aufgrund der sonst entstehenden Länge entfernt.
-    \begin{multicols}{2}
-        \inputminted[breaklines]{yaml}{appendix/api-contract.yaml} %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
+    \mintedTwoCols{yaml}{appendix/api-contract.yaml}
 
-        \newpage
-        \section{clingo-cheatsheet.lp}\label{sec:clingo-cheatsheet.lp}
-        \inputminted[breaklines,breakanywhere]{clingo}{appendix/clingo-cheatsheet.lp} %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}
-    \end{multicols}
+    \newpage
+    \section{clingo-cheatsheet.lp}\label{sec:clingo-cheatsheet.lp}
+    \mintedTwoCols{clingo}{appendix/clingo-cheatsheet.lp}
+
+    %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
+    %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}
 \end{landscape}

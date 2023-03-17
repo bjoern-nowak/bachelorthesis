@@ -93,7 +93,18 @@
 
 
 %% ----- Listings -------------------------------------------------------------
-\newcommand{\mintedInline}[2]{\mintinline[breaklines,breakanywhere]{#1}{#2}}
+\newcommand{\mintedInline}[2]{\mintinline{#1}{#2}}
+\newcommand{\mintedTwoColsCaption}[2]{%
+    \captionof{listing}{#1}\label{#2}\vspace{1.1em}%
+}
+\newcommand{\mintedTwoCols}[3][]{%
+    \setlength\columnsep{15pt}%
+    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.5em}%
+    \begin{multicols}{2}%
+        \inputminted[frame=none,#1]{#2}{#3}%
+    \end{multicols}%
+    \vspace{-2em}\rule{\linewidth}{0.4pt}%
+}
 
 
 %% ----- Semantische Textverarbeitung -----------------------------------------

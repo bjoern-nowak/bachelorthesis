@@ -5,11 +5,21 @@
     framesep=6pt,
     fontsize=\scriptsize,
     frame=lines,
+    breaklines,
+    breakafter=\_,
 }
 \renewcommand{\theFancyVerbLine}{\tiny\arabic{FancyVerbLine}}
 \usemintedstyle[clingo]{clingos}
 \usemintedstyle[yaml]{yamls}
 
+%% 'minted' uses 'newfloat' (as configured) for the 'listing' environemnt
+%%     which can be configured through 'caption' package
+\captionsetup[listing]{
+    position=top,
+%    margin=0em,
+%    parskip=0em,
+    skip=-1em,
+}
 
 %% ----- lstlisting package ------
 %\lstset{
