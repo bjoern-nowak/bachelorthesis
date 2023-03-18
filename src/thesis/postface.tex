@@ -3,12 +3,14 @@
 \defbibnote{prenote}{Alle Online-Referenzen (jene mit URLs) wurden am 21.01.2023 abgerufen.}
 \printbibliography[title=\bibTitle, prenote=prenote]
 
+\hypersetup{linkcolor=\linkColorToc} %% ToC uses its on link color
 %\clearpage
 \listoftables
 
 %\clearpage
-\listoffigures
+%\listoffigures %% TODO [SUBMISSION] show list of figures if there are some
 
 %\clearpage
 \SetupFloatingEnvironment{listing}{listname=\lstTitle}
 \listoflistings %% vs '\lstlistoflistings' from lstlisting package
+\hypersetup{linkcolor=\linkColor} %% ToC uses its on link color

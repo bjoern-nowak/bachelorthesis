@@ -1,14 +1,67 @@
 \section{Regelwerk-Interpretation}\label{sec:regelwerk-interpretation}
 
+Dieses Kapitel setzt Kenntnisse im Bereich Logikprogrammierung, im konkreten die Syntax und Semantik von \Tech{Clingo}, vorraus.
+Zum Verständnis nachfolgender \Tech{Listings} liegt mit \Kapitel{sec:clingo-cheatsheet.lp} eine Hilfestellung vor, welches auch Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository} vorliegt.
+Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide} und daher ein ebenso guter (praxis-orientierter) Einstieg.
 
-{\color{red}
-Zum Verständnis nachfolgender Code-Auszüge liegt mit \Kapitel{sec:clingo-cheatsheet.lp} eine Hilfestellung vor, welches auch Mitwirkende im quelloffenen Aufbewahrungsort\Englisch{repository} als Einstiegshilfe vorliegt.
+Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP} \Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
+Dazu werden zunächst die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
 
-Wie in \Listing{lst:clingocheatsheetlp} zu sehen ist, dass....
-}
-%\mint{clingo}|unknown(species(S)) :- species(S), not known_species(S).|
+Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing[K]{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
+Jedes Charakter-Merkmal ist ein eigener Fakt.
+Dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
+Daneben bekannt sind die Argumente Stufe (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
+
+Als Konvention ist zu benennen, dass \Begriff{Variabeln} einen kurzen \underline{aber} unverwechselbaren Namen tragen sollen.
+Maximal kurz dürfen \Begriff{Variablen} sein welche sich direkt aus dem verwendeten Merkmalsfakt, als Abkürzung, ableiten lassen.
 
 \begin{listing}[htbp]
-    \caption{clingo-cheatsheet.lp (bis Zeile 20)}\label{lst:clingocheatsheetlp}
-    \inputminted[firstline=312,lastline=326]{clingo}{appendix/clingo-cheatsheet.lp}
+    \caption{Merkmalsfakten eines Charakters}\label{lst:merkmalsfakten-eines-charakters}
+    \begin{minted}{clingo}
+%% Strukturelle Darstellung mit Konventions-konformern Argumenten-Variable-Namen
+experience_level(EL).
+species(S).
+culture(C).
+profession(P).
+talent(T,LVL). %% LVL := Stufe (englishe Abkürzung für 'level')
+combat_technique(CT,LVL).
+advantage(A,USES,LVL). %% USES := freie Referenz (Text)
+disadvantage(DA,USES,LVL).
+%% weitere Ähnliche wie Eigenschaften, Sonderfertigkeiten, Zauber und Liturgien möglich
+    \end{minted}
 \end{listing}
+
+
+\subsection{Regelkategorien und -varianten}\label{subsec:regelkategorien-und--varianten}
+
+Wie bereits in \Kapitel{sec:grundlagen} beschrieben gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
+Hausregeln können nachvollziehbar hier nicht betrachtet werden, da diese frei definierbar sind.
+Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP}.
+Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
+Diese werden gruppiert nach der Bedeutung \bzw dem Einhaltungsgrad: hart und weich (Absprache mit der Spielleitung erforderlich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+
+\textbf{Harte Regel (muss eingehalten werden):}
+\begin{enumerate}
+    \item {\color{red}Begrenzung von Eigenschaften, Fertigkeiten und Kampftechniken \Vgl[Schritt 2]{RWiki-Erstellung}}
+\end{enumerate}
+
+\textbf{Weiche Regel (Abweichungen nach Absprache möglich):}
+\begin{enumerate}
+    \item {\color{red}Begrenzung von Eigenschaften, Fertigkeiten und Kampftechniken \Vgl[Schritt 2]{RWiki-Erstellung}}
+\end{enumerate}
+
+
+\subsection{\textquote{Kochbuch} zur Regelformalisierung}\label{subsec:kochbuch-zur-regelformalisierung}
+
+{\color{red}
+\begin{enumerate}
+    \item (vgl. \Code{resources/rulebook/common.lp}, Zeile 78-86)
+    \begin{minted}[linenos=false]{clingo}
+unknown(species(S)) :- species(S), not known_species(S).
+unknown(talent(T)) :- talent(T,_), not known_talent(T).
+unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+    \end{minted}
+
+    \item {\color{red}more to come}
+\end{enumerate}
+}

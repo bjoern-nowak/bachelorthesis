@@ -28,7 +28,7 @@ class ClingoLexer(RegexLexer):
             (r'\.\.', Keyword.Type),
             (r'(!=?|&|\*|\+|-|\/|\\|\||<=?|>=?|\?|\^|not|~|\')', Operator),
             (r'(:~|#(count|false|inf|max(imize)?|min(imize)?|show|sum\+?|sup|true|external|script|end|const|defined|heuristic|project))', Operator.Word),
-            # (r'_?[A-Z]\w*', Name.Variable),
+            (r'_?[A-Z]\w*', Name.Variable),
             # (r'(_?[a-z]\w*)(?!\()', Name.Constant),
             (r'(_?[a-z]\w*)(?=\()', Name.Function),
             (r'%\*', Comment.Multiline, 'multiline-comment'),
