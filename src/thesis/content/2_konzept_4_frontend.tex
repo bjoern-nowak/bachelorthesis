@@ -119,7 +119,7 @@ Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-
 Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
 
 \mintedTwoColsCaption{Charakter Schema in api-contract.yaml (Zeile 325 bis 390)}{lst:characterSchema}
-\mintedTwoCols[firstline=325,lastline=390]{yaml}{appendix/api-contract.yaml}
+\inputMintedTwoCols[firstline=325,lastline=390]{yaml}{appendix/api-contract.yaml}
 
 Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
 Dies sind Listen von drei-elementigen Tuple, dargestellt durch eine zwei-dimensionale Liste, wobei die Verschachtelte mindestens und maximal drei Elemente verlangt.
@@ -135,4 +135,4 @@ In \Listing[K]{lst:invalidheroexamplejson} wird beispielhaft gezeigt wie das Cha
 \textquote{Invalide} bezieht sich in diesem Kontext auf ein Regelverstoß, nicht auf die Syntax oder der Struktur.
 
 \mintedTwoColsCaption{Beispiel Anfragekörper: invalider Held}{lst:invalidheroexamplejson}
-\mintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}
+\inputMintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}

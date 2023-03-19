@@ -14,7 +14,7 @@ __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{minted}
 
-    \item Damit bestimmte LP-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, wird das Konstrukt \textquote{conditional literal} verwendet.
+    \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, wird das Konstrukt \textquote{conditional literal} verwendet.
     Dies Verhält sich im Kopfbereich jedoch anders, als im Körper: dort dienen sie dem Mapping über ein Atom, es muss also etwas abgeleitet werden.
     Deshalb funktioniert folgendes, leicht lesbares, nicht:
     \begin{minted}[linenos=false]{clingo}

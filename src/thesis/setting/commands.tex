@@ -98,7 +98,7 @@
     \captionof{listing}{#1}\label{#2}%
     \vspace{1.1em}%
 }
-\newcommand{\mintedTwoCols}[3][]{%
+\newcommand{\inputMintedTwoCols}[3][]{%
     \setlength\columnsep{15pt}%
     \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.5em}%
     \begin{multicols}{2}%
@@ -106,6 +106,44 @@
     \end{multicols}%
     \vspace{-2em}\rule{\linewidth}{0.4pt}%
 }
+%% usage: \begin{mintedTwoCols}[]{clingo}
+\newenvironment{mintedTwoCols}[2][]
+{%
+    \VerbatimEnvironment%
+    \setlength\columnsep{15pt}%
+    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.5em}%
+    \begin{multicols}{2}%
+        \begin{minted}[frame=none,#1]{#2}%
+}{%
+        \end{minted}%
+    \end{multicols}%
+    \vspace{-2em}\rule{\linewidth}{0.4pt}%
+}
+
+%% Minted within a tabular with no extra spacing
+%% source: https://tex.stackexchange.com/questions/188003/minted-environment-inside-tabular
+\makeatletter
+\newenvironment{mintedTabular}{%
+    \let\FV@ListVSpace\relax
+    \minted
+    }{%
+    \endminted
+    \unskip
+    \aftergroup\@tabmintedend
+}
+\newcommand*{\tabminted@finalstrut}[1]{%
+\ifdim\prevdepth>0pt
+\ifdim\dp#1>\prevdepth
+\vskip\dimexpr(\dp#1)-\prevdepth\relax
+\fi
+\else
+\vskip\dimexpr(\dp#1)\relax
+\fi
+}
+\newcommand*{\@tabmintedend}{%
+    \let\@finalstrut\tabminted@finalstrut
+}
+\makeatother
 
 
 %% ----- Semantische Textverarbeitung -----------------------------------------

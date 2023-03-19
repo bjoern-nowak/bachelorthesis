@@ -4,64 +4,151 @@ Dieses Kapitel setzt Kenntnisse im Bereich Logikprogrammierung, im konkreten die
 Zum Verständnis nachfolgender \Tech{Listings} liegt mit \Kapitel{sec:clingo-cheatsheet.lp} eine Hilfestellung vor, welches auch Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository} vorliegt.
 Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide} und daher ein ebenso guter (praxis-orientierter) Einstieg.
 
-Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP} \Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
-Dazu werden zunächst die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
+Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit, und Vorraussetzung für Ersteres, die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP} \Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
+Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
+
+\subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
 Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing[K]{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
 Jedes Charakter-Merkmal ist ein eigener Fakt.
 Dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
 Daneben bekannt sind die Argumente Stufe (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
+Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten, mit unterschiedlichen Ausprägungen (Argumenten), mehrfach vorkommen.
 
 Als Konvention ist zu benennen, dass \Begriff{Variabeln} einen kurzen \underline{aber} unverwechselbaren Namen tragen sollen.
 Maximal kurz dürfen \Begriff{Variablen} sein welche sich direkt aus dem verwendeten Merkmalsfakt, als Abkürzung, ableiten lassen.
 
-\begin{listing}[htbp]
-    \caption{Merkmalsfakten eines Charakters}\label{lst:merkmalsfakten-eines-charakters}
-    \begin{minted}{clingo}
+\mintedTwoColsCaption{Merkmalsfakten eines Charakters}{lst:merkmalsfakten-eines-charakters}
+\begin{tabular}{@{}p{.55\textwidth}p{.42\textwidth}@{}}
+    \midrule
+    \begin{mintedTabular}[frame=none]{clingo}
 %% Strukturelle Darstellung mit Konventions-konformern Argumenten-Variable-Namen
 experience_level(EL).
 species(S).
 culture(C).
 profession(P).
-talent(T,LVL). %% LVL := Stufe (englishe Abkürzung für 'level')
+talent(T,LVL). %% LVL := Stufe (english für 'level')
 combat_technique(CT,LVL).
-advantage(A,USES,LVL). %% USES := freie Referenz (Text)
+advantage(A,USES,LVL). %% USES := Referenz (Text)
 disadvantage(DA,USES,LVL).
 %% weitere Ähnliche wie Eigenschaften, Sonderfertigkeiten, Zauber und Liturgien möglich
-    \end{minted}
-\end{listing}
+    \end{mintedTabular}
+    &
+    \begin{mintedTabular}[frame=none]{clingo}
+%% Beispiel, wobei bestimmte Fakten mehrfach vorkommen dürfen z.B. Talente
+experience_level("Average").
+species("Elfen").
+culture("Auelfen").
+profession("Söldner").
+talent("Kraftakt",3). talent("Zechen",3).
+combat_technique("Armbrüste",10).
+advantage("Begabung","Singen",1).
+disadvantage("Wahrer Name","",1).
+    \end{mintedTabular}
+    \\
+    \midrule
+\end{tabular}
 
 
-\subsection{Regelkategorien und -varianten}\label{subsec:regelkategorien-und--varianten}
+\subsection{Validierungsvoraussetzung}\label{subsec:validierungsvoraussetzung}
 
-Wie bereits in \Kapitel{sec:grundlagen} beschrieben gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
-Hausregeln können nachvollziehbar hier nicht betrachtet werden, da diese frei definierbar sind.
-Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP}.
-Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
-Diese werden gruppiert nach der Bedeutung \bzw dem Einhaltungsgrad: hart und weich (Absprache mit der Spielleitung erforderlich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+Die Validierung eines Charakters hat eine wichtige Voraussetzung:
+Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüchern bekannt sein.
+Für diese Überprüfung ist es erforderlich, dass bei der Implementierung von Regelbüchern diese deklariert werden.
+Dabei müssen Regelbücher nicht Sämtliche, bereits aus anderen Regelbüchern bekannte, neu deklarieren, sondern können eine Abhängigkeit zu diesen deklarieren.
 
-\textbf{Harte Regel (muss eingehalten werden):}
-\begin{enumerate}
-    \item {\color{red}Begrenzung von Eigenschaften, Fertigkeiten und Kampftechniken \Vgl[Schritt 2]{RWiki-Erstellung}}
-\end{enumerate}
+Deklariert werden Merkmalsauspräungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
+Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können.
+Hingegen bei \zB Vor- und Nachteilen diese nicht beliebig sind und daher zu deklarieren sind.
 
-\textbf{Weiche Regel (Abweichungen nach Absprache möglich):}
-\begin{enumerate}
-    \item {\color{red}Begrenzung von Eigenschaften, Fertigkeiten und Kampftechniken \Vgl[Schritt 2]{RWiki-Erstellung}}
-\end{enumerate}
+\begin{minted}{clingo}
+known_profession("Händler").
+known_combat_technique("Armbrüste";"Raufen").
+known_advantage("Dunkelsicht","",(1..2)).
+known_advantage("Begabung",("Singen";"Musizieren"),1).
+known_advantage(("Beidhändig";"Zauberer";"Flink"),"",1).
+\end{minted}
+
+Diese somit bekannten Merkmalsausprägungen werden dann überprüft.
+
+\begin{minted}{clingo}
+%% Finde unbekannte Ausprägungen
+unknown(profession(P)) :- profession(P), not known_profession(P).
+unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
+unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+\end{minted}
 
 
 \subsection{\textquote{Kochbuch} zur Regelformalisierung}\label{subsec:kochbuch-zur-regelformalisierung}
 
-{\color{red}
+Wie bereits in \Kapitel{sec:grundlagen} beschrieben gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
+Hausregeln können, nachvollziehbar, hier nicht betrachtet werden, da diese frei definierbar sind.
+Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP}.
+Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
+Diese werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+
+Das Kochbuch setzt sich aus Rezepte zusammen die nachfolgend beschriebenen Regeln beispielhaft für einen Fall formalisiert werden können.
+
+\textbf{Allgemeingültige Regel:}
 \begin{enumerate}
-    \item (vgl. \Code{resources/rulebook/common.lp}, Zeile 78-86)
+    \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
+    Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
     \begin{minted}[linenos=false]{clingo}
-unknown(species(S)) :- species(S), not known_species(S).
-unknown(talent(T)) :- talent(T,_), not known_talent(T).
-unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+max_count(culture,1).
+max_count_exceeded(culture,MAX_COUNT) :- COUNT = {C,culture(C)}, max_count(culture,MAX_COUNT), COUNT > MAX_COUNT.
     \end{minted}
 
-    \item {\color{red}more to come}
+    \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert, ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
+    Somit sind negativen Zahlen ausgeschlossen.
+    \begin{minted}[linenos=false]{clingo}
+min_skill_level(0).
+missing_min_lvl(talent(T),MIN_LVL) :- talent(T,LVL), min_skill_level(MIN_LVL), LVL < MIN_LVL.
+    \end{minted}
+
+    \item Der gewählte Erfahrungsgrad des Charakters begrenzt die maximalen Stufen von Eigenschaften, Fertigkeiten (Talente, Sonderfertigkeiten) und Kampftechniken, die maximale Gesamtanzahl an Eigenschaftspunkten, die maximale Anzahl an Zauber und Liturgien sowie davon die Anzahl an Fremdzauber \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}.
+    \begin{minted}{clingo}
+%% Model des Erfahrungsgrades
+%% CC := MAX_CHARACTERISTIC_LVL (only on character creation)
+%% S := MAX_SKILL_LVL
+%% CT := MAX_COMBAT_TECHNIQUE_LVL
+%% CCP := MAX_CHARACTERISTIC_POINTS
+%% SL := MAX_SPELLS_AND_LITURGIES
+%% FS := MAX_FOREIGN_SPELL
+known_experience_level(EL,CC,S,CT,CCP,SL,FS).
+
+%% Finde Talente, welche die maximale Stufengrenze überschreiten
+max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), LVL > MAX_LVL.
+    \end{minted}
 \end{enumerate}
-}
+
+\textbf{Regelbuch-spezifische harte Regel:}
+\begin{enumerate}
+    \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
+\end{enumerate}
+
+\textbf{Regelbuch-spezifische weiche Regel:}
+\begin{enumerate}
+    \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
+\end{enumerate}
+
+
+\subsection{Interpretation des \Abk{ASP} Ergebnis}\label{subsec:interpretation-des-asp-ergebnis}
+
+\begin{wrapfigure}{r}{.5\textwidth}
+    \centering
+    \caption{Deklarative Problemlösung \Vgl[Seite 14 (Folie 8)]{ASP-Gebser2012}}\label{fig:deklarative-problemloesung}
+    \Image{declarative_problem_solving.pdf}
+\end{wrapfigure}
+
+Wie in \Abbildung[K]{fig:deklarative-problemloesung} gezeigt wird, muss das Ergebnis vom \Abk{LP} (konkret vom \Tech{Clingo} \Begriff{Solver}) interpretiert werden.
+Dies ist die Aufgabe der Software, konkreter die Aufbereitung zur Verwendung im Frontend.
+Typischerweise sucht man mit \Abk{ASP} für ein Problem mögliche Lösungen.
+Hier hingegen nicht: wir suchen nicht mögliche Charaktere (\Begriff{Answer Set}) unter Beachtung gewählter Regelbücher (Problem), sondern für einen gegebenen Charakter mögliche Regelverstöße.
+Diese Regelverstöße müssen mit ihren Informationen gesammelt werden.
+Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum interpretieren gibt.
+Daher leitet das zuvor beschriebene \textquote{Kochbuch} immer konkrete \Begriff{Atome} als Regelverstöße ab.
+Dadurch bleibt im Sinne von \Abk{ASP} das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Begriff{Answer Set} an möglichen Regelverstößen zurück.
+
+Die für die Interpretation relevanten Atome sind entsprechenden des Erfüllungsgrades (hart: muss, weich: kann) als Validierungsfehler oder -Warnung zu interpretieren.
+So gehören zu den Fehlern die Atome: \Code{unknown}, \Code{max\_count\_exceeded}, \Code{max\_lvl\_exceeded}, \Code{unusable\_by}, \Code{missing\_min\_lvl} und \Code{missing\_level}.
+Und zu den Warnungen: \Code{missing\_usual}, \Code{missing\_typical} und \Code{atypical}.

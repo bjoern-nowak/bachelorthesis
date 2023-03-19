@@ -45,16 +45,16 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     \Tech{Clingo} selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen;
     und seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
     Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
-    Aus einem \Tech{Clingo}-Logik-Programm kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
+    Aus einem \Tech{Clingo}-\Abk{LP} kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
 
     Zwei wichtige Features (eingeführt mit der \Tech{Clingo} Version 4), für die Modellierung von komplexen Problemen, sind:
     \begin{inparaenum}[\bfseries(a)]
-        \item die Möglichkeit Teile des Logik-Programms in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
+        \item die Möglichkeit Teile des \AbkP{LP} in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
         \item Regeln/Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden
     \end{inparaenum}
     \Vgl{CLINGO-Gebser2014}.
     Ebenfalls nennenswert ist die Unterstützung, ab Version 5, von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
-    Auch zu nennen ist das \sog[multi-shot solving] (aus Version 4), bei dem ein Logik-Programm nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
+    Auch zu nennen ist das \sog[multi-shot solving] (aus Version 4), bei dem ein \Abk{LP} nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
 
     Mit der \Tech{Clingo} Erweiterung clingcon (\textquote{con} für Bedingung\Englisch{constraint}) können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
     Hingegen die Erweiterung \AbkS{clorm}{\Tech{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
@@ -129,7 +129,7 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
 
 Am entschiedensten ist zunächst die Wahl des Frameworks, bevor eine Programmiersprache ausgewählt werden kann.
 Beide der genannten Frameworks sind für den nicht-kommerziellen Gebrauch, bezogen auf die Lizenz, frei verfügbar.
-\Tech{Clingo} bietet im Vergleich zu \Abk{DLV} eine größere Anzahl relevanter Features (\inkl der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des Logik-Programms.
+\Tech{Clingo} bietet im Vergleich zu \Abk{DLV} eine größere Anzahl relevanter Features (\inkl der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des \AbkP{LP}.
 Auch die breitere Unterstützung von Programmiersprachen und deutlich bessere Integration in diesen spricht für \Tech{Clingo}.
 Die genannten Erweiterungen und ungenannten Projekte, welche auf \Tech{Clingo}s Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft relevante Erweiterungen und weitere solide Integrationen versprechen.
 Ebenfalls entscheidend ist die Verfügbarkeit und Qualität von Dokumentationen.
@@ -140,6 +140,6 @@ Die von \Tech{Clingo} nativ, also offiziell (out-of-the-box), unterstützten und
 Die freundlichste für ungeübte und angehende Programmierende ist Python.
 Dies, also der Einstieg in die Programmierung abhängig der Sprache, wurde in Ansätzen in \Vgl{C++-Ateeq2014} für Python und C++ aufgezeigt.
 Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwicklenden bestimmte Aufgabenbereiche abnimmt.
-Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von \Tech{Clingo}s Logik-Programmen passt.
-Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem \Tech{Clingo} Logik-Programm heraus externe und kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
+Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von \Tech{Clingo}-\AbkP{LP} passt.
+Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem \Tech{Clingo}-\Abk{LP} heraus externe und kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
 Somit stellt \textbf{Python} die \textbf{sinnvollste} Wahl der \textbf{Programmiersprache} dar.
