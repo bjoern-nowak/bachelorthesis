@@ -7,6 +7,24 @@ Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide}
 Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit, und Vorraussetzung für Ersteres, die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP} \Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
 Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
 
+
+\subsection{Konventionen}\label{subsec:konventionen}
+\begin{inparaenum}[\bfseries(a)]
+
+    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln und Ergebnisfakten. %% TODO [ASK} for a better name of Ergebnisfakten
+    Fakten sind immer \Tech{Clingo} \Begriff{Funktionen}.
+    Spielwelt-Regeln sind immer \Tech{Clingo} \Begriff{Regeln} welche Ergebnisfakten ableiten.
+
+    \item Bei Fakten ist als ersten Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
+    Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt.
+    Wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
+    Letzteres ist damit dann das referenzierte Merkmal.
+
+    \item \Tech{Clingo} \Begriff{Variabel}-Namen sind prägnant, also möglichst kurz \underline{aber} unverwechselbar.
+    Maximal kurz dürfen \Begriff{Variablen} sein welche sich direkt aus dem verwendeten Atom(en), ableiten lassen.
+\end{inparaenum}
+
+
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
 Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing[K]{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
@@ -15,8 +33,6 @@ Dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und minde
 Daneben bekannt sind die Argumente Stufe (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
 Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten, mit unterschiedlichen Ausprägungen (Argumenten), mehrfach vorkommen.
 
-Als Konvention ist zu benennen, dass \Begriff{Variabeln} einen kurzen \underline{aber} unverwechselbaren Namen tragen sollen.
-Maximal kurz dürfen \Begriff{Variablen} sein welche sich direkt aus dem verwendeten Merkmalsfakt, als Abkürzung, ableiten lassen.
 
 \mintedTwoColsCaption{Merkmalsfakten eines Charakters}{lst:merkmalsfakten-eines-charakters}
 \begin{tabular}{@{}p{.55\textwidth}p{.42\textwidth}@{}}
@@ -87,52 +103,81 @@ Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beach
 Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
 Diese werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
 
-Das Kochbuch setzt sich aus Rezepte zusammen die nachfolgend beschriebenen Regeln beispielhaft für einen Fall formalisiert werden können.
+Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen Fall, konkrete Regeln formalisiert.
+Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
+Ein Beispiel endet immer mit der Regel.
 
-\textbf{Allgemeingültige Regel:}
-\begin{enumerate}
+%% TODO [ASK] use textbf instead of subsubsection
+%% TODO [ASK] leftmargin=0em good or bad?
+\subsubsection{Allgemeingültige Regeln}\label{subsubsec:allgemeingultige-regeln}
+%\textbf{Allgemeingültige Regeln:}
+\begin{enumerate}[leftmargin=0em]
     \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
-    Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
+    Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}
     \begin{minted}[linenos=false]{clingo}
-max_count(culture,1).
-max_count_exceeded(culture,MAX_COUNT) :- COUNT = {C,culture(C)}, max_count(culture,MAX_COUNT), COUNT > MAX_COUNT.
+max_count(culture,1). %% nur Fakt mit höhstem Wert entscheidend
+max_count_exceeded(culture,MAX) :- COUNT = #count{C:culture(C)}, MAX = #max{MC:max_count(culture,MC)}, COUNT > MAX.
     \end{minted}
 
-    \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert, ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
+    \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
     Somit sind negativen Zahlen ausgeschlossen.
+    Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.
     \begin{minted}[linenos=false]{clingo}
-min_skill_level(0).
-missing_min_lvl(talent(T),MIN_LVL) :- talent(T,LVL), min_skill_level(MIN_LVL), LVL < MIN_LVL.
+missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
     \end{minted}
 
-    \item Der gewählte Erfahrungsgrad des Charakters begrenzt die maximalen Stufen von Eigenschaften, Fertigkeiten (Talente, Sonderfertigkeiten) und Kampftechniken, die maximale Gesamtanzahl an Eigenschaftspunkten, die maximale Anzahl an Zauber und Liturgien sowie davon die Anzahl an Fremdzauber \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}.
+    \item Der gewählte Erfahrungsgrad des Charakters begrenzt die maximalen Stufen von Eigenschaften, Fertigkeiten (Talente, Sonderfertigkeiten) und Kampftechniken, die maximale Gesamtanzahl an Eigenschaftspunkten, die maximale Anzahl an Zauber und Liturgien sowie davon die Anzahl an Fremdzauber.
+    Wobei nach Charakter-Erstellung nur noch die maximalen Stufen gelten. \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}
     \begin{minted}{clingo}
 %% Model des Erfahrungsgrades
-%% CC := MAX_CHARACTERISTIC_LVL (only on character creation)
-%% S := MAX_SKILL_LVL
-%% CT := MAX_COMBAT_TECHNIQUE_LVL
-%% CCP := MAX_CHARACTERISTIC_POINTS
-%% SL := MAX_SPELLS_AND_LITURGIES
-%% FS := MAX_FOREIGN_SPELL
-known_experience_level(EL,CC,S,CT,CCP,SL,FS).
-
+%%   ES := max. Eigenschaftsstufe
+%%   FS := max. Fertigkeitsstufe
+%%   KTS := max. Kamptechnikstufe
+%%   EP := max. Eigenschaftspunkte
+%%   ZL := max. Anzahl Zauber und Liturgien
+%%   FZ := davon max. Fremdzaumber
+%% Beispiel: known_experience_level(<name>, <ES>, <FS>, <KTS>, <EP>, <ZL>, <FZ>).
+known_experience_level("Average", 13, 10, 10, 98, 10, 1).
 %% Finde Talente, welche die maximale Stufengrenze überschreiten
-max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), LVL > MAX_LVL.
+max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX,_,_,_,_), LVL > MAX.
     \end{minted}
 \end{enumerate}
 
-\textbf{Regelbuch-spezifische harte Regel:}
-\begin{enumerate}
+
+\subsubsection{Regelbuch-spezifische harte Regeln}\label{subsubsec:regelbuch-spezifische-harte-regeln}
+%\textbf{Regelbuch-spezifische harte Regeln:}
+\begin{enumerate}[leftmargin=0em]
     \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
 \end{enumerate}
 
-\textbf{Regelbuch-spezifische weiche Regel:}
-\begin{enumerate}
+
+\subsubsection{Regelbuch-spezifische weiche Regeln}\label{subsubsec:regelbuch-spezifische-weiche-regeln}
+%\textbf{Regelbuch-spezifische weiche Regeln:}
+\begin{enumerate}[leftmargin=0em]
+    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
+    \begin{minted}[linenos=false]{clingo}
+has_usual(species("Elfen"),culture("Auelfen")).
+missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
+    \end{minted}
+
+    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als typisch oder untypisch \Vgl{RWiki-Spezies-Elfen}.
+    Es werden beide Regeln in einem Beispiel gezeigt.
+    \begin{minted}[linenos=false]{clingo}
+has_typical(species("Elfen"),advantage("Dunkelsicht","",2)).
+missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+
+has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
+atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
+    \end{minted}
+
     \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
+    \begin{minted}[linenos=false]{clingo}
+
+    \end{minted}
 \end{enumerate}
 
 
-\subsection{Interpretation des \Abk{ASP} Ergebnis}\label{subsec:interpretation-des-asp-ergebnis}
+\subsection{Interpretation des \AbkK{ASP} Ergebnis}\label{subsec:interpretation-des-asp-ergebnis}
 
 \begin{wrapfigure}{r}{.5\textwidth}
     \centering
@@ -149,6 +194,7 @@ Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei
 Daher leitet das zuvor beschriebene \textquote{Kochbuch} immer konkrete \Begriff{Atome} als Regelverstöße ab.
 Dadurch bleibt im Sinne von \Abk{ASP} das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Begriff{Answer Set} an möglichen Regelverstößen zurück.
 
-Die für die Interpretation relevanten Atome sind entsprechenden des Erfüllungsgrades (hart: muss, weich: kann) als Validierungsfehler oder -Warnung zu interpretieren.
+Die für die Interpretation relevanten Atome sind entsprechenden des Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -Warnung zu interpretieren.
 So gehören zu den Fehlern die Atome: \Code{unknown}, \Code{max\_count\_exceeded}, \Code{max\_lvl\_exceeded}, \Code{unusable\_by}, \Code{missing\_min\_lvl} und \Code{missing\_level}.
 Und zu den Warnungen: \Code{missing\_usual}, \Code{missing\_typical} und \Code{atypical}.
+Diese Interpretation wird nicht in die Namen der Atome aufgenommen, damit die Applikation (und nur diese) drüber, ohne weiteren Aufwand, entscheiden kann und somit \zB wartungsarm Gruppen hinzufügen, entfernen und ändern kann.
