@@ -1,38 +1,48 @@
 \section{Regelwerk-Interpretation}\label{sec:regelwerk-interpretation}
 
-Dieses Kapitel setzt Kenntnisse im Bereich Logikprogrammierung, im konkreten die Syntax und Semantik von \Tech{Clingo}, vorraus.
+Dieses Kapitel setzt Kenntnisse im Bereich Logikprogrammierung, im konkreten die Syntax und Semantik von \Tech{Clingo}, voraus.
 Zum Verständnis nachfolgender \Tech{Listings} liegt mit \Kapitel{sec:clingo-cheatsheet.lp} eine Hilfestellung vor, welches auch Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository} vorliegt.
-Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide} und daher ein ebenso guter (praxis-orientierter) Einstieg.
+Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide} und daher ein ebenso guter (Praxis-orientierter) Einstieg.
 
-Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit, und Vorraussetzung für Ersteres, die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP} \Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
+Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit, und Voraussetzung für Ersteres, die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP}-\Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
 Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
 
 
 \subsection{Konventionen}\label{subsec:konventionen}
 \begin{inparaenum}[\bfseries(a)]
 
-    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln und Ergebnisfakten. %% TODO [ASK} for a better name of Ergebnisfakten
-    Fakten sind immer \Tech{Clingo} \Begriff{Funktionen}.
-    Spielwelt-Regeln sind immer \Tech{Clingo} \Begriff{Regeln} welche Ergebnisfakten ableiten.
+    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln und Ergebnis-Fakten. %% TODO [ASK} for a better name of Ergebnis-Fakten
+    Fakten sind immer \Tech{Clingo}-\Begriff{Funktionen}.
+    Spielwelt-Regeln sind immer \Tech{Clingo}-\Begriff{Regeln}, welche Ergebnis-Fakten ableiten.
 
     \item Bei Fakten ist als ersten Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
     Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt.
     Wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
     Letzteres ist damit dann das referenzierte Merkmal.
 
-    \item \Tech{Clingo} \Begriff{Variabel}-Namen sind prägnant, also möglichst kurz \underline{aber} unverwechselbar.
-    Maximal kurz dürfen \Begriff{Variablen} sein welche sich direkt aus dem verwendeten Atom(en), ableiten lassen.
+    \item \Tech{Clingo}-\Begriff{Variabel}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
+    Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
+
+    \item {\color{red}Auspraeungen als String} %% TODO
+
+    \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
+    Semantisch wird aus \textquote{\mintinline[fontsize=\normalsize]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
+    \vspace{-2em}
+    \begin{minted}[linenos=false]{clingo}
+%% Spielwelt-Fakt:
+has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual culture 'Auelfen'
+%% Ergebnis-Fakt:
+missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C>
+    \end{minted}
 \end{inparaenum}
 
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
 Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing[K]{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
-Jedes Charakter-Merkmal ist ein eigener Fakt.
-Dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
-Daneben bekannt sind die Argumente Stufe (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
-Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten, mit unterschiedlichen Ausprägungen (Argumenten), mehrfach vorkommen.
-
+Jedes Charakter-Merkmal ist ein eigener Fakt, dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
+Daneben bekannt sind die Argumente \textquote{Stufe} (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
+Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten mit unterschiedlichen Ausprägungen (Argumenten) mehrfach vorkommen.
 
 \mintedTwoColsCaption{Merkmalsfakten eines Charakters}{lst:merkmalsfakten-eines-charakters}
 \begin{tabular}{@{}p{.55\textwidth}p{.42\textwidth}@{}}
@@ -71,11 +81,11 @@ disadvantage("Wahrer Name","",1).
 Die Validierung eines Charakters hat eine wichtige Voraussetzung:
 Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüchern bekannt sein.
 Für diese Überprüfung ist es erforderlich, dass bei der Implementierung von Regelbüchern diese deklariert werden.
-Dabei müssen Regelbücher nicht Sämtliche, bereits aus anderen Regelbüchern bekannte, neu deklarieren, sondern können eine Abhängigkeit zu diesen deklarieren.
+Dabei müssen Regelbücher nicht sämtliche, bereits aus anderen Regelbüchern Bekannte, neu deklarieren, sondern können eine Abhängigkeit zu diesen deklarieren.
 
-Deklariert werden Merkmalsauspräungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
-Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können.
-Hingegen bei \zB Vor- und Nachteilen diese nicht beliebig sind und daher zu deklarieren sind.
+Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
+Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können;
+hingegen bei \zB Vor- und Nachteilen nicht beliebig und daher zu deklarieren sind.
 
 \begin{minted}{clingo}
 known_profession("Händler").
@@ -97,8 +107,8 @@ unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,U
 
 \subsection{\textquote{Kochbuch} zur Regelformalisierung}\label{subsec:kochbuch-zur-regelformalisierung}
 
-Wie bereits in \Kapitel{sec:grundlagen} beschrieben gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
-Hausregeln können, nachvollziehbar, hier nicht betrachtet werden, da diese frei definierbar sind.
+Wie bereits in \Kapitel{sec:grundlagen} beschrieben, gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
+Hausregeln können hier nicht betrachtet werden, da diese frei definierbar sind.
 Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP}.
 Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
 Diese werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
@@ -120,7 +130,7 @@ max_count_exceeded(culture,MAX) :- COUNT = #count{C:culture(C)}, MAX = #max{MC:m
     \end{minted}
 
     \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
-    Somit sind negativen Zahlen ausgeschlossen.
+    Somit sind negative Zahlen ausgeschlossen.
     Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.
     \begin{minted}[linenos=false]{clingo}
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
@@ -147,7 +157,7 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), know
 \subsubsection{Regelbuch-spezifische harte Regeln}\label{subsubsec:regelbuch-spezifische-harte-regeln}
 %\textbf{Regelbuch-spezifische harte Regeln:}
 \begin{enumerate}[leftmargin=0em]
-    \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
+    \item {\color{red}more to come} %% TODO
 \end{enumerate}
 
 
@@ -170,14 +180,14 @@ has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
 atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
     \end{minted}
 
-    \item {\color{red}asdfasdfasdf \Vgl[Schritt 2]{RWiki-Erstellung}} %% TODO
+    \item {\color{red}more to come} %% TODO
     \begin{minted}[linenos=false]{clingo}
-
+%% TBA
     \end{minted}
 \end{enumerate}
 
 
-\subsection{Interpretation des \AbkK{ASP} Ergebnis}\label{subsec:interpretation-des-asp-ergebnis}
+\subsection{Interpretation des \AbkK{ASP}-Ergebnisses}\label{subsec:interpretation-des-asp-ergebnisses}
 
 \begin{wrapfigure}{r}{.5\textwidth}
     \centering
@@ -187,14 +197,14 @@ atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypi
 
 Wie in \Abbildung[K]{fig:deklarative-problemloesung} gezeigt wird, muss das Ergebnis vom \Abk{LP} (konkret vom \Tech{Clingo} \Begriff{Solver}) interpretiert werden.
 Dies ist die Aufgabe der Software, konkreter die Aufbereitung zur Verwendung im Frontend.
-Typischerweise sucht man mit \Abk{ASP} für ein Problem mögliche Lösungen.
-Hier hingegen nicht: wir suchen nicht mögliche Charaktere (\Begriff{Answer Set}) unter Beachtung gewählter Regelbücher (Problem), sondern für einen gegebenen Charakter mögliche Regelverstöße.
+Typischerweise sucht man mit \Abk{ASP} für ein Problem mögliche Lösungen;
+hier hingegen nicht: es werden keine möglichen Charaktere (\Begriff{Answer Set}) unter Beachtung gewählter Regelbücher (Problem) gesucht, sondern für einen gegebenen Charakter mögliche Regelverstöße.
 Diese Regelverstöße müssen mit ihren Informationen gesammelt werden.
-Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum interpretieren gibt.
+Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum Interpretieren gibt.
 Daher leitet das zuvor beschriebene \textquote{Kochbuch} immer konkrete \Begriff{Atome} als Regelverstöße ab.
-Dadurch bleibt im Sinne von \Abk{ASP} das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Begriff{Answer Set} an möglichen Regelverstößen zurück.
+Dadurch bleibt, im Sinne von \Abk{ASP}, das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Begriff{Answer Set} an möglichen Regelverstößen zurück.
 
-Die für die Interpretation relevanten Atome sind entsprechenden des Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -Warnung zu interpretieren.
+Die für die Interpretation relevanten Atome sind entsprechend dem Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -warnung zu interpretieren.
 So gehören zu den Fehlern die Atome: \Code{unknown}, \Code{max\_count\_exceeded}, \Code{max\_lvl\_exceeded}, \Code{unusable\_by}, \Code{missing\_min\_lvl} und \Code{missing\_level}.
-Und zu den Warnungen: \Code{missing\_usual}, \Code{missing\_typical} und \Code{atypical}.
+Warnungen sind: \Code{missing\_usual}, \Code{missing\_typical} und \Code{atypical}.
 Diese Interpretation wird nicht in die Namen der Atome aufgenommen, damit die Applikation (und nur diese) drüber, ohne weiteren Aufwand, entscheiden kann und somit \zB wartungsarm Gruppen hinzufügen, entfernen und ändern kann.

@@ -1,22 +1,22 @@
 \section{Schwierigkeiten}\label{sec:probleme}
 
 Während der Umsetzung des Konzeptes sind einige unerwartete Schwierigkeiten aufgekommen.
-Diese werden nachfolgend aufgelistet, die Reihenfolge hat keine Bedeutung:
+Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
 
 %% TODO also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
 \begin{itemize}
-    \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten zu erzeugen, die mehrere Argumente haben, ohne Hilfsfakten zu erzeugen.
-    Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo} Tuple zurückgeben, diese werden aber nicht automatisch als Argumente entpackt.
-    Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Code{resources/rulebook/common.lp}, Zeile 63-75):
+    \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
+    Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
+    Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Code{resources/rulebook/common.lp}, Zeile 63-75): %% TODO [ASK] add to appendix?
     \begin{minted}[linenos=false]{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{minted}
 
-    \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, wird das Konstrukt \textquote{conditional literal} verwendet.
-    Dies Verhält sich im Kopfbereich jedoch anders, als im Körper: dort dienen sie dem Mapping über ein Atom, es muss also etwas abgeleitet werden.
-    Deshalb funktioniert folgendes, leicht lesbares, nicht:
+    \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, beachtet werden, wird das Konstrukt \textquote{conditional literal} verwendet.
+    Dies verhält sich im Kopfbereich jedoch anders als im Körper: dort dienen sie dem Mapping über ein Atom; es muss also etwas abgeleitet werden.
+    Deshalb funktioniert folgendes, leicht lesbare, nicht:
     \begin{minted}[linenos=false]{clingo}
 unusable_by(profession(P),species(S)) : species(S), not requires(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)).
     \end{minted}
@@ -24,7 +24,7 @@ unusable_by(profession(P),species(S)) : species(S), not requires(profession(P),s
     \begin{minted}[linenos=false]{clingo}
 unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
     \end{minted}
-    Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählten Spezies darin nicht enthalten ist.}
+    Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählte Spezies darin nicht enthalten ist.}
 
     \item {\color{red}more to come}
 \end{itemize}
