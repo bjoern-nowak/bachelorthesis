@@ -121,10 +121,10 @@ Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen F
 Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
 Ein Beispiel endet immer mit der Regel.
 
-\vspace{1em}\todo{Sollen das Listings mit Überschriften sein?}\textbf{Allgemeingültige Regeln:}
-\begin{enumerate}[leftmargin=0em]
+\paragraph{Allgemeingültige Regeln:}
+\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
     \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
-    Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}
+    Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}\todo{Sollen das Listings mit Überschriften sein?}
     \begin{minted}[linenos=false]{clingo}
 max_count(culture,1). %% nur Fakt mit höhstem Wert entscheidend
 max_count_exceeded(culture,MAX) :- COUNT = #count{C:culture(C)}, MAX = #max{MC:max_count(culture,MC)}, COUNT > MAX.
@@ -154,14 +154,15 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), know
     \end{minted}
 \end{enumerate}
 
-\textbf{Regelbuch-spezifische harte Regeln:}
-\begin{enumerate}[leftmargin=0em]
+\paragraph{Regelbuch-spezifische harte Regeln:}
+\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, welches \underline{keine} Stufe hat {\color{red}[vgl. ]}.
     \begin{minted}[linenos=false]{clingo}
 requires(culture("Auelfen"),species("Elfen")).
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
 %% hierzu zählen auch Vor- und Nachteile, weil deren Stufe nicht dynamisch ist:
 requires(species("Elfen"),advantage("Zauberer","",1)).
+missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{minted}
 
     \item Eine \todo{Kann man auch ein '\_' nutzen für den Funktionsnamen?]} Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
@@ -175,8 +176,8 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not re
     \item {\color{red}more to come} %% TODO
 \end{enumerate}
 
-\textbf{Regelbuch-spezifische weiche Regeln:}
-\begin{enumerate}[leftmargin=0em]
+\paragraph{Regelbuch-spezifische weiche Regeln:}
+\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{minted}[linenos=false]{clingo}
 has_usual(species("Elfen"),culture("Auelfen")).

@@ -1,8 +1,8 @@
 \chapter{Diskussion}\label{ch:diskussion}
 
 {\color{red}
-    - Export Format das Kompatibel zu anderen Softwares ist
-    - Datenbank anbindung
+- Export Format das Kompatibel zu anderen Softwares ist
+- Datenbank anbindung
 %    - Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession_requires_culture("<profession>","<culture>").' )
 %        anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde. Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
@@ -13,3 +13,29 @@ Das muss das Schema des Charakters angepasst werden, so das diese Merkmale keine
 - Es fehlt: Charakter-Validierungswarnungen müssen ignorierbar sein, also \textquote{von der Spielleitung akzeptierte Abweichungen}.
 Dazu kann die \Abk{API} erweitert werden, das eine Liste der konkreten Warnungen enthält.
 }
+
+- Viele Regeln werden im \Abk{LP} für ähnliche Merkmale wiederholt.
+Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsames \Tech{Clingo}-\Begriff{Funktion} (\Begriff{Gruppe}) abbilden.
+Wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
+Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen, letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
+Das \Listing[K]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
+
+\begin{listing}[htbp]
+    \caption{Modellierung von strukturell ähnlichen Merkmalen in einer Gruppe}\label{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe}
+    \begin{minted}{clingo}
+%% Beispiel einer Regel-Wiederholung
+missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
+missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN = 0, LVL < MIN.
+%% Option A: zusätzlich zu bekannten Charakter-Fakten
+skill(talent,NAME,LVL) :- talent(NAME,LVL).
+skill(combat_technique,NAME,LVL) :- combat_technique(NAME,LVL).
+%% Option B: Charakter-Fakten ersetzen
+skill(talent,NAME,LVL) :- __talent_wrapper((NAME,LVL)).
+skill(combat_technique,NAME,LVL) :- __combat_technique_wrapper((NAME,LVL)).
+%% Einzehlne Regel über eine Merkmalsgruppe
+missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL < MIN.
+    \end{minted}
+\end{listing}
+
+Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten (in {\color{red}\textquote{hero\_validation\_interpreter.py}}) angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären.
+
