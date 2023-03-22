@@ -11,7 +11,7 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 \subsection{Konventionen}\label{subsec:konventionen}
 \begin{inparaenum}[\bfseries(a)]
 
-    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln und Ergebnis-Fakten. %% TODO [ASK} for a better name of Ergebnis-Fakten
+    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln  und \todo{besserer Name?}Ergebnis-Fakten.
     Fakten sind immer \Tech{Clingo}-\Begriff{Funktionen}.
     Spielwelt-Regeln sind immer \Tech{Clingo}-\Begriff{Regeln}, welche Ergebnis-Fakten ableiten.
 
@@ -19,11 +19,15 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt.
     Wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
     Letzteres ist damit dann das referenzierte Merkmal.
+    Dies macht es möglich die dazugehörige Regel schneller im echten Regelbuch nachzuschlagen.
+
+    \item Merkmale werden als \Tech{Clingo}-\Begriff{Konstante} oder -\Begriff{Funktion} formuliert.
+    Bei Letzterem ist das erste Argument immer der Name der Merkmalsausprägung.
+    Diese sind immer in Form eines \Tech{Clingo}-\Begriff{Textes} (also in Hochkommata), da Leerzeichen und Sonderzeichen möglich sind.
+    Dies macht es einfach die Merkmalsausprägung im echten Regelbuch wiederzufinden.
 
     \item \Tech{Clingo}-\Begriff{Variabel}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
     Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
-
-    \item {\color{red}Auspraeungen als String} %% TODO
 
     \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
     Semantisch wird aus \textquote{\mintinline[fontsize=\normalsize]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
@@ -39,7 +43,7 @@ missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
-Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing[K]{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
+Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
 Jedes Charakter-Merkmal ist ein eigener Fakt, dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
 Daneben bekannt sind die Argumente \textquote{Stufe} (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
 Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten mit unterschiedlichen Ausprägungen (Argumenten) mehrfach vorkommen.
@@ -117,10 +121,7 @@ Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen F
 Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
 Ein Beispiel endet immer mit der Regel.
 
-%% TODO [ASK] use textbf instead of subsubsection
-%% TODO [ASK] leftmargin=0em good or bad?
-\subsubsection{Allgemeingültige Regeln}\label{subsubsec:allgemeingultige-regeln}
-%\textbf{Allgemeingültige Regeln:}
+\vspace{1em}\todo{Sollen das Listings mit Überschriften sein?}\textbf{Allgemeingültige Regeln:}
 \begin{enumerate}[leftmargin=0em]
     \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}
@@ -153,16 +154,28 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), know
     \end{minted}
 \end{enumerate}
 
-
-\subsubsection{Regelbuch-spezifische harte Regeln}\label{subsubsec:regelbuch-spezifische-harte-regeln}
-%\textbf{Regelbuch-spezifische harte Regeln:}
+\textbf{Regelbuch-spezifische harte Regeln:}
 \begin{enumerate}[leftmargin=0em]
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, welches \underline{keine} Stufe hat {\color{red}[vgl. ]}.
+    \begin{minted}[linenos=false]{clingo}
+requires(culture("Auelfen"),species("Elfen")).
+unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
+%% hierzu zählen auch Vor- und Nachteile, weil deren Stufe nicht dynamisch ist:
+requires(species("Elfen"),advantage("Zauberer","",1)).
+    \end{minted}
+
+    \item Eine \todo{Kann man auch ein '\_' nutzen für den Funktionsnamen?]} Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
+    \begin{minted}[linenos=false]{clingo}
+requires(profession("Söldner"),talent("Kriegskunst",6)).
+%% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet wenn das Merkmal komplett fehlt
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
+    \end{minted}
+
     \item {\color{red}more to come} %% TODO
 \end{enumerate}
 
-
-\subsubsection{Regelbuch-spezifische weiche Regeln}\label{subsubsec:regelbuch-spezifische-weiche-regeln}
-%\textbf{Regelbuch-spezifische weiche Regeln:}
+\textbf{Regelbuch-spezifische weiche Regeln:}
 \begin{enumerate}[leftmargin=0em]
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{minted}[linenos=false]{clingo}
@@ -178,11 +191,6 @@ missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not ha
 
 has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
 atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
-    \end{minted}
-
-    \item {\color{red}more to come} %% TODO
-    \begin{minted}[linenos=false]{clingo}
-%% TBA
     \end{minted}
 \end{enumerate}
 

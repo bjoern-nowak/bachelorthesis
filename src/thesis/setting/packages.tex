@@ -102,6 +102,7 @@
 %% ----- Styling --------------------------------------------------------------
 \usepackage{xcolor} %% predefined color names
 \usepackage{lscape} %% rotates specific page in landscape
+\usepackage{caption} %% required for custom listing see '\captionsetup'
 
 
 %% ----- Sonstiges ------------------------------------------------------------
@@ -181,4 +182,5 @@
 
 
 %% ----- END OF FILE (PREAMBLE) -----------------------------------------------
+\usepackage[obeyFinal,colorinlistoftodos,textsize=scriptsize]{todonotes} %% in-document todos (must be here ,else graphicx is sad
 \usepackage[strict]{csquotes} %% required by babel to ensure qoutes are typeset to language

@@ -1,3 +1,20 @@
+%% ----- copy-pasteable listings -----
+%%%% source: https://tex.stackexchange.com/questions/83204/how-can-i-make-source-code-included-with-minted-copyable
+%% based on: http://tex.stackexchange.com/questions/57151/how-do-i-prevent-conflicts-between-accsupp-and-hyperref
+\usepackage[space=true]{accsupp}
+
+%%% make space/indention copyable (requires above [space=true]) TODO does not work
+%% see http://www.monperrus.net/martin/copy-pastable-listings-in-pdf-from-latex
+%% see http://tex.stackexchange.com/questions/4911/phantom-spaces-in-listings-pdf
+\newcommand{\copyablespace}{\BeginAccSupp{method=hex,unicode,ActualText=00A0}\ \EndAccSupp{}} %% may use '\hphantom{x}' for '\ '
+
+%%% exclude line numbering from copying
+\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+%% default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
+\let\theHFancyVerbLine\theFancyVerbLine %% don't apply our patch to hyperref's version
+\def\theFancyVerbLine{\tiny\emptyaccsupp{\arabic{FancyVerbLine}}} %% ALSO make line numberin tiny
+
+
 %% ----- minted package -----
 \setminted{
     linenos, %% line numbering
@@ -7,8 +24,11 @@
     frame=lines,
     breaklines,
     breakafter=\_,
+%    obeytabs,
+%    showtabs,
+    showspaces,
+    space=\copyablespace
 }
-\renewcommand{\theFancyVerbLine}{\tiny\arabic{FancyVerbLine}}
 \usemintedstyle[clingo]{clingos}
 \usemintedstyle[yaml]{yamls}
 

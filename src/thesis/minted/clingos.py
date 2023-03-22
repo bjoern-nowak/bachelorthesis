@@ -63,13 +63,13 @@ class ClingosStyle(Style):
         # Literal: '',
         # Literal.Date: '',
 
-        String: '#1E9B24',  # lila
+        String: '#6A0B86',  # lila
         # String.Affix: '',
         # String.Backtick: '',
         # String.Char: '',
         # String.Delimiter: '',
         # String.Doc: '',
-        String.Double: '#1E9B24',  # lila
+        String.Double: '#6A0B86',  # lila
         String.Escape: '#B4B400',  # yellow
         # String.Heredoc: '',
         # String.Interpol: '',
@@ -87,7 +87,7 @@ class ClingosStyle(Style):
         # Number.Oct: '',
 
         Operator: 'bold #F92772',  # pink @@@ ! != & ' * ** + - / < <= > >= ? \ ^ _ not | ~
-        Operator.Word: 'bold #46B13E',
+        Operator.Word: 'bold #0F7315',  # green
         # green @@@ :~ # #count #false #inf #max #maximize #min #minimize #program #show #sum #sum+ #sup #true
 
         # Punctuation: '',
