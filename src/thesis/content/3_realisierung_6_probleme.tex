@@ -1,30 +1,33 @@
 \section{Schwierigkeiten}\label{sec:probleme}
 
-Während der Umsetzung des Konzeptes sind einige unerwartete Schwierigkeiten aufgekommen.
+Während der Umsetzung des Konzeptes sind einige unerwartete oder nennenswerte Schwierigkeiten aufgekommen.
 Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
+%% also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
+\begin{enumerate}[leftmargin=0em,label=\textbf{\alph*)}]
+    \itemsep0em
 
-%% TODO also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
-\begin{itemize}
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
     Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (\todo{Datei nicht im Anhang}vgl. \Code{resources/rulebook/common.lp}, Zeile 63-75):
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
-    \end{minted}
+    \end{mintedNameless}
 
     \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, beachtet werden, wird das Konstrukt \textquote{conditional literal} verwendet.
     Dies verhält sich im Kopfbereich jedoch anders als im Körper: dort dienen sie dem Mapping über ein Atom; es muss also etwas abgeleitet werden.
     Deshalb funktioniert folgendes, leicht lesbare, nicht:
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 unusable_by(profession(P),species(S)) : species(S), not requires(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)).
-    \end{minted}
+    \end{mintedNameless}
     Daher muss im Körperbereich eine Doppelverneinung (\mintinline{clingo}{#false : not}) genutzt werden:
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
-    \end{minted}
+    \end{mintedNameless}
     Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählte Spezies darin nicht enthalten ist.}
 
+    \item {\color{red}Vor Start der Applikation die Regelbücher auf korrektheit zu überprüfen. Z.B. das die Regelbücher nur bekannte Werte in den Spielwelt-Regeln nutzen]}
+
     \item {\color{red}more to come}
-\end{itemize}
+\end{enumerate}

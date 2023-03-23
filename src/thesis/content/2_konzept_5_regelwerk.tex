@@ -9,7 +9,9 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 
 
 \subsection{Konventionen}\label{subsec:konventionen}
-\begin{inparaenum}[\bfseries(a)]
+
+\begin{enumerate}[leftmargin=0em,label=\textbf{\alph*)}]
+    \itemsep0em
 
     \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln  und \todo{besserer Name?}Ergebnis-Fakten.
     Fakten sind immer \Tech{Clingo}-\Begriff{Funktionen}.
@@ -31,14 +33,13 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 
     \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
     Semantisch wird aus \textquote{\mintinline[fontsize=\normalsize]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
-    \vspace{-2em}
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 %% Spielwelt-Fakt:
 has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual culture 'Auelfen'
 %% Ergebnis-Fakt:
 missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C>
-    \end{minted}
-\end{inparaenum}
+    \end{mintedNameless}
+\end{enumerate}
 
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
@@ -48,10 +49,11 @@ Jedes Charakter-Merkmal ist ein eigener Fakt, dargestellt als \Begriff{Funktion}
 Daneben bekannt sind die Argumente \textquote{Stufe} (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
 Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten mit unterschiedlichen Ausprägungen (Argumenten) mehrfach vorkommen.
 
-\mintedTwoColsCaption{Merkmalsfakten eines Charakters}{lst:merkmalsfakten-eines-charakters}
-\begin{tabular}{@{}p{.55\textwidth}p{.42\textwidth}@{}}
-    \midrule
-    \begin{mintedTabular}[frame=none]{clingo}
+\begin{listing}[htbp]
+    \captionOfListingInTabular{Merkmalsfakten eines Charakters}{lst:merkmalsfakten-eines-charakters}
+    \begin{tabular}{@{}p{.55\textwidth}p{.42\textwidth}@{}}
+        \midrule
+        \begin{mintedTabular}[frame=none]{clingo}
 %% Strukturelle Darstellung mit Konventions-konformern Argumenten-Variable-Namen
 experience_level(EL).
 species(S).
@@ -62,9 +64,9 @@ combat_technique(CT,LVL).
 advantage(A,USES,LVL). %% USES := Referenz (Text)
 disadvantage(DA,USES,LVL).
 %% weitere Ähnliche wie Eigenschaften, Sonderfertigkeiten, Zauber und Liturgien möglich
-    \end{mintedTabular}
-    &
-    \begin{mintedTabular}[frame=none]{clingo}
+        \end{mintedTabular}
+        &
+        \begin{mintedTabular}[frame=none]{clingo}
 %% Beispiel, wobei bestimmte Fakten mehrfach vorkommen dürfen z.B. Talente
 experience_level("Average").
 species("Elfen").
@@ -74,39 +76,44 @@ talent("Kraftakt",3). talent("Zechen",3).
 combat_technique("Armbrüste",10).
 advantage("Begabung","Singen",1).
 disadvantage("Wahrer Name","",1).
-    \end{mintedTabular}
-    \\
-    \midrule
-\end{tabular}
+        \end{mintedTabular}
+        \\
+        \midrule
+    \end{tabular}
+\end{listing}
 
 
 \subsection{Validierungsvoraussetzung}\label{subsec:validierungsvoraussetzung}
 
 Die Validierung eines Charakters hat eine wichtige Voraussetzung:
 Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüchern bekannt sein.
-Für diese Überprüfung ist es erforderlich, dass bei der Implementierung von Regelbüchern diese deklariert werden.
-Dabei müssen Regelbücher nicht sämtliche, bereits aus anderen Regelbüchern Bekannte, neu deklarieren, sondern können eine Abhängigkeit zu diesen deklarieren.
+
+Für diese Überprüfung ist es erforderlich, dass Regelbücher bekannte Merkmalsausprägungen deklarieren.
+Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderem definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
+\begin{mintedNameless}[linenos=false]{clingo}
+%% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
+rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
+%% Allgemeine Überprüfung der Abhängigkeiten:
+rulebook_missing(R,D) :- rulebook_depends(R,D),  rulebook(R), not rulebook(D).
+\end{mintedNameless}
 
 Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
 Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können;
-hingegen bei \zB Vor- und Nachteilen nicht beliebig und daher zu deklarieren sind.
-
-\begin{minted}{clingo}
+hingegen diese bei Vor- und Nachteilen nicht beliebig und daher zu deklarieren sind.
+\begin{mintedNameless}[linenos=false]{clingo}
 known_profession("Händler").
 known_combat_technique("Armbrüste";"Raufen").
 known_advantage("Dunkelsicht","",(1..2)).
 known_advantage("Begabung",("Singen";"Musizieren"),1).
-known_advantage(("Beidhändig";"Zauberer";"Flink"),"",1).
-\end{minted}
+\end{mintedNameless}
 
 Diese somit bekannten Merkmalsausprägungen werden dann überprüft.
-
-\begin{minted}{clingo}
+\begin{mintedNameless}[linenos=false]{clingo}
 %% Finde unbekannte Ausprägungen
 unknown(profession(P)) :- profession(P), not known_profession(P).
 unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
 unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
-\end{minted}
+\end{mintedNameless}
 
 
 \subsection{\textquote{Kochbuch} zur Regelformalisierung}\label{subsec:kochbuch-zur-regelformalisierung}
@@ -122,24 +129,24 @@ Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellieru
 Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}
-\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
+\begin{enumerate}[leftmargin=0em,label={\small\textbf{AR.\arabic*)}}]
     \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}\todo{Sollen das Listings mit Überschriften sein?}
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 max_count(culture,1). %% nur Fakt mit höhstem Wert entscheidend
 max_count_exceeded(culture,MAX) :- COUNT = #count{C:culture(C)}, MAX = #max{MC:max_count(culture,MC)}, COUNT > MAX.
-    \end{minted}
+    \end{mintedNameless}
 
     \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
     Somit sind negative Zahlen ausgeschlossen.
     Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
-    \end{minted}
+    \end{mintedNameless}
 
     \item Der gewählte Erfahrungsgrad des Charakters begrenzt die maximalen Stufen von Eigenschaften, Fertigkeiten (Talente, Sonderfertigkeiten) und Kampftechniken, die maximale Gesamtanzahl an Eigenschaftspunkten, die maximale Anzahl an Zauber und Liturgien sowie davon die Anzahl an Fremdzauber.
     Wobei nach Charakter-Erstellung nur noch die maximalen Stufen gelten. \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}
-    \begin{minted}{clingo}
+    \begin{mintedNameless}{clingo}
 %% Model des Erfahrungsgrades
 %%   ES := max. Eigenschaftsstufe
 %%   FS := max. Fertigkeitsstufe
@@ -151,48 +158,48 @@ missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
 known_experience_level("Average", 13, 10, 10, 98, 10, 1).
 %% Finde Talente, welche die maximale Stufengrenze überschreiten
 max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX,_,_,_,_), LVL > MAX.
-    \end{minted}
+    \end{mintedNameless}
 \end{enumerate}
 
 \paragraph{Regelbuch-spezifische harte Regeln:}
-\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
+\begin{enumerate}[leftmargin=0em,label={\small\textbf{HR.\arabic*)}}]
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, welches \underline{keine} Stufe hat {\color{red}[vgl. ]}.
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 requires(culture("Auelfen"),species("Elfen")).
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
 %% hierzu zählen auch Vor- und Nachteile, weil deren Stufe nicht dynamisch ist:
 requires(species("Elfen"),advantage("Zauberer","",1)).
 missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
-    \end{minted}
+    \end{mintedNameless}
 
     \item Eine \todo{Kann man auch ein '\_' nutzen für den Funktionsnamen?]} Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
 %% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet wenn das Merkmal komplett fehlt
 missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
 missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
-    \end{minted}
+    \end{mintedNameless}
 
     \item {\color{red}more to come} %% TODO
 \end{enumerate}
 
 \paragraph{Regelbuch-spezifische weiche Regeln:}
-\begin{enumerate}[leftmargin=0em,label=\textbf{\arabic*)}]
+\begin{enumerate}[leftmargin=0em,label={\small\textbf{WR.\arabic*)}}]
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(species("Elfen"),culture("Auelfen")).
 missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
-    \end{minted}
+    \end{mintedNameless}
 
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als typisch oder untypisch \Vgl{RWiki-Spezies-Elfen}.
     Es werden beide Regeln in einem Beispiel gezeigt.
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 has_typical(species("Elfen"),advantage("Dunkelsicht","",2)).
 missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
 
 has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
 atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
-    \end{minted}
+    \end{mintedNameless}
 \end{enumerate}
 
 

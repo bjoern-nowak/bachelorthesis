@@ -5,9 +5,9 @@
 
 
 - Hero validation pre-check step (vgl. \Code{resources/rulebook/common.lp}, Zeile 78-86)
-    \begin{minted}[linenos=false]{clingo}
+    \begin{mintedNameless}[linenos=false]{clingo}
 unknown(species(S)) :- species(S), not known_species(S).
 unknown(talent(T)) :- talent(T,_), not known_talent(T).
 unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
-    \end{minted}
+    \end{mintedNameless}
 }

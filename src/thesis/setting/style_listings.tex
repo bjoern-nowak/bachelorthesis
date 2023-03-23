@@ -31,6 +31,8 @@
 }
 \usemintedstyle[clingo]{clingos}
 \usemintedstyle[yaml]{yamls}
+\BeforeBeginEnvironment{minted}{\unskip} %% or {\vspace{-\parskip}}
+\AfterEndEnvironment{minted}{\unskip} %% or {\vspace{-\parskip}}
 
 %% 'minted' uses 'newfloat' (as configured) for the 'listing' environemnt
 %%     which can be configured through 'caption' package

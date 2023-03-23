@@ -93,31 +93,39 @@
 
 
 %% ----- Listings -------------------------------------------------------------
-\newcommand{\mintedTwoColsCaption}[2]{%
-    \vspace{1em plus 1em minus .25em}%
+\newcommand{\captionOfListingInTabular}[2]{%
     \captionof{listing}{#1}\label{#2}%
-    \vspace{1.1em}%
+    \vspace{1em}%
 }
 \newcommand{\inputMintedTwoCols}[3][]{%
+    \vspace{1em}%
     \setlength\columnsep{15pt}%
-    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.5em}%
+    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.4em}%
     \begin{multicols}{2}%
         \inputminted[frame=none,#1]{#2}{#3}%
     \end{multicols}%
-    \vspace{-2em}\rule{\linewidth}{0.4pt}%
+    \vspace{-1.8em}\rule{\linewidth}{0.4pt}%
 }
-%% usage: \begin{mintedTwoCols}[]{clingo}
+
 \newenvironment{mintedTwoCols}[2][]
 {%
     \VerbatimEnvironment%
     \setlength\columnsep{15pt}%
-    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.5em}%
+    \par\noindent\rule{\linewidth}{0.4pt}\vspace{-1.4em}%
     \begin{multicols}{2}%
         \begin{minted}[frame=none,#1]{#2}%
 }{%
         \end{minted}%
     \end{multicols}%
-    \vspace{-2em}\rule{\linewidth}{0.4pt}%
+    \vspace{-1.8em}\rule{\linewidth}{0.4pt}%
+}
+\newenvironment{mintedNameless}[2][]
+{%
+    \VerbatimEnvironment%
+    \vspace{-.8em}
+    \begin{minted}[#1]{#2}%
+}{%
+    \end{minted}%
 }
 
 %% Minted within a tabular with no extra spacing
