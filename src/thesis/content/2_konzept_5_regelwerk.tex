@@ -32,7 +32,7 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
 
     \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
-    Semantisch wird aus \textquote{\mintinline[fontsize=\normalsize]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
+    Semantisch wird aus \textquote{\mintinline[fontsize=\small]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
     \begin{mintedNameless}[linenos=false]{clingo}
 %% Spielwelt-Fakt:
 has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual culture 'Auelfen'
@@ -172,7 +172,7 @@ requires(species("Elfen"),advantage("Zauberer","",1)).
 missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{mintedNameless}
 
-    \item Eine \todo{Kann man auch ein '\_' nutzen für den Funktionsnamen?]} Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
     \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
 %% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet wenn das Merkmal komplett fehlt

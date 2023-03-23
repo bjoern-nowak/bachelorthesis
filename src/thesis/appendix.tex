@@ -3,13 +3,27 @@
 \begin{landscape}
     \chapter{Anhang}\label{ch:anhang}
 
-    \section{api-contract.yaml}\label{sec:api-contract.yaml}
-    Beispiele innerhalb des Schnittstellenvertrags wurden aufgrund der sonst entstehenden Länge entfernt.
+    Einträge die mit \textquote{<root>/} beginnen sind Dateien im quelloffenen Aufbewahrungsort.
+
+    \section{<api>/openapi.yaml}\label{sec:openapi.yaml}
+    \Abk{API}-Endpunkt zum Abrufen des Schnittstellenvertrags.
+    Beispiele innerhalb des Schnittstellenvertrags wurden, aufgrund der sonst entstehenden Länge, entfernt.
     \vspace{-1em}\inputMintedTwoCols{yaml}{appendix/api-contract.yaml}
 
-    \newpage
+%    \newpage
     \section{clingo-cheatsheet.lp}\label{sec:clingo-cheatsheet.lp}
+    Einstiegshilfe zur \Tech{Clingo} Syntax und Semantik.
     \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/clingo-cheatsheet.lp}
+
+%    \newpage
+    \section{<root>/resources/rulebook/common.lp}\label{sec:common.lp}
+    \Abk{LP}, das, als Basis für alle Regelbücher, von der Software geladen wird.
+    \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/common.lp}
+
+%    \newpage
+    \section{<root>/app/engine/hero\_validation\_interpreter.py}\label{sec:hero-validation-interpreter.py}
+    Quellcode zur Interpretation der Ergebnis-Fakten.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_validation_interpreter.py}
 
     %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
     %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}

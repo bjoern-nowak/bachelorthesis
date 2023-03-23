@@ -9,7 +9,7 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
-    Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (\todo{Datei nicht im Anhang}vgl. \Code{resources/rulebook/common.lp}, Zeile 63-75):
+    Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 63-75):
     \begin{mintedNameless}[linenos=false]{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
