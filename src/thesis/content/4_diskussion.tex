@@ -25,6 +25,10 @@
     Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen, letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
     Das \Listing[KP]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
+
+    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Begriff{Clingo}).
+    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
+    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
 \end{enumerateWithCode}
 
 \begin{listing}[htbp]
