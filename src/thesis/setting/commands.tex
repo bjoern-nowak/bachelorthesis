@@ -92,6 +92,16 @@
 }
 
 
+%% ----- items ----------------------------------------------------------------
+\newenvironment{enumerateWithCode}[1]
+{%
+    \begin{enumerate}[leftmargin=0em,label={\small\textbf{#1.\arabic*)}}] %% or \alph*
+        \itemsep0em%
+}{%
+    \end{enumerate}%
+}
+
+
 %% ----- Listings -------------------------------------------------------------
 \newcommand{\captionOfListingInTabular}[2]{%
     \captionof{listing}{#1}\label{#2}%

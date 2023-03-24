@@ -1,8 +1,6 @@
 \chapter{Diskussion}\label{ch:diskussion}
 
-\begin{enumerate}[leftmargin=0em,label=\textbf{\alph*)}]
-    \itemsep0em
-
+\begin{enumerateWithCode}{D}
     \item Ein Export-Endpunkt, welches ein Charakter in einem Format zurück gibt, das kompatibel zu anderen Softwares ist, ist im allgemeinen Benutzenden-freundlich.
     Noch besser wäre ein Import-Endpunkt gewesen, welches fremde Formate in das Eigene konvertiert.
     Dies würde eine Migration von einer anderen Software erleichtern und damit die Zahl der Benutzenden und möglichen Mitwirkenden potenziell vergrößern.
@@ -12,7 +10,7 @@
 
     \item Durch die generierten Validierungsfehler und -warnungen, weiß der Benutzende zwar was nicht richtig ist, es fehlt aber der helfende Hinweis, wie es richtig wäre.
     Die Parameter der Rückmeldungen sollten daher um solche Informationen ergänzt werden.
-    Auch denkbar ist es ein Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurück gibt.
+    Auch denkbar ist es ein Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
     Dies kann \ggf unter Angabe des gesuchten Merkmals passieren oder hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, für fehlende Merkmale passieren.
     \ZB wenn für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt mögliche Professionen bennen.
     Dazu muss das Schema des Charakters angepasst werden, so das diese Merkmale keine Pflichtfelder mehr sind (außer bei Listen, da diese leer sein können).
@@ -27,7 +25,7 @@
     Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen, letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
     Das \Listing[KP]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
-\end{enumerate}
+\end{enumerateWithCode}
 
 \begin{listing}[htbp]
     \caption{Modellierung von strukturell ähnlichen Merkmalen in einer Gruppe}\label{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe}

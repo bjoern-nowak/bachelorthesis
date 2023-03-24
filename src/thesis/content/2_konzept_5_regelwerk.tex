@@ -10,9 +10,7 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 
 \subsection{Konventionen}\label{subsec:konventionen}
 
-\begin{enumerate}[leftmargin=0em,label=\textbf{\alph*)}]
-    \itemsep0em
-
+\begin{enumerateWithCode}{K}
     \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln  und \todo{besserer Name?}Ergebnis-Fakten.
     Fakten sind immer \Tech{Clingo}-\Begriff{Funktionen}.
     Spielwelt-Regeln sind immer \Tech{Clingo}-\Begriff{Regeln}, welche Ergebnis-Fakten ableiten.
@@ -39,7 +37,7 @@ has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual cul
 %% Ergebnis-Fakt:
 missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C>
     \end{mintedNameless}
-\end{enumerate}
+\end{enumerateWithCode}
 
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
@@ -129,7 +127,7 @@ Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellieru
 Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}
-\begin{enumerate}[leftmargin=0em,label={\small\textbf{AR.\arabic*)}}]
+\begin{enumerateWithCode}{AR}
     \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. Regelbuch das zweite Profession erlaubt]}\todo{Sollen das Listings mit Überschriften sein?}
     \begin{mintedNameless}[linenos=false]{clingo}
@@ -159,10 +157,10 @@ known_experience_level("Average", 13, 10, 10, 98, 10, 1).
 %% Finde Talente, welche die maximale Stufengrenze überschreiten
 max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX,_,_,_,_), LVL > MAX.
     \end{mintedNameless}
-\end{enumerate}
+\end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische harte Regeln:}
-\begin{enumerate}[leftmargin=0em,label={\small\textbf{HR.\arabic*)}}]
+\begin{enumerateWithCode}{HR}
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, welches \underline{keine} Stufe hat {\color{red}[vgl. ]}.
     \begin{mintedNameless}{clingo}
 requires(culture("Auelfen"),species("Elfen")).
@@ -181,10 +179,10 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not re
     \end{mintedNameless}
 
     \item {\color{red}more to come} %% TODO
-\end{enumerate}
+\end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische weiche Regeln:}
-\begin{enumerate}[leftmargin=0em,label={\small\textbf{WR.\arabic*)}}]
+\begin{enumerateWithCode}{WR}
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(species("Elfen"),culture("Auelfen")).
@@ -200,7 +198,7 @@ missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not ha
 has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
 atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
     \end{mintedNameless}
-\end{enumerate}
+\end{enumerateWithCode}
 
 
 \subsection{Interpretation des \AbkK{ASP}-Ergebnisses}\label{subsec:interpretation-des-asp-ergebnisses}

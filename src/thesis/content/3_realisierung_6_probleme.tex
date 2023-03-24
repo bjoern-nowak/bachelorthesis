@@ -4,9 +4,7 @@ Während der Umsetzung des Konzeptes sind einige unerwartete oder nennenswerte S
 Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
 %% also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
-\begin{enumerate}[leftmargin=0em,label=\textbf{\alph*)}]
-    \itemsep0em
-
+\begin{enumerateWithCode}{S}
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
     Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 63-75):
@@ -27,7 +25,5 @@ unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not
     \end{mintedNameless}
     Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählte Spezies darin nicht enthalten ist.}
 
-    \item {\color{red}Vor Start der Applikation die Regelbücher auf korrektheit zu überprüfen. Z.B. das die Regelbücher nur bekannte Werte in den Spielwelt-Regeln nutzen]}
-
-    \item {\color{red}more to come}
-\end{enumerate}
+    {\color{red}\item more to come}
+\end{enumerateWithCode}

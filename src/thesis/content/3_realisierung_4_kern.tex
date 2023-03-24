@@ -1,13 +1,11 @@
 \section{Kern-Funktionalität}\label{sec:kern-funktionalitat}
 
-{\color{red}
-- Engine
+\begin{enumerateWithCode}{KF}
+    {\color{red}\item ClingoExecutor}
 
+    {\color{red}\item Engine}
 
-- Hero validation pre-check step (vgl. \Code{resources/rulebook/common.lp}, Zeile 78-86)
-    \begin{mintedNameless}[linenos=false]{clingo}
-unknown(species(S)) :- species(S), not known_species(S).
-unknown(talent(T)) :- talent(T,_), not known_talent(T).
-unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
-    \end{mintedNameless}
-}
+    {\color{red}\item HeroValidationInterpreter}
+
+    {\color{red}\item more to come}
+\end{enumerateWithCode}
