@@ -26,14 +26,9 @@
     Das \Listing[KP]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
 
-    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Begriff{Clingo}).
-    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
-    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
-\end{enumerateWithCode}
-
-\begin{listing}[htbp]
-    \caption{Modellierung von strukturell ähnlichen Merkmalen in einer Gruppe}\label{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe}
-    \begin{minted}{clingo}
+    \begin{listing}[htbp]
+        \caption{Modellierung von strukturell ähnlichen Merkmalen in einer Gruppe}\label{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe}
+        \begin{minted}{clingo}
 %% Beispiel einer Regel-Wiederholung
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
 missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN = 0, LVL < MIN.
@@ -45,5 +40,37 @@ skill(talent,NAME,LVL) :- __talent_wrapper((NAME,LVL)).
 skill(combat_technique,NAME,LVL) :- __combat_technique_wrapper((NAME,LVL)).
 %% Einzehlne Regel über eine Merkmalsgruppe
 missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL < MIN.
-    \end{minted}
-\end{listing}
+        \end{minted}
+    \end{listing}
+
+%    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Begriff{Clingo}).
+%    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
+%    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
+
+    \todo{ins Fazit?}\item Zwei Aspekte konnten aufgrund des Umfangs dieser Arbeit nicht beachtet werden, diese sind jedoch entscheidend bei der Frage \bzw des Problems \textquote{ob und wie sich das komplette Regelwerk zu \Abk{DSA} mit \Abk{ASP} formalisieren lässt}.
+    Erstens ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und Beachtung der \Abk{AP}-Kosten der Merkmale, eine offene Herausforderung.
+    Dies könnte nachträglich von den Regelbüchern durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
+    Dadurch muss die bereits existierende Modellierung der Merkmale nicht angepasst werden, was einer guten Modularität entspricht und damit geringeren Wartungsaufwand.
+    Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
+    \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf bezug genommen werden kann und entsprechend in Gänze validiert werden kann.
+    Aussehen könnte so etwas wie in \Listing[KP]{lst:grob-formalisierung-von-ap} gezeigt.
+
+    \begin{listing}[htbp]
+        \caption{Grob-Formalisierung von \AbkK{AP}}\label{lst:grob-formalisierung-von-ap}
+        \begin{minted}{clingo}
+%% Regelbuch-spezifische Spielwelt-Fakten (pro Merkmalsausprägung)
+ap_cost(<feature:function>,<cost:number>)).
+%% Charakter-Fakt
+ap_account(<totalIncome>,<totalExpenses>).
+%% allgemeine Spielwelt-Regel
+ap_account_overdrawn :- ap_account(IN,OUT), IN < OUT.
+
+%% bei Charakter-Verwaltung Änderung deklarieren
+change(<type>,<feature>). %% 'type' ist Konstante 'add' oder 'remove'
+%% damit sind dann die eigentlichen Charakter-Fakten abzuleiten und in Gänze zu prüfen
+        \end{minted}
+    \end{listing}
+
+    Das zweite Aspekte ist im Prinzip ähnlich zum Ersten.
+    Es ist die Modellierung der Charakter-Eigenschaften und -Basiswerte \inkl des Verfolgens der Veränderungen durch Merkmalsausprägungen und die Einhaltung von Grenzen.
+\end{enumerateWithCode}

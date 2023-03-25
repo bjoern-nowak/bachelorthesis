@@ -42,7 +42,16 @@ missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
-Für Letzteres wird ein formales Model des Charakters benötigt; dieses wird nachfolgend kurz beschrieben und in \Listing{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
+\Begriff{Clingo} bietet verschiedene Möglichkeiten an, wie man einem \Abk{LP} Informationen/Werten bereitstellen kann.
+Man kann ein \Abk{LP} um weitere \AbkP{LP} erweitern;
+aus einem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{clingo.Control.load(\ldots)}}].
+Dieses \Abk{LP} könnte zur Laufzeit, mit den Werten des Charakters, generiert werden.
+Auch besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge, welche entsprechend die Charakter-Fakten enthält, hinzuzufügen.
+Die beste Variante, da diese die loseste Kopplung, bezogen auf das sonst in Python notwendig Wissen über die Syntax von \Begriff{Clingo}, bietet, ist das Nutzen der \textquote{\Tech{externen Funktionen}}\Englisch{external functions}.
+Damit können aus einem \Abk{LP} Python-Funktionen, welche zur im Rahmen eines Kontext-Objektes bereitgestellt wurden, aufgerufen werden.
+Diese liefern dann entsprechende \Begriff{Clingo}-Objekte zurück.
+
+Das Ziel also Endprodukt ist ein definiertes formales Model der Charakter-Fakten; dieses wird nachfolgend kurz beschrieben und in \Listing{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
 Jedes Charakter-Merkmal ist ein eigener Fakt, dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
 Daneben bekannt sind die Argumente \textquote{Stufe} (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
 Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten mit unterschiedlichen Ausprägungen (Argumenten) mehrfach vorkommen.
@@ -118,9 +127,11 @@ unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,U
 
 Wie bereits in \Kapitel{sec:grundlagen} beschrieben, gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
 Hausregeln können hier nicht betrachtet werden, da diese frei definierbar sind.
-Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP}.
-Beachtet werden Grundregeln mit Relevanz bei der Charakter-Erstellung und -Verwaltung.
-Diese werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} und Charakter-Eigenschaften \bzw -Basiswerte.
+Beachtet werden Grundregeln außerdem nur mit Relevanz bei der Charakter-Erstellung.
+    {\color{red}In \Kapitel{ch:diskussion} ({\color{orange}Punkt D.5}) wird auf den Bereich der Verwaltung eingegangen.}
+
+Dies beachteten Regeln werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
 
 Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen Fall, konkrete Regeln formalisiert.
 Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
@@ -170,7 +181,7 @@ requires(species("Elfen"),advantage("Zauberer","",1)).
 missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}. \todo{2in1 möglich? "existiert nicht oder exisitert und ..."}
     \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
 %% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet wenn das Merkmal komplett fehlt
@@ -216,6 +227,7 @@ hier hingegen nicht: es werden keine möglichen Charaktere (\Begriff{Answer Set}
 Diese Regelverstöße müssen mit ihren Informationen gesammelt werden.
 Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum Interpretieren gibt.
 Daher leitet das zuvor beschriebene \textquote{Kochbuch} immer konkrete \Begriff{Atome} als Regelverstöße ab.
+Das Nutzen von \zB \textquote{integrity constraints} ist daher nicht möglich.
 Dadurch bleibt, im Sinne von \Abk{ASP}, das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Begriff{Answer Set} an möglichen Regelverstößen zurück.
 
 Die für die Interpretation relevanten Atome sind entsprechend dem Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -warnung zu interpretieren.
