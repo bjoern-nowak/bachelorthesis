@@ -13,17 +13,17 @@ __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{mintedNameless}
 
-    \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, beachtet werden, wird das Konstrukt \textquote{conditional literal} verwendet.
-    Dies verhält sich im Kopfbereich jedoch anders als im Körper: dort dienen sie dem Mapping über ein Atom; es muss also etwas abgeleitet werden.
-    Deshalb funktioniert folgendes, leicht lesbare, nicht:
-    \begin{mintedNameless}[linenos=false]{clingo}
-unusable_by(profession(P),species(S)) : species(S), not requires(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)).
-    \end{mintedNameless}
-    Daher muss im Körperbereich eine Doppelverneinung (\mintinline{clingo}{#false : not}) genutzt werden:
-    \begin{mintedNameless}[linenos=false]{clingo}
-unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
-    \end{mintedNameless}
-    Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählte Spezies darin nicht enthalten ist.}
+%    \item Damit bestimmte \Abk{LP}-Regeln nur unter bestimmten Bedingungen, wie \zB das Vorkommen einer Einschränkung für ein Merkmal des Charakters, beachtet werden, wird das Konstrukt \textquote{conditional literal} verwendet.
+%    Dies verhält sich im Kopfbereich jedoch anders als im Körper: dort dienen sie dem Mapping über ein Atom; es muss also etwas abgeleitet werden.
+%    Deshalb funktioniert folgendes, leicht lesbare, nicht:
+%    \begin{mintedNameless}[linenos=false]{clingo}
+%unusable_by(profession(P),species(S)) : species(S), not requires(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)).
+%    \end{mintedNameless}
+%    Daher muss im Körperbereich eine Doppelverneinung (\mintinline{clingo}{#false : not}) genutzt werden:
+%    \begin{mintedNameless}[linenos=false]{clingo}
+%unusable_by(profession(P),species(S)) :- profession(P), species(S), requires(profession(P),species(_)); not requires(profession(P),species(S)).
+%    \end{mintedNameless}
+%    Zu lesen ist es so: \textquote{Leite '\Code{unusable\_by}' ab, wenn beide Merkmale existieren, es für die konkrete Profession eine Einschränkung auf Spezies gibt und die gewählte Spezies darin nicht enthalten ist.}
 
     {\color{red}\item more to come}
 \end{enumerateWithCode}

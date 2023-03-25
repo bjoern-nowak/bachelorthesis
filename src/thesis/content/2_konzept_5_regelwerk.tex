@@ -175,18 +175,18 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- talent(T,LVL), experience_level(EL), know
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, welches \underline{keine} Stufe hat {\color{red}[vgl. ]}.
     \begin{mintedNameless}{clingo}
 requires(culture("Auelfen"),species("Elfen")).
-unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
+unusable_by(culture(C),species(S)) :- culture(C), species(S), requires(culture(C),species(_)), not requires(culture(C),species(S)).
 %% hierzu zählen auch Vor- und Nachteile, weil deren Stufe nicht dynamisch ist:
 requires(species("Elfen"),advantage("Zauberer","",1)).
-missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing(species(S),advantage(A,USES,LVL)) :- species(S), requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}. \todo{2in1 möglich? "existiert nicht oder exisitert und ..."}
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals auf eine bestimmte Stufe {\color{red}[vgl. ]}. \todo{2in1 möglich: existiert nicht oder existiert und}
     \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
-%% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet wenn das Merkmal komplett fehlt
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
+%% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet, wenn das Merkmal komplett fehlt
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
     \end{mintedNameless}
 
     \item {\color{red}more to come} %% TODO
@@ -197,17 +197,17 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not re
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(species("Elfen"),culture("Auelfen")).
-missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
+missing_usual(species(S),culture(C)) :- species(S), culture(C), has_usual(species(S),culture(_)), not has_usual(species(S),culture(C)).
     \end{mintedNameless}
 
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als typisch oder untypisch \Vgl{RWiki-Spezies-Elfen}.
     Es werden beide Regeln in einem Beispiel gezeigt.
     \begin{mintedNameless}{clingo}
 has_typical(species("Elfen"),advantage("Dunkelsicht","",2)).
-missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
 
 has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
-atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
+atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
     \end{mintedNameless}
 \end{enumerateWithCode}
 
