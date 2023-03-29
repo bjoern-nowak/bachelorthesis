@@ -31,12 +31,18 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 
     \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
     Semantisch wird aus \textquote{\mintinline[fontsize=\small]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 %% Spielwelt-Fakt:
 has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual culture 'Auelfen'
 %% Ergebnis-Fakt:
 missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C>
     \end{mintedNameless}
+
+    \item Um Missverständnissen vorzubeugen ist bei der Verwendung des Operators \textquote{=} auf folgendes zu achten:
+    wenn es als Vergleich (auf Gleichheit) genutzt wird ist der Operator zwischen Leerzeichen zu platzieren (Beispiel: \Item{itm:AR.1});
+    wenn dieser hingegen als Vereinigung\Englisch{unification} genutzt wird, also wie eine Variabelzuweisung zu verstehen ist, dann werden vor und nach dem Operator keine Leerzeichen gesetzt (Beispiel: \Item{itm:HR.3}).
+
+    \item Innerhalb von \Tech{Clingo}-\Begriff{Funktionen} sind bei der Auflistung der Argumente keine Leerzeichen zu setzen, sodass schnell unterschieden werden kann zwischen einer Auflistung von Argumenten oder Bedingungen.
 \end{enumerateWithCode}
 
 
@@ -66,7 +72,7 @@ experience_level(EL).
 species(S).
 culture(C).
 profession(P).
-talent(T,LVL). %% LVL := Stufe (english für 'level')
+talent(T,LVL). %% LVL := Stufe (englisch für 'level')
 combat_technique(CT,LVL).
 advantage(A,USES,LVL). %% USES := Referenz (Text)
 disadvantage(DA,USES,LVL).
@@ -97,7 +103,7 @@ Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüche
 
 Für diese Überprüfung ist es erforderlich, dass Regelbücher bekannte Merkmalsausprägungen deklarieren.
 Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderem definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
-\begin{mintedNameless}[linenos=false]{clingo}
+\begin{mintedNameless}{clingo}
 %% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
 rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
 %% Allgemeine Überprüfung der Abhängigkeiten:
@@ -107,7 +113,7 @@ rulebook_missing(R,D) :- rulebook(R), rulebook_depends(R,D), not rulebook(D).
 Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
 Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können;
 hingegen diese bei Vor- und Nachteilen nicht beliebig und daher zu deklarieren sind.
-\begin{mintedNameless}[linenos=false]{clingo}
+\begin{mintedNameless}{clingo}
 known_profession("Händler").
 known_combat_technique("Armbrüste";"Raufen").
 known_advantage("Dunkelsicht","",(1..2)).
@@ -115,7 +121,7 @@ known_advantage("Begabung",("Singen";"Musizieren"),1).
 \end{mintedNameless}
 
 Diese somit bekannten Merkmalsausprägungen werden dann überprüft.
-\begin{mintedNameless}[linenos=false]{clingo}
+\begin{mintedNameless}{clingo}
 %% Finde unbekannte Ausprägungen
 unknown(profession(P)) :- profession(P), not known_profession(P).
 unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
@@ -129,7 +135,7 @@ Wie bereits in \Kapitel{sec:grundlagen} beschrieben, gibt es nach \Zitat{Wiki-Re
 Hausregeln können hier nicht betrachtet werden, da diese frei definierbar sind.
 Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} und Charakter-Eigenschaften \bzw -Basiswerte.
 Beachtet werden Grundregeln außerdem nur mit Relevanz bei der Charakter-Erstellung.
-    {\color{red}In \Kapitel{ch:diskussion} ({\color{orange}Punkt D.5}) wird auf den Bereich der Verwaltung eingegangen.}
+In \Kapitel[KN]{ch:diskussion} (\Item{itm:D.CharakterVerwaltung}) wird ein Ausblick auf die Verwaltung gegeben.
 
 Dies beachteten Regeln werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
 
@@ -139,33 +145,31 @@ Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}
 \begin{enumerateWithCode}{AR}
-    \item Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
-    Wobei weitere Regelbücher diese Begrenzung auflockern könnten. {\color{red} [vgl. ]}
-    \todo{in die diskussion?}{\color{red}Die konzipierten nachfolgenden formalen Regeln unterscheiden zwischen Merkmalen welche mehrere Ausprägungen annehmen können beachten jedoch nicht diese dynamik.}
+    \item\label{itm:AR.1} Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
+    Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
     \begin{mintedNameless}[linenos=false]{clingo}
 max_count(culture,1). %% nur Fakt mit höhstem Wert entscheidend
-max_count_exceeded(culture,MAX) :- COUNT = #count{C:culture(C)}, MAX = #max{MC:max_count(culture,MC)}, COUNT > MAX.
+max_count_exceeded(culture,MAX) :- COUNT=#count{C:culture(C)}, MAX=#max{MC:max_count(culture,MC)}, COUNT > MAX.
     \end{mintedNameless}
 
     \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
     Somit sind negative Zahlen ausgeschlossen.
     Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.\todo{Sollen das Listings mit Überschriften sein?}
     \begin{mintedNameless}[linenos=false]{clingo}
-missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
+missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN=0, LVL < MIN.
     \end{mintedNameless}
 
     \item Der gewählte Erfahrungsgrad des Charakters begrenzt die maximalen Stufen von Eigenschaften, Fertigkeiten (Talente, Sonderfertigkeiten) und Kampftechniken, die maximale Gesamtanzahl an Eigenschaftspunkten, die maximale Anzahl an Zauber und Liturgien sowie davon die Anzahl an Fremdzauber.
     Wobei nach Charakter-Erstellung nur noch die maximalen Stufen gelten. \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}
     \begin{mintedNameless}{clingo}
-%% Model des Erfahrungsgrades
-%%   ES := max. Eigenschaftsstufe
-%%   FS := max. Fertigkeitsstufe
+%% Model des Erfahrungsgrades: known_experience_level(<name>,<ES>,<FS>,<KTS>,<EP>,<ZL>,<FZ>).
+%%   ES  := max. Eigenschaftsstufe
+%%   FS  := max. Fertigkeitsstufe
 %%   KTS := max. Kamptechnikstufe
-%%   EP := max. Eigenschaftspunkte
-%%   ZL := max. Anzahl Zauber und Liturgien
-%%   FZ := davon max. Fremdzaumber
-%% Beispiel: known_experience_level(<name>, <ES>, <FS>, <KTS>, <EP>, <ZL>, <FZ>).
-known_experience_level("Average", 13, 10, 10, 98, 10, 1).
+%%   EP  := max. Eigenschaftspunkte
+%%   ZL  := max. Anzahl Zauber und Liturgien
+%%   FZ  := davon max. Fremdzaumber
+known_experience_level("Average",13,10,10,98,10,1).
 %% Finde Talente, welche die maximale Stufengrenze überschreiten
 max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_level(EL,_,MAX,_,_,_,_), talent(T,LVL), LVL > MAX.
     \end{mintedNameless}
@@ -173,17 +177,16 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
 
 \paragraph{Regelbuch-spezifische harte Regeln:}
 \begin{enumerateWithCode}{HR}
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{nur eine} Ausprägung haben kann {\color{red}[vgl. ]}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
     \begin{mintedNameless}{clingo}
 %% Eine bestimmte Spezies ist gefordert. Spezies kann nur eine Ausprägung haben.
 requires(culture("Auelfen"),species("Elfen")).
-unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S), not requires(culture(C),species(S)).
+unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S),     not requires(culture(C),species(S)).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{mehrere} Ausprägung haben kann {\color{red}[vgl. ]}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{mehrere} Ausprägung haben kann \Vgl{RWiki-Spezies-Elfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
-
     Der entscheidende Unterschied bei der Formalisierung zur vorherigen Regel ist, dass die genutzte \Begriff{Variabel} für die geforderte Ausprägung aus der Forderung kommt und nicht vom Charakter-Fakt.
     \begin{mintedNameless}{clingo}
 %% Ein bestimmter Vorteil ist gefordert. Es kann mehrere Vorteile geben.
@@ -191,17 +194,37 @@ requires(species("Elfen"),advantage("Zauberer","",1)).
 missing(species(S),advantage(A,USES,LVL)) :- species(S), requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe {\color{red}[vgl. ]}. \todo{2in1 möglich: existiert nicht oder existiert und}
+    \item\label{itm:HR.3} Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
     \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
-%% Diese Regel besteht aus zwei Regeln: ersteres wird abgeleitet, wenn das Merkmal komplett fehlt
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
+%% logisches 'oder' durch '#count': das Merkmal fehlt oder die Stufe ist nicht erreicht
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)),                                                      1 = #count{ x: not talent(T,_) ; x: talent(T,LVL), LVL < MIN_LVL }.
     \end{mintedNameless}
 
-    \item {\color{red}any\_of} %% TODO
-
-    \item {\color{red}more to come} %% TODO
+    \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
+    Aufgrund der leichteren Implementierung und Wartbarkeit (\inkl Verständlichkeit) wird die konkrete Überprüfung in Python umgesetzt.
+    Dadurch kann die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
+    \begin{mintedNameless}{clingo}
+%% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
+requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen"),10)).
+missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @fulfills_any_of(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
+    \end{mintedNameless}
+    \vspace{-1em}
+    \begin{mintedNameless}{python}
+## Python Pseudo-Code (!): Method der Clingo-Kontext-Klasse, welche als Klassenfeld den Helden hat
+def fulfills_any_of(self, choices, feature, selection, minimum_level) -> bool:
+    values_with_level: dict[str, int]
+    match feature:
+        case 'combat_technique':
+            values_with_level = {ct.name: ct.level for ct in self.hero.combat_techniques}
+        case _:
+            raise NotImplementedError()
+    passed = 0
+    for option in selection:
+        if option in values_with_level and values_with_level[option] >= minimum_level:
+        passed += 1
+    return passed >= choices
+    \end{mintedNameless}
 \end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische weiche Regeln:}
@@ -212,8 +235,9 @@ has_usual(species("Elfen"),culture("Auelfen")).
 missing_usual(species(S),culture(C)) :- species(S), has_usual(species(S),culture(_)), culture(C), not has_usual(species(S),culture(C)).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als typisch oder untypisch \Vgl{RWiki-Spezies-Elfen}.
+    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als (un)typisch \Vgl{RWiki-Spezies-Elfen}.
     Es werden beide Regeln in einem Beispiel gezeigt.
+    Diese Formalisierung kann auch auf die Semantik von \textquote{empfohlen und ungeeignet} übertragen werden \Vgl{RWiki-Ritter}.
     \begin{mintedNameless}{clingo}
 has_typical(species("Elfen"),advantage("Dunkelsicht","",2)).
 missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).

@@ -47,9 +47,41 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
 %    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
 %    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
 
-    {\color{red}\item zb erste harte regel geht nicht darauf ein das der max\_count fuer ein merkmal sich aendert könnte}
+    \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehreren Ausprägungen annehmen können.
+    Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
+    Dadurch kann eine Inkosistenz/Wiederspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden aber betroffene Regeln nicht korrigiert werden.
 
-    \todo{ins Fazit?}\item Zwei Aspekte konnten aufgrund des Umfangs dieser Arbeit nicht beachtet werden, diese sind jedoch entscheidend bei der Frage \bzw des Problems \textquote{ob und wie sich das komplette Regelwerk zu \Abk{DSA} mit \Abk{ASP} formalisieren lässt}.
+    \item Eine einfache und gut verständliche Formalisierung der \textquote{any\_of} Regel (\Item{itm:HR.AnyOf}) konnte nicht gefunden werden.
+    Es wurden zwei Lösungsansätze betrachtet.
+    Die Modellierung erfordert, dass die Auswahlliste kein Tuple, von freier Länge ist, sodass \textquote{pooling} genutzt wird.
+    Damit die, daraus generierten, Spielwelt-Fakten der entsprechenden Auswahlliste zugeorndert werden kann, wird ein Schlüssel vergeben.
+    Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, ansonsten würde die Liste erweitert werden.
+
+    \begin{listing}[htbp]
+        \caption{Pseudo \AbkK{LP}: Formalisierungsansatz any\_of Regel}\label{lst:pseudo-lp-formalisierungsansatz-any-of-regel}
+        \begin{minted}{clingo}
+%% Auswahlliste nicht als Tuple sondern "pooling" unter nutzen eines Schlüssels für
+requires(profession("Söldner"),any_of("SöldnerKampftechnik",1,combat_technique("Hiebwaffen";"Schwerter";"Stangenwaffen"),10)).
+
+
+missing_level(profession(P),combat_technique(any_of(KEY,CHOICES,CT),MIN_LVL)) :-
+profession(P), requires(profession(P),any_of(KEY,CHOICES,combat_technique(_),MIN_LVL)),
+CHOICES > #count{ 1,CT: requires(profession(P),any_of(KEY,CHOICES,combat_technique(CT),MIN_LVL)), combat_technique(CT,LVL), LVL >= MIN_LVL }.
+
+%that("a","x1",11).
+%that("a","x2",11).
+%that("a","x3",11).
+%2 > #count{ here(KEY,X) : that(KEY,X,LVL) } :- that(KEY,_,_), that(KEY,X,LVL), LVL > 10.
+
+CHOICES > #count{
+KEY,CT:
+missing_level(profession(P),combat_technique(any_of(KEY,CHOICES,CT),MIN_LVL)):
+requires(profession(P),any_of(KEY,CHOICES,combat_technique(CT),MIN_LVL)), combat_technique(CT,LVL), LVL >= MIN_LVL
+} :- profession(P), requires(profession(P),any_of(KEY,CHOICES,combat_technique(_),MIN_LVL)).
+        \end{minted}
+    \end{listing}
+
+    \todo{ins Fazit?}\item\label{itm:D.CharakterVerwaltung} Zwei Aspekte konnten aufgrund des Umfangs dieser Arbeit nicht beachtet werden, diese sind jedoch entscheidend bei der Frage \bzw des Problems \textquote{ob und wie sich das komplette Regelwerk zu \Abk{DSA} mit \Abk{ASP} formalisieren lässt}.
     Erstens ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und Beachtung der \Abk{AP}-Kosten der Merkmale, eine offene Herausforderung.
     Dies könnte nachträglich von den Regelbüchern durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
     Dadurch muss die bereits existierende Modellierung der Merkmale nicht angepasst werden, was einer guten Modularität entspricht und damit geringeren Wartungsaufwand.

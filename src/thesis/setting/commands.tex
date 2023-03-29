@@ -95,7 +95,7 @@
 %% ----- items ----------------------------------------------------------------
 \newenvironment{enumerateWithCode}[1]
 {%
-    \begin{enumerate}[leftmargin=0em,label={\small\textbf{#1.\arabic*)}}] %% or \alph*
+    \begin{enumerate}[leftmargin=0em,label={\small\textbf{#1.\arabic*)}},ref=#1.\arabic*] %% or \alph*
         \itemsep0em%
 }{%
     \end{enumerate}%
@@ -214,36 +214,23 @@
 \ifthenelse{\boolean{isBookPrint}}{}{
     \renewcommand{\DefaultRefCase}{KN}
 }
-\newcommand{\Gleichung}[2][K]{\RefByCase{#1}{#2}}
-\newcommand{\Abbildung}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
-\newcommand{\Listing}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
-\newcommand{\Anhang}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
-\newcommand{\Tabelle}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
-\newcommand{\RefByCase}[2]{% K=Tabelle~<Nr> N=<Tabellenname> P='auf S.~<Seite>'
-    \IfStrEqCase{#1}{
-        {N}{\nameref{#2}}
-        {K}{\hyperref[#2]{\autoref{#2}}}
-        {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
-        {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
-        {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
-        {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
-    }[\autoref{#2}]%
-}
-
-\newcommand{\KapitelDefaultRef}{KNP}
-\ifthenelse{\boolean{isBookPrint}}{}{
-    \renewcommand{\KapitelDefaultRef}{KN}
-}
-\newcommand{\Kapitel}[2][\KapitelDefaultRef]{% K=Kapitel~<Nr> N=<Kapitelname> P='auf S.~<Seite>'
+\newcommand{\RefByCase}[2]{% K=<Kapitel-Nr> N=<Name> P='auf S.~<Seite>'
     \IfStrEqCase{#1}{
             {N}{\nameref{#2}}
-            {K}{\autoref{#2}}
+            {K}{\hyperref[#2]{\autoref{#2}}}
             {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
             {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
             {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
             {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
     }[\autoref{#2}]%
 }
+\newcommand{\Gleichung}[2][K]{\RefByCase{#1}{#2}}
+\newcommand{\Abbildung}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Listing}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Anhang}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Tabelle}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Kapitel}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
+\newcommand{\Item}[2][KP]{\RefByCase{#1}{#2}}
 
 %% manual naming with \ref
 %\newcommand{\Gleichung}[1]{Gleichung~\ref{#1}}
