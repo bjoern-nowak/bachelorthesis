@@ -304,7 +304,7 @@ components:
       title: Feature
       enum:
         - experience_level
-        - species
+        - race
         - culture
         - profession
         - advantage
@@ -327,7 +327,7 @@ components:
       required:
         - name
         - experience_level
-        - species
+        - race
         - culture
         - profession
         - talents
@@ -342,8 +342,8 @@ components:
         experience_level:
           title: Experience Level
           type: string
-        species:
-          title: Species
+        race:
+          title: race
           type: string
         culture:
           title: Culture

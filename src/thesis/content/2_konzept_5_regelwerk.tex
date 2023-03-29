@@ -33,9 +33,9 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Semantisch wird aus \textquote{\mintinline[fontsize=\small]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
     \begin{mintedNameless}{clingo}
 %% Spielwelt-Fakt:
-has_usual(species("Elfen"),culture("Auelfen")). %% species 'Elfen' has usual culture 'Auelfen'
+has_usual(race("Elfen"),culture("Auelfen")). %% Spezies 'Elfen' hat üblich Kultur 'Auelfen'
 %% Ergebnis-Fakt:
-missing_usual(species(S),culture(C)). %% species <S> is missing usual culture <C>
+missing_usual(race(R),culture(C)). %% Spezies <R> fehlt die übliche Kultur <C>
     \end{mintedNameless}
 
     \item Um Missverständnissen vorzubeugen ist bei der Verwendung des Operators \textquote{=} auf folgendes zu achten:
@@ -69,7 +69,7 @@ Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:sc
         \begin{mintedTabular}[frame=none]{clingo}
 %% Strukturelle Darstellung mit Konventions-konformern Argumenten-Variable-Namen
 experience_level(EL).
-species(S).
+race(R).
 culture(C).
 profession(P).
 talent(T,LVL). %% LVL := Stufe (englisch für 'level')
@@ -82,7 +82,7 @@ disadvantage(DA,USES,LVL).
         \begin{mintedTabular}[frame=none]{clingo}
 %% Beispiel, wobei bestimmte Fakten mehrfach vorkommen dürfen z.B. Talente
 experience_level("Average").
-species("Elfen").
+race("Elfen").
 culture("Auelfen").
 profession("Söldner").
 talent("Kraftakt",3). talent("Zechen",3).
@@ -107,7 +107,7 @@ Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderem definier
 %% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
 rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
 %% Allgemeine Überprüfung der Abhängigkeiten:
-rulebook_missing(R,D) :- rulebook(R), rulebook_depends(R,D), not rulebook(D).
+rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
 \end{mintedNameless}
 
 Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
@@ -181,8 +181,8 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
     \begin{mintedNameless}{clingo}
 %% Eine bestimmte Spezies ist gefordert. Spezies kann nur eine Ausprägung haben.
-requires(culture("Auelfen"),species("Elfen")).
-unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S),     not requires(culture(C),species(S)).
+requires(culture("Auelfen"),race("Elfen")).
+unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), race(R),     not requires(culture(C),race(R)).
     \end{mintedNameless}
 
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{mehrere} Ausprägung haben kann \Vgl{RWiki-Spezies-Elfen}.
@@ -190,8 +190,8 @@ unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)
     Der entscheidende Unterschied bei der Formalisierung zur vorherigen Regel ist, dass die genutzte \Begriff{Variabel} für die geforderte Ausprägung aus der Forderung kommt und nicht vom Charakter-Fakt.
     \begin{mintedNameless}{clingo}
 %% Ein bestimmter Vorteil ist gefordert. Es kann mehrere Vorteile geben.
-requires(species("Elfen"),advantage("Zauberer","",1)).
-missing(species(S),advantage(A,USES,LVL)) :- species(S), requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+requires(race("Elfen"),advantage("Zauberer","",1)).
+missing(race(R),advantage(A,USES,LVL)) :- race(R), requires(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
     \end{mintedNameless}
 
     \item\label{itm:HR.3} Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
@@ -231,19 +231,19 @@ def fulfills_any_of(self, choices, feature, selection, minimum_level) -> bool:
 \begin{enumerateWithCode}{WR}
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
-has_usual(species("Elfen"),culture("Auelfen")).
-missing_usual(species(S),culture(C)) :- species(S), has_usual(species(S),culture(_)), culture(C), not has_usual(species(S),culture(C)).
+has_usual(race("Elfen"),culture("Auelfen")).
+missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C), not has_usual(race(R),culture(C)).
     \end{mintedNameless}
 
     \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als (un)typisch \Vgl{RWiki-Spezies-Elfen}.
     Es werden beide Regeln in einem Beispiel gezeigt.
     Diese Formalisierung kann auch auf die Semantik von \textquote{empfohlen und ungeeignet} übertragen werden \Vgl{RWiki-Ritter}.
     \begin{mintedNameless}{clingo}
-has_typical(species("Elfen"),advantage("Dunkelsicht","",2)).
-missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+has_typical(race("Elfen"),advantage("Dunkelsicht","",2)).
+missing_typical(race(R),advantage(A,USES,LVL)) :- race(R), has_typical(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
 
-has_atypical(species("Elfen"),disadvantage("Blutrausch","",1)).
-atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
+has_atypical(race("Elfen"),disadvantage("Blutrausch","",1)).
+atypical(race(R),disadvantage(DA,USES)) :- race(R), has_atypical(race(R),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
     \end{mintedNameless}
 \end{enumerateWithCode}
 

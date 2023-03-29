@@ -41,7 +41,7 @@ So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Param
 
     \begin{tabularx}{.936\textwidth}{XX}
         \footnotesize Beispiel Anfrage:                           & \footnotesize Beispiel Antwort:                            \\
-        \HttpInline{GET /api/meta/feature/list?feature=species\&} & \CodeInline{\verb|["Elfen","Halbelfen","Mensch","Zwerg"]|} \\
+        \HttpInline{GET /api/meta/feature/list?feature=race\&} & \CodeInline{\verb|["Elfen","Halbelfen","Mensch","Zwerg"]|} \\
         $\hookrightarrow$ \HttpInline{rulebooks=dsa5}             &                                                            \\
 %        \midrule
     \end{tabularx}
@@ -106,7 +106,7 @@ Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, we
 Das Konzept der Schemata wird am wichtigsten Schema, das des Charakters, erklärt.
 Nachfolgende Zeilen-Referenzen beziehen sich, wenn nicht anders benannt, auf das \Listing{lst:characterSchema}.
 
-Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{species}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
+Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{race}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
 diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
 Das Konzept der Schemata sieht vor, dass sämtliche konkrete Werte, neben Zahlen, Zeichenfolgen (Text) sind.
 Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbüchern gemäß der Anfrage, ergeben.
