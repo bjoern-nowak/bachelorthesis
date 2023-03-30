@@ -1,11 +1,11 @@
 \section{Regelwerk-Interpretation}\label{sec:regelwerk-interpretation}
+\vspace{-.4em}
+Dieses Kapitel setzt Kenntnisse im Bereich \Abk{LP} voraus, \insb die Syntax und Semantik von \Tech{Clingo}.
+Eine Einstiegshilfe liegt mit \Kapitel[KP]{sec:clingo-cheatsheet.lp}, auch den Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository}, vor.
+Es basiert auf den ebenso Praxis-orientierten \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide}.
 
-Dieses Kapitel setzt Kenntnisse im Bereich Logikprogrammierung, im konkreten die Syntax und Semantik von \Tech{Clingo}, voraus.
-Zum Verständnis nachfolgender \Tech{Listings} liegt mit \Kapitel{sec:clingo-cheatsheet.lp} eine Hilfestellung vor, welches auch Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository} vorliegt.
-Detaillierter ist das \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide} und daher ein ebenso guter (Praxis-orientierter) Einstieg.
-
-Neben der Umsetzung des Konzepts ist der Fokus dieser Arbeit, und Voraussetzung für Ersteres, die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP}-\Abk{DSA} mit \Abk{ASP} unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen.
-Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, allgemein formal beschrieben.
+Die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP}-\Abk{DSA} mit \Abk{ASP}, unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen, ist mit der Realisierung dessen Fokus dieser Arbeit.
+Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, formal beschrieben.
 
 
 \subsection{Konventionen}\label{subsec:konventionen}
@@ -49,10 +49,11 @@ missing_usual(race(R),culture(C)). %% Spezies <R> fehlt die übliche Kultur <C>
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
 \Begriff{Clingo} bietet verschiedene Möglichkeiten an, wie man einem \Abk{LP} Informationen/Werten bereitstellen kann.
-Man kann ein \Abk{LP} um weitere \AbkP{LP} erweitern;
-aus einem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{clingo.Control.load(\ldots)}}].
+Zu einem kann ein \Abk{LP} um weitere \AbkP{LP} erweitern;
+aus einem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{clingo.Control.load(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.load}}.
 Dieses \Abk{LP} könnte zur Laufzeit, mit den Werten des Charakters, generiert werden.
-Auch besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge, welche entsprechend die Charakter-Fakten enthält, hinzuzufügen.
+Zum Anderem besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.add}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge, welche entsprechend die Charakter-Fakten enthält, hinzuzufügen.
+
 Die beste Variante, da diese die loseste Kopplung, bezogen auf das sonst in Python notwendig Wissen über die Syntax von \Begriff{Clingo}, bietet, ist das Nutzen der \textquote{\Tech{externen Funktionen}}\Englisch{external functions}.
 Damit können aus einem \Abk{LP} Python-Funktionen, welche zur im Rahmen eines Kontext-Objektes bereitgestellt wurden, aufgerufen werden.
 Diese liefern dann entsprechende \Begriff{Clingo}-Objekte zurück.
@@ -132,12 +133,13 @@ unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,U
 \subsection{\textquote{Kochbuch} zur Regelformalisierung}\label{subsec:kochbuch-zur-regelformalisierung}
 
 Wie bereits in \Kapitel{sec:grundlagen} beschrieben, gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
-Hausregeln können hier nicht betrachtet werden, da diese frei definierbar sind.
-Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} und Charakter-Eigenschaften \bzw -Basiswerte.
+Hausregeln können nicht betrachtet werden, da diese unter den Spielenden frei definierbar sind.
+Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} oder Charakter-Eigenschaften \bzw -Basiswerte.
 Beachtet werden Grundregeln außerdem nur mit Relevanz bei der Charakter-Erstellung.
 In \Kapitel[KN]{ch:diskussion} (\Item{itm:D.CharakterVerwaltung}) wird ein Ausblick auf die Verwaltung gegeben.
 
-Dies beachteten Regeln werden gruppiert nach dem Anwendungsbereich \bzw dem Einhaltungsgrad: allgemeingültig (üblich Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+Die beachteten Regeln werden gruppiert nach dem Anwendungsbereich \bzw Einhaltungsgrad: allgemeingültig (Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
+Wie bereits in \Kapitel[KN]{subsec:endpunkte} wird \textquote{Regelbuch} als Synonym für Regelbuch-Erweiterung benutzt.
 
 Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen Fall, konkrete Regeln formalisiert.
 Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
@@ -163,12 +165,9 @@ missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN=0, LVL < MIN.
     Wobei nach Charakter-Erstellung nur noch die maximalen Stufen gelten. \Vgl[Schritt 2, 5 und 8]{RWiki-Erstellung}
     \begin{mintedNameless}{clingo}
 %% Model des Erfahrungsgrades: known_experience_level(<name>,<ES>,<FS>,<KTS>,<EP>,<ZL>,<FZ>).
-%%   ES  := max. Eigenschaftsstufe
-%%   FS  := max. Fertigkeitsstufe
-%%   KTS := max. Kamptechnikstufe
-%%   EP  := max. Eigenschaftspunkte
-%%   ZL  := max. Anzahl Zauber und Liturgien
-%%   FZ  := davon max. Fremdzaumber
+%%   ES  := max. Eigenschaftsstufe        %%   EP  := max. Eigenschaftspunkte
+%%   FS  := max. Fertigkeitsstufe         %%   ZL  := max. Anzahl Zauber und Liturgien
+%%   KTS := max. Kamptechnikstufe         %%   FZ  := davon max. Fremdzaumber
 known_experience_level("Average",13,10,10,98,10,1).
 %% Finde Talente, welche die maximale Stufengrenze überschreiten
 max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_level(EL,_,MAX,_,_,_,_), talent(T,LVL), LVL > MAX.
@@ -182,7 +181,7 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
     \begin{mintedNameless}{clingo}
 %% Eine bestimmte Spezies ist gefordert. Spezies kann nur eine Ausprägung haben.
 requires(culture("Auelfen"),race("Elfen")).
-unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), race(R),     not requires(culture(C),race(R)).
+unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), race(R),             not requires(culture(C),race(R)).
     \end{mintedNameless}
 
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{mehrere} Ausprägung haben kann \Vgl{RWiki-Spezies-Elfen}.
@@ -191,7 +190,7 @@ unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), rac
     \begin{mintedNameless}{clingo}
 %% Ein bestimmter Vorteil ist gefordert. Es kann mehrere Vorteile geben.
 requires(race("Elfen"),advantage("Zauberer","",1)).
-missing(race(R),advantage(A,USES,LVL)) :- race(R), requires(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing(race(R),advantage(A,USES,LVL)) :- race(R), requires(race(R),advantage(A,USES,LVL)),     not advantage(A,USES,LVL).
     \end{mintedNameless}
 
     \item\label{itm:HR.3} Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
@@ -202,16 +201,17 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profes
     \end{mintedNameless}
 
     \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
-    Aufgrund der leichteren Implementierung und Wartbarkeit (\inkl Verständlichkeit) wird die konkrete Überprüfung in Python umgesetzt.
+    Aufgrund der leichteren Implementierung und Wartbarkeit (\inkl Verständlichkeit) wird die konkrete Überprüfung in Python umgesetzt, ein Entwurf dessen wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
     Dadurch kann die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
     \begin{mintedNameless}{clingo}
 %% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
-requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen"),10)).
+requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffe","Schwert","Stangenwaffe"),10)).
 missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @fulfills_any_of(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
     \end{mintedNameless}
-    \vspace{-1em}
-    \begin{mintedNameless}{python}
-## Python Pseudo-Code (!): Method der Clingo-Kontext-Klasse, welche als Klassenfeld den Helden hat
+    \begin{listing}[ht]
+        \caption{Entwurf der \Code{fulfills\_any\_of} Methode (Python Pseudo-Code) }\label{lst:entwurf-fulfills-any-of}
+        \begin{minted}{python}
+## Method der Clingo-Kontext-Klasse, welche als Klassenfeld den Helden hat
 def fulfills_any_of(self, choices, feature, selection, minimum_level) -> bool:
     values_with_level: dict[str, int]
     match feature:
@@ -224,20 +224,20 @@ def fulfills_any_of(self, choices, feature, selection, minimum_level) -> bool:
         if option in values_with_level and values_with_level[option] >= minimum_level:
         passed += 1
     return passed >= choices
-    \end{mintedNameless}
+        \end{minted}
+    \end{listing}
 \end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische weiche Regeln:}
 \begin{enumerateWithCode}{WR}
-    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
+    \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(race("Elfen"),culture("Auelfen")).
-missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C), not has_usual(race(R),culture(C)).
+missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C),           not has_usual(race(R),culture(C)).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als (un)typisch \Vgl{RWiki-Spezies-Elfen}.
+    \item\label{itm:WR.2} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals als typisch oder untypisch \Vgl{RWiki-Spezies-Elfen}.
     Es werden beide Regeln in einem Beispiel gezeigt.
-    Diese Formalisierung kann auch auf die Semantik von \textquote{empfohlen und ungeeignet} übertragen werden \Vgl{RWiki-Ritter}.
     \begin{mintedNameless}{clingo}
 has_typical(race("Elfen"),advantage("Dunkelsicht","",2)).
 missing_typical(race(R),advantage(A,USES,LVL)) :- race(R), has_typical(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
@@ -247,18 +247,26 @@ atypical(race(R),disadvantage(DA,USES)) :- race(R), has_atypical(race(R),disadva
     \end{mintedNameless}
 \end{enumerateWithCode}
 
+\textbf{Anmerkung}
+
+Wie zu sehen ist, ist die Struktur der formalen Regeln in \ref{itm:WR.1} und \ref{itm:WR.2} gleich.
+Diese kann auch auf die Semantik von \textquote{empfohlen} und \textquote{ungeeignet} übertragen werden, weshalb diese nicht zusätzlich aufgeführt werden \Vgl{RWiki-Ritter}.
+
+Darüber hinaus wird im Regelwerk der Einhaltungsgrad der weichen Regeln mit \textquote{dringend empfohlen} zwar verschärft dargestellt, aber zugleich Abweichungen, wie bisher, nach Absprache erlaubt \Vgl{RWiki-Spezies-Elfen}.
+Letzteres hat daher maximal eine Relevanz bei der Auswertung/Interpretation der Ergebnis-Fakten.
+
 
 \subsection{Interpretation des \AbkK{ASP}-Ergebnisses}\label{subsec:interpretation-des-asp-ergebnisses}
 
+Wie in \Abbildung[K]{fig:deklarative-problemloesung} gezeigt wird, muss das Ergebnis vom \Abk{LP} (konkret vom \Tech{Clingo}-\Begriff{Solver}) interpretiert werden.
+Dies ist die Aufgabe der Software, konkreter die Aufbereitung der Ergebnis-Fakten zur Verwendung im Frontend.
+Typischerweise sucht man mit \Abk{ASP} für
 \begin{wrapfigure}{r}{.5\textwidth}
     \centering
     \caption{Deklarative Problemlösung \Vgl[Seite 14 (Folie 8)]{ASP-Gebser2012}}\label{fig:deklarative-problemloesung}
     \Image{declarative_problem_solving.pdf}
 \end{wrapfigure}
-
-Wie in \Abbildung[K]{fig:deklarative-problemloesung} gezeigt wird, muss das Ergebnis vom \Abk{LP} (konkret vom \Tech{Clingo} \Begriff{Solver}) interpretiert werden.
-Dies ist die Aufgabe der Software, konkreter die Aufbereitung zur Verwendung im Frontend.
-Typischerweise sucht man mit \Abk{ASP} für ein Problem mögliche Lösungen;
+ein Problem mögliche Lösungen;
 hier hingegen nicht: es werden keine möglichen Charaktere (\Begriff{Answer Set}) unter Beachtung gewählter Regelbücher (Problem) gesucht, sondern für einen gegebenen Charakter mögliche Regelverstöße.
 Diese Regelverstöße müssen mit ihren Informationen gesammelt werden.
 Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum Interpretieren gibt.

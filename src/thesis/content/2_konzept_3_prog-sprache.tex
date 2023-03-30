@@ -9,14 +9,15 @@ Wrapper- und High-Level-\Abk{API}s (Dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist als die erlangten Vorteile.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt, aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützten, kann die Entwicklung blockiert sein.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffen sind, nicht mehr gewartet werden und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu (erheblichen) Mehraufwand führen würde.
-Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für \Tech{clingo}s Python \Abk{API}: \url{https://github.com/Aluriak/clyngor} (Nachfolger von PyASP: \url{https://github.com/sthiele/pyasp})}, Asp4J\Note{\Tech{clingo} High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{\Tech{clingo} Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{\Tech{clingo} \Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
+Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für \Tech{clingo}s Python \Abk{API}: \url{https://github.com/Aluriak/clyngor}}, Asp4J\Note{\Tech{clingo} High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{\Tech{clingo} Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{\Tech{clingo} \Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
+% Clyngor ist Nachfolger von PyASP: \url{https://github.com/sthiele/pyasp}
 
 
 \subsection{Populäre Frameworks}\label{subsec:populare-frameworks}
 
 \begin{description}
     \item[\Abk{DLV}] ist seit dem Jahr \Jahr{1996} verfügbar.
-    Über die Jahre wurde das System signifikant verbessert und die Sprache erweitert, wodurch es im Bereich \Abk{DLP} zum Standard wurde und vergleichbar, \insb hinsichtlich der Effizienz, mit anderen fortgeschrittenen \Abk{ASP}-Systemen ist.
+    Über die Jahre wurde das System signifikant verbessert und die Sprache erweitert, wodurch es im Bereich \Abk{DLP} zum Standard wurde und vergleichbar, \insb hinsichtlich der Effizienz, mit fortgeschrittenen \Abk{ASP}-Systemen ist.
     \Vgl[Kapitel 1]{DLV-Leone2006}
 
     Ein Vorteil von \Abk{DLV}, im Vergleich, ist die Breite der Anwendbarkeit.
@@ -24,8 +25,8 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     Andere Systeme hingegen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
     \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
 
-    Aktuell wird \Abk{DLV} fokussiert von DLVSYSTEM S.R.L. beworben und mit dem Fokus auf industrielle Bereiche vertrieben.
-    Sie wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
+    DLVSYSTEM S.R.L. bewirbt und vertreibt \Abk{DLV} mit dem Fokus auf industrielle Bereiche.
+    Diese Firma wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
     \Vgl{DLV-Calimeri2012, DLV-dlvsystem-histroy}
 
     Ein \Abk{DLV}-Programm kann ausgeführt werden, indem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
@@ -47,16 +48,13 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
     Aus einem \Tech{Clingo}-\Abk{LP} kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
 
-    Zwei wichtige Features (eingeführt mit der \Tech{Clingo} Version 4), für die Modellierung von komplexen Problemen, sind:
-    \begin{inparaenum}[\bfseries(a)]
-        \item die Möglichkeit Teile des \AbkP{LP} in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
-        \item Regeln/Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden
-    \end{inparaenum}
-    \Vgl{CLINGO-Gebser2014}.
-    Ebenfalls nennenswert ist die Unterstützung, ab Version 5, von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
-    Auch zu nennen ist das \sog[multi-shot solving] (aus Version 4), bei dem ein \Abk{LP} nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
+    Zwei wichtige Features, für die Modellierung von komplexen Problemen, sind:
+    erstens die Möglichkeit Teile des \AbkP{LP} in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
+    und zweitens Regeln und Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden \Vgl{CLINGO-Gebser2014}.
+    Ebenfalls nennenswert ist die Unterstützung von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
+    Auch zu nennen ist das \sog[multi-shot solving], bei dem ein \Abk{LP} nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
 
-    Mit der \Tech{Clingo} Erweiterung clingcon (\textquote{con} für Bedingung\Englisch{constraint}) können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
+    Mit der \Tech{Clingo}-Erweiterung clingcon können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
     Hingegen die Erweiterung \AbkS{clorm}{\Tech{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
 \end{description}
 

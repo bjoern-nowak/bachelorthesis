@@ -52,42 +52,29 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     Dadurch kann eine Inkosistenz/Wiederspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden aber betroffene Regeln nicht korrigiert werden.
 
     \item Eine einfache und gut verständliche Formalisierung der \textquote{any\_of} Regel (\Item{itm:HR.AnyOf}) konnte nicht gefunden werden.
-    Es wurden zwei Lösungsansätze betrachtet.
     Die Modellierung erfordert, dass die Auswahlliste kein Tuple, von freier Länge ist, sodass \textquote{pooling} genutzt wird.
-    Damit die, daraus generierten, Spielwelt-Fakten der entsprechenden Auswahlliste zugeorndert werden kann, wird ein Schlüssel vergeben.
-    Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, ansonsten würde die Liste erweitert werden.
+    Damit die daraus generierten Spielwelt-Fakten der entsprechenden Auswahlliste zugeordnet werden können, muss ein Schlüssel vergeben werden.
+    Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, sofern die Liste nicht erweitert werden soll.
+    In \Listing[K]{lst:formalisierungsansatz-any-of-regel} wird ein Lösungsansatz skizziert.
 
-    \begin{listing}[htbp]
-        \caption{Pseudo \AbkK{LP}: Formalisierungsansatz any\_of Regel}\label{lst:pseudo-lp-formalisierungsansatz-any-of-regel}
+    \begin{listing}[!h]
+        \caption{Formalisierungsansatz \Code{any\_of} Regel (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-any-of-regel}
         \begin{minted}{clingo}
-%% Auswahlliste nicht als Tuple sondern "pooling" unter nutzen eines Schlüssels für
-requires(profession("Söldner"),any_of("SöldnerKampftechnik",1,combat_technique("Hiebwaffen";"Schwerter";"Stangenwaffen"),10)).
-
-
-missing_level(profession(P),combat_technique(any_of(KEY,CHOICES,CT),MIN_LVL)) :-
-profession(P), requires(profession(P),any_of(KEY,CHOICES,combat_technique(_),MIN_LVL)),
-CHOICES > #count{ 1,CT: requires(profession(P),any_of(KEY,CHOICES,combat_technique(CT),MIN_LVL)), combat_technique(CT,LVL), LVL >= MIN_LVL }.
-
-%that("a","x1",11).
-%that("a","x2",11).
-%that("a","x3",11).
-%2 > #count{ here(KEY,X) : that(KEY,X,LVL) } :- that(KEY,_,_), that(KEY,X,LVL), LVL > 10.
-
-CHOICES > #count{
-KEY,CT:
-missing_level(profession(P),combat_technique(any_of(KEY,CHOICES,CT),MIN_LVL)):
-requires(profession(P),any_of(KEY,CHOICES,combat_technique(CT),MIN_LVL)), combat_technique(CT,LVL), LVL >= MIN_LVL
-} :- profession(P), requires(profession(P),any_of(KEY,CHOICES,combat_technique(_),MIN_LVL)).
+%%%% 'prof := profession' und 'combatT := combat_technique'
+%% Auswahlliste mit drei Elementen ergibt drei Spielwelt-Fakten mit dem selben Schlüssel
+requires(prof("Söldner"),any_of("uniqueID",1,combatT("Hiebwaffen";"Schwerter";"Stangenwaffen"),10)).
+%% Ansatz nutzt "head aggregation", um drei Ergebnis-Fakten mit selbigen Schlüssel zu erzeugen, damit die Auswahlliste zusammengesetzt und dem Frontend zur Verfügung gestellt werden kann
+CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),MIN_LVL)): requires(prof(P),any_of(KEY,CHOICES,combatT(CT),MIN_LVL)), combatT(CT,LVL), LVL >= MIN_LVL } :- prof(P), requires(prof(P),any_of(KEY,CHOICES,combatT(_),MIN_LVL)).
         \end{minted}
     \end{listing}
 
-    \todo{ins Fazit?}\item\label{itm:D.CharakterVerwaltung} Zwei Aspekte konnten aufgrund des Umfangs dieser Arbeit nicht beachtet werden, diese sind jedoch entscheidend bei der Frage \bzw des Problems \textquote{ob und wie sich das komplette Regelwerk zu \Abk{DSA} mit \Abk{ASP} formalisieren lässt}.
-    Erstens ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und Beachtung der \Abk{AP}-Kosten der Merkmale, eine offene Herausforderung.
-    Dies könnte nachträglich von den Regelbüchern durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
-    Dadurch muss die bereits existierende Modellierung der Merkmale nicht angepasst werden, was einer guten Modularität entspricht und damit geringeren Wartungsaufwand.
+    \item\label{itm:D.CharakterVerwaltung} Die Charakter-Verwaltung, ist zwar nicht Fokus dieser Arbeit, spielt jedoch eine entscheidende Rolle bei der Frage \bzw dem Problem \textquote{wie das komplette Regelwerk zu \Abk{DSA} formalisiert werden kann}, weshalb nachfolgend ein kurzer Ausblick gegeben wird.
+    Ein herausfordernder Aspekt ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und Beachtung der \Abk{AP}-Kosten der Merkmale.
+    Dies könnte durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
+    Dadurch muss die bereits existierende Modellierung der Merkmale nicht, nachträglich von den Regelbüchern, angepasst werden, was einer guten Modularität entspricht und damit geringeren Wartungsaufwand.
     Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
-    \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf bezug genommen werden kann und entsprechend in Gänze validiert werden kann.
-    Aussehen könnte so etwas wie in \Listing[KP]{lst:grob-formalisierung-von-ap} gezeigt.
+    \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf bezug genommen und entsprechend in Gänze validiert werden kann.
+    In \Listing[K]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
 
     \begin{listing}[htbp]
         \caption{Grob-Formalisierung von \AbkK{AP}}\label{lst:grob-formalisierung-von-ap}
@@ -98,10 +85,9 @@ ap_cost(<feature:function>,<cost:number>)).
 ap_account(<totalIncome>,<totalExpenses>).
 %% allgemeine Spielwelt-Regel
 ap_account_overdrawn :- ap_account(IN,OUT), IN < OUT.
-
 %% bei Charakter-Verwaltung Änderung deklarieren
 change(<type>,<feature>). %% 'type' ist Konstante 'add' oder 'remove'
-%% damit sind dann die eigentlichen Charakter-Fakten abzuleiten und in Gänze zu prüfen
+%% dann: eigentliche Charakter-Fakten ableiten und Regeln prüfen
         \end{minted}
     \end{listing}
 

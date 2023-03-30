@@ -14,6 +14,41 @@ Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, wi
 Um den Wartungsaufwand, \zB durch \Abk{API}-Versionierung im Pfad, gering zu halten und weil es sich hierbei um keine öffentliche \Abk{API} handelt mit einer großen Anwenderzahl, wird stets nur die aktuellste Version vom Backend unterstützt.
 Dies bedeutet, dass eine neue \Abk{API}-Version nur veröffentlicht werden kann, wenn diese mit der aktuell veröffentlichten Frontend-Version kompatibel ist.
 
+
+\subsection{Schemata}\label{subsec:schemata}
+
+Das Konzept der Schemata wird am wichtigsten Schema, das des Charakters, erklärt.
+Nachfolgende Zeilen-Referenzen beziehen sich auf das \Listing[KP]{lst:characterSchema}.
+
+Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{race}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
+diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
+Das Konzept der Schemata sieht vor, dass sämtliche konkrete Werte, neben Zahlen, Zeichenfolgen (Text) sind.
+Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbüchern gemäß der Anfrage, ergeben.
+
+Auch die Merkmale \Code{talents} und \Code{combat\_techniques} geben die Merkmalsausprägung (Name) als Freitext an;
+dies ist jedoch schwerer abzulesen.
+Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Begriff{Wörterbuch}\Englisch{Dictionary} von Python;
+dies kann man als Map von Schlüssel-Wert-Paaren begreifen.
+Wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
+Der Wert ist bei diesen Merkmalen die Stufe.
+Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Tech{object}) existieren.
+Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
+
+Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
+Dies sind Listen von drei-elementigen Tuple, dargestellt durch eine zwei-dimensionale Liste, wobei die Verschachtelte genau drei Elemente verlangt.
+Das erste Element ist wie bisher der Name der Merkmalsausprägung.
+Das letzte Element ist die Stufe.
+Das Mittlere ist ein Text, welches \insb auch leer sein darf.
+Dies wird benötigt, da einige Vor- und Nachteile dahingehend mehrfach vorkommen können, dass sie auf andere Merkmalsausprägungen oder gar nicht modellierbare, frei wählbare Definitionen referenzieren können und daher nur in der Kombination spezifisch sind \Vgl{RWiki-HassAuf,RWiki-ImmunitaetKrankheit,RWiki-Unfaehig,RWiki-SchlechteEigenschaft}.
+Auf eine tiefere Unterscheidung wird zunächst verzichtet.
+Dies führt zwar dazu, dass, wenn ein Name einer Merkmalsausprägung auch in anderen Merkmalen vorkommt, nicht differenziert werden kann welches Merkmal referenziert wird.
+Diese Ausnahmefälle können jedoch leicht umgangen werden, indem das vermeintliche Duplikat bei der Modellierung im Regelbuch \zB als Präfix den Namen des Merkmals bekommt.
+
+\begin{listing}[!ht]
+    \caption{Charakter Schema in api-contract.yaml}\label{lst:characterSchema}
+    \inputMintedTwoCols[firstline=325,lastline=390]{yaml}{appendix/api-contract.yaml}
+\end{listing}
+
 \subsection{Endpunkte}\label{subsec:endpunkte}
 
 Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:openapi.yaml} vor.
@@ -94,52 +129,13 @@ Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, we
     \end{tabularx}
 \end{description}
 
-\begin{listing}[htbp]
-    %% good json styles: trac, tango, colorful
-    \caption{Beispiel Antwort: zu invalidem Helden}\label{lst:invalidheroresponseexamplejson}
-    \inputminted[style=colorful]{json}{appendix/invalid-hero-response-example.json}
-\end{listing}
-
-
-\subsection{Schemata}\label{subsec:schemata}
-
-Das Konzept der Schemata wird am wichtigsten Schema, das des Charakters, erklärt.
-Nachfolgende Zeilen-Referenzen beziehen sich, wenn nicht anders benannt, auf das \Listing{lst:characterSchema}.
-
-Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{race}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
-diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
-Das Konzept der Schemata sieht vor, dass sämtliche konkrete Werte, neben Zahlen, Zeichenfolgen (Text) sind.
-Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbüchern gemäß der Anfrage, ergeben.
-
-Auch die Merkmale \Code{talents} und \Code{combat\_techniques} geben die Merkmalsausprägung (Name) als Freitext an;
-dies ist jedoch schwerer abzulesen.
-Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Begriff{Wörterbuch}\Englisch{Dictionary} von Python;
-dies kann man als Map von Schlüssel-Wert-Paaren begreifen.
-Wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
-Der Wert ist bei diesen Merkmalen die Stufe.
-Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Tech{object}) existieren.
-Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
-
-\begin{listing}[htb]
-    \caption{Charakter Schema in api-contract.yaml}\label{lst:characterSchema}
-    \inputMintedTwoCols[firstline=325,lastline=390]{yaml}{appendix/api-contract.yaml}
-\end{listing}
-
-Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
-Dies sind Listen von drei-elementigen Tuple, dargestellt durch eine zwei-dimensionale Liste, wobei die Verschachtelte genau drei Elemente verlangt.
-Das erste Element ist wie bisher der Name der Merkmalsausprägung.
-Das letzte Element ist die Stufe.
-Das Mittlere ist ein Text, welches \insb auch leer sein darf.
-Dies wird benötigt, da einige Vor- und Nachteile dahingehend mehrfach vorkommen können, dass sie auf andere Merkmalsausprägungen oder gar nicht modellierbare, frei wählbare Definitionen referenzieren können und daher nur in der Kombination spezifisch sind \Vgl{RWiki-HassAuf,RWiki-ImmunitaetKrankheit,RWiki-Unfaehig,RWiki-SchlechteEigenschaft}.
-Auf eine tiefere Unterscheidung wird zunächst verzichtet.
-Dies führt zwar dazu, dass, wenn ein Name einer Merkmalsausprägung auch in anderen Merkmalen vorkommt, nicht differenziert werden kann welches Merkmal referenziert wird.
-Diese Ausnahmefälle können jedoch leicht umgangen werden, indem das vermeintliche Duplikat bei der Modellierung im Regelbuch \zB als Präfix den Namen des Merkmals bekommt.
-
-In \Listing[KP]{lst:invalidheroexamplejson} wird beispielhaft gezeigt wie das Charakter-Schema bei einer Anfrage ausgefüllt sein kann.
-\textquote{Invalide} bezieht sich in diesem Kontext auf ein Regelverstoß, nicht auf die Syntax oder Struktur.
-
-
-\begin{listing}[h]
+\begin{listing}[!h]
     \caption{Beispiel Anfragekörper: invalider Held}\label{lst:invalidheroexamplejson}
     \inputMintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}
+\end{listing}
+
+\begin{listing}[!h]
+    %% good json styles: trac, tango, colorful
+    \caption{Beispiel Antwort: zu invalidem Helden}\label{lst:invalidheroresponseexamplejson}
+    \inputMinted[style=colorful]{json}{appendix/invalid-hero-response-example.json}
 \end{listing}
