@@ -201,29 +201,29 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profes
     \end{mintedNameless}
 
     \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
-    Aufgrund der leichteren Implementierung und Wartbarkeit (\inkl Verständlichkeit) wird die konkrete Überprüfung in Python umgesetzt, ein Entwurf dessen wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
-    Dadurch kann die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
+    Aufgrund der leichteren Implementierung, Wartbarkeit und Verständlichkeit wird die Zählung jener Ausprägungen, welche die Mindeststufe erreicht haben, in Python umgesetzt.
+    Dessen Entwurf wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
+    SO kann dadurch die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
     \begin{mintedNameless}{clingo}
 %% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
-requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffe","Schwert","Stangenwaffe"),10)).
-missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @fulfills_any_of(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
+requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen"),10)).
+missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)),                      CHOICES > @count_by("combat_techniques",CTs,MIN_LVL).
     \end{mintedNameless}
     \begin{listing}[ht]
-        \caption{Entwurf der \Code{fulfills\_any\_of} Methode (Python Pseudo-Code) }\label{lst:entwurf-fulfills-any-of}
+        \caption{Entwurf der \Code{count\_by} Methode (Python Pseudo-Code) }\label{lst:entwurf-fulfills-any-of}
         \begin{minted}{python}
-## Method der Clingo-Kontext-Klasse, welche als Klassenfeld den Helden hat
-def fulfills_any_of(self, choices, feature, selection, minimum_level) -> bool:
-    values_with_level: dict[str, int]
-    match feature:
-        case 'combat_technique':
-            values_with_level = {ct.name: ct.level for ct in self.hero.combat_techniques}
-        case _:
-            raise NotImplementedError()
-    passed = 0
-    for option in selection:
-        if option in values_with_level and values_with_level[option] >= minimum_level:
-        passed += 1
-    return passed >= choices
+from clingo import Symbol, Number
+## Method der Clingo-Kontext-Klasse, welche als Klassenfeld den Helden hat (self.hero)
+def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
+    """
+    :return: count of feature values ('options') of 'feature' passing minimum level
+    """
+    # dynamically get class field (with 'getattr') instead of manual mapping with a switch-case
+    #  requires 'feature.string' to be exactly the field name of the actual hero model
+    values_lvl: dict[str, int] = {fv.name: fv.level for fv in getattr(self._hero, feature.string)}
+    # count all features having the minimum level
+    passed = sum(1 for opt in options.arguments if min_lvl.number <= values_lvl.get(opt.string, 0))
+    return Number(passed)
         \end{minted}
     \end{listing}
 \end{enumerateWithCode}

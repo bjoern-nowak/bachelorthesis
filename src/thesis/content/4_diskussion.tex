@@ -8,12 +8,12 @@
 %    \item Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession\_requires\_culture("<profession>","<culture>").' ) anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde.
 %    Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
-    \item Durch die generierten Validierungsfehler und -warnungen, weiß der Benutzende zwar was nicht richtig ist, es fehlt aber der helfende Hinweis, wie es richtig wäre.
-    Die Parameter der Rückmeldungen sollten daher um solche Informationen ergänzt werden.
+    \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre.
+    Die Parameter der Rückmeldungen sollten daher um solche helfenden Hinweise ergänzt werden.
     Auch denkbar ist es ein Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
     Dies kann \ggf unter Angabe des gesuchten Merkmals passieren oder hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, für fehlende Merkmale passieren.
-    \ZB wenn für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt mögliche Professionen bennen.
-    Dazu muss das Schema des Charakters angepasst werden, so das diese Merkmale keine Pflichtfelder mehr sind (außer bei Listen, da diese leer sein können).
+    Wenn \zB für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt mögliche Professionen benennen.
+    Dazu muss das Schema des Charakters so angepasst werden, dass diese Merkmale keine Pflichtfelder sind.
 
     \item Des Weiteren werden die Charakter-Validierungswarnungen immer ausgeben.
     Es fehlt die Möglichkeit diese zu ignorieren \bzw als \textquote{von der Spielleitung akzeptierte Abweichungen} zu markieren.
