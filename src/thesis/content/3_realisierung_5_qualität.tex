@@ -1,9 +1,35 @@
 \section{Qualitätssicherung}\label{sec:qualitaetssicherung}
 
-\begin{enumerateWithCode}{QS}
-    {\color{red}\item Vor Start der Applikation die Regelbücher auf korrektheit zu überprüfen.
-    Z.B. das die Regelbücher nur bekannte Werte in den Spielwelt-Regeln nutzen]}
+{\color{red}
+Keine \textbf{Ende-zu-Ende Tests} (API)
+}
 
-    {\color{red}\item more to come}
-\end{enumerateWithCode}
+\subsection{Prüfung der Regelbücher Struktur}\label{subsec:anforderungen-an-regelbucher}
+
+{\color{red}
+Vor Start der Applikation die Regelbücher auf korrektheit zu überprüfen.
+Z.B. das die Regelbücher nur bekannte Werte in den Spielwelt-Regeln nutzen
+}
+
+
+\subsection{Prüfung einzelner Regeln/Funktionalitäten}\label{subsec:prufung-einzelner-regeln/funktionalitaten}
+
+{\color{red}
+
+Komponententests\Englisch{unit tets}    (VERGLEICH)\todo{VERGLEICH}
+}
+
+
+\subsection{Prüfung gesamtheitliches Zusammenspiel}\label{subsec:prufung-gesamntheitliches-zusammenspiel}
+
+{\color{red}
+Um unvermeidliche blinde Flecken, durch fehlende Komponententests, wahrscheinlicher aufzudecken, werden \sog \textbf{Funktionstests} durchgeführt.
+In Gegensatz zu Komponententests werden bei diesen ganze fachliche Anforderungen getestet, dabei gibt es lediglich eine definierte Eingabe und ein erwartetes Ergebnis.
+Alles dazwischen wird im Sinne einer \textquote{schwarzen Box} nicht betrachtet.
+(VERGLEICH)\todo{VERGLEICH}
+
+Ein Beispiel wäre, dass zu ein validen Charakter keine Validierungsfehler erzeugt werden.
+}
+
+
 

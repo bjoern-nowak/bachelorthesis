@@ -13,5 +13,15 @@ __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{mintedNameless}
 
+    {\color{red}\item Das Definieren von sinnvollen und ausreichenden Testfällen war und ist schwierig bei den Komponententests.
+    Bei den Funktionstets können einfach komplett valide Charaktere (Testdaten) ermittelt werden und \ggf gezielte fehlerhafte Abweichungen platziert werden.
+    Für die Komponententests geht dies nur bedingt, so ist es, für die Wartbarkeit, zu vermeiden die Testdaten mit unnötigen Informationen zu füllen, also Charakter-Merkmale anzugeben die für den Testfall nicht relevant sind.
+    Dies erfordert wissen über die Implementierung und gegenseitige Beieinflussung von Regeln.
+    Trotz der Stufen-weiße Helden-Validierung können solch gezielte Testdaten, für den Testfall, unrelevante Meldungen erzeugen.
+
+    Es ist auch schwierig zuvermeiden ungewollt gleiches tu testen ...... Ferner, für die Wartbarkeit, ist es wichtig ein möglichst kleines Set and Testfällen zu definieren, welches dennoch eine vollständige Abdeckung der Funktionalitäten bietet und konkrete nur einzelne Funktionen prüft.
+
+    }
+
     {\color{red}\item more to come}
 \end{enumerateWithCode}
