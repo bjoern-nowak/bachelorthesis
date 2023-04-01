@@ -142,7 +142,7 @@
 }
 
 
-%% ----- Font-Stil der Überschriften -----------------------------------------------
+%% ----- Font-Stil der Überschriften ------------------------------------------
 \setkomafont{sectioning}{\normalfont\normalcolor\bfseries} %% in TOC
 \SetTracking[context=largetracking]{encoding=*}{160}
 \SetTracking[context=smalltracking]{encoding=*}{80}
@@ -155,6 +155,11 @@
 %\renewcommand\subsectionformat{\bfseries\thesubsection\autodot\enskip}
 %\renewcommand\subsubsectionformat{\bfseries\thesubsubsection\autodot\enskip}
 
+
+%% ----- Bezeichner -----------------------------------------------------------
+\captionsetup[figure]{
+    skip=0em,
+}
 
 %% ----- Schusterjungen und Hurenkinder vermeiden -----------------------------
 %% TODO set clubpenalty and widowpenalty

@@ -1,14 +1,32 @@
 \section{Projektstruktur}\label{sec:projektstruktur}
 
-\begin{enumerateWithCode}{PS}
+Wie auch die, nach diesem Kapitel folgende, Architektur ist die Projektstruktur maßgeblich für die Wartbarkeit und Orientierung.
+Die Projektstruktur definiert, ähnlich zur Architektur der Software selbst, den Aufbau des Projekts und damit \zB die Ablageorte für bestimmte Dateien und wie, mit welchen Abhängigkeiten, das Projekt zu bauen ist.
+Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellte Projektstruktur genommen.
+
+\begin{minipage}[t]{.7\textwidth}
+    \begin{enumerateWithCode}{PS}
+    \item Als einer der wichtigsten Bestandteile ist die \sog \textquote{lies mich Datei} (siehe \Anhang[KP]{sec:readme.md}).
+    Diese wird oft, von Betreibern von quelloffenen Aufbewahrungsorten, automatisch als Einsteigsseite angezeigt und damit das \textquote{Aushängeschild} des Projekts \Vgl{GitHub-Doc-Readme}.
+    Inhalte sind \uA eine Kurzbeschreibung des Projektes, wie man mitwirken und Probleme melden kann sowie \ggf Lizenz- und Kontakt-Hinweise.
+
+    \item Von dort aus werden auf weitere Dokumentationen verwiesen.
+    Diese befinden sich in einem Unterordner \textquote{docs}.
+    Dazu gehört \zB eine Anleitung wie man eine lokale Entwicklungsumgebung aufsetzt und die Software startet aber auch wie man konkret Regelbücher erstellt.
+
     {\color{red}\item ein Makefile für commen/daily dev tasks \Vgl[Kapitel 1]{REALISIERUNG-Anaya2018}}
 
-    {\color{red}\item .md fuer meta dokumentation, z.B. how to contribute}
 
     {\color{red}\item poetry all venv (package) manager, replacesment of requtiements.txt or setup
     -> .venv in project root, better control with makefile}
 
-    {\color{red}\item root README.md für github einstiegsseite}
-
-    {\color{red}\item more to come}
-\end{enumerateWithCode}
+    \end{enumerateWithCode}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.26\textwidth}
+    \centering
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \captionof{figure}{Projektstruktur\\(erster Ebene)}\label{fig:projektstruktur}
+    \vspace{.25em}
+    \Image{projektstruktur.pdf}
+\end{minipage}

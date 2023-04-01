@@ -7,14 +7,28 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 \begin{enumerateWithCode}{S}
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
-    Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 63-75):
+    \todo{sollten das Listings sein?}Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 63-75):
     \begin{mintedNameless}[linenos=false]{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{mintedNameless}
 
+    Die externe Funktion \Code{@talents} ist wie folgt umgesetzt (vgl. \Anhang[KP]{sec:hero_wrapper.py}):
+    \begin{mintedNameless}{python}
+% [ ... ]
+def _map_skills(skills: List[Skill]) -> List[Symbol]:
+    return [Tuple_([String(skill.name), Number(skill.level)]) for skill in skills]
+% [ ... ]
+class HeroWrapper:
+    _hero: Hero
+% [ ... ]
+    def talents(self) -> List[Symbol]:
+        return _map_skills(self._hero.talents)
+% [ ... ]
+    \end{mintedNameless}
+
     {\color{red}\item Das Definieren von sinnvollen und ausreichenden Testfällen war und ist schwierig bei den Komponententests.
-    Bei den Funktionstets können einfach komplett valide Charaktere (Testdaten) ermittelt werden und \ggf gezielte fehlerhafte Abweichungen platziert werden.
+    Bei den Funktionstets können einfach valide Charaktere (Testdaten) ermittelt werden und \ggf gezielt fehlerhafte Abweichungen platziert werden.
     Für die Komponententests geht dies nur bedingt, so ist es, für die Wartbarkeit, zu vermeiden die Testdaten mit unnötigen Informationen zu füllen, also Charakter-Merkmale anzugeben die für den Testfall nicht relevant sind.
     Dies erfordert wissen über die Implementierung und gegenseitige Beieinflussung von Regeln.
     Trotz der Stufen-weiße Helden-Validierung können solch gezielte Testdaten, für den Testfall, unrelevante Meldungen erzeugen.

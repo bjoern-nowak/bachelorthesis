@@ -3,7 +3,7 @@
 \begin{landscape}
     \chapter{Anhang}\label{ch:anhang}
 
-    Einträge die mit \textquote{<root>/} beginnen sind Dateien im quelloffenen Aufbewahrungsort.
+    Einträge die mit \textquote{<repo>/} beginnen sind Dateien im quelloffenen Aufbewahrungsort.
 
     \section{<api>/openapi.yaml}\label{sec:openapi.yaml}
     \Abk{API}-Endpunkt zum Abrufen des Schnittstellenvertrags.
@@ -16,12 +16,23 @@
     \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/clingo-cheatsheet.lp}
 
 %    \newpage
-    \section{<root>/resources/rulebook/common.lp}\label{sec:common.lp}
+    \section{<repo>/README.md}\label{sec:readme.md}
+    Einstiegsseite des quelloffenen Aufbewahrungsortes.
+    \vspace{-1em}\inputMintedTwoCols{text}{appendix/README.md}
+
+%    \newpage
+    \section{<repo>/resources/rulebook/common.lp}\label{sec:common.lp}
     \Abk{LP}, das, als Basis für alle Regelbücher, von der Software geladen wird.
     \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/common.lp}
 
 %    \newpage
-    \section{<root>/app/engine/hero\_validation\_interpreter.py}\label{sec:hero-validation-interpreter.py}
+    \section{<repo>/app/infrastructure/hero\_wrapper.py}\label{sec:hero_wrapper.py}
+    \Begriff{Clingo}/\Abk{LP} Kontext-Klasse, welche die \textquote{external functions} bereitstellt.
+    Konkret konvertiert es die Charakter-Merkmale in \Begriff{Clingo}-\Tech{Symbole}
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_wrapper.py}
+
+%    \newpage
+    \section{<repo>/app/engine/hero\_validation\_interpreter.py}\label{sec:hero-validation-interpreter.py}
     Quellcode zur Interpretation der Ergebnis-Fakten.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_validation_interpreter.py}
 
