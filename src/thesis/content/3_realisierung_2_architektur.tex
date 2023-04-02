@@ -1,11 +1,34 @@
 \section{Architektur}\label{sec:architektur}
 
+Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wichtigsten technischen Merkmale dar, um eine qualitative und wartbare Software zu erstellen \Vgl[Kapitel 15]{REALISIERUNG-Martin2017}.
+Zwei sehr bekannte und von den Prinzipen ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
+Gewählt wird Letzteres, da dieses bereits das \textquote{Domain-driven Design} Pattern (\Zitat{REALISIERUNG-Evans2004}) gut integriert (siehe \Abbildung[KP]{fig:onion-architecture}).
+
 \begin{enumerateWithCode}{A}
-    {\color{red}\item eanlehnung an OnionArchitektur, jedoch weich, denn strikte einhalten erhöht wartungsaufwand bei geringerem nutzen, bei so kleinen applikationen}
 
-    {\color{red}\item ordner: docs, app, resources, tests}
+    \item Entsprechend (weit ausgelegt) der in Clean-Code-Developer\Note{\url{https://clean-code-developer.de/}} aufgeführten Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
+Dies ist der Fall bei der fundamentalen Regel der \Begriff{Onion Architecture}, dass Schichten nur von tieferen Schichten abhängig sein dürfen.
+Verletzt wird dadurch vor allem das Prinzip \AbkS{DIP}{\textquote{Dependency Inversion Principle}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}}}.
+Es wird also auf eine losere Kopplung verzichtet aber weiterhin Klassen entsprechen ihrer Schicht zugeordnet.
+So kann dies bei Bedarf, durch steigende Anforderungen an die Software, nachgeholt werden.
+Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
 
-    {\color{red}\item backend api kann separat betrieben werden womit andere frontends ermoeglicht werden}
+    {\color{red}\item Ordnerstruktur von APP}
+
+    {\color{red}\item Ordnerstruktur von resources}
+
+    {\color{red}\item Ordnerstruktur von tests, packages structure gleich zu app}
 
     {\color{red}\item more to come}
 \end{enumerateWithCode}
+
+\todo{Fix size}
+\begin{figure}
+    \centering
+    \caption{\textquote{Onion Architecture} (Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
+    \vspace{.25em}
+    \Image[trim=1.5cm 1.5cm 1.5cm 1.5cm]{onion-architecture.pdf}
+\end{figure}
+
+\todo{add picture of actual structure}
+

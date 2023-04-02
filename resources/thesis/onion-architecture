@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" modified="2023-04-02T15:42:56.753Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" etag="fPnGTvaM4zqO_D8xgM2A" version="21.1.2" type="device">
+  <diagram name="Page-1" id="9BFHCrgZd6QgVHpx39Rw">
+    <mxGraphModel dx="1454" dy="1186" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-22" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.partConcEllipse;startAngle=0.3611490728576792;endAngle=0.9037267924846636;arcWidth=0.35;rotation=135;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="-440" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-20" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.partConcEllipse;startAngle=0.4710896907986387;endAngle=0.8217249777060813;arcWidth=0.35;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="-440" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-16" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.partConcEllipse;startAngle=0.18402918196425902;endAngle=0.5;arcWidth=0.35;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="-440" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-2" value="Application Services" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;verticalAlign=top;spacing=16;spacingTop=0;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="-405" y="-405" width="210" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-3" value="Domain Services" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;verticalAlign=top;spacing=16;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="-370" y="-365" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-4" value="Domain&lt;br&gt;Model" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;verticalAlign=top;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="-335" y="-325" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-8" value="User Interface" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="-350" y="-435" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-9" value="Infrastructure" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-52;" parent="1" vertex="1">
+          <mxGeometry x="-250" y="-245" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-11" value="Tests" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=60;" parent="1" vertex="1">
+          <mxGeometry x="-430" y="-259" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fdz_m9BgYYTquuVbr_k0-13" value="Application Core" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="-386.87" y="-285" width="173.75" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
