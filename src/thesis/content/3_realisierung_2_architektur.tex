@@ -9,26 +9,41 @@ Gewählt wird Letzteres, da dieses bereits das \textquote{Domain-driven Design} 
     \item Entsprechend (weit ausgelegt) der in Clean-Code-Developer\Note{\url{https://clean-code-developer.de/}} aufgeführten Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
 Dies ist der Fall bei der fundamentalen Regel der \Begriff{Onion Architecture}, dass Schichten nur von tieferen Schichten abhängig sein dürfen.
 Verletzt wird dadurch vor allem das Prinzip \AbkS{DIP}{\textquote{Dependency Inversion Principle}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}}}.
-Es wird also auf eine losere Kopplung verzichtet aber weiterhin Klassen entsprechen ihrer Schicht zugeordnet.
-So kann dies bei Bedarf, durch steigende Anforderungen an die Software, nachgeholt werden.
-Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
-
-    {\color{red}\item Ordnerstruktur von APP}
-
-    {\color{red}\item Ordnerstruktur von resources}
-
-    {\color{red}\item Ordnerstruktur von tests, packages structure gleich zu app}
-
-    {\color{red}\item more to come}
+Es wird also auf eine losere
 \end{enumerateWithCode}
 
-\todo{Fix size}
-\begin{figure}
-    \centering
-    \caption{\textquote{Onion Architecture} (Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
+
+\begin{minipage}[t]{.55\textwidth}
+    Kopplung verzichtet aber weiterhin Klassen entsprechen ihrer Schicht zugeordnet.
+    So kann dies bei Bedarf, durch steigende Anforderungen an die Software, nachgeholt werden.
+    Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
+
+    \begin{enumerateWithCode}{A}
+        \setcounter{enumi}{1}
+
+        {\color{red}\item Ordnerstruktur von APP}
+
+        {\color{red}\item Ordnerstruktur von resources}
+
+        {\color{red}\item Ordnerstruktur von tests, packages structure gleich zu app}
+
+        {\color{red}\item more to come}
+    \end{enumerateWithCode}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.4\textwidth}
+%    \captionsetup{justification=raggedleft}
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \flushright
+
+    \vspace{-.75em}
+    \captionof{figure}{\textquote{Onion Architecture}\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
+    \vspace{-.5em}
+    \ImageInRatio{1}{onion-architecture.pdf}
+
+    \vspace{2em}
+
+    \captionof{figure}{Projekt Architektur\\(Python Module)}\label{fig:projekt-architektur}
     \vspace{.25em}
-    \Image[trim=1.5cm 1.5cm 1.5cm 1.5cm]{onion-architecture.pdf}
-\end{figure}
-
-\todo{add picture of actual structure}
-
+    \ImageInRatio{.9}{architektur.pdf}
+\end{minipage}
