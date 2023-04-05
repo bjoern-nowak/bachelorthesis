@@ -8,6 +8,10 @@
 %    \item Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession\_requires\_culture("<profession>","<culture>").' ) anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde.
 %    Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
+    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung, dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}) doch kann es für die zukünftige Erstellung von Tests hinderlich sein.
+    Die Packages/Module sind sauber definiert, jedoch wurde an den meisten Stellen das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
+    Dadurch, dass vermehrt und etwas \textquote{un-pythonic} (also für Python-Verhältnisse unüblich) vorwiegend \bzw grundsätzlich Klassen erstellt wurden, kann auch dies mit überschaubarem Aufwand bei Bedarf nachgepflegt werden.
+
     \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre.
     Die Parameter der Rückmeldungen sollten daher um solche helfenden Hinweise ergänzt werden.
     Auch denkbar wäre es einen Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
@@ -23,7 +27,7 @@
     Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Tech{Clingo}-\Begriff{Funktion} (\Begriff{Gruppe}) abbilden.
     Wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
     Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen; Letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
-    Das \Listing[KP]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
+    Das \Listing[K]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
 
     \begin{listing}[htbp]
@@ -55,7 +59,7 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt wird.
     Damit die daraus generierten Spielwelt-Fakten der entsprechenden Auswahlliste zugeordnet werden können, muss ein Schlüssel vergeben werden.
     Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, sofern die Liste nicht erweitert werden soll.
-    In \Listing[K]{lst:formalisierungsansatz-any-of-regel} wird ein Lösungsansatz skizziert.
+    In \Listing[KP]{lst:formalisierungsansatz-any-of-regel} wird ein Lösungsansatz skizziert.
 
     \begin{listing}[!h]
         \caption{Formalisierungsansatz \Code{any\_of} Regel (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-any-of-regel}

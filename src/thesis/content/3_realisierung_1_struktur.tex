@@ -4,7 +4,7 @@ Wie auch die, nach diesem Kapitel folgende, Architektur ist die Projektstruktur 
 Die Projektstruktur definiert, ähnlich zur Architektur der Software selbst, den Aufbau des Projekts und damit \zB die Ablageorte für bestimmte Dateien und wie, mit welchen Abhängigkeiten, das Projekt zu bauen ist.
 Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellte Projektstruktur genommen.
 
-\begin{minipage}[t]{.68\textwidth}
+\begin{minipage}[t]{.7\textwidth}
     \begin{enumerateWithCode}{PS}
     \item Eine der wichtigsten Bestandteile ist die \sog \textquote{lies mich Datei} (siehe \Anhang[KP]{sec:readme.md}).
     Diese wird oft, von Betreibern quelloffener Aufbewahrungsorte, automatisch als Einsteigsseite angezeigt und damit das \textquote{Aushängeschild} des Projekts.
@@ -36,10 +36,10 @@ Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellt
 
     \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog \textquote{virtuelle Umgebung} geschaffen, diese liegt unter \textquote{\Code{.venv}}.
     Darin werden, anstatt global, Projekt-spezifisch die Abhängigkeiten installiert.
-    Genutzt wird dazu das sehr verbreitete, Funktionsreihe und leicht zu bedienende poetry\Note{\url{https://github.com/python-poetry/poetry}}.
-    Damit lässt sich \uA auch die zu verwendende Python Version steuern, falls bereits andere installiert sind, und die Software für eine mögliche Verteilung, \zB als ausführbare Datei oder Container\Note{\zB als Docker: \url{https://www.docker.com/}}, verpacken.
-    Projekt-Meta-Informationen und Abhängigkeiten werden in \textquote{\Code{pyproject.toml}} geschrieben (siehe \Anhang[KP]{sec:pyproject.toml}).
-    Poetry wertet diese Datei aus und erzeugt eine \textquote{\Code{poetry.lock}} Datei, welche die exakt geladene Versionen der Abhängigkeiten festhält.
+    Genutzt wird dazu das sehr verbreitete, funktionsreiche und leicht zu bedienende poetry\Note{\url{https://github.com/python-poetry/poetry}}.
+    Es kann \uA auch die zu verwendende Python Version steuern, falls weitere installiert sind, und die Software für eine mögliche Verteilung, \zB als ausführbare Datei oder Container\Note{\zB als Docker: \url{https://www.docker.com/}}, verpacken.
+    Projekt-Meta-Informationen und Abhängigkeiten werden in \textquote{\Code{pyproject.toml}} dokumentiert (siehe \Anhang[KP]{sec:pyproject.toml}).
+    Poetry wertet dies aus und erzeugt eine \textquote{\Code{poetry.lock}} Datei, welche die exakt geladene Versionen der Abhängigkeiten festhält.
 
     \item Zur Versionsverwaltung des Quellcodes wird das verbreitete und quelloffene GiT\Note{\url{https://git-scm.com/}} eingesetzt und die Software letztlich auf GitHub\Note{\url{https://github.com/bjoern-nowak/dsa-heldenbogen}} veröffentlicht.
     Mit der Datei \textquote{\Code{.gitignore}}, werden Pfade und Dateien, welche \zB durch Frameworks oder der eingesetzten Entwicklungsumgebung erstellt werden und keine Relevanz für die Software selbst haben, als zu ignorieren markiert.

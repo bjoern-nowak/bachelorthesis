@@ -5,6 +5,12 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
 %% also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
 \begin{enumerateWithCode}{S}
+    \item Das Absichern der Architektur ist ebenso wichtig wie klassische Funktionstests.
+    Für Python war die Wahl eines passenden Frameworks jedoch nicht eindeutig.
+    Es wurden mehrere quelloffene Frameworks (import-linter\Note{\url{https://github.com/seddonym/import-linter}}, pytest-archon\Note{\url{https://github.com/jwbargsten/pytest-archon}},
+    pytestarch\Note{\url{https://github.com/zyskarch/pytestarch}}) gefunden, doch konnte keins vom Funktionsumfang überzeugen (im Vergleich zu ArchUnit\Note{\url{https://www.archunit.org/}} für Java).
+    Die Entscheidung wurde, daher offen gelassen.
+
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Tech{Clingo}-Tuple zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
     \todo{sollten das Listings sein?}Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 63-75):
@@ -37,5 +43,4 @@ class HeroWrapper:
 
     }
 
-    {\color{red}\item more to come}
 \end{enumerateWithCode}
