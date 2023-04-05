@@ -1,10 +1,10 @@
 \section{Regelwerk-Interpretation}\label{sec:regelwerk-interpretation}
 \vspace{-.4em}
 Dieses Kapitel setzt Kenntnisse im Bereich \Abk{LP} voraus, \insb die Syntax und Semantik von \Tech{Clingo}.
-Eine Einstiegshilfe liegt mit \Kapitel[KP]{sec:clingo-cheatsheet.lp}, auch den Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository}, vor.
+Eine Einstiegshilfe liegt mit \Kapitel[KP]{sec:clingo-cheatsheet.lp}, auch für die Mitwirkenden im quelloffenen Aufbewahrungsort\Englisch{repository}, vor.
 Es basiert auf den ebenso Praxis-orientierten \textquote{\Abk{Potassco} User Guide} \Zitat{CLINGO-Guide}.
 
-Die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP}-\Abk{DSA} mit \Abk{ASP}, unter Berücksichtigung möglicher weiterer Regelbücher und -Erweiterungen, ist mit der Realisierung dessen Fokus dieser Arbeit.
+Die Formalisierung des Basisregelwerks zu \Abk{RPG}-\Abk{PP}-\Abk{DSA} mit \Abk{ASP}, unter Berücksichtigung möglicher weiterer Regelbücher und -erweiterungen, ist mit der Realisierung dessen Fokus dieser Arbeit.
 Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im Sinne eines \textquote{Kochbuches} rezeptartig, formal beschrieben.
 
 
@@ -15,10 +15,9 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Fakten sind immer \Tech{Clingo}-\Begriff{Funktionen}.
     Spielwelt-Regeln sind immer \Tech{Clingo}-\Begriff{Regeln}, welche Ergebnis-Fakten ableiten.
 
-    \item Bei Fakten ist als ersten Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
-    Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt.
-    Wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
-    Letzteres ist damit dann das referenzierte Merkmal.
+    \item Bei Fakten ist als erstes Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
+    Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt, wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
+    Letzteres ist damit das referenzierte Merkmal.
     Dies macht es möglich die dazugehörige Regel schneller im echten Regelbuch nachzuschlagen.
 
     \item Merkmale werden als \Tech{Clingo}-\Begriff{Konstante} oder -\Begriff{Funktion} formuliert.
@@ -26,7 +25,7 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Diese sind immer in Form eines \Tech{Clingo}-\Begriff{Textes} (also in Hochkommata), da Leerzeichen und Sonderzeichen möglich sind.
     Dies macht es einfach die Merkmalsausprägung im echten Regelbuch wiederzufinden.
 
-    \item \Tech{Clingo}-\Begriff{Variabel}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
+    \item \Tech{Clingo}-\Begriff{Variable}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
     Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
 
     \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
@@ -38,27 +37,27 @@ has_usual(race("Elfen"),culture("Auelfen")). %% Spezies 'Elfen' hat üblich Kult
 missing_usual(race(R),culture(C)). %% Spezies <R> fehlt die übliche Kultur <C>
     \end{mintedNameless}
 
-    \item Um Missverständnissen vorzubeugen ist bei der Verwendung des Operators \textquote{=} auf folgendes zu achten:
-    wenn es als Vergleich (auf Gleichheit) genutzt wird ist der Operator zwischen Leerzeichen zu platzieren (Beispiel: \Item{itm:AR.1});
-    wenn dieser hingegen als Vereinigung\Englisch{unification} genutzt wird, also wie eine Variabelzuweisung zu verstehen ist, dann werden vor und nach dem Operator keine Leerzeichen gesetzt (Beispiel: \Item{itm:HR.3}).
+    \item Um Missverständnisse vorzubeugen ist bei der Verwendung des Operators \textquote{=} auf folgendes zu achten:
+    wenn es als Vergleich (auf Gleichheit) genutzt wird, ist der Operator zwischen Leerzeichen zu platzieren (Beispiel: \Item{itm:AR.1});
+    wenn dieser hingegen als Vereinigung\Englisch{unification} genutzt wird, also wie eine Variablenzuweisung zu verstehen ist, dann werden vor und nach dem Operator keine Leerzeichen gesetzt (Beispiel: \Item{itm:HR.3}).
 
-    \item Innerhalb von \Tech{Clingo}-\Begriff{Funktionen} sind bei der Auflistung der Argumente keine Leerzeichen zu setzen, sodass schnell unterschieden werden kann zwischen einer Auflistung von Argumenten oder Bedingungen.
+    \item Innerhalb von \Tech{Clingo}-\Begriff{Funktionen} sind bei der Auflistung der Argumente keine Leerzeichen zu setzen, sodass schnell zwischen einer Auflistung von Argumenten oder Bedingungen unterschieden werden kann.
 \end{enumerateWithCode}
 
 
 \subsection{Eingabemodell (Kontext): der Charakter}\label{subsec:eingabemodell-(kontext):-der-charakter}
 
-\Begriff{Clingo} bietet verschiedene Möglichkeiten an, wie man einem \Abk{LP} Informationen/Werten bereitstellen kann.
-Zu einem kann ein \Abk{LP} um weitere \AbkP{LP} erweitern;
+\Begriff{Clingo} bietet verschiedene Möglichkeiten an, wie man einem \Abk{LP} Informationen/Werte bereitstellen kann.
+Zum einen kann ein \Abk{LP} um weitere \AbkP{LP} erweitert werden;
 aus einem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{clingo.Control.load(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.load}}.
-Dieses \Abk{LP} könnte zur Laufzeit, mit den Werten des Charakters, generiert werden.
-Zum Anderem besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.add}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge, welche entsprechend die Charakter-Fakten enthält, hinzuzufügen.
+Dieses \Abk{LP} könnte zur Laufzeit mit den Werten des Charakters generiert werden.
+Zum anderen besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.add}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge hinzuzufügen, welche entsprechend die Charakter-Fakten enthält.
 
-Die beste Variante, da diese die loseste Kopplung, bezogen auf das sonst in Python notwendig Wissen über die Syntax von \Begriff{Clingo}, bietet, ist das Nutzen der \textquote{\Tech{externen Funktionen}}\Englisch{external functions}.
-Damit können aus einem \Abk{LP} Python-Funktionen, welche zur im Rahmen eines Kontext-Objektes bereitgestellt wurden, aufgerufen werden.
+Die beste Variante, da diese die loseste Kopplung, bezogen auf das sonst in Python notwendige Wissen über die Syntax von \Begriff{Clingo}, bietet, ist das Nutzen der \textquote{\Tech{externen Funktionen}}\Englisch{external functions}.
+Damit können aus einem \Abk{LP} Python-Funktionen, welche im Rahmen eines Kontext-Objektes bereitgestellt wurden, aufgerufen werden.
 Diese liefern dann entsprechende \Begriff{Clingo}-Objekte zurück.
 
-Das Ziel also Endprodukt ist ein definiertes formales Model der Charakter-Fakten; dieses wird nachfolgend kurz beschrieben und in \Listing{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
+Das Ziel, also Endprodukt, ist ein definiertes formales Model der Charakter-Fakten; dieses wird nachfolgend kurz beschrieben und in \Listing{lst:merkmalsfakten-eines-charakters} syntaktisch vorgestellt:
 Jedes Charakter-Merkmal ist ein eigener Fakt, dargestellt als \Begriff{Funktion} mit dem Charakter-Merkmal als Namen und mindestens als erstes Argument den Namen der Merkmalsausprägung (als Text).
 Daneben bekannt sind die Argumente \textquote{Stufe} (als Ganzzahl) und eine Referenz auf andere Merkmalsausprägungen (Name als Text).
 Entsprechend des Charakter-Schemas vom Schnittstellenvertrag (\Kapitel{subsec:schemata}) können bestimmte Merkmalsfakten mit unterschiedlichen Ausprägungen (Argumenten) mehrfach vorkommen.
@@ -103,7 +102,7 @@ Die Validierung eines Charakters hat eine wichtige Voraussetzung:
 Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüchern bekannt sein.
 
 Für diese Überprüfung ist es erforderlich, dass Regelbücher bekannte Merkmalsausprägungen deklarieren.
-Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderem definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
+Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderen definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
 \begin{mintedNameless}{clingo}
 %% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
 rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
@@ -113,7 +112,7 @@ rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
 
 Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
 Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können;
-hingegen diese bei Vor- und Nachteilen nicht beliebig und daher zu deklarieren sind.
+hingegen sind diese bei Vor- und Nachteilen nicht beliebig und daher zu deklarieren.
 \begin{mintedNameless}{clingo}
 known_profession("Händler").
 known_combat_technique("Armbrüste";"Raufen").
@@ -139,7 +138,7 @@ Beachtet werden Grundregeln außerdem nur mit Relevanz bei der Charakter-Erstell
 In \Kapitel[KN]{ch:diskussion} (\Item{itm:D.CharakterVerwaltung}) wird ein Ausblick auf die Verwaltung gegeben.
 
 Die beachteten Regeln werden gruppiert nach dem Anwendungsbereich \bzw Einhaltungsgrad: allgemeingültig (Regelbuch-übergreifend) sowie Regelbuch-spezifisch hart (immer einzuhalten) und weich (Abweichung nach Absprache mit der Spielleitung möglich \Vgl[Schritt 4 und 6]{RWiki-Erstellung}).
-Wie bereits in \Kapitel[KN]{subsec:endpunkte} wird \textquote{Regelbuch} als Synonym für Regelbuch-Erweiterung benutzt.
+Wie bereits in \Kapitel[KN]{subsec:endpunkte}, wird \textquote{Regelbuch} als Synonym für Regelbuch-Erweiterung benutzt.
 
 Das Kochbuch setzt sich aus Rezepten zusammen, welche, beispielhaft für einen Fall, konkrete Regeln formalisiert.
 Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellierung (Fakten) aufgezeigt.
@@ -176,7 +175,7 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
 
 \paragraph{Regelbuch-spezifische harte Regeln:}
 \begin{enumerateWithCode}{HR}
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
     \begin{mintedNameless}{clingo}
 %% Eine bestimmte Spezies ist gefordert. Spezies kann nur eine Ausprägung haben.
@@ -184,26 +183,26 @@ requires(culture("Auelfen"),race("Elfen")).
 unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), race(R),             not requires(culture(C),race(R)).
     \end{mintedNameless}
 
-    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderes Merkmal, das \underline{mehrere} Ausprägung haben kann \Vgl{RWiki-Spezies-Elfen}.
+    \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{mehrere} Ausprägungen haben kann \Vgl{RWiki-Spezies-Elfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
-    Der entscheidende Unterschied bei der Formalisierung zur vorherigen Regel ist, dass die genutzte \Begriff{Variabel} für die geforderte Ausprägung aus der Forderung kommt und nicht vom Charakter-Fakt.
+    Der entscheidende Unterschied bei der Formalisierung zur vorherigen Regel ist, dass die genutzte \Begriff{Variable} für die geforderte Ausprägung aus der Forderung kommt und nicht vom Charakter-Fakt.
     \begin{mintedNameless}{clingo}
 %% Ein bestimmter Vorteil ist gefordert. Es kann mehrere Vorteile geben.
 requires(race("Elfen"),advantage("Zauberer","",1)).
 missing(race(R),advantage(A,USES,LVL)) :- race(R), requires(race(R),advantage(A,USES,LVL)),     not advantage(A,USES,LVL).
     \end{mintedNameless}
 
-    \item\label{itm:HR.3} Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
+    \item\label{itm:HR.3} Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{mehrere} Ausprägungen haben kann, auf \underline{eine Mindeststufe} \Vgl{RWiki-Soeldner}.
     \begin{mintedNameless}{clingo}
 requires(profession("Söldner"),talent("Kriegskunst",6)).
 %% logisches 'oder' durch '#count': das Merkmal fehlt oder die Stufe ist nicht erreicht
 missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)),                                                      1 = #count{ x: not talent(T,_) ; x: talent(T,LVL), LVL < MIN_LVL }.
     \end{mintedNameless}
 
-    \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägung eines anderen Merkmals, das mehrere Ausprägung haben kann, auf eine bestimmte Stufe \Vgl{RWiki-Soeldner}.
+    \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägungen eines anderen Merkmals, das mehrere Ausprägungen haben kann, auf \underline{eine Mindeststufe} \Vgl{RWiki-Soeldner}.
     Aufgrund der leichteren Implementierung, Wartbarkeit und Verständlichkeit wird die Zählung jener Ausprägungen, welche die Mindeststufe erreicht haben, in Python umgesetzt.
     Dessen Entwurf wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
-    SO kann dadurch die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
+    So kann die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
     \begin{mintedNameless}{clingo}
 %% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
 requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen"),10)).
@@ -250,24 +249,24 @@ atypical(race(R),disadvantage(DA,USES)) :- race(R), has_atypical(race(R),disadva
 \textbf{Anmerkung}
 
 Wie zu sehen ist, ist die Struktur der formalen Regeln in \ref{itm:WR.1} und \ref{itm:WR.2} gleich.
-Diese kann auch auf die Semantik von \textquote{empfohlen} und \textquote{ungeeignet} übertragen werden, weshalb diese nicht zusätzlich aufgeführt werden \Vgl{RWiki-Ritter}.
+Diese kann auch auf die Semantik von \textquote{empfohlen} und \textquote{ungeeignet} übertragen werden, weshalb sie nicht zusätzlich aufgeführt werden \Vgl{RWiki-Ritter}.
 
 Darüber hinaus wird im Regelwerk der Einhaltungsgrad der weichen Regeln mit \textquote{dringend empfohlen} zwar verschärft dargestellt, aber zugleich Abweichungen, wie bisher, nach Absprache erlaubt \Vgl{RWiki-Spezies-Elfen}.
-Letzteres hat daher maximal eine Relevanz bei der Auswertung/Interpretation der Ergebnis-Fakten.
+Letzteres hat daher lediglich eine Relevanz bei der Auswertung/Interpretation der Ergebnis-Fakten.
 
 
 \subsection{Interpretation des \AbkK{ASP}-Ergebnisses}\label{subsec:interpretation-des-asp-ergebnisses}
 
 Wie in \Abbildung[K]{fig:deklarative-problemloesung} gezeigt wird, muss das Ergebnis vom \Abk{LP} (konkret vom \Tech{Clingo}-\Begriff{Solver}) interpretiert werden.
 Dies ist die Aufgabe der Software, konkreter die Aufbereitung der Ergebnis-Fakten zur Verwendung im Frontend.
-Typischerweise sucht man mit \Abk{ASP} für
-\begin{wrapfigure}{r}{.5\textwidth}
+Typischerweise sucht man mit \Abk{ASP}%
+\begin{wrapfigure}{r}{.5\textwidth}%
     \centering
     \caption{Deklarative Problemlösung \Vgl[Seite 14 (Folie 8)]{ASP-Gebser2012}}\label{fig:deklarative-problemloesung}
     \vspace{.25em}
     \Image{declarative_problem_solving.pdf}
-\end{wrapfigure}
-ein Problem mögliche Lösungen;
+\end{wrapfigure}%
+mögliche Lösungen für ein Problem;
 hier hingegen nicht: es werden keine möglichen Charaktere (\Begriff{Answer Set}) unter Beachtung gewählter Regelbücher (Problem) gesucht, sondern für einen gegebenen Charakter mögliche Regelverstöße.
 Diese Regelverstöße müssen mit ihren Informationen gesammelt werden.
 Dies geht nur, wenn das \Abk{LP} erfüllbar\Englisch{satisfiable} ist, da es bei einer Unerfüllbarkeit kein \Begriff{Answer Set} zum Interpretieren gibt.
@@ -278,4 +277,4 @@ Dadurch bleibt, im Sinne von \Abk{ASP}, das Problem erfüllbar und das \Abk{LP} 
 Die für die Interpretation relevanten Atome sind entsprechend dem Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -warnung zu interpretieren.
 So gehören zu den Fehlern die Atome: \Code{unknown}, \Code{max\_count\_exceeded}, \Code{max\_lvl\_exceeded}, \Code{unusable\_by}, \Code{missing\_min\_lvl} und \Code{missing\_level}.
 Warnungen sind: \Code{missing\_usual}, \Code{missing\_typical} und \Code{atypical}.
-Diese Interpretation wird nicht in die Namen der Atome aufgenommen, damit die Applikation (und nur diese) drüber, ohne weiteren Aufwand, entscheiden kann und somit \zB wartungsarm Gruppen hinzufügen, entfernen und ändern kann.
+Diese Interpretation wird nicht in die Namen der Atome aufgenommen, damit die Applikation (und nur diese) ohne weiteren Aufwand darüber entscheiden kann und somit \zB wartungsarm Gruppen hinzufügen, entfernen und ändern kann.

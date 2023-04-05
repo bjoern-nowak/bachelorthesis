@@ -1,7 +1,7 @@
 \chapter{Diskussion}\label{ch:diskussion}
 
 \begin{enumerateWithCode}{D}
-    \item Ein Export-Endpunkt, welches ein Charakter in einem Format zurückgibt, das kompatibel zu anderen Softwares ist, ist zwar im allgemeinen Benutzenden-freundlich.
+    \item Ein Export-Endpunkt, welches einen Charakter in einem Format zurückgibt, das kompatibel zu anderen Softwares ist, ist zwar im Allgemeinen Benutzenden-freundlich.
     Noch besser wäre jedoch ein Import-Endpunkt gewesen, welches fremde Formate in das Eigene konvertiert.
     Dies würde eine Migration von einer anderen Software erleichtern und damit die Zahl der Benutzenden und möglichen Mitwirkenden potenziell vergrößern.
 
@@ -10,19 +10,19 @@
 
     \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre.
     Die Parameter der Rückmeldungen sollten daher um solche helfenden Hinweise ergänzt werden.
-    Auch denkbar ist es ein Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
-    Dies kann \ggf unter Angabe des gesuchten Merkmals passieren oder hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, für fehlende Merkmale passieren.
+    Auch denkbar wäre es einen Endpunkt bereitzustellen, welcher mögliche Merkmalsausprägungen, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
+    Dies kann \ggf unter Angabe des gesuchten Merkmals oder hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, für fehlende Merkmale passieren.
     Wenn \zB für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt mögliche Professionen benennen.
     Dazu muss das Schema des Charakters so angepasst werden, dass diese Merkmale keine Pflichtfelder sind.
 
-    \item Des Weiteren werden die Charakter-Validierungswarnungen immer ausgeben.
+    \item Des Weiteren werden die Charakter-Validierungswarnungen immer ausgegeben.
     Es fehlt die Möglichkeit diese zu ignorieren \bzw als \textquote{von der Spielleitung akzeptierte Abweichungen} zu markieren.
-    Dazu kann die \Abk{API} angepasst werden, sodass der Validierungsendpunkt zusätzlich eine Liste der konkret zu ignorierenden Warnungen (so wie sie zuvor zurückgeben wurden) annimmt.
+    Dazu kann die \Abk{API} angepasst werden, sodass der Validierungsendpunkt zusätzlich eine Liste der konkret zu ignorierenden Warnungen (so wie sie zuvor zurückgegeben wurden) annimmt.
 
     \item Viele Regeln werden im \Abk{LP} für ähnliche Merkmale wiederholt.
-    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsames \Tech{Clingo}-\Begriff{Funktion} (\Begriff{Gruppe}) abbilden.
+    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Tech{Clingo}-\Begriff{Funktion} (\Begriff{Gruppe}) abbilden.
     Wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
-    Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen, letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
+    Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen; Letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
     Das \Listing[KP]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
 
@@ -47,12 +47,12 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
 %    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
 %    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
 
-    \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehreren Ausprägungen annehmen können.
+    \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
-    Dadurch kann eine Inkosistenz/Wiederspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden aber betroffene Regeln nicht korrigiert werden.
+    Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
 
     \item Eine einfache und gut verständliche Formalisierung der \textquote{any\_of} Regel (\Item{itm:HR.AnyOf}) konnte nicht gefunden werden.
-    Die Modellierung erfordert, dass die Auswahlliste kein Tuple, von freier Länge ist, sodass \textquote{pooling} genutzt wird.
+    Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt wird.
     Damit die daraus generierten Spielwelt-Fakten der entsprechenden Auswahlliste zugeordnet werden können, muss ein Schlüssel vergeben werden.
     Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, sofern die Liste nicht erweitert werden soll.
     In \Listing[K]{lst:formalisierungsansatz-any-of-regel} wird ein Lösungsansatz skizziert.
@@ -68,12 +68,12 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
         \end{minted}
     \end{listing}
 
-    \item\label{itm:D.CharakterVerwaltung} Die Charakter-Verwaltung, ist zwar nicht Fokus dieser Arbeit, spielt jedoch eine entscheidende Rolle bei der Frage \bzw dem Problem \textquote{wie das komplette Regelwerk zu \Abk{DSA} formalisiert werden kann}, weshalb nachfolgend ein kurzer Ausblick gegeben wird.
-    Ein herausfordernder Aspekt ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und Beachtung der \Abk{AP}-Kosten der Merkmale.
+    \item\label{itm:D.CharakterVerwaltung} Die Charakter-Verwaltung ist zwar nicht Fokus dieser Arbeit spielt jedoch eine entscheidende Rolle bei der Frage \bzw dem Problem \textquote{wie das komplette Regelwerk zu \Abk{DSA} formalisiert werden kann}, weshalb nachfolgend ein kurzer Ausblick gegeben wird.
+    Ein herausfordernder Aspekt ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und die Beachtung der \Abk{AP}-Kosten der Merkmale.
     Dies könnte durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
-    Dadurch muss die bereits existierende Modellierung der Merkmale nicht, nachträglich von den Regelbüchern, angepasst werden, was einer guten Modularität entspricht und damit geringeren Wartungsaufwand.
+    Dadurch muss die bereits existierende Modellierung der Merkmale nicht nachträglich von den Regelbüchern angepasst werden, was einer guten Modularität entspricht und damit einem geringeren Wartungsaufwand.
     Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
-    \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf bezug genommen und entsprechend in Gänze validiert werden kann.
+    \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf Bezug genommen und entsprechend in Gänze validiert werden kann.
     In \Listing[K]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
 
     \begin{listing}[htbp]
@@ -91,6 +91,6 @@ change(<type>,<feature>). %% 'type' ist Konstante 'add' oder 'remove'
         \end{minted}
     \end{listing}
 
-    Das zweite Aspekte ist im Prinzip ähnlich zum Ersten.
+    Der zweite Aspekt ist im Prinzip ähnlich zum Ersten.
     Es ist die Modellierung der Charakter-Eigenschaften und -Basiswerte \inkl des Verfolgens der Veränderungen durch Merkmalsausprägungen und die Einhaltung von Grenzen.
 \end{enumerateWithCode}
