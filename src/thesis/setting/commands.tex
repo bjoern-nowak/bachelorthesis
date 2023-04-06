@@ -220,6 +220,7 @@
             {NK}{\hyperref[#2]{\nameref{#2} (\autoref{#2})}}
             {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
             {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
+            {NP}{\hyperref[#2]{\nameref{#2} auf S.~\pageref{#2}}}
             {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
     }[\autoref{#2}]%
 }
@@ -230,6 +231,7 @@
 \newcommand{\Tabelle}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
 \newcommand{\Kapitel}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
 \newcommand{\Item}[2][KP]{\RefByCase{#1}{#2}}
+\newcommand{\Regel}[1]{\hyperref[#1]{Regel~\ref{#1} auf S.~\pageref{#1}}}
 
 %% manual naming with \ref
 %\newcommand{\Gleichung}[1]{Gleichung~\ref{#1}}

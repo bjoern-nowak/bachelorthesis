@@ -12,7 +12,7 @@ Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/
 Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können, wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
 \Vgl{REALISIERUNG-Palermo2008}\todo{Vergleiche richtig positioniert?}
 
-\begin{minipage}[t]{.55\textwidth}
+\begin{minipage}[t]{.575\textwidth}
     \begin{enumerateWithCode}{A}
         \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer\Note{\url{https://clean-code-developer.de/}} aufgeführten (und hier weit ausgelegten) Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
         Dies ist der Fall bei der fundamentalen Regel von \Begriff{Onion Architecture}.
@@ -21,16 +21,22 @@ Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klass
         So kann dies bei Bedarf, durch steigende Anforderungen an die Software, nachgeholt werden.
         Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
 
-        \item Notwendige \bzw genutzten Ressourcen einer Applikation Ordnerstruktur von resources
+        Nachfolgende Erklärungen nehmen Bezug auf die \Abbildung[K]{fig:projekt-architektur}:
 
-            {\color{red}\item Ordnerstruktur von APP}
-
-            {\color{red}\item Ordnerstruktur von tests, packages structure gleich zu app}
+        \item Sämtlicher Python-Quellcode der Backends selbst befindet sich unter \textquote{dsaheldenbogen}.
+        Dies ist das oberste Python-Package und trägt, entsprechend dem gängigen Standard, den Namen des Projekts.
+        %% osurce: https://stackoverflow.com/questions/193161/what-is-the-best-project-structure-for-a-python-application
+        %% quelle a: https://github.com/pypa/sampleproject
+        %% quelle b: https://kennethreitz.org/essays/2013/01/27/repository-structure-and-python
+        %% sekundaer b: https://docs.python-guide.org/writing/structure/
+        Direkt darunter befinden sich alle Packages der äußeren Schichten.
+        Ausnahme sind die Tests, da diese nicht zur Laufzeit benötigt werden und daher klar getrennt werden.
+        Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
+        Außerdem dokumentieren die Packages, mit \textquote{pydoc}, ihre Schicht-Zugehörigkeit.
     \end{enumerateWithCode}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{.4\textwidth}
-%    \captionsetup{justification=raggedleft}
     \captionsetup{labelsep=newline,format=plain,justification=centering}
     \flushright
 
@@ -43,13 +49,28 @@ Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klass
 
     \captionof{figure}{Projekt Architektur\\(Python Module)}\label{fig:projekt-architektur}
     \vspace{.25em}
-    \ImageInRatio{.9}{architektur.pdf}
+    \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
 \end{minipage}
 
 \begin{enumerateWithCode}{A}
     \setcounter{enumi}{2}
 
-    {\color{red}\item Ordnerstruktur von APP}
+    \item Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wieder und wird daher nicht zusätzlich abgebildet.
+    Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Tests stattfindet.
+    Eine Ausnahme stellt das Package \Code{resources\_rulebook} (nicht abgebildet) dar.
+    Darin enthalten sind Tests, welche die Regelbücher-\AbkP{LP} auf Korrektheit überprüft.
 
-    {\color{red}\item Ordnerstruktur von tests, packages structure gleich zu app}
+    \item Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} und haben jeweils einen eigenen Unterordner.
+    Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt.
+    Es muss dabei direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen.
+    Dies erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
+
+    In der Architektur lassen sich die \AbkP{LP} schwer einordnen.
+    Einerseits gehören sie zur (Domain-)Modellierung, \insb die allgemeingültigen Regeln.
+    Andererseits ist es kein Python-Code, steht wahrscheinlich oft unter Veränderungen und stellt, mit der Verwendung des \Begriff{Clingo}-Frameworks, ein Implementierungsdetail der eigentlichen \textquote{Engine} (im Sinne von \Abk{DIP}) dar.
+    So ist dies als eine der äußersten Schichten einzuordnen.
+
+    \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der Python-Applikation und der \Begriff{Clingo}-\Abk{API} fungiert.
+
+
 \end{enumerateWithCode}

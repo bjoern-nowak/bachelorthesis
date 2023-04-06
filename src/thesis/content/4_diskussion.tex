@@ -55,14 +55,14 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
     Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
 
-    \item Eine einfache und gut verständliche Formalisierung der \textquote{any\_of} Regel (\Item{itm:HR.AnyOf}) konnte nicht gefunden werden.
-    Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt wird.
+    \item Eine einfach nutzbare und gut verständliche Formalisierung der \textquote{count\_by} Methode aus \Regel{itm:HR.AnyOf} konnte nicht gefunden werden.
+    Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt werden muss.
     Damit die daraus generierten Spielwelt-Fakten der entsprechenden Auswahlliste zugeordnet werden können, muss ein Schlüssel vergeben werden.
     Dieser muss, in Kombination mit dem verursachendem und gesuchten Merkmal, einmalig unter allen Regelbüchern sein, sofern die Liste nicht erweitert werden soll.
-    In \Listing[KP]{lst:formalisierungsansatz-any-of-regel} wird ein Lösungsansatz skizziert.
+    In \Listing[KP]{lst:formalisierungsansatz-count-by} wird ein Lösungsansatz skizziert.
 
     \begin{listing}[!h]
-        \caption{Formalisierungsansatz \Code{any\_of} Regel (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-any-of-regel}
+        \caption{Ansatz zur vollständigen Formalisierung von \Regel{itm:HR.AnyOf} (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-count-by}
         \begin{minted}{clingo}
 %%%% 'prof := profession' und 'combatT := combat_technique'
 %% Auswahlliste mit drei Elementen ergibt drei Spielwelt-Fakten mit dem selben Schlüssel
