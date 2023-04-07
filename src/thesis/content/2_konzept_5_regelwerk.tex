@@ -145,7 +145,7 @@ Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellieru
 Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}
-\begin{enumerateWithCode}{AR}
+\begin{enumerateWithCode}[.5em plus .5em minus .5em]{AR}
     \item\label{itm:AR.1} Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
     \begin{mintedNameless}[linenos=false]{clingo}
@@ -174,7 +174,7 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
 \end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische harte Regeln:}
-\begin{enumerateWithCode}{HR}
+\begin{enumerateWithCode}[.5em plus .5em minus .5em]{HR}
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
     \begin{mintedNameless}{clingo}
@@ -228,7 +228,7 @@ def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
 \end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische weiche Regeln:}
-\begin{enumerateWithCode}{WR}
+\begin{enumerateWithCode}[.5em plus .5em minus .5em]{WR}
     \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(race("Elfen"),culture("Auelfen")).

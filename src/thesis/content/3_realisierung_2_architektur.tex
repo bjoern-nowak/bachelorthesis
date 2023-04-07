@@ -4,35 +4,31 @@ Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wich
 Zwei sehr bekannte und von den Prinzipen ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
 Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.
 
-Es fokussiert sich im Grunde auf eine möglichst loose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[KP]{fig:onion-architecture}).
-Dabei ist es fundamental, das jede Schicht nur von Tieferen abhängig sein darf.
-Die Idee ist, umso tiefer die Schicht ist, desto seltenerer kommen Änderungen vor, wodurch weniger Wartungsaufwand bei den äußeren Schichten entstehen soll.
-Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.
-Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}} wird es inneren Schichten ermöglicht indirekt äußeren Schichten zu verwenden.
-Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können, wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
-\Vgl{REALISIERUNG-Palermo2008}\todo{Vergleiche richtig positioniert?}
-
+\todo{Vergleiche richtig positioniert?}
 \begin{minipage}[t]{.575\textwidth}
+    Es fokussiert sich auf eine möglichst loose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}).
+    Dabei ist es fundamental, das jede Schicht nur von Tieferen abhängig sein darf.
+    Die Idee ist, umso tiefer die Schicht ist, desto seltenerer kommen Änderungen vor, wodurch weniger Wartungsaufwand bei den äußeren Schichten entstehen soll.
+    Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.
+    Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}} wird es inneren Schichten ermöglicht indirekt äußeren Schichten zu verwenden.
+    Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können, wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
+    \Vgl{REALISIERUNG-Palermo2008}
+
+    \vspace{.5em}
+    Nachfolgendes bezieht sich auf die \Abbildung[K]{fig:projekt-architektur}:
+    \vspace{-.5em}
+
     \begin{enumerateWithCode}{A}
-        \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer\Note{\url{https://clean-code-developer.de/}} aufgeführten (und hier weit ausgelegten) Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
-        Dies ist der Fall bei der fundamentalen Regel von \Begriff{Onion Architecture}.
-        Verletzt wird dadurch vor allem das \Abk{DIP}.
-        Es wird also auf einen gewissen Grad an loser Kopplung verzichtet, aber Klassen weiterhin ihrer Schicht zugeordnet.
-        So kann dies bei Bedarf, durch steigende Anforderungen an die Software, nachgeholt werden.
-        Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
-
-        Nachfolgende Erklärungen nehmen Bezug auf die \Abbildung[K]{fig:projekt-architektur}:
-
-        \item Sämtlicher Python-Quellcode der Backends selbst befindet sich unter \textquote{dsaheldenbogen}.
-        Dies ist das oberste Python-Package und trägt, entsprechend dem gängigen Standard, den Namen des Projekts.
-        %% osurce: https://stackoverflow.com/questions/193161/what-is-the-best-project-structure-for-a-python-application
-        %% quelle a: https://github.com/pypa/sampleproject
-        %% quelle b: https://kennethreitz.org/essays/2013/01/27/repository-structure-and-python
-        %% sekundaer b: https://docs.python-guide.org/writing/structure/
-        Direkt darunter befinden sich alle Packages der äußeren Schichten.
-        Ausnahme sind die Tests, da diese nicht zur Laufzeit benötigt werden und daher klar getrennt werden.
+        \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
         Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
         Außerdem dokumentieren die Packages, mit \textquote{pydoc}, ihre Schicht-Zugehörigkeit.
+
+        \item\label{itm:K.Tests} Eine Ausnahme sind die Tests.
+        Diese werden nicht zur Laufzeit benötigt und werden daher, von der eigentlichen Applikation, getrennt.
+        Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wieder und wird daher nicht zusätzlich abgebildet.
+        Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Test stattfindet.
+        Eine Ausnahme stellt das Package \Code{resources\_rulebook} (nicht abgebildet) dar.
+        Darin enthalten sind Tests, welche die Regelbücher-\AbkP{LP} auf Korrektheit überprüfen.
     \end{enumerateWithCode}
 \end{minipage}
 \hfill
@@ -47,7 +43,7 @@ Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klass
 
     \vspace{2em}
 
-    \captionof{figure}{Projekt Architektur\\(Python Module)}\label{fig:projekt-architektur}
+    \captionof{figure}{Projekt Architektur\\(Python Packages)}\label{fig:projekt-architektur}
     \vspace{.25em}
     \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
 \end{minipage}
@@ -55,22 +51,41 @@ Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klass
 \begin{enumerateWithCode}{A}
     \setcounter{enumi}{2}
 
-    \item Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wieder und wird daher nicht zusätzlich abgebildet.
-    Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Tests stattfindet.
-    Eine Ausnahme stellt das Package \Code{resources\_rulebook} (nicht abgebildet) dar.
-    Darin enthalten sind Tests, welche die Regelbücher-\AbkP{LP} auf Korrektheit überprüft.
-
-    \item Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} und haben jeweils einen eigenen Unterordner.
+    \item Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordner.
     Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt.
-    Es muss dabei direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen.
-    Dies erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
+    Diese muss dabei direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen.
+    Es erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
 
     In der Architektur lassen sich die \AbkP{LP} schwer einordnen.
     Einerseits gehören sie zur (Domain-)Modellierung, \insb die allgemeingültigen Regeln.
-    Andererseits ist es kein Python-Code, steht wahrscheinlich oft unter Veränderungen und stellt, mit der Verwendung des \Begriff{Clingo}-Frameworks, ein Implementierungsdetail der eigentlichen \textquote{Engine} (im Sinne von \Abk{DIP}) dar.
-    So ist dies als eine der äußersten Schichten einzuordnen.
+    Andererseits ist es kein Python-Code, wird oft unter Veränderungen stehen und stellt, durch die Verwendung des \Begriff{Clingo}-Frameworks, ein Implementierungsdetail der eigentlichen \Begriff{Engine} (im Sinne von \Abk{DIP}) dar.
+    Daher werden sie als eine der äußersten Schichten angesiedelt betrachtet.
 
-    \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der Python-Applikation und der \Begriff{Clingo}-\Abk{API} fungiert.
+    \item Die Schnittstelle, unter \textquote{\Code{api}}, definiert zusätzlich, neben den Domänenmodells, eigene entsprechende Schemas.
+    Dies ist nicht nur konform zur Architektur, sondern bietet \insb die Möglichkeit die Strukturen und Datentypen so zu wählen, dass diese möglichst einfach für die \Abk{API}-Benutzenden (\zB das Frontend) zu nutzen sind.
 
+    \item Konkrete Endpunkte werden unter \textquote{\Code{api/endpoints}} getrennt nach der Domäne abgelegt und spiegelt im Dateinamen die Domäne wider.
+    So stellt der Charakter eine Domäne dar.
+    Künftig könnte ebenfalls der Benutzende eine Domäne sein, über dessen Endpunkte ein Benutzender, wie beim Charakter, erstellt, bearbeitet und gelöscht werden könnte.
+    Die Funktionalität des An- und Abmeldens hingegen gehört der Applikationsdomäne \textquote{\Code{root}} selbst an.
 
+    \item Aufrufen von Endpunkten resultieren immer in einem Aufruf eines Applikationsservices.
+    Die \Abk{API}-Schicht übernimmt dabei die Übersetzung des Schemas zu und vom Domänenmodell.
+    Die Applikationsservices enthalten entsprechend des
+    \AbkS{IOSP}{\textquote{Integration Operation Segregation Principle}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Integration_Operation_Segregation_Principle_IOSP}}} keine eigene Logik, sondern steuern, mit dem Aufruf anderer Klassen und Methoden, den Ablauf wie die gewünschte Funktionalität erreicht wird.
+    Sie stellen damit eine \textquote{Integration} dar.
+    Methoden mit Logik hingegen eine \textquote{Operation}.
+
+    \item Die \Begriff{Engine}, unter dem gleichnamigen Package, stellt solche \textquote{Operation}-Methoden bereit und ist, neben der Ausführung und Auswertung von \AbkP{LP}, Kern der Applikation.
+    Mehr dazu in \Kapitel{sec:kern-funktionalitat}.
+
+    \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der \Begriff{Engine} und \Begriff{Clingo}-\Abk{API} fungiert.
+    Hier soll die Konvertierung des Charakter-Domain-Models zum \Begriff{Clingo}-Kontext und die erste Übersetzung der Ergebnis-Fakten in ein Domänenmodell passieren.
+    Sodass entsprechend der Zielarchitektur bei Änderungen dieses Teils der Applikationskern unberührt bleibt.
+
+    \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer aufgeführten (und hier weit ausgelegten) Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
+    Dies ist, auf Ebene der Klassen, der Fall bei der Anwendung von \Abk{DIP} und stellt eine Verletzung der fundamentalen Regel von \Begriff{Onion Architecture} dar.
+    Es wird also auf einen gewissen Grad loser Kopplung verzichtet, aber Klassen weiterhin ihrer Schicht zugeordnet.
+    So kann dies bei Bedarf, durch steigende Anforderungen, nachgeholt werden.
+    Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.
 \end{enumerateWithCode}

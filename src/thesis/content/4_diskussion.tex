@@ -8,7 +8,8 @@
 %    \item Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession\_requires\_culture("<profession>","<culture>").' ) anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde.
 %    Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
-    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung, dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}) doch kann es für die zukünftige Erstellung von Tests hinderlich sein.
+    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung zwischen der \Begriff{Engine} und \Begriff{Clingo}.
+    Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), doch kann es für die zukünftige Erstellung von Tests hinderlich sein.
     Die Packages/Module sind sauber definiert, jedoch wurde an den meisten Stellen das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
     Dadurch, dass vermehrt und etwas \textquote{un-pythonic} (also für Python-Verhältnisse unüblich) vorwiegend \bzw grundsätzlich Klassen erstellt wurden, kann auch dies mit überschaubarem Aufwand bei Bedarf nachgepflegt werden.
 
@@ -62,7 +63,7 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     In \Listing[KP]{lst:formalisierungsansatz-count-by} wird ein Lösungsansatz skizziert.
 
     \begin{listing}[!h]
-        \caption{Ansatz zur vollständigen Formalisierung von \Regel{itm:HR.AnyOf} (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-count-by}
+        \caption{Ansatz zur vollen Formalisierung von Regel~\ref{itm:HR.AnyOf} (Pseudo \AbkK{LP})}\label{lst:formalisierungsansatz-count-by}
         \begin{minted}{clingo}
 %%%% 'prof := profession' und 'combatT := combat_technique'
 %% Auswahlliste mit drei Elementen ergibt drei Spielwelt-Fakten mit dem selben Schlüssel
