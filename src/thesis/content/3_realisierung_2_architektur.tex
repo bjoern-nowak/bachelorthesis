@@ -21,7 +21,7 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     \begin{enumerateWithCode}{A}
         \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
         Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
-        Außerdem dokumentieren die Packages, mit \textquote{pydoc}, ihre Schicht-Zugehörigkeit.
+        Außerdem dokumentieren die Packages, mit \textquote{docstring}, ihre Schicht-Zugehörigkeit.
 
         \item\label{itm:K.Tests} Eine Ausnahme sind die Tests.
         Diese werden nicht zur Laufzeit benötigt und werden daher, von der eigentlichen Applikation, getrennt.
@@ -57,8 +57,9 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     Es erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
 
     In der Architektur lassen sich die \AbkP{LP} schwer einordnen.
-    Einerseits gehören sie zur (Domain-)Modellierung, \insb die allgemeingültigen Regeln.
-    Andererseits ist es kein Python-Code, wird oft unter Veränderungen stehen und stellt, durch die Verwendung des \Begriff{Clingo}-Frameworks, ein Implementierungsdetail der eigentlichen \Begriff{Engine} (im Sinne von \Abk{DIP}) dar.
+    Einerseits gehören sie zur Domänen-Modellierung, \insb die allgemeingültigen Regeln.
+    Andererseits ist es kein Python-Code und wird oft unter Veränderungen stehen.
+    Auch stellt es, aufgrund der Einordnung des \Begriff{Clingo}-Frameworks in die Infrastruktur-Schicht, ein Implementierungsdetail der eigentlichen \Begriff{Engine} (im Sinne von \Abk{DIP}) dar.
     Daher werden sie als eine der äußersten Schichten angesiedelt betrachtet.
 
     \item Die Schnittstelle, unter \textquote{\Code{api}}, definiert zusätzlich, neben den Domänenmodells, eigene entsprechende Schemas.

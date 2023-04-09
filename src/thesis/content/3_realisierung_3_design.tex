@@ -7,25 +7,41 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
 
 \begin{enumerateWithCode}{DE}
 
-    \item In diesem Stadium der Software werden für bestimmte Aufgaben, von dieser Arbeit, keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB aus \Zitat{REALISIERUNG-Gamma1994}, gemacht.
+    \item In diesem Stadium der Software werden für bestimmte Aufgaben, von dieser Arbeit, keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog \textquote{Gang of Four (GoF) Design Patterns} aus \Zitat{REALISIERUNG-Gamma1994}, gemacht.
     Dies soll entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude), auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
 
-    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
+    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Begriff{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
 
-    {\color{red}\item entgegen PEP-8: Klassen in eigener separater Datei, OOP, bessere übersicht und auffindgbarkeit (neulinge)
+    \item Entgegen diesem wird die maximale Zeilenlänge auf 130 angehoben.
+    Die damalige Begründung sehr kurzer Zeilen lag darin, dass man mehrere Dateien nebeneinander öffnen und vollständig betrachten könne.
+    Die zum Zeitpunkt der Veröffentlichung existierenden technische Einschränkungen (Bildschrimgröße und -auflösung) sind jedoch heutzutage längst überholt.
+    Außerdem ist der Author davon überzeugt, dass bei zu vielen gleichzeitig betrachteten Dateien der Fokus verloren geht und dessen Notwendigkeit ein Zeichen schlechter \AbkS{SoC}{\textquote{Separation of Concerns}\Note{\url{https://clean-code-developer.de/die-grade/orangener-grad/\#Separation_of_Concerns_SoC}}} ist.
+    Des Weiteren sei unter Verwendung der Namenskonvention und Vermeidung von Abkürzungen die sonst sehr beschränkte Zeile schnell aufgebraucht, welches zu unschönen (Lesefluss-störenden) Zeilenumbrüchen führe.
 
-    --> dafür ggf. in \_\_init\_\_ des modules direkte importierung der klasse, damit die import statements nichts verbose sind und sich verhalten wie packages (in java)
+    \item Weiter unterscheidet \Begriff{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die consistent Anwendung einer frei-wählbaren Regel.
+    In diesem Projekt werden einfache Anführungszeichen verwendet, wenn die Zeichenkette eine Identifikation (Schlüssel) darstellt, wie \zB der Name einer Merkmalsausprägung.
+    Doppelte bei freien Texten, wie Fehlermeldungen.
 
-    --> ausnahme: excpetions.py (pro package) als sammlung möglicher exceptions, da dies dem best-practice entspricht und meist sehr kurz sind, weshalb eine sammlung dennoch übersichlicht ist}
+    \item Python Dateien sind \sog Module, können entsprechend alles enthalten (Variablen, Funktionen, Klassen und auszuführende Befehle) und gruppiert üblicherweiße Funktionalitäten eines Kontextes.
+    Dabei können Module von anderen Modulen in Gänze oder in Teile importiert werden.
+    Zusätzlich des eigentlichen Zwecks werden Klassen stets in separate Module geschrieben (Klassen-Modul).
+    Dies soll die Übersichtlichkeit (vermeidung von sehr langen Dateien) und Auffindbarkeit von Klassen stärken.
+    \Vgl[Kapitel 6]{REALISIERUNG-PythonDoc-Modules}
 
-    {\color{red}\item entgegen PEp-8 werden imports nicht gruppiert -> bessere nutzbarkeit der GIT annotate funktion}
+    \item Das Importieren von Sub-Modulen in Packages, zur Verkürzung von Import-Befehlen und damit der Verschleierung der Implementierungsstruktur, wird vermieden \Vgl[Kapitel 5.4.2]{REALISIERUNG-PythonDoc-Modules}.
+    Als Grund ist zu nennen, das diese Software keine \textquote{öffentliche Bibliothek/Framework} darstellt und die Verwendung daher (beim Importieren) nicht vereinfacht werden muss.
+    Bei reinen Klassen-Modulen wird dies jedoch akzeptiert, da dies Redundanz bei den Import-Befehlen reduziert, da der Klassenname \idR gleich dem Modulnamen ist.
 
-    {\color{red}\item \Abk{LP} \Begriff{Kommentare}, welcher nicht temporär-auskommentierten Quellcode darstellen, werden mit einem zusätzlichen (doppelten) Kommentar-Zeichen (\%) gekennzeichnet.}
+    Eine Ausnahme stellen Exceptions dar.
+    Aufgrund der oft kurzen Definitionen sei es, wie in der Python-Gemeindschaft bei Bibliotheken und Frameworks üblich, erlaubt diese in übergeordneten Packages in einem Modul namens \textquote{excpetions.py} oder \textquote{errors.py} zu sammeln.
 
-    {\color{red}\item Es gibt keine Zeichenbegrenzung für Zeilen in einem \Abk{LP}.
-    Damit (bei ausgeschaltetem \textquote{auto-wrap}) eine schnelle und gute Übersicht gegeben ist.
-    Zeilen können bei konkretem Lesebedarf (temporär) umgebrochen werden.}
+    \item Neben den konzeptionellen Konventionen für \Abk{LP} aus \Kapitel[K]{subsec:konventionen} werden noch zwei Design-Entscheidungen vorgeschlagen.
+    Kommentare, welche nicht temporär-auskommentierten Quellcode darstellen, wie Dokumentationen, werden mit einem zusätzlichen (doppelten) Kommentar-Zeichen (\%\%) gekennzeichnet.
 
-    {\color{red}\item more to come}
+    \item Außerdem soll es in einem \Abk{LP} keine Zeichenbegrenzung für Zeilen geben.
+    Damit (bei ausgeschaltetem \textquote{auto-wrap} der \Abk{IDE}) eine schnelle und gute Übersicht des \Abk{LP} gegeben ist.
+    Da zumeist die wichtigen ausmachenden Informationen am Anfang stehen und zumal die Anwendung von Fakten und Regeln sich wiederholen.
+    Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
+
 \end{enumerateWithCode}
 
