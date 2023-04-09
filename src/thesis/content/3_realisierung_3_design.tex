@@ -1,6 +1,17 @@
 \section{Design-Entscheidungen}\label{sec:design-entscheidungen}
 
+Wie auch bei der Architektur, nur in diesem Fall noch stärker, sind Design-Entscheidungen subjektive Maßnahmen;
+mit dem Ziel übersichtlichen, verständlichen und wartbaren Quellcodes zu entwickeln.
+Dies geht von Vorgaben zum Quellcode-Stil (\zB der Länge von Einrückungen und Position von Klammern) über Namenskonventionen bis hin zu Entwurfsmustern\Englisch{design patterns}.
+Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
+
 \begin{enumerateWithCode}{DE}
+
+    \item In diesem Stadium der Software werden für bestimmte Aufgaben, von dieser Arbeit, keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB aus \Zitat{REALISIERUNG-Gamma1994}, gemacht.
+    Dies soll entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude), auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
+
+    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
+
     {\color{red}\item entgegen PEP-8: Klassen in eigener separater Datei, OOP, bessere übersicht und auffindgbarkeit (neulinge)
 
     --> dafür ggf. in \_\_init\_\_ des modules direkte importierung der klasse, damit die import statements nichts verbose sind und sich verhalten wie packages (in java)
