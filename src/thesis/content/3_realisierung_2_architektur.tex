@@ -18,7 +18,7 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     Nachfolgendes bezieht sich auf die \Abbildung[K]{fig:projekt-architektur}:
     \vspace{-.5em}
 
-    \begin{enumerateWithCode}{A}
+    \begin{enumerateWithCode}{AT}
         \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
         Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
         Außerdem dokumentieren die Packages, mit \textquote{docstring}, ihre Schicht-Zugehörigkeit.
@@ -48,10 +48,10 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
 \end{minipage}
 
-\begin{enumerateWithCode}{A}
+\begin{enumerateWithCode}{AT}
     \setcounter{enumi}{2}
 
-    \item Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordner.
+    \item\label{itm:A.LpEntrypoint} Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordner.
     Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt.
     Diese muss dabei direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen.
     Es erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
@@ -77,7 +77,8 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     Sie stellen damit eine \textquote{Integration} dar.
     Methoden mit Logik hingegen eine \textquote{Operation}.
 
-    \item Die \Begriff{Engine}, unter dem gleichnamigen Package, stellt solche \textquote{Operation}-Methoden bereit und ist, neben der Ausführung und Auswertung von \AbkP{LP}, Kern der Applikation.
+    \item Das Package \textquote{engine} enthält Klassen, welche solche \textquote{Operation}-Methoden bereitstellen.
+    Die gleichnamige Klasse ist, neben der Ausführung und Auswertung von \AbkP{LP}, Kern der Applikation.
     Mehr dazu in \Kapitel{sec:kern-funktionalitat}.
 
     \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der \Begriff{Engine} und \Begriff{Clingo}-\Abk{API} fungiert.

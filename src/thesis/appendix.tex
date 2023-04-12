@@ -36,10 +36,27 @@
     \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/common.lp}
 
 %    \newpage
-    \section{<repo>/app/infrastructure/hero\_wrapper.py}\label{sec:hero_wrapper.py}
+    \section{<repo>/app/engine/engine.py}\label{sec:engine.py}
+    Kern-Steuerungseinheit der Applikation.
+    Es orchestriert die Ausführung und Interpretation der \AbkP{LP}.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/engine.py}
+
+%    \newpage
+    \section{<repo>/app/infrastructure/clingo\_executor.py}\label{sec:clingo-executor.py}
+    Abstraktionsschicht zwischen der \Begriff{Engine} und einem \Abk{ASP}-Framework, in diesem Fall die \Begriff{Clingo}-\Abk{API}.
+    Führt gewünschte Unterprogramme von vorgegebenen Regelbücher-\AbkP{LP} aus.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/clingo_executor.py}
+
+%    \newpage
+    \section{<repo>/app/infrastructure/hero\_wrapper.py}\label{sec:hero-wrapper.py}
     \Begriff{Clingo}/\Abk{LP} Kontext-Klasse, welche die \textquote{external functions} bereitstellt.
     Konkret konvertiert es die Charakter-Merkmale in \Begriff{Clingo}-\Tech{Symbole}
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_wrapper.py}
+
+%    \newpage
+    \section{<repo>/app/engine/collector.py}\label{sec:collector.py}
+    Sammelt \bzw filtert aus dem \Begriff{answer set} die gesuchte Ergebnis-Fakten (\Begriff{Clingo}-\Tech{Funktionen}) heraus.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/collector.py}
 
 %    \newpage
     \section{<repo>/app/engine/hero\_validation\_interpreter.py}\label{sec:hero-validation-interpreter.py}

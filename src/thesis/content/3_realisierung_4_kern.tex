@@ -1,13 +1,19 @@
 \section{Kern-Funktionalität}\label{sec:kern-funktionalitat}
 
-\begin{enumerateWithCode}{KF}
-    {\color{red}\item ClingoExecutor}
+Nach der Formalisierung eines Regelwerks muss entsprechend der \Abbildung{fig:deklarative-problemloesung} das \Abk{LP} ausgeführt und interpretiert werden.
+Die Orchestrierung dessen ist die Aufgabe der \Tech{Engine} und wird nachfolgend, anhand der Kern-Funktion der Charakter-Validierung, aufgezeigt.
 
-    {\color{red}\item \Begriff{Engine}}
+Die \Tech{Engine} ist die, den formalisierten Regelbüchern, übergeordnete Steuerungseinheit.
+Sie definiert ein geordnetes Standard-Set an Charakter-Validierungsschritten.
+Jeder Schritt wird einzeln ausgeführt.
+Dabei werden Validierungswarnung Schritt-übergreifend gesammelt.
+Bei einem Validerungsfehler beendet die \Tech{Engine} mit einer \Tech{Exception}.
+Ansonsten werden die potenziellen Validierungswarnung zurückgegeben.
+(vgl. \Anhang[KP]{sec:engine.py})
 
-    {\color{red}\item HeroValidationInterpreter}
-
-    {\color{red}\item Ähnlich zu MultißShot SOlving wegen den Validaiotn Steps?}
-
-    {\color{red}\item more to come}
-\end{enumerateWithCode}
+Dazu greift die \Tech{Engine} auf den \Tech{ClingoExecutor} zu.
+Dieser gehört der Infrastrukturschicht an und abstrahiert die Verwendung der \Begriff{Clingo}-\Abk{API}.
+Er erhält konkrete Anweisungen, welche Regelbücher-\AbkP{LP} zu laden und welche Unterprogramme auszuführen sind (vgl. \Anhang[KP]{sec:clingo-executor.py}).
+Das daraus resultierende \Begriff{answer set} wird dann von der \Tech{Engine} an den \Tech{Collector} übergeben, welcher die entsprechend gesuchten Ergebnis-Fakten herausfiltert (vgl \Anhang[KP]{sec:collector.py}).
+Anschließend werden die Ergebnis-Fakten vom \Tech{HeroValidationInterpreter} in entsprechende Domänenmodelle (Validierungswarnungen oder -fehler) konvertiert (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
+Diese Klasse ist von kritischer Bedeutung, da es die genaue Interpretation des \Abk{ASP}-Ergebnisses beherbergt.
