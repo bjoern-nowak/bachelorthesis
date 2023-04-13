@@ -10,7 +10,7 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     \item In diesem Stadium der Software werden für bestimmte Aufgaben, von dieser Arbeit, keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog \textquote{Gang of Four (GoF) Design Patterns} aus \Zitat{REALISIERUNG-Gamma1994}, gemacht.
     Dies soll entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude), auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
 
-    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Begriff{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
+    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Tech{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
 
     \item Entgegen diesem wird die maximale Zeilenlänge auf 130 angehoben.
     Die damalige Begründung sehr kurzer Zeilen lag darin, dass man mehrere Dateien nebeneinander öffnen und vollständig betrachten könne.
@@ -18,7 +18,7 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     Außerdem ist der Author davon überzeugt, dass bei zu vielen gleichzeitig betrachteten Dateien der Fokus verloren geht und dessen Notwendigkeit ein Zeichen schlechter \AbkS{SoC}{\textquote{Separation of Concerns}\Note{\url{https://clean-code-developer.de/die-grade/orangener-grad/\#Separation_of_Concerns_SoC}}} ist.
     Des Weiteren sei unter Verwendung der Namenskonvention und Vermeidung von Abkürzungen die sonst sehr beschränkte Zeile schnell aufgebraucht, welches zu unschönen (Lesefluss-störenden) Zeilenumbrüchen führe.
 
-    \item Weiter unterscheidet \Begriff{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die consistent Anwendung einer frei-wählbaren Regel.
+    \item Weiter unterscheidet \Tech{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die consistent Anwendung einer frei-wählbaren Regel.
     In diesem Projekt werden einfache Anführungszeichen verwendet, wenn die Zeichenkette eine Identifikation (Schlüssel) darstellt, wie \zB der Name einer Merkmalsausprägung.
     Doppelte bei freien Texten, wie Fehlermeldungen.
 
@@ -44,10 +44,11 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     Da zumeist die wichtigen ausmachenden Informationen am Anfang stehen und zumal die Anwendung von Fakten und Regeln sich wiederholen.
     Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
 
-    \item Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur (siehe \Kapitel[KP]{subsec:anforderungen-an-regelbucher}) etwas eingeschränkt.
+    \item Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur etwas eingeschränkt.
     Diese trennt Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}).
+    (vgl. \Kapitel[KP]{subsec:anforderungen-an-regelbucher})
 
-    \item Weiter wird die Freiheit durch die, der \Begriff{Engine}, vorgegebene Mindestaufteilung in Unterprogramme verringert.
+    \item Weiter wird die Freiheit durch die, der \Code{Engine}, vorgegebene Mindestaufteilung in Unterprogramme verringert.
     Dadurch wird eine feinere Steuerung und Trennung von unrelevanten Programmteilen, für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
     Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierende Spielwelt-Regel-Verletzungen, zu beschränken.
     Diese Unterprogramme werden Charakter-Validierungsschritt genannt.
@@ -55,7 +56,7 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     Zuerst zur Prüfung, ob die Ausprägung/en genutzt werden kann/können, also ob durch die bereits gewählten anderen Merkmale oder einer Spielwelt-Regel, wie die Überschreitung einer maximalen Stufe, ein Regelverstoß vorliegt.
     Und anschließen, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
 
-    \item Regelbücher-\AbkP{LP} können weitere (Zwischen-)Schritte definieren.
+    \item\label{itm:DE.ExtraStep} Regelbücher-\AbkP{LP} können weitere (Zwischen-)Schritte definieren.
     Dazu müssen Sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) ein Fakt mit der Schrittnummer/-position (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
 
 \end{enumerateWithCode}

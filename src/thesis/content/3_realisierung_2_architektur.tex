@@ -52,14 +52,13 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     \setcounter{enumi}{2}
 
     \item\label{itm:A.LpEntrypoint} Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordner.
-    Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt.
-    Diese muss dabei direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen.
+    Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt, welche direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen muss.
     Es erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
 
     In der Architektur lassen sich die \AbkP{LP} schwer einordnen.
     Einerseits gehören sie zur Domänen-Modellierung, \insb die allgemeingültigen Regeln.
     Andererseits ist es kein Python-Code und wird oft unter Veränderungen stehen.
-    Auch stellt es, aufgrund der Einordnung des \Begriff{Clingo}-Frameworks in die Infrastruktur-Schicht, ein Implementierungsdetail der eigentlichen \Begriff{Engine} (im Sinne von \Abk{DIP}) dar.
+    Auch stellt es, aufgrund der Einordnung des \Begriff{Clingo}-Frameworks in die Infrastruktur-Schicht, ein Implementierungsdetail der eigentlichen \Code{Engine} (im Sinne von \Abk{DIP}) dar.
     Daher werden sie als eine der äußersten Schichten angesiedelt betrachtet.
 
     \item Die Schnittstelle, unter \textquote{\Code{api}}, definiert zusätzlich, neben den Domänenmodells, eigene entsprechende Schemas.
@@ -81,12 +80,12 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     Die gleichnamige Klasse ist, neben der Ausführung und Auswertung von \AbkP{LP}, Kern der Applikation.
     Mehr dazu in \Kapitel{sec:kern-funktionalitat}.
 
-    \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der \Begriff{Engine} und \Begriff{Clingo}-\Abk{API} fungiert.
-    Hier soll die Konvertierung des Charakter-Domain-Models zum \Begriff{Clingo}-Kontext und die erste Übersetzung der Ergebnis-Fakten in ein Domänenmodell passieren.
+    \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der \Code{Engine} und \Begriff{Clingo}-\Abk{API} fungiert.
+    Hier soll die Konvertierung des Charakter-Domain-Models zum \Begriff{Clingo}-\Tech{Kontext} und die erste Übersetzung der Ergebnis-Fakten in ein Domänenmodell passieren.
     Sodass entsprechend der Zielarchitektur bei Änderungen dieses Teils der Applikationskern unberührt bleibt.
 
     \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer aufgeführten (und hier weit ausgelegten) Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern da abgewichen, wo es der Wartbarkeit zuträglich ist.
-    Dies ist, auf Ebene der Klassen, der Fall bei der Anwendung von \Abk{DIP} und stellt eine Verletzung der fundamentalen Regel von \Begriff{Onion Architecture} dar.
+    Dies ist, auf Ebene der Klassen, der Fall bei der Anwendung von \Abk{DIP} und stellt eine Verletzung der fundamentalen Regel von \Tech{Onion Architecture} dar.
     Es wird also auf einen gewissen Grad loser Kopplung verzichtet, aber Klassen weiterhin ihrer Schicht zugeordnet.
     So kann dies bei Bedarf, durch steigende Anforderungen, nachgeholt werden.
     Grund ist, dass davon ausgegangen wird, dass für die Gewinnung von Mitwirkenden eine komplexe und aufwändige Architektur eher hinderlich ist und bei einer (noch) so kleinen Software (wie dieser) der Mehrwert strikten Folgens zu gering ist.

@@ -12,7 +12,7 @@
 
 %    \newpage
     \section{clingo-cheatsheet.lp}\label{sec:clingo-cheatsheet.lp}
-    Einstiegshilfe zur \Tech{Clingo} Syntax und Semantik.
+    Einstiegshilfe zur \Begriff{Clingo} Syntax und Semantik.
     \vspace{-1em}\inputMintedTwoCols{clingo}{appendix/clingo-cheatsheet.lp}
 
 %    \newpage
@@ -43,25 +43,35 @@
 
 %    \newpage
     \section{<repo>/app/infrastructure/clingo\_executor.py}\label{sec:clingo-executor.py}
-    Abstraktionsschicht zwischen der \Begriff{Engine} und einem \Abk{ASP}-Framework, in diesem Fall die \Begriff{Clingo}-\Abk{API}.
+    Abstraktionsschicht zwischen der \Code{Engine} und einem \Abk{ASP}-Framework, in diesem Fall die \Begriff{Clingo}-\Abk{API}.
     Führt gewünschte Unterprogramme von vorgegebenen Regelbücher-\AbkP{LP} aus.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/clingo_executor.py}
 
 %    \newpage
     \section{<repo>/app/infrastructure/hero\_wrapper.py}\label{sec:hero-wrapper.py}
-    \Begriff{Clingo}/\Abk{LP} Kontext-Klasse, welche die \textquote{external functions} bereitstellt.
-    Konkret konvertiert es die Charakter-Merkmale in \Begriff{Clingo}-\Tech{Symbole}
+    \Begriff{Clingo}-\Abk{LP} Kontext-Klasse, welche die \textquote{external functions} bereitstellt.
+    Konkret konvertiert es die Charakter-Merkmale in \Begriff{Clingo}-\Begriff{Symbole}
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_wrapper.py}
 
 %    \newpage
     \section{<repo>/app/engine/collector.py}\label{sec:collector.py}
-    Sammelt \bzw filtert aus dem \Begriff{answer set} die gesuchte Ergebnis-Fakten (\Begriff{Clingo}-\Tech{Funktionen}) heraus.
+    Sammelt \bzw filtert aus dem \Tech{answer set} die gesuchte Ergebnis-Fakten (\Begriff{Clingo}-\Begriff{Funktionen}) heraus.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/collector.py}
 
 %    \newpage
     \section{<repo>/app/engine/hero\_validation\_interpreter.py}\label{sec:hero-validation-interpreter.py}
     Quellcode zur Interpretation der Ergebnis-Fakten.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_validation_interpreter.py}
+
+%    \newpage
+    \section{<repo>/tests/test\_resources\_rulebooks.py}\label{sec:test-resources-rulebooks.py}
+    Testet alle Regelbücher auf Einhaltung der Anforderungen, nutzt dafür \uA den \Begriff{RulebookValidator} (\Anhang[KP]{sec:rulebook-validator.py}).
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_resources_rulebooks.py}
+
+%    \newpage
+    \section{<repo>/app/engine/rulebook\_validator.py}\label{sec:rulebook-validator.py}
+    Es prüft die Grundstruktur der Regelbücher und wird von \Begriff{TestResourcesRulebooks} (\Anhang[KP]{sec:test-resources-rulebooks.py}) aufgerufen.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/rulebook_validator.py}
 
     %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
     %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}

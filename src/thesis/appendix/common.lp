@@ -4,7 +4,7 @@
 #defined rulebook_depends/2.
 #defined rulebook_missing/2. #show rulebook_missing/2.
 %% world facts
-#defined known_experience_level/1.
+#defined known_experience_level/7.
 #defined known_race/1.
 #defined known_culture/1.
 #defined known_profession/1.
@@ -45,20 +45,6 @@ rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
 %% TODO add check that rulebook only uses known feature values, to be executed by testcases
 
 #program world_facts.
-% CC := MAX_CHARACTERISTIC_LVL (only on character creation)
-% S := MAX_SKILL_LVL
-% CT := MAX_COMBAT_TECHNIQUE_LVL
-% CCP := MAX_CHARACTERISTIC_POINTS
-% SL := MAX_SPELLS_AND_LITURGIES
-% FS := MAX_FOREIGN_SPELL
-%                                       CC  S   CT  CCP  SL  FS
-known_experience_level("Inexperienced", 12, 10,  8,  95,  8, 0 ).
-known_experience_level("Average",       13, 10, 10,  98, 10, 1 ).
-known_experience_level("Experienced",   14, 10, 12, 100, 12, 2 ).
-known_experience_level("Competent",     15, 13, 14, 102, 14, 3 ).
-known_experience_level("Masterful",     16, 16, 16, 105, 16, 4 ).
-known_experience_level("Brilliant",     17, 19, 18, 109, 18, 5 ).
-known_experience_level("Legendary",     18, 20, 20, 114, 20, 6 ).
 
 #program hero_facts.
 %% to be used with programs 'validate_hero_step<X>'
@@ -109,7 +95,7 @@ unusable_by(profession(P),culture(C)) :- profession(P), requires(profession(P),c
 #program validate_hero_step_350. %% check profession requirements
 missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), 1 = #count{ 1: not talent(T,_) ; 1: talent(T,LVL), LVL < MIN_LVL }.
 missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), requires(profession(P),combat_technique(CT,MIN_LVL)), 1 = #count{ 1: not combat_technique(CT,_) ; 1: combat_technique(CT,LVL), LVL < MIN_LVL }.
-missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
+missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), CHOICES > @count_by("combat_techniques",CTs,MIN_LVL).
 
 #program validate_hero_step_400. %% check (dis)advantage usable
 

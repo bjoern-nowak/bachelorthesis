@@ -8,8 +8,8 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
 
 \begin{description}
     \item[\Abk{Prolog}] hat zur Grundlage die formalisierte Darstellung von Wissen und die Verwendung von logischen Regeln, um dieses Wissen zu verarbeiten und Probleme zu lösen.
-    \Abk{Prolog} basiert auf der \Begriff{Horn-Klausel}-Semantik, bei der eine Aussage durch eine Menge von Horn-Klauseln dargestellt und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
-    Eine Horn-Klausel ist eine logische Formel, die aus einem \Begriff{Kopf} und einer Menge von \Begriff{Füßen} besteht, wobei der Kopf ein positives Literal ist und die Füße negative Literale sind.
+    \Abk{Prolog} basiert auf der \Tech{Horn-Klausel}-Semantik, bei der eine Aussage durch eine Menge von Horn-Klauseln dargestellt und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
+    Eine Horn-Klausel ist eine logische Formel, die aus einem \Tech{Kopf} und einer Menge von \Tech{Füßen} besteht, wobei der Kopf ein positives Literal ist und die Füße negative Literale sind.
     Eine Aussage ist dann wahr, wenn es eine Übereinstimmung (Unifikation) zwischen dem Kopf und einer der Füße gibt.
     Um die Horn-Klauseln zu verarbeiten, wird ein Übereinstimmung-Algorithmus genutzt.
     Dieser versucht die Variablen in den Horn-Klauseln so zu substituieren, dass der Kopf und einer der Füße übereinstimmen.
@@ -18,7 +18,7 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
     Durch das Navigieren durch verschiedene Möglichkeiten kann \Abk{Prolog} komplexe Probleme lösen.
     \Vgl{PROLOG-Apt1997,PROLOG-Bratko2012}
 
-    \item[\Abk{SAT}] ist ein Erfüllbarkeitsproblem der Aussagenlogik, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene \Begriff{Boolean-Formel} gibt, welche die Formel als wahr evaluiert.
+    \item[\Abk{SAT}] ist ein Erfüllbarkeitsproblem der Aussagenlogik, das darin besteht, festzustellen, ob es eine Boolean-Vereinbarung für eine gegebene \Tech{Boolean-Formel} gibt, welche die Formel als wahr evaluiert.
     Eine Boolean-Formel besteht nur aus den Operatoren \textquote{\Tech{und}}, \textquote{\Tech{oder}} und \textquote{\Tech{nicht}}.
     Sie kann als Konjunktion von Disjunktionen von Literalen dargestellt werden, wobei ein Literal entweder eine Variable oder deren Negation ist.
     \Abk{SAT} ist ein NP-vollständiges Problem, was bedeutet, dass es keine effiziente algorithmische Lösung gibt, die für alle Fälle eine korrekte Lösung findet.
@@ -31,15 +31,15 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
 
     \item[\Abk{ASP}] ist ein deklaratives Problemlösungsparadigma.
     Es basiert auf der Logikprogrammierung (\AbkK{Prolog}), dem Erfüllbarkeitsproblem der Aussagenlogik (\AbkK{SAT}) sowie der Wissensrepräsentation und Argumentation\Englisch{knowledge representation and reasoning}.
-    Ein \Abk{ASP}-System besteht aus einer Menge von \Begriff{Regeln} und \Begriff{Fakten}.
-    Die Regeln sind logische Implikationen in der Form \textquote{\textit{wenn A dann B}}, wobei \Begriff{A} und \Begriff{B} logische \Begriff{Aussagen} sind.
+    Ein \Abk{ASP}-System besteht aus einer Menge von \Tech{Regeln} und \Tech{Fakten}.
+    Die Regeln sind logische Implikationen in der Form \textquote{\textit{wenn A dann B}}, wobei \Tech{A} und \Tech{B} logische \Tech{Aussagen} sind.
     Ein Beispiel wäre: \textquote{\textit{Wenn es regnet, dann nehme ich einen Regenschirm mit.}}.
     Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
-    Fakten sind einfache logische Aussagen, die bereits als \Begriff{wahr} bekannt sind; sie haben keine Bedigung.
-    Unbekannte Aussagen werden, gemäß der \AbkS{CWA}{Complete World Assumption}, als \Begriff{falsch} gewertet.
-    Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden, die, unter den gegeben Regeln und Fakten, \Begriff{wahr} sind.
-    Diese Menge von Aussagen wird als \Begriff{Answer Set} (auch \Begriff{stable models}) bezeichnet.
-    Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Begriff{Answer Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
+    Fakten sind einfache logische Aussagen, die bereits als \Tech{wahr} bekannt sind; sie haben keine Bedigung.
+    Unbekannte Aussagen werden, gemäß der \AbkS{CWA}{Complete World Assumption}, als \Tech{falsch} gewertet.
+    Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden, die, unter den gegeben Regeln und Fakten, \Tech{wahr} sind.
+    Diese Menge von Aussagen wird als \Tech{Answer Set} (auch \Tech{stable models}) bezeichnet.
+    Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Tech{Answer Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
     Es beginnt mit der Menge der Fakten und wendet die Regeln an, um zu sehen, welche anderen Aussagen logisch aus ihnen abgeleitet werden können.
     Wenn ein Widerspruch gefunden wird, geht das System zurück und versucht einen anderen Weg.
     Wenn es keine weiteren Schlussfolgerungen mehr findet, gibt es die Menge der abgeleiteten Aussagen als Answer Set zurück.
@@ -118,7 +118,7 @@ In der \Tabelle{tab:verfahrensgegenüberstellung} werden die vorgestellten Verfa
 
 Die Verbreitung wird rudimentär über die Anzahl der gefundenen Ergebnisse über Google Scholar bestimmt.
 Es wird nach der expliziten (in Hochkommata gestellten) englischen Langform der Abkürzungen \Abk{Prolog}, \Abk{SAT} und \Abk{ASP} gesucht, wobei diese die Kurzform als Präfix hat.
-Das Suchformat entspricht damit: \Tech{<Kurzform> ''<englische Langform>''}.
+Das Suchformat entspricht damit: \Begriff{<Kurzform> ''<englische Langform>''}.
 Besonderes hohe Bedeutung werden den Kriterien Verbreitung, Stärken und Schwächen zugesprochen.
 Die Verbreitung stellt einen sehr einfachen Indikator für die Verbreitung des Verfahrens und somit für das Finden möglicher hilfreicher Ressourcen dar.
 Dies ist auch in Hinblick der Langlebigkeit der Software relevant.

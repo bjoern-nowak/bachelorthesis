@@ -27,11 +27,11 @@ Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie 
 
 Auch die Merkmale \Code{talents} und \Code{combat\_techniques} geben die Merkmalsausprägung (Name) als Freitext an;
 dies ist jedoch schwerer abzulesen.
-Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Begriff{Wörterbuch}\Englisch{Dictionary} von Python;
+Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Tech{Wörterbuch}\Englisch{Dictionary} von Python;
 dies kann man als Map von Schlüssel-Wert-Paaren begreifen.
 Wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
 Der Wert ist bei diesen Merkmalen die Stufe.
-Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Tech{object}) existieren.
+Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Begriff{object}) existieren.
 Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
 
 Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
@@ -41,7 +41,7 @@ Das letzte Element ist die Stufe.
 Das Mittlere ist ein Text, welches \insb auch leer sein darf.
 Dies wird benötigt, da einige Vor- und Nachteile dahingehend mehrfach vorkommen können, dass sie auf andere Merkmalsausprägungen oder gar nicht modellierbare, frei wählbare Definitionen referenzieren können und daher nur in der Kombination spezifisch sind \Vgl{RWiki-HassAuf,RWiki-ImmunitaetKrankheit,RWiki-Unfaehig,RWiki-SchlechteEigenschaft}.
 Auf eine tiefere Unterscheidung wird zunächst verzichtet.
-Dies führt zwar dazu, dass, wenn ein Name einer Merkmalsausprägung auch in anderen Merkmalen vorkommt, nicht differenziert werden kann welches Merkmal referenziert wird.
+Dies führt dazu, dass, wenn ein Name einer Merkmalsausprägung auch in anderen Merkmalen vorkommt, nicht differenziert werden kann welches Merkmal referenziert wird.
 Diese Ausnahmefälle können jedoch leicht umgangen werden, indem das vermeintliche Duplikat bei der Modellierung im Regelbuch \zB als Präfix den Namen des Merkmals bekommt.
 
 \begin{listing}[!ht]

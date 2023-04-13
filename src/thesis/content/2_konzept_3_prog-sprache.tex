@@ -9,7 +9,7 @@ Wrapper- und High-Level-\Abk{API}s (Dritter), welche diese Frameworks für weite
 Diese würden eine weitere Komplexitäts- und Abhängigkeitsschicht bringen, welche im Kontext von langlebiger und wartungsarmer quelloffener Software ein größerer Nachteil ist als die erlangten Vorteile.
 Wenn es \zB relevante Updates des eigentlichen Frameworks gibt, aber diese \textquote{Zwischen-\Abk{API}s} dieses Update nicht unterstützten, kann die Entwicklung blockiert sein.
 Noch kritischer ist dieser Fall, wenn diese \textquote{Zwischen-\Abk{API}s}, welche zumeist ebenfalls quelloffen sind, nicht mehr gewartet werden und man somit gezwungen ist, diese selbst zu warten oder sie auszubauen, was in beiden Fällen zu (erheblichen) Mehraufwand führen würde.
-Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für \Tech{clingo}s Python \Abk{API}: \url{https://github.com/Aluriak/clyngor}}, Asp4J\Note{\Tech{clingo} High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{\Tech{clingo} Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{\Tech{clingo} \Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
+Beispiele sind clingo-haskell\Note{\Begriff{Clingo}-\Abk{API} für Haskell: \url{https://github.com/tsahyt/clingo-haskell}}, Clyngor\Note{Wrapper-\Abk{API} für \Begriff{Clingo}s Python-\Abk{API}: \url{https://github.com/Aluriak/clyngor}}, Asp4J\Note{\Begriff{Clingo}-High-Level-\Abk{API} für Java: \url{https://github.com/hbeck/asp4j}}, jclingo\Note{\Begriff{Clingo} Java Bindings: \url{https://github.com/kherud/jclingo}}, clingo-wasm\Note{\Begriff{Clingo}-\Abk{API} für JavaScript: \url{https://github.com/domoritz/clingo-wasm}} und DLVHEX\Note{Python Interface für HEX-Programme (Erweiterung von \Abk{ASP}): \url{https://github.com/hexhex/core}; \url{http://www.kr.tuwien.ac.at/research/systems/dlvhex/}}.
 % Clyngor ist Nachfolger von PyASP: \url{https://github.com/sthiele/pyasp}
 
 
@@ -21,8 +21,8 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     \Vgl[Kapitel 1]{DLV-Leone2006}
 
     Ein Vorteil von \Abk{DLV}, im Vergleich, ist die Breite der Anwendbarkeit.
-    Neben seiner Kernstärke in \Abk{DB}-orientierten Anwendungen mit großen Datenmengen, kann es mit ausreichender Effizienz \Begriff{NP} Such- und Optimierungsprobleme bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
-    Andere Systeme hingegen sind eher auf eine Problemklasse spezialisiert, wie \zB \Begriff{NP}-vollständige Probleme.
+    Neben seiner Kernstärke in \Abk{DB}-orientierten Anwendungen mit großen Datenmengen, kann es mit ausreichender Effizienz \Tech{NP} Such- und Optimierungsprobleme bis hin zu komplexen Problemen in der zweiten Ebene der Polynomialzeithierarchie lösen.
+    Andere Systeme hingegen sind eher auf eine Problemklasse spezialisiert, wie \zB \Tech{NP}-vollständige Probleme.
     \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
 
     DLVSYSTEM S.R.L. bewirbt und vertreibt \Abk{DLV} mit dem Fokus auf industrielle Bereiche.
@@ -39,14 +39,14 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     % TODO add JASP link
 
     \Abk{DLV} wird auch weiterhin direkt von der Universtität von Calabria veröffentlicht.
-    Sie bieten zusätzlich eine Variante an, die den Aufruf von Python-Funktionen als \Begriff{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
+    Sie bieten zusätzlich eine Variante an, die den Aufruf von Python-Funktionen als \Tech{external atoms}, aus einem \Abk{DLV}-Programm, unterstützt.
     \Vgl{DLV-unical-home}
 
-    \item[Clingo] ist ein \Abk{ASP}-System von \Abk{Potassco}, ein Projekt der Universtität Potsdam, das sowohl den \sog \Begriff{grounder} (gringo) als auch den \Begriff{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
-    \Tech{Clingo} selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen;
+    \item[Clingo] ist ein \Abk{ASP}-System von \Abk{Potassco}, ein Projekt der Universtität Potsdam, das sowohl den \sog \Tech{grounder} (gringo) als auch den \Tech{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
+    \Begriff{Clingo} selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen;
     und seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
     Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
-    Aus einem \Tech{Clingo}-\Abk{LP} kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
+    Aus einem \Begriff{Clingo}-\Abk{LP} kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
 
     Zwei wichtige Features, für die Modellierung von komplexen Problemen, sind:
     erstens die Möglichkeit Teile des \AbkP{LP} in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
@@ -54,8 +54,8 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
     Ebenfalls nennenswert ist die Unterstützung von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
     Auch zu nennen ist das \sog[multi-shot solving], bei dem ein \Abk{LP} nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
 
-    Mit der \Tech{Clingo}-Erweiterung clingcon können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
-    Hingegen die Erweiterung \AbkS{clorm}{\Tech{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
+    Mit der \Begriff{Clingo}-Erweiterung clingcon können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
+    Hingegen die Erweiterung \AbkS{clorm}{\Begriff{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
 \end{description}
 
 
@@ -128,17 +128,17 @@ Beispiele sind clingo-haskell\Note{\Tech{clingo} \Abk{API} für Haskell: \url{ht
 Entscheidend ist zunächst die Wahl des Frameworks.
 Erst dann kann eine Programmiersprache ausgewählt werden.
 Beide der genannten Frameworks sind für den nicht-kommerziellen Gebrauch, bezogen auf die Lizenz, frei verfügbar.
-\Tech{Clingo} bietet im Vergleich zu \Abk{DLV} eine größere Auswahl relevanter Features (\inkl der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des \AbkP{LP}.
-Auch die breitere Unterstützung von Programmiersprachen und deutlich bessere Integration in diesen spricht für \Tech{Clingo}.
-Die genannten Erweiterungen und ungenannten Projekte, welche auf \Tech{Clingo}s Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft relevante Erweiterungen und weitere solide Integrationen versprechen.
+\Begriff{Clingo} bietet im Vergleich zu \Abk{DLV} eine größere Auswahl relevanter Features (\inkl der Erweiterungen) an, wie die Unterteilung und Wiederverwendung von Teilen des \AbkP{LP}.
+Auch die breitere Unterstützung von Programmiersprachen und deutlich bessere Integration in diesen spricht für \Begriff{Clingo}.
+Die genannten Erweiterungen und ungenannten Projekte, welche auf \Begriff{Clingo}s Komponenten aufbauen, sind ein Indiz für eine Plattform, die in der Zukunft relevante Erweiterungen und weitere solide Integrationen versprechen.
 Ebenfalls entscheidend ist die Verfügbarkeit und Qualität von Dokumentationen.
-Hier bietet \Tech{Clingo}, aufgrund der veröffentlichten Materialien, welche teils in einem universitären Kontext zur Bildung genutzt werden, eine bessere Grundlage.
-\textbf{\Tech{Clingo} ist} daher \textbf{das geeignetere Framework}.
+Hier bietet \Begriff{Clingo}, aufgrund der veröffentlichten Materialien, welche teils in einem universitären Kontext zur Bildung genutzt werden, eine bessere Grundlage.
+\textbf{\Begriff{Clingo} ist} daher \textbf{das geeignetere Framework}.
 
-Die von \Tech{Clingo} nativ, also offiziell (out-of-the-box), unterstützten und relevanten (aufgrund der Popularität) Programmiersprachen sind C(++) und Python.
+Die von \Begriff{Clingo} nativ, also offiziell (out-of-the-box), unterstützten und relevanten (aufgrund der Popularität) Programmiersprachen sind C(++) und Python.
 Die freundlichste für ungeübte und angehende Programmierende ist Python.
 Dies, also der Einstieg in die Programmierung abhängig der Sprache, wurde in Ansätzen in \Vgl{C++-Ateeq2014} für Python und C++ aufgezeigt.
 Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwicklenden bestimmte Aufgabenbereiche abnimmt.
-Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von \Tech{Clingo}-\AbkP{LP} passt.
-Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem \Tech{Clingo}-\Abk{LP} heraus externe und Kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
+Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von \Begriff{Clingo}-\AbkP{LP} passt.
+Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem \Begriff{Clingo}-\Abk{LP} heraus externe und Kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
 Somit stellt \textbf{Python} die \textbf{sinnvollste} Wahl der \textbf{Programmiersprache} dar.

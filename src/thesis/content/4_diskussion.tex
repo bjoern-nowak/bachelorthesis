@@ -8,10 +8,11 @@
 %    \item Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession\_requires\_culture("<profession>","<culture>").' ) anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde.
 %    Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
-    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung zwischen der \Begriff{Engine} und \Begriff{Clingo}.
-    Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), doch kann es für die zukünftige Erstellung von Tests hinderlich sein.
+    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung zwischen der \Code{Engine} und \Begriff{Clingo}.
+    Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), doch kann es auch für die zukünftige Erstellung von Tests oder einem, aktuell noch unwahrscheinlichem, Wechsel des \Abk{ASP}-Framework hinderlich sein.
     Die Packages/Module sind sauber definiert, jedoch wurde an den meisten Stellen das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
     Dadurch, dass vermehrt und etwas \textquote{un-pythonic} (also für Python-Verhältnisse unüblich) vorwiegend \bzw grundsätzlich Klassen erstellt wurden, kann auch dies mit überschaubarem Aufwand bei Bedarf nachgepflegt werden.
+    Des Weiteren fehlt es an einem Domänenmodell der Ergebnis-Fakten, welches der \Code{ClingoExecutor}, \bzw eine andere Infrastruktur-Klasse, an die \Code{Engine} zurückgeben müsste, sodass die Applikationskern-Schicht gänzlich vom genutzten \Abk{ASP}-Framework unabhängig sein kann.
 
     \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre.
     Die Parameter der Rückmeldungen sollten daher um solche helfenden Hinweise ergänzt werden.
@@ -25,11 +26,11 @@
     Dazu kann die \Abk{API} angepasst werden, sodass der Validierungsendpunkt zusätzlich eine Liste der konkret zu ignorierenden Warnungen (so wie sie zuvor zurückgegeben wurden) annimmt.
 
     \item Viele Regeln werden im \Abk{LP} für ähnliche Merkmale wiederholt.
-    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Tech{Clingo}-\Begriff{Funktion} (\Begriff{Gruppe}) abbilden.
+    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Begriff{Clingo}-\Tech{Funktion} (\Tech{Gruppe}) abbilden.
     Wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
     Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen; Letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
     Das \Listing[K]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
-    Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Tech{Clingo}-\Begriff{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
+    Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Begriff{Clingo}-\Tech{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (vgl. \Anhang[KP]{sec:hero-validation-interpreter.py}).
 
     \begin{listing}[htbp]
         \caption{Modellierung von strukturell ähnlichen Merkmalen in einer Gruppe}\label{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe}
@@ -48,8 +49,8 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
         \end{minted}
     \end{listing}
 
-%    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Begriff{Clingo}).
-%    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Begriff{Clingo}.
+%    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Tech{Clingo}).
+%    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Tech{Clingo}.
 %    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
 
     \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
