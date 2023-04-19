@@ -60,12 +60,22 @@
     }{}
 
 % ----- preface ---------------------------------
+    \ifthenelse{\boolean{isBookPrint}}{
+        \ifthenelse{\boolean{includeCover}}{
+            \cleardoublepage
+        }{
+            \ifthenelse{\boolean{includeAbstract}}{
+                \cleardoublepage
+            }{}
+        }
+    }{\clearpage}
     \pagenumbering{Roman}
     \input{preface.tex}
 
 % ----- content ---------------------------------
-    \clearpage
-%    \newpage\null\thispagestyle{empty}\newpage % empty page
+    \ifthenelse{\boolean{isBookPrint}}{
+        \cleardoublepage
+    }{\clearpage}
     \pagenumbering{arabic}
     \input{content.tex}
 
@@ -75,13 +85,17 @@
     \input{appendix.tex}
 
 % ----- postface --------------------------------
-    \clearpage
+    \ifthenelse{\boolean{isBookPrint}}{
+        \cleardoublepage
+    }{\clearpage}
     \pagenumbering{roman}
     \input{postface.tex}
 
 % ----- statement -------------------------------
     \ifthenelse{\boolean{includeStatement}}{
-        \clearpage
+        \ifthenelse{\boolean{isBookPrint}}{
+            \cleardoublepage
+        }{\clearpage}
         \input{statement.tex}
     }{}
 

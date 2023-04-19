@@ -13,6 +13,10 @@
 - siehe Thesis Vorlage für Wichtige Hinweise  (!)
 - Nutze https://www.zotero.org/ als Citavi Alternative für Linux
 - Abgabeformalien prüfen (was muss abgegeben werden, in welcher Form)
+  - A4, 3-4cm Rand links-rechts, 2-3cm Rand oben/unten
+  - Arial 11, Times New Roman 12 oder vergleichbar
+  - inhalts- und abbildungsverzeichnis vorne
+  - zwei Ausdrucke binden (Leimbindung oder Hardcover) UND ein PDF per Mail
 - COde in English kommentieren
 - Referenzierte Webseiten exportieren um langfristig Inhalt nachzuweißen 
 
