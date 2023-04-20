@@ -49,9 +49,9 @@ missing_usual(race(R),culture(C)). %% Spezies <R> fehlt die übliche Kultur <C>
 
 \Begriff{Clingo} bietet verschiedene Möglichkeiten an, wie man einem \Abk{LP} Informationen/Werte bereitstellen kann.
 Zum einen kann ein \Abk{LP} um weitere \AbkP{LP} erweitert werden;
-aus einem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{clingo.Control.load(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.load}}.
+direkt aus dem \Abk{LP} mit der Direktive \textquote{\Code{\#include}} oder dynamisch über die Python-\Abk{API} mit \textquote{\Code{Control.load(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.load}}.
 Dieses \Abk{LP} könnte zur Laufzeit mit den Werten des Charakters generiert werden.
-Zum anderen besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{clingo.Control.add(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.add}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge hinzuzufügen, welche entsprechend die Charakter-Fakten enthält.
+Zum anderen besteht die Möglichkeit zur Laufzeit mit \textquote{\Code{Control.add(\ldots)}}\Note{\scriptsize\url{https://potassco.org/clingo/python-api/5.6/clingo/control.html\#clingo.control.Control.add}} ein \sog \Tech{Programmteil}\Englisch{program part} (Direktive \textquote{\Code{\#program}}) als Zeichenfolge hinzuzufügen, welche entsprechend die Charakter-Fakten enthält.
 
 Die beste Variante, da diese die loseste Kopplung, bezogen auf das sonst in Python notwendige Wissen über die Syntax von \Begriff{Clingo}, bietet, ist das Nutzen der \textquote{externen Funktionen}\Englisch{external functions}.
 Damit können aus einem \Abk{LP} Python-Funktionen, welche im Rahmen eines Kontext-Objektes bereitgestellt wurden, aufgerufen werden.

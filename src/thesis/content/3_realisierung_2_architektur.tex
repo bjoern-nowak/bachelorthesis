@@ -69,7 +69,7 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
     Künftig könnte ebenfalls der Benutzende eine Domäne sein, über dessen Endpunkte ein Benutzender, wie beim Charakter, erstellt, bearbeitet und gelöscht werden könnte.
     Die Funktionalität des An- und Abmeldens hingegen gehört der Applikationsdomäne \textquote{\Code{root}} selbst an.
 
-    \item Aufrufen von Endpunkten resultieren immer in einem Aufruf eines Applikationsservices.
+    \item Anfragen eines Endpunktes resultieren immer in einem Aufruf eines Applikationsservices.
     Die \Abk{API}-Schicht übernimmt dabei die Übersetzung des Schemas zu und vom Domänenmodell.
     Die Applikationsservices enthalten entsprechend des
     \AbkS{IOSP}{\textquote{Integration Operation Segregation Principle}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Integration_Operation_Segregation_Principle_IOSP}}} keine eigene Logik, sondern steuern, mit dem Aufruf anderer Klassen und Methoden, den Ablauf wie die gewünschte Funktionalität erreicht wird.
