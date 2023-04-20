@@ -4,6 +4,13 @@
 \usepackage{lipsum} %% generate dummy text with \lipsum{1-2}
 \usepackage{xstring} %% string comparision commands like \IfStrEqCase
 
+%% makes \layout prints mm instead of pt
+\makeatletter
+\renewcommand*{\lay@value}[2]{%
+    \strip@pt\dimexpr0.351459\dimexpr\csname#2\endcsname\relax\relax mm%
+}
+\makeatother
+
 %% ----- Umlaute / Symbols ----------------------------------------------------
 \usepackage[utf8]{inputenc} %$ erlaubt Sonderzeichen/Umlaute im Quelltext %% ALWAYS ON TOP
 \usepackage[T1]{fontenc} %% automatische Trennung von Worten mit Umlauten
