@@ -3,7 +3,7 @@
 \paragraph{Diskussion}\label{par:diskussion}
 In diesem Teil der Arbeit wird die entstandene Software begutachtet, bei dem \insb Entscheidungen des Konzeptes und der Realisierung bewertet werden.
 
-\begin{enumerateWithCode}{D}
+\begin{enumerateWithCode}{DK}
 
     \item Ein Export-Endpunkt, welches einen Charakter in einem Format zurückgibt, das kompatibel zu anderen Softwares ist, ist zwar im Allgemeinen Benutzenden-freundlich.
     Besser \bzw wichtiger ist jedoch ein Import-Endpunkt, welches es ermöglicht fremde Formate in das Eigene zu konvertieren.
@@ -36,9 +36,9 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
         \end{minted}
     \end{listing}
 
-    \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
+    {\renewcommand\theEnumerateWithCodeLabelSep{\labelsep .5em}\item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
-    Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
+    Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.}
 
     \item Eine einfach nutzbare und gut verständliche Formalisierung der \textquote{count\_by} Methode aus \Regel{itm:HR.AnyOf} konnte nicht gefunden werden.
     Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt werden muss.
@@ -92,8 +92,7 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
     Dadurch muss die bereits existierende Modellierung der Merkmale nicht nachträglich von den Regelbüchern angepasst werden, was einer guten Modularität entspricht und damit einem geringeren Wartungsaufwand.
     Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
     \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf Bezug genommen und entsprechend in Gänze validiert werden kann.
-    In \Listing[K]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
-
+    In \Listing[KP]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
     Dafür kann \ggf das \sog \textquote{multi-shot solving} relevant/hilfreich sein, bei dem könnte erst der Charakter ohne Änderungen validiert werden und anschließend sukzessiv jede Änderung einzeln \Vgl{DISKUSSION-Gebser2018}.
 
     Der zweite Aspekt ist im Prinzip ähnlich zum Ersten.

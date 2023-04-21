@@ -3,6 +3,15 @@
 Wie auch die, nach diesem Kapitel folgende, Architektur ist die Projektstruktur maßgeblich für die Wartbarkeit und Orientierung.
 Die Projektstruktur definiert, ähnlich zur Architektur der Software selbst, den Aufbau des Projekts und damit \zB die Ablageorte für bestimmte Dateien und wie, mit welchen Abhängigkeiten, das Projekt zu bauen ist.
 Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellte Projektstruktur genommen.
+\begin{minipage}[t]{.26\textwidth}
+    \vspace{.5em}
+    \centering
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \captionof{figure}{Projektstruktur\\(erster Ebene)}\label{fig:projektstruktur}
+    \vspace{.25em}
+    \Image{projektstruktur.pdf}
+\end{minipage}
+\hfill
 \begin{minipage}[t]{.7\textwidth}
     \vspace{-.75em}
     \begin{enumerateWithCode}{PS}
@@ -22,15 +31,6 @@ Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellt
 
     \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog \textquote{virtuelle Umgebung} geschaffen, diese liegt unter \textquote{\Code{.venv}}.
     \end{enumerateWithCode}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.26\textwidth}
-    \vspace{.5em}
-    \centering
-    \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \captionof{figure}{Projektstruktur\\(erster Ebene)}\label{fig:projektstruktur}
-    \vspace{.25em}
-    \Image{projektstruktur.pdf}
 \end{minipage}
 
 Darin werden, anstatt global, Projekt-spezifisch die Abhängigkeiten installiert.
