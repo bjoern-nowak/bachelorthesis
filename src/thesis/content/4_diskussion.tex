@@ -36,9 +36,9 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
         \end{minted}
     \end{listing}
 
-    {\renewcommand\theEnumerateWithCodeLabelSep{\labelsep .5em}\item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
+    \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
-    Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.}
+    Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
 
     \item Eine einfach nutzbare und gut verständliche Formalisierung der \textquote{count\_by} Methode aus \Regel{itm:HR.AnyOf} konnte nicht gefunden werden.
     Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt werden muss.

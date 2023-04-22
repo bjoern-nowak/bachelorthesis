@@ -3,7 +3,6 @@
 \usepackage{layout} %% print debug figure of page borders; \layout
 \usepackage{lipsum} %% generate dummy text with \lipsum{1-2}
 \usepackage{xstring} %% string comparision commands like \IfStrEqCase
-\usepackage{ifoddpage}
 
 %% makes \layout prints mm instead of pt
 \makeatletter
@@ -124,6 +123,8 @@
 \usepackage[useregional]{datetime2} %% darstellung eines datum
 \usepackage{appendix} %% enable appendix environment
 \usepackage{bookmark}
+\usepackage{ifoddpage} %% not koma doc with \Ifthispageodd: \checkoddpage \ifoddpage or \@ifoddpage{}{}
+\usepackage{needspace}
 
 
 %% ----- Abkürzungsverzeichnis ------------------------------------------------

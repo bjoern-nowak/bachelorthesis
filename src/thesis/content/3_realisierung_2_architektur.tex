@@ -4,7 +4,22 @@ Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wich
 Zwei sehr bekannte und von den Prinzipen ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
 Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.
 
-\todo{Vergleiche richtig positioniert?}
+\begin{minipage}[t]{.4\textwidth}
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \flushright
+
+    \vspace{-.75em}
+    \captionof{figure}{\textquote{Onion Architecture}\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
+    \vspace{-.5em}
+    \ImageInRatio{1}{onion-architecture.pdf}
+
+    \vspace{2em}
+
+    \captionof{figure}{Projekt Architektur\\(Python Packages)}\label{fig:projekt-architektur}
+    \vspace{.25em}
+    \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
+\end{minipage}
+\hfill\todo{Vergleiche richtig positioniert?}
 \begin{minipage}[t]{.575\textwidth}
     Es fokussiert sich auf eine möglichst loose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}).
     Dabei ist es fundamental, das jede Schicht nur von Tieferen abhängig sein darf.
@@ -30,22 +45,6 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
         Eine Ausnahme stellt das Package \Code{resources\_rulebook} (nicht abgebildet) dar.
         Darin enthalten sind Tests, welche die Regelbücher-\AbkP{LP} auf Korrektheit überprüfen.
     \end{enumerateWithCode}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.4\textwidth}
-    \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \flushright
-
-    \vspace{-.75em}
-    \captionof{figure}{\textquote{Onion Architecture}\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
-    \vspace{-.5em}
-    \ImageInRatio{1}{onion-architecture.pdf}
-
-    \vspace{2em}
-
-    \captionof{figure}{Projekt Architektur\\(Python Packages)}\label{fig:projekt-architektur}
-    \vspace{.25em}
-    \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
 \end{minipage}
 
 \begin{enumerateWithCode}{AT}

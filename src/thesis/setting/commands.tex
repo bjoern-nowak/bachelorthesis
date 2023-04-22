@@ -93,41 +93,26 @@
 
 
 %% ----- items ----------------------------------------------------------------
-\newcommand{\theEnumerateWithCodeLabel}[1]{%
-    \Ifthispageodd{\small\textbf{(#1.\arabic*}}%
-                  {\small\textbf{#1.\arabic*)}}%
-}
 \newcommand{\theEnumerateWithCodeLabelSep}{%
-    \Ifthispageodd{\labelsep\dimexpr -1.1em -\labelwidth -\textwidth\relax}%
-                  {\labelsep .5em}%
+    \Ifthispageodd{\labelsep\dimexpr -2.1em -\labelwidth -\textwidth\relax}%
+                  {\labelsep -.25em}%
 }
-\newcommand{\theEnumerateWithCodeAlign}{%
-    \checkoddpage%
-    \ifoddpage%
-        \expandafter{}left%
-    \else%
-        \expandafter{}right%
-    \fi%
-}
-\SetLabelAlign{enumerateWithCodeAlign}{%
-    \checkoddpage%
-    \ifoddpage%
-    \expandafter{}#1\hfil%
-    \else%
-    \expandafter{}\hss\llap{#1}%
-    \fi%
-%        \Ifthispageodd{#1\hfil}%
-%                      {\hss\llap{#1}}%
-}
-
+\SetLabelAlign{enumerateWithCodeAlign}{\hss\llap{#1}\hfil}
 \newenvironment{enumerateWithCode}[2][]
-{%
+{% see https://tex.stackexchange.com/questions/683448/enumerate-item-label-position-by-even-odd-page
     \let\originalitem\item%
-    \def\item{\theEnumerateWithCodeLabelSep\originalitem}%
+    \def\item{%\par
+        % make sure this item has room, if not clear page while
+        % keeping flushbottom in effect, so that the reference
+        % inserted by \Ifthispageodd will be at top of next page
+        % and the test of page parity on second LaTeX pass will be ok
+        \Needspace*{\baselineskip}%
+        \theEnumerateWithCodeLabelSep%
+        \originalitem%
+    }%
     \begin{enumerate}[
         leftmargin=0em,
-%        align=enumerateWithCodeAlign,
-%        label=\theEnumerateWithCodeLabel{#2},
+        align=enumerateWithCodeAlign,
         label={\small\textbf{#2.\arabic*}},
         ref=#2.\arabic*] %% or \alph*
         \ifthenelse{\isempty{#1}}{%

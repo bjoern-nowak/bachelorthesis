@@ -44,20 +44,25 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     Da zumeist die wichtigen ausmachenden Informationen am Anfang stehen und zumal die Anwendung von Fakten und Regeln sich wiederholen.
     Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
 
-    \item Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur etwas eingeschränkt.
-    Diese trennt Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}).
+    \item Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur gering eingeschränkt.
+    Diese schlägt eine Trennung der Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}) vor.
     (vgl. \Kapitel[KP]{subsec:anforderungen-an-regelbucher})
 
-    \item Weiter wird die Freiheit durch die, der \Code{Engine}, vorgegebene Mindestaufteilung in Unterprogramme verringert.
+    \item Weiter wird die Freiheit durch die, der \Code{Engine} (siehe nachfolgendes Kapitel), vorgegebene Mindestaufteilung in Unterprogramme verringert.
     Dadurch wird eine feinere Steuerung und Trennung von unrelevanten Programmteilen, für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
+
     Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierende Spielwelt-Regel-Verletzungen, zu beschränken.
     Diese Unterprogramme werden Charakter-Va\-li\-die\-rungs\-schritt genannt.
-    Pro Charakter-Merkmal gibt es \idR zwei solcher Schritte/Un\-ter\-pro\-gram\-me.
+    Pro Charakter-Merkmal gibt es \idR zwei solcher Va\-li\-die\-rungs\-schritte.
     Zuerst zur Prüfung, ob die Ausprägung/en genutzt werden kann/können, also ob durch die bereits gewählten anderen Merkmale oder einer Spielwelt-Regel, wie die Überschreitung einer maximalen Stufe, ein Regelverstoß vorliegt.
     Und anschließen, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
 
-    \item\label{itm:DE.ExtraStep} Regelbücher-\AbkP{LP} können weitere (Zwischen-)Schritte definieren.
-    Dazu müssen Sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) ein Fakt mit der Schrittnummer/-position (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
+    Jedem Validierungsschritt wird eine Nummer zugeteilt, welche im Namen des Unterprogramms enthalten ist.
+    Die Ausführungsreihenfolge der Schritte wird durch die zugeordnete Nummer ermittelt, beginned mit der Kleinsten.
+    Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert (vgl. \Anhang[KP]{sec:common.lp}.
+
+    \item\label{itm:DE.ExtraStep} Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.
+    Dazu müssen Sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) ein Fakt mit der Schrittnummer (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
 
 \end{enumerateWithCode}
 
