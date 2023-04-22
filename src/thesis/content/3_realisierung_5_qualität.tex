@@ -1,8 +1,25 @@
 \section{Qualitätssicherung}\label{sec:qualitaetssicherung}
 
-{\color{red}
-Keine \textbf{Ende-zu-Ende Tests} (API)
-}
+Die \underline{automatisierte} Qualitätssicherung ist ein unerlässliches Werkzeug bei der Entwicklung \underline{nachhaltig} korrekter und wartbarer Software.
+Im Allgemeinen wird unterschieden zwischen der Prüfung der Quellcode-Qualität und der Anforderungseinhaltung.
+Die Analyse der Quellcode-Qualität kann statisch und dynamisch durchgeführt werden, wobei beim Letzteren der Quellcode ausgeführt wird, um \zB die Testabdeckung zu ermitteln.
+Die Testabdeckung drückt aus wie viele Zeilen Quellcode durch die vorhanden Tests abgedeckt sind und gegeben somit einen sehr einfachen Grad-Indikator für blinde Flecken.
+Eine hohe Testabdeckung ist nicht gleichzusetzen mit einer hohen Testqualität.
+Das Messen der Testqualität ist ein schwieriges Feld, erwähnt sei als bekanntes Mittel das \sog \textquote{Mutation Testing}\Note{die Populärsten Python-Frameworks dazu sind mutmut (\url{https://github.com/boxed/mutmut}) und mutpy (\url{https://github.com/mutpy/mutpy})}.
+Bei der Statischen wird \zB die Einhaltung von Programmierkonventionen und vorgegebener Quellcode-Formatierung, die Existenz von ungenutzten Variablen und Imports sowie Programmierfehler (falsche Reihenfolge beim Fangen von Exceptions) und schlechter Praktiken (\sog \textquote{code smells}) überprüft.
+Bei der Anforderungseinhaltung geht es um die Erstellung von Tests, welche Funktionalitäten auf bekannte Anforderungen überprüft.
+Die Relevanz dessen lässt sich \uA durch die Verbreitung des \AbkS{TDD}{\textquote{test-driven development}} beispielhaft zeigen.
+Es ist eine Entwicklungsmethode, bei der die Erstellung des Testes vor der Implementierung der Funktionalität gestellt wird.
+Die Tests können dabei in verschiedenen Tiefen stattfinden.
+Die tiefste und bekannteste sind \sog Komponententests\Englisch{unit tests}, welche \zB konkrete Methoden auf das gewünschte Verhalten prüfen.
+Anforderungen können technisch, \zB eine Methode soll \Tech{wahr} zurückgegeben wenn \Tech{X}, oder fachlich, \zB ein Regelbuch ist verwendbar, wenn all seine Abhängigkeiten gegeben sind, sein.
+\parencites(vgl.)()[][Kapitel 8]{REALISIERUNG-Anaya2018}[][Kapitel 10]{PYTHON-Jaworski2021}
+
+Konträr dazu gibt es \zB Ende-zu-Ende Tests, bei der die Applikation, in der Gesamtheit, über die \Abk{API} mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
+
+Zur Wahrung der Quellcode-Qualität werden die Werkzeuge pylint\Note{\url{https://github.com/pylint-dev/pylint}} (strike Prüfung von Programmierkonventionen]), bandit\Note{\url{https://github.com/PyCQA/bandit}} (Finden von bekannten Sicherheitslücken]) und mypy\Note{\url{https://github.com/python/mypy}} (statische Prüfung der Typisierung) in der Standardkonfiguration eingesetzt.
+
+Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleistet wird.
 
 \subsection{Prüfung der Regelbücher Struktur}\label{subsec:anforderungen-an-regelbucher}
 
@@ -11,8 +28,8 @@ Vor Start der Applikation die Regelbücher auf korrektheit zu überprüfen.
 Z.B. das die Regelbücher nur bekannte Werte in den Spielwelt-Regeln nutzen
 
 Testet alle Regelbücher auf Einhaltung der Anforderungen, wie \zB die Existenz von Pflicht-Unterprogrammen und dass das Regelbuch nur als sich selbst identifiziert.
-\Anhang{sec:test-resources-rulebooks.py}
-\Anhang{sec:rulebook-validator.py}
+\Anhang[KP]{sec:test-resources-rulebooks.py}
+\Anhang[KP]{sec:rulebook-validator.py}
 }
 
 
