@@ -33,6 +33,16 @@ class HeroWrapper:
 % [ ... ]
     \end{mintedNameless}
 
+    \item Zur Überprüfung der Existenz von Pflicht-\Abk{LP}-Unterprogrammen (gemäß \Kapitel[KP]{subsec:anforderungen-an-regelbucher}) musste eine implizite Anforderung an die Deklarierung von \Abk{LP}-Unterprogrammen aufgenommen werden.
+    Diese besagt, dass jede Deklaration von einem Fakt mit dessen Namen folgen muss.
+    Um dies zu gewährleisten, müsste die Anforderung im \Code{RulebookValidator} aufgenommen werden.
+    \begin{mintedNameless}[linenos=false]{clingo}
+#program rulebook_usable.
+program("rulebook_usable").
+    \end{mintedNameless}
+    Notwendig ist dies, da die \Begriff{Clingo}-Python-\Abk{API} keine Möglichkeit bietet auf die Existenz eines Unterprogramms zu prüfen.
+    Selbst beim programmatischen Hinzufügen eines Unterprogramms (über diese \Abk{API}) zu einem \Abk{LP}, dass bereits ein gleichnamiges Unterprogramm definiert hat, wird keine Fehlermeldung geworfen, sondern lediglich die Definition erweitert.
+
     {\color{red}\item Das Definieren von sinnvollen und ausreichenden Testfällen war und ist schwierig bei den Komponententests.
     Bei den Funktionstets können einfach valide Charaktere (Testdaten) ermittelt werden und \ggf gezielt fehlerhafte Abweichungen platziert werden.
     Für die Komponententests geht dies nur bedingt, so ist es, für die Wartbarkeit, zu vermeiden die Testdaten mit unnötigen Informationen zu füllen, also Charakter-Merkmale anzugeben die für den Testfall nicht relevant sind.

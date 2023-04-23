@@ -64,13 +64,9 @@
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/hero_validation_interpreter.py}
 
 %    \newpage
-    \section{<repo>/tests/test\_resources\_rulebooks.py}\label{sec:test-resources-rulebooks.py}
-    Testet alle Regelbücher auf Einhaltung der Anforderungen, nutzt dafür \uA den \Begriff{RulebookValidator} (\Anhang[KP]{sec:rulebook-validator.py}).
-    \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_resources_rulebooks.py}
-
-%    \newpage
-    \section{<repo>/app/engine/rulebook\_validator.py}\label{sec:rulebook-validator.py}
-    Es prüft die Grundstruktur der Regelbücher und wird von \Begriff{TestResourcesRulebooks} (\Anhang[KP]{sec:test-resources-rulebooks.py}) aufgerufen.
+    \section{<repo>/app/services/rulebook\_validator.py}\label{sec:rulebook-validator.py}
+    Prüft die Regelbücher-\AbkP{LP} gegen bestimmte Anforderungen ab.
+    Die \Code{check} Methode wird von einem entsprechenden Test für alle Regelbücher ausgeführt.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/rulebook_validator.py}
 
     %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}

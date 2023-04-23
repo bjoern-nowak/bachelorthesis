@@ -44,11 +44,11 @@ Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
     Da zumeist die wichtigen ausmachenden Informationen am Anfang stehen und zumal die Anwendung von Fakten und Regeln sich wiederholen.
     Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
 
-    \item Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur gering eingeschränkt.
+    \item\label{itm:DE.LpDateistruktur} Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur gering eingeschränkt.
     Diese schlägt eine Trennung der Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}) vor.
     (vgl. \Kapitel[KP]{subsec:anforderungen-an-regelbucher})
 
-    \item Weiter wird die Freiheit durch die, der \Code{Engine} (siehe nachfolgendes Kapitel), vorgegebene Mindestaufteilung in Unterprogramme verringert.
+    \item\label{itm:DE.EngineUnterprogramme} Weiter wird die Freiheit durch die, der \Code{Engine} (siehe nachfolgendes Kapitel), vorgegebene Mindestaufteilung in Unterprogramme verringert.
     Dadurch wird eine feinere Steuerung und Trennung von unrelevanten Programmteilen, für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
 
     Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierende Spielwelt-Regel-Verletzungen, zu beschränken.

@@ -5,9 +5,9 @@ from clingo import String
 from clingo import Symbol
 from clingo import Tuple_
 
-from app.models.dis_advantage import DisAdvantage
-from app.models.hero import Hero
-from app.models.skill import Skill
+from dsaheldenbogen.app.models.dis_advantage import DisAdvantage
+from dsaheldenbogen.app.models.hero import Hero
+from dsaheldenbogen.app.models.skill import Skill
 
 
 def _map_skills(skills: List[Skill]) -> List[Symbol]:

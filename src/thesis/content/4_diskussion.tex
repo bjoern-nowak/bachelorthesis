@@ -73,6 +73,10 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
 
 \begin{enumerateWithCode}{AB}
 
+    \item Zur Minimierung von Implementierungsfehlern in den Regelbücher-\AbkP{LP} sollte ein allgemeines Unterprogramm hinzugefügt werden, welches überprüft, dass alle Spielwelt-Fakten und -Regel nur bekannte Merkmalsausprägungen nutzen.
+    Dabei müssen entsprechenden Regelbuchabhängigkeiten mit beachtet werden.
+    Dieses Unterprogramm kann dann dem \Code{RulebookValidator} als weiteres Kriterium hinzugefügt werden.
+
     \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre, \zB bei einer Meldung das die gewählte Kultur nicht von der gewählte Spezies nutzbar ist.
     Es sollte ein Endpunkt bereitgestellt werden, welcher mögliche Merkmalsausprägungen des, anzugebenen, gesuchten Merkmals, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
     Das nächst zu wählende, also gesuchte, Merkmal könnte auch hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, automatisch ermittelt werden.
