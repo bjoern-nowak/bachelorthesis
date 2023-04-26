@@ -2,59 +2,60 @@
 
 Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wichtigsten technischen Merkmale dar, um eine qualitative und wartbare Software zu erstellen \Vgl[Kapitel 15]{REALISIERUNG-Martin2017}.
 Zwei sehr bekannte und von den Prinzipen ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
-Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.\todo{([x]) ?}
+Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.
 
-\begin{minipage}[t]{.4\textwidth}
-    \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \flushright
-
-    \vspace{-.75em}
-    \captionof{figure}{\textquote{Onion Architecture}\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
-    \vspace{-.5em}
-    \ImageInRatio{1}{onion-architecture.pdf}
-
-    \vspace{2em}
-
-    \captionof{figure}{Projekt Architektur\\(Python Packages)}\label{fig:projekt-architektur}
+\begin{wrapfigure}{l}{.45\textwidth}%
+    \centering
+    \caption{Onion Architecture\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
     \vspace{.25em}
-    \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.575\textwidth}
-    Es fokussiert sich auf eine möglichst loose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}).
-    Dabei ist es fundamental, das jede Schicht nur von Tieferen abhängig sein darf.
-    Die Idee ist, umso tiefer die Schicht ist, desto seltenerer kommen Änderungen vor, wodurch weniger Wartungsaufwand bei den äußeren Schichten entstehen soll.
-    Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.
-    Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}} wird es inneren Schichten ermöglicht indirekt äußeren Schichten zu verwenden.
-    Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können. \Vgl{REALISIERUNG-Palermo2008}
+    \ImageInRatio{.45}{onion-architecture.pdf}
+\end{wrapfigure}%
+%\begin{minipage}[t]{.4\textwidth}
+%    \captionsetup{labelsep=newline,format=plain,justification=centering}
+%    \flushright
+%
+%    \vspace{-.85em}
+%    \captionof{figure}{Onion Architecture\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
+%    \vspace{.25em}
+%    \ImageInRatio{.95}{onion-architecture.pdf}
 
-    Wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[][Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
+%    \vspace{1em}
+%    \captionof{figure}{Projekt Architektur\\(Python Packages)}\label{fig:projekt-architektur}
+%    \vspace{.25em}
+%    \ImageInRatio{.8}{architektur.pdf}\hspace{1em}
+%\end{minipage}
+%\hfill
+%\begin{minipage}[t]{.575\textwidth}
 
-    \vspace{.5em}
-    Nachfolgendes bezieht sich auf die \Abbildung[K]{fig:projekt-architektur}:
-    \vspace{-.5em}
+Es fokussiert sich auf eine möglichst loose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}). \todo{([x]) ?}
+Dabei ist es fundamental, das jede Schicht nur von Tieferen abhängig sein darf.
+Die Idee ist, umso tiefer die Schicht ist, desto seltenerer kommen Änderungen vor, wodurch weniger Wartungsaufwand bei den äußeren Schichten entstehen soll.
+Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.
+Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}} wird es inneren Schichten ermöglicht indirekt äußeren Schichten zu verwenden.
+Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können. \Vgl{REALISIERUNG-Palermo2008}
 
-    \begin{enumerateWithCode}{AT}
-        \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
-        Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
-        Außerdem dokumentieren die Packages, mit \textquote{docstring}, ihre Schicht-Zugehörigkeit.
+Wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[][Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
 
-        \item\label{itm:K.Tests} Eine Ausnahme sind die Tests.
-        Diese werden nicht zur Laufzeit benötigt und werden daher, von der eigentlichen Applikation, getrennt.
-        Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wieder und wird daher nicht zusätzlich abgebildet.
-        Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Test stattfindet.
-        Eine Ausnahme stellt das Package \Code{resources\_rulebook} (nicht abgebildet) dar.
-        Darin enthalten sind Tests, welche die Regelbücher-\AbkP{LP} auf Korrektheit überprüfen.
-    \end{enumerateWithCode}
-\end{minipage}
+Nachfolgendes bezieht sich \insb dem eingefärbten Teil der \Abbildung[K]{fig:projekt-struktur-architektur}:
 
 \begin{enumerateWithCode}{AT}
-    \setcounter{enumi}{2}
+    \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
+    Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
+    Außerdem dokumentieren die Packages, mit \textquote{docstring}, ihre Schicht-Zugehörigkeit.
+
+    \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.
+    Die \textquote{Application Services} Schicht und \textquote{Domain} Schichten wurden unter \textquote{\Code{app}} gebündelt, um eine bessere Übersicht und flachere Struktur zu erhalten.
+    Außerdem dokumentieren die Packages, mit \textquote{docstring}, ihre Schicht-Zugehörigkeit.
+
+    \item\label{itm:K.Tests} Eine Ausnahme sind die Tests.
+    Diese werden nicht zur Laufzeit benötigt und werden daher, von der eigentlichen Applikation, getrennt.
+    Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wieder und wird daher nicht zusätzlich abgebildet.
+    Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Test stattfindet.
+    Das Package \Code{tests\_resources} verhält sich ähnlich, es spiegelt die Struktur der \Code{resources} ab und enthält Test-exclusive Regelbücher-\AbkP{LP}.
 
     \item\label{itm:A.LpEntrypoint} Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordner.
     Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt, welche direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen muss.
     Es erlaubt jedem Regelbuch den Aufbau einer eigenen internen Struktur.
-
     In der Architektur lassen sich die \AbkP{LP} schwer einordnen.
     Einerseits gehören sie zur Domänen-Modellierung, \insb die allgemeingültigen Regeln.
     Andererseits ist es kein Python-Code und wird oft unter Veränderungen stehen.

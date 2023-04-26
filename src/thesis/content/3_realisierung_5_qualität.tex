@@ -23,19 +23,25 @@ Zur Wahrung der Quellcode-Qualität werden die Werkzeuge pylint\Note{\url{https:
 Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleistet wird.
 
 
-\subsection{Prüfung der Regelbücher Struktur}\label{subsec:anforderungen-an-regelbucher}
+\subsection{Prüfung der Regelbücher Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}
 
-Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar ist, werden diese auf entsprechenden Anforderungen vom \Code{RulebookValidator} überprüft (vgl. \Anhang[KP]{sec:rulebook-validator.py}).
+Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (vgl. \Anhang[KP]{sec:rulebook-validator.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
 Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt).
 
 
 \subsection{Prüfung einzelner Regeln/Funktionalitäten}\label{subsec:prufung-einzelner-regeln/funktionalitaten}
 
-{\color{red}
-Komponententests\Englisch{unit tets}    (VERGLEICH)\todo{VERGLEICH}
-}
+Zur Prüfung einzelner Funktionalitäten der Applikation wurde nicht eine vielzahl an kleinen und separaten Komponententests geschrieben, sondern Systemtests.
+Diese prüfen die technische Korrektheit der Funktionalität auf Ebene der Applikationsserviceschicht und durchlaufen dabei alle tieferen Schichten.
+Damit wird der Wartungsaufwand reduziert, ohne dabei an qualitativer Testabdeckung zu verlieren.
 
+Ein Beispiel zeigt der Test des \Code{MetaService} (\Anhang[KP]{sec:test-meta-service.py}), dieser Service stellt \zB die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, zu nennen.
+Dazu wird Um keine Abhängigkeit zu echten fachlichen Regelbücher zu haben, wurde dazu
+Ist eine einfacherer Variante der echten Engine, welches es ermöglicht einfache Test-Regelbücher-\AbkP{LP} aus zu führen. welche auf dasinterne Validierungen, wie die Prüfung ob die angegeben Regelbücher nutzbare sind, verzichtet
+
+
+\Anhang[KP]{sec:testing-engine.py}
 
 \subsection{Prüfung gesamtheitliches Zusammenspiel}\label{subsec:prufung-gesamntheitliches-zusammenspiel}
 

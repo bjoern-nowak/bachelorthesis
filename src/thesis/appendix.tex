@@ -69,6 +69,17 @@
     Die \Code{check} Methode wird von einem entsprechenden Test für alle Regelbücher ausgeführt.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/rulebook_validator.py}
 
+%    \newpage
+    \section{<repo>/tests/app/services/test\_meta\_service.py}\label{sec:test-meta-service.py}
+    Komponententests das die Funktionalitäten des \Code{MetaService} prüft.
+    Es nutzt dazu die \Code{TestingEngine} (siehe \Anhang[KP]{sec:testing-engine.py}).
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_meta_service.py}
+
+%    \newpage
+    \section{<repo>/tests/app/engine/testing\_engine.py}\label{sec:testing-engine.py}
+    Ist eine einfachere Variante der echten Engine, welches es ermöglicht einfache Test-Regelbücher-\AbkP{LP} aus zu führen.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/testing_engine.py}
+
     %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
     %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}
 \end{landscape}

@@ -33,6 +33,14 @@
 
 
 %% ----- Styling --------------------------------------------------------------
+\newenvironment{minipageContinuingFootnotes}[2][]
+{%
+    \begin{minipage}[#1]{#2}
+        \setcounter{mpfootnote}{\arabic{footnote}}
+}{%
+        \setcounter{footnote}{\arabic{mpfootnote}}
+    \end{minipage}
+}
 \newcommand{\emptypage}{\newpage\null\thispagestyle{empty}\newpage}
 \newcommand{\changefont}[3] %% einfaches Wechseln der Schrift, z.B.: \changefont{cmss}{sbc}{n}
 {\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}

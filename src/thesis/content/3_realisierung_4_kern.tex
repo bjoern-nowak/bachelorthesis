@@ -25,7 +25,6 @@ Dadurch wäre es möglich andere Basisregelbücher zu implementieren, ohne Gemei
 
 Jeder Charakter-Valididierungsschritt ist ein eigener Durchlauf und bekommt als Kontext die Klasse \Code{HeroWrapper} (\Anhang[KP]{sec:hero-wrapper.py}).
 Dieses stellt die Felder des Charakter-Domänenmodell als \Begriff{Clingo}-\Tech{Symbole}, wie in \Kapitel[KP]{subsec:eingabemodell-(kontext):-der-charakter} dargestellt, bereit.
-
 Das aus dem jeweiligen Durchlauf resultierende \Tech{answer set} wird dann von der \Code{Engine} an den \Code{Collector} (\Anhang[KP]{sec:collector.py}) übergeben, um die entsprechend gesuchten Ergebnis-Fakten herausfiltert.
 Anschließend werden diese vom \Code{HeroValidationInterpreter} (\Anhang[KP]{sec:hero-validation-interpreter.py}) in entsprechende Domänenmodelle (Validierungswarnungen oder -fehler) konvertiert.
 \textbf{Anmerkung:} diese Klasse ist von kritischer Bedeutung, da es die genaue Interpretation des \Abk{ASP}-Ergebnisses beherbergt.

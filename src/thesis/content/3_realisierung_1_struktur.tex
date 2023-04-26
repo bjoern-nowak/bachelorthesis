@@ -1,23 +1,14 @@
 \section{Projektstruktur}\label{sec:projektstruktur}
 
-Wie auch die, nach diesem Kapitel folgende, Architektur ist die Projektstruktur maßgeblich für die Wartbarkeit und Orientierung.
-Die Projektstruktur definiert, ähnlich zur Architektur der Software selbst, den Aufbau des Projekts und damit \zB die Ablageorte für bestimmte Dateien und wie, mit welchen Abhängigkeiten, das Projekt zu bauen ist.
-Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellte Projektstruktur genommen.
-\begin{minipage}[t]{.26\textwidth}
-    \vspace{.5em}
-    \centering
-    \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \captionof{figure}{Projektstruktur\\(erster Ebene)}\label{fig:projektstruktur}
-    \vspace{.25em}
-    \Image{projektstruktur.pdf}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.7\textwidth}
-    \vspace{-.75em}
-    \begin{enumerateWithCode}{PS}
-    \item Eine der wichtigsten Bestandteile ist die \sog \textquote{lies mich Datei} (siehe \Anhang[KP]{sec:readme.md}).
+Die Projektstruktur definiert den Aufbau des Projekts und damit \zB die Ablageorte für bestimmte Dateien und wie, mit welchen Abhängigkeiten, das Projekt zu bauen ist.
+Es ist also maßgeblich für die Orientierung im quelloffenen Projekt.
+Nachfolgend wird Bezug, auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktur-architektur} genommen.
+
+\begin{enumerateWithCode}{PS}
+    \item Eine der wichtigsten Bestandteile ist die \sog \textquote{lies mich Datei} (\Anhang[KP]{sec:readme.md}).
     Diese wird oft, von Betreibern quelloffener Aufbewahrungsorte, automatisch als Einsteigsseite angezeigt und damit das \textquote{Aushängeschild} des Projekts.
-    Inhalte sind \uA eine Kurzbeschreibung des Projektes, wie man mitwirken und Probleme melden kann sowie \ggf Lizenz- und Kontakt-Hinweise. \Vgl{GitHub-Doc-Readme}
+    Inhalte sind \uA eine Kurzbeschreibung des Projektes, wie man mitwirken und Probleme melden kann sowie \ggf Lizenz- und Kontakt-Hinweise.
+    \Vgl{GitHub-Doc-Readme}
 
     \item Von dort werden auf weitere Dokumentationen verwiesen.
     Diese befinden sich unter \textquote{\Code{docs}}.
@@ -25,37 +16,59 @@ Nachfolgend wird Bezug auf die in \Abbildung[K]{fig:projektstruktur} dargestellt
 
     \item Diese Regelbücher, genauer die entsprechenden \Begriff{Clingo}-\AbkP{LP}, und \ggf künftig weitere, zur Laufzeit relevante, Ressourcen (nicht Python-Dateien) befinden sich unter \textquote{\Code{resources}}.
 
-    \item Die zweitwichtigste Datei ist, das \sog \textquote{\Code{Makefile}} (siehe \Anhang[KP]{sec:makefile}).
+    \item Die zweitwichtigste Datei ist das \sog \textquote{\Code{Makefile}} (\Anhang[KP]{sec:makefile}).
     Es dient zur Automatisierung häufiger Aufgaben \bzw Schritten von Mitwirkenden.
-    Wie \zB das Installieren von Abhängigkeiten, Durchführen aller Tests und Starten des Backends.  \Vgl[Kapitel 1]{REALISIERUNG-Anaya2018}
-
-    \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog \textquote{virtuelle Umgebung} geschaffen, diese liegt unter \textquote{\Code{.venv}}.
-    \end{enumerateWithCode}
-\end{minipage}
-
-Darin werden, anstatt global, Projekt-spezifisch die Abhängigkeiten installiert.
-Genutzt wird dazu das sehr verbreitete, funktionsreiche und leicht zu bedienende poetry\Note{\url{https://github.com/python-poetry/poetry}}.
-Es kann \uA auch die zu verwendende Python Version steuern, falls weitere installiert sind, und die Software für eine mögliche Verteilung, \zB als ausführbare Datei oder Container\Note{\zB als Docker: \url{https://www.docker.com/}}, verpacken.
-Projekt-Meta-Informationen und Abhängigkeiten werden in \textquote{\Code{pyproject.toml}} dokumentiert (siehe \Anhang[KP]{sec:pyproject.toml}).
-Poetry wertet dies aus und erzeugt eine \textquote{\Code{poetry.lock}} Datei, welche die exakt geladene Versionen der Abhängigkeiten festhält.
-
-\begin{enumerateWithCode}{PS}
-    \setcounter{enumi}{5}
-
-    \item Für die Entwicklung hilfreiche Werkzeuge und Skripte werden unter \textquote{\Code{tools}} abgelegt.
-    Während der Entwicklung hat es sich \zB bewährt Ideen zur Formalisierung und Modellierung zunächst auf eine \sog \textquote{grüne Wiese}, also ohne eventuell hinderlichen Einflüssen der bisherigen Implementierung, auszuprobieren.
-    Dazu liegt entsprechend ein ausführbares Python-Programm bereit, welches ein leeres \Abk{LP} ausführt.
-    Quellcode der eigentlichen Implementierung kann dabei nach Bedarf genutzt werden, so kann \zB das Model des Charakters weiterhin genutzt werden.
-
-    \item Der Quellcode der eigentlichen Implementierung, also das Python-Backend \inkl Schnittstelle, befinden sich unter \textquote{\Code{dsaheldenbogen}}.
-    Dies ist das oberste Python-Package der Software und trägt, entsprechend dem gängigen Standard, den Namen des Projekts.
-    %% osurce: https://stackoverflow.com/questions/193161/what-is-the-best-project-structure-for-a-python-application
-    %% quelle a: https://github.com/pypa/sampleproject
-    %% quelle b: https://kennethreitz.org/essays/2013/01/27/repository-structure-and-python
-    %% sekundaer b: https://docs.python-guide.org/writing/structure/
-    Jegliche Art von Tests sind in \textquote{\Code{tests}} abgelegt, mehr dazu in \Item{itm:K.Tests}.
-
-    \item Zur Versionsverwaltung des Quellcodes wird, das verbreitete und quelloffene GiT\Note{\url{https://git-scm.com/}} eingesetzt und die Software letztlich auf GitHub\Note{\url{https://github.com/bjoern-nowak/dsa-heldenbogen}} veröffentlicht.
-    Mit der Datei \textquote{\Code{.gitignore}}, werden Pfade und Dateien, welche \zB durch Frameworks oder der eingesetzten Entwicklungsumgebung erstellt werden und keine Relevanz für die Software selbst haben, als zu ignorieren markiert.
-    Dazu gehören \textquote{\Code{.venv}} und \textquote{\Code{poetry.lock}}.
+    Wie \zB das Installieren von Abhängigkeiten, Durchführen aller Tests und Starten des Backends.
+    \Vgl[Kapitel 1]{REALISIERUNG-Anaya2018}
 \end{enumerateWithCode}
+
+\begin{minipageContinuingFootnotes}[t]{.65\textwidth}
+    \begin{enumerateWithCode}{PS}
+        \setcounter{enumi}{4}
+
+        \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog \textquote{virtuelle Umgebung} geschaffen, diese liegt unter \textquote{\Code{.venv}}.
+        Darin werden, anstatt global, Projekt-spezifisch die Abhängigkeiten installiert.
+        Genutzt wird dazu das sehr verbreitete, funktionsreiche und leicht zu bedienende poetry\Note{\url{https://github.com/python-poetry/poetry}}.
+        Es kann \uA auch die zu verwendende Python Version steuern, falls weitere installiert sind, und die Software für eine mögliche Verteilung, \zB als ausführbare Datei oder Container\Note{\zB als Docker: \url{https://www.docker.com/}}, verpacken.
+        Projekt-Meta-Informationen und Abhängigkeiten werden in \textquote{\Code{pyproject.toml}} dokumentiert (siehe \Anhang[KP]{sec:pyproject.toml}).
+        Poetry wertet dies aus und erzeugt eine \textquote{\Code{poetry.lock}} Datei, welche die exakt geladene Versionen der Abhängigkeiten festhält.
+
+        \item Für die Entwicklung hilfreiche Werkzeuge und Skripte werden unter \textquote{\Code{tools}} abgelegt.
+        Während der Entwicklung hat es sich \zB bewährt Ideen zur Formalisierung und Modellierung zunächst auf eine \sog \textquote{grüne Wiese}, also ohne eventuell hinderlichen Einflüssen der bisherigen Implementierung, auszuprobieren.
+        Dazu liegt entsprechend ein ausführbares Python-Programm bereit, welches ein leeres \Abk{LP} ausführt.
+        Quellcode der eigentlichen Implementierung kann dabei nach Bedarf genutzt werden, so kann \zB das Model des Charakters weiterhin genutzt werden.
+
+        \item Der Quellcode der eigentlichen Implementierung, also das Python-Backend \inkl Schnittstelle, befinden sich unter \textquote{\Code{dsaheldenbogen}}.
+        Dies ist das oberste Python-Package der Software und trägt, entsprechend dem gängigen Standard, den Namen des Projekts.
+        %% osurce: https://stackoverflow.com/questions/193161/what-is-the-best-project-structure-for-a-python-application
+        %% quelle a: https://github.com/pypa/sampleproject
+        %% quelle b: https://kennethreitz.org/essays/2013/01/27/repository-structure-and-python
+        %% sekundaer b: https://docs.python-guide.org/writing/structure/
+        Jegliche Art von Tests sind in \textquote{\Code{tests}} abgelegt, mehr dazu in \Item{itm:K.Tests}.
+
+        \item Zur Versionsverwaltung des Quellcodes wird, das verbreitete und quelloffene GiT\Note{\url{https://git-scm.com/}} eingesetzt.
+        Mit der Datei \textquote{\Code{.gitignore}}, werden Pfade und Dateien, welche \zB \parfillskip 0pt
+    \end{enumerateWithCode}
+\end{minipageContinuingFootnotes}
+\hfill
+\begin{minipage}[t]{.32\textwidth}
+    \vspace{.5em}
+%    \flushright
+%    \centering
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \captionof{figure}{Projektstruktur und -architektur}\label{fig:projekt-struktur-architektur}
+    \vspace{.25em}
+    \Image{projekt-struktur-architektur.pdf}
+\end{minipage}
+%\begin{minipage}[t]{.26\textwidth}
+%%    \vspace{.5em}
+%    \centering
+%    \captionsetup{labelsep=newline,format=plain,justification=centering}
+%    \captionof{figure}{Projektstruktur\\(erster Ebene)}\label{fig:projektstruktur}
+%    \vspace{.25em}
+%    \Image{projektstruktur.pdf}
+%\end{minipage}
+
+durch Frameworks oder der eingesetzten Entwicklungsumgebung erstellt werden und keine Relevanz für die Software selbst haben, als zu ignorieren markiert.
+Dazu gehören \textquote{\Code{.venv}} und \textquote{\Code{poetry.lock}}.
+Zur Veröffentlichung der Software wird die größte und bekannteste GiT-Plattform GitHub\Note{\url{https://github.com/bjoern-nowak/dsa-heldenbogen}} genutzt.
