@@ -2,29 +2,29 @@
 
 Nach der Formalisierung eines Regelwerks muss, entsprechend der \Abbildung{fig:deklarative-problemloesung}, das \Abk{LP} ausgeführt und interpretiert werden.
 Die Orchestrierung dessen ist die Aufgabe der \Code{Engine} und wird nachfolgend, anhand der Charakter-Validierung, aufgezeigt.
-Dabei wird Bezug auf konkrete Klassen genommen und bei erst Nennung dieser der entsprechende Anhang genannt.
+Dabei wird Bezug auf konkrete Klassen genommen und bei Erstnennung dieser der entsprechende Anhang genannt.
 
-Die \Code{Engine} (\Anhang[KP]{sec:engine.py}) ist die, den formalisierten Regelbüchern, übergeordnete Steuerungseinheit.
-Sie definiert \zB ein geordnetes Standard-Set an Charakter-Validierungsschritten, welches gemäß \Item[K]{itm:DE.ExtraStep} erweitert werden kann.
+Die \Code{Engine} (\Anhang[KP]{sec:engine.py}) ist die, den formalisierten Regelbüchern übergeordnete, Steuerungseinheit.
+Sie definiert \zB ein geordnetes Standard-Set an Charakter-Validierungsschritten, welches, gemäß \Item[K]{itm:DE.ExtraStep}, erweitert werden kann.
 Eine Charakter-Validierung läuft wie folgt ab:
 Jeder Schritt wird einzeln ausgeführt.
-Dabei werden Validierungswarnung Schritt-übergreifend gesammelt.
-Bei einem Validerungsfehler beendet die \Code{Engine} mit der Exception \Code{HeroInvalidError}, welche neben dem Fehler auch die bisher gesammelten Warnungen beinhaltet.
-Ansonsten werden die potenziellen Validierungswarnung zurückgegeben.
+Dabei werden Validierungswarnungen Schritt-übergreifend gesammelt.
+Bei einem Validerungsfehler beendet die \Code{Engine} die Charakter-Validierung mit der Exception \Code{HeroInvalidError}, welche neben dem Fehler auch die bisher gesammelten Warnungen beinhaltet.
+Ansonsten werden die potenziellen Validierungswarnungen zurückgegeben.
 
 Dazu greift die \Code{Engine} auf den \Code{ClingoExecutor} (\Anhang[KP]{sec:clingo-executor.py}) zu.
 Dieser gehört der Infrastrukturschicht an und abstrahiert die Verwendung der \Begriff{Clingo}-\Abk{API}.
 Er erhält konkrete Anweisungen, welche \AbkP{LP} zu laden und welche Unterprogramme auszuführen sind.
-Für jeden Durchlauf werden, von \Begriff{Clingo}, die \Abk{LP}-Dateien neu geladen, sowie die gewünschten Unterprogramme geerdet\Englisch{grounded} und gelöst.
+Für jeden Durchlauf werden von \Begriff{Clingo} die \Abk{LP}-Dateien neu geladen, sowie die gewünschten Unterprogramme geerdet\Englisch{grounded} und gelöst.
 Das Erden ist ein normaler Prozess bei \Abk{ASP}, bei dem alle Variablen \textquote{weg} transformiert werden.
 Dabei ist anzumerken, dass, wie bereits in \Kapitel[KP]{subsec:interpretation-des-asp-ergebnisses} beschrieben, bisher alle \textquote{Probleme} (\AbkP{LP}) generell als lösbar modelliert sind.
 
-Neben den freiwählbaren Regelbücher-\AbkP{LP} wird zusätzlich immer das \Code{common.lp} (\Anhang[KP]{sec:common.lp}) mitgeladen.
-Dieses enthält Regelbuch-übergreifende, also allgemeine, Definitionen, wie Spielwelt-Regeln und Charakter-Fakten.
+Neben den frei-wählbaren Regelbücher-\AbkP{LP}, wird zusätzlich immer das \Code{common.lp} (\Anhang[KP]{sec:common.lp}) mitgeladen.
+Dieses enthält Regelbuch-übergreifende, also allgemeine, Definitionen wie Spielwelt-Regeln und Charakter-Fakten.
 Dadurch wäre es möglich andere Basisregelbücher zu implementieren, ohne Gemeinsamkeiten neu zu implementieren, wie \zB die \hyperref[par:AR]{allgemeingültigen Regeln auf S.\pageref{par:AR}}.
 
 Jeder Charakter-Valididierungsschritt ist ein eigener Durchlauf und bekommt als Kontext die Klasse \Code{HeroWrapper} (\Anhang[KP]{sec:hero-wrapper.py}).
-Dieses stellt die Felder des Charakter-Domänenmodell als \Begriff{Clingo}-\Tech{Symbole}, wie in \Kapitel[KP]{subsec:eingabemodell-(kontext):-der-charakter} dargestellt, bereit.
+Dieses stellt die Felder des Charakter-Domänenmodells als \Begriff{Clingo}-\Tech{Symbole}, wie in \Kapitel[KP]{subsec:eingabemodell-(kontext):-der-charakter} dargestellt, bereit.
 Das aus dem jeweiligen Durchlauf resultierende \Tech{answer set} wird dann von der \Code{Engine} an den \Code{Collector} (\Anhang[KP]{sec:collector.py}) übergeben, um die entsprechend gesuchten Ergebnis-Fakten herausfiltert.
 Anschließend werden diese vom \Code{HeroValidationInterpreter} (\Anhang[KP]{sec:hero-validation-interpreter.py}) in entsprechende Domänenmodelle (Validierungswarnungen oder -fehler) konvertiert.
 \textbf{Anmerkung:} diese Klasse ist von kritischer Bedeutung, da es die genaue Interpretation des \Abk{ASP}-Ergebnisses beherbergt.

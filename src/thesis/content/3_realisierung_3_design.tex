@@ -1,68 +1,66 @@
 \section{Design-Entscheidungen}\label{sec:design-entscheidungen}
 
 Wie auch bei der Architektur, nur in diesem Fall noch stärker, sind Design-Entscheidungen subjektive Maßnahmen;
-mit dem Ziel übersichtlichen, verständlichen und wartbaren Quellcodes zu entwickeln.
+mit dem Ziel einen übersichtlichen, verständlichen und wartbaren Quellcode zu entwickeln.
 Dies geht von Vorgaben zum Quellcode-Stil (\zB der Länge von Einrückungen und Position von Klammern) über Namenskonventionen bis hin zu Entwurfsmustern\Englisch{design patterns}.
-Nachfolgend werden jene vorgestellt, welche der Author verfolgt hat:
+Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
 
 \begin{enumerateWithCode}{DE}
 
-    \item In diesem Stadium der Software werden für bestimmte Aufgaben, von dieser Arbeit, keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog \textquote{Gang of Four (GoF) Design Patterns} aus \Zitat{REALISIERUNG-Gamma1994}, gemacht.
-    Dies soll entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude), auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
+    \item In diesem Stadium der Software werden für bestimmte Aufgaben keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog \textquote{Gang of Four (GoF) Design Patterns} aus \Zitat{REALISIERUNG-Gamma1994}, von dieser Arbeit gemacht.
+    Dies soll, entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude) auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
 
-    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen, auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Tech{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
+    \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Tech{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
 
     \item Entgegen diesem wird die maximale Zeilenlänge auf 130 angehoben.
     Die damalige Begründung sehr kurzer Zeilen lag darin, dass man mehrere Dateien nebeneinander öffnen und vollständig betrachten könne.
-    Die zum Zeitpunkt der Veröffentlichung existierenden technische Einschränkungen (Bildschrimgröße und -auflösung) sind jedoch heutzutage längst überholt.
-    Außerdem ist der Author davon überzeugt, dass bei zu vielen gleichzeitig betrachteten Dateien der Fokus verloren geht und dessen Notwendigkeit ein Zeichen schlechter \AbkS{SoC}{\textquote{Separation of Concerns}\Note{\url{https://clean-code-developer.de/die-grade/orangener-grad/\#Separation_of_Concerns_SoC}}} ist.
+    Die zum Zeitpunkt der Veröffentlichung existierenden technischen Einschränkungen (Bildschirmgröße und -auflösung) sind jedoch heutzutage längst überholt.
+    Außerdem ist der Autor davon überzeugt, dass bei zu vielen gleichzeitig betrachteten Dateien der Fokus verloren geht und dessen Notwendigkeit ein Zeichen schlechter \AbkS{SoC}{\textquote{Separation of Concerns}\Note{\url{https://clean-code-developer.de/die-grade/orangener-grad/\#Separation_of_Concerns_SoC}}} ist.
     Des Weiteren sei unter Verwendung der Namenskonvention und Vermeidung von Abkürzungen die sonst sehr beschränkte Zeile schnell aufgebraucht, welches zu unschönen (Lesefluss-störenden) Zeilenumbrüchen führe.
 
     \item Weiter unterscheidet \Tech{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die consistent Anwendung einer frei-wählbaren Regel.
-    In diesem Projekt werden einfache Anführungszeichen verwendet, wenn die Zeichenkette eine Identifikation (Schlüssel) darstellt, wie \zB der Name einer Merkmalsausprägung.
-    Doppelte bei freien Texten, wie Fehlermeldungen.
+    In diesem Projekt werden einfache Anführungszeichen verwendet, wenn die Zeichenkette eine Identifikation (Schlüssel) darstellt, wie \zB der Name einer Merkmalsausprägung, und Doppelte bei freien Texten, wie Fehlermeldungen.
 
-    \item Python Dateien sind \sog Module, können entsprechend alles enthalten (Variablen, Funktionen, Klassen und auszuführende Befehle) und gruppiert üblicherweiße Funktionalitäten eines Kontextes.
+    \item Python-Dateien sind \sog Module, können entsprechend alles enthalten (Variablen, Funktionen, Klassen und auszuführende Befehle) und gruppiert üblicherweiße Funktionalitäten eines Kontextes.
     Dabei können Module von anderen Modulen in Gänze oder in Teile importiert werden.
-    Zusätzlich des eigentlichen Zwecks werden Klassen stets in separate Module geschrieben (Klassen-Modul).
-    Dies soll die Übersichtlichkeit (vermeidung von sehr langen Dateien) und Auffindbarkeit von Klassen stärken.
+    Zusätzlich des eigentlichen Zwecks, werden Klassen stets in separate Module geschrieben (Klassen-Modul).
+    Dies soll die Übersichtlichkeit (Vermeidung von sehr langen Dateien) und Auffindbarkeit von Klassen stärken.
     \Vgl[Kapitel 6]{REALISIERUNG-PythonDoc-Modules}
 
     \item Das Importieren von Sub-Modulen in Packages, zur Verkürzung von Import-Befehlen und damit der Verschleierung der Implementierungsstruktur, wird vermieden \Vgl[Kapitel 5.4.2]{REALISIERUNG-PythonDoc-Modules}.
     Als Grund ist zu nennen, das diese Software keine \textquote{öffentliche Bibliothek/Framework} darstellt und die Verwendung daher (beim Importieren) nicht vereinfacht werden muss.
-    Bei reinen Klassen-Modulen wird dies jedoch akzeptiert, da dies Redundanz bei den Import-Befehlen reduziert, da der Klassenname \idR gleich dem Modulnamen ist.
+    Bei reinen Klassen-Modulen wird dies jedoch akzeptiert, da dies Redundanz bei den Import-Befehlen reduziert, da der Klassenname \idR dem Modulnamen gleicht.
 
     Eine Ausnahme sind Exceptions, aufgrund der oft kurzen Definition.
     Es ist erlaubt diese in einem Modul, eines \ggf übergeordneten Packages, namens \textquote{excpetions.py} oder \textquote{errors.py} zu sammeln.
     Dies ist in der Python-Gemeinschaft bei Bibliotheken und Frameworks üblich.
 
-    \item Neben den konzeptionellen Konventionen für \Abk{LP} aus \Kapitel[K]{subsec:konventionen} werden noch zwei Design-Entscheidungen vorgeschlagen.
-    Kommentare, welche nicht temporär-auskommentierten Quellcode darstellen, wie Dokumentationen, werden mit einem zusätzlichen (doppelten) Kommentar-Zeichen (\%\%) gekennzeichnet.
+    \item Neben den konzeptionellen Konventionen für \Abk{LP} aus \Kapitel[K]{subsec:konventionen}, werden noch zwei Design-Entscheidungen vorgeschlagen:
+    Kommentare, welche einen nicht temporär auskommentierten Quellcode darstellen, wie Dokumentationen, werden mit einem zusätzlichen (doppelten) Kommentar-Zeichen (\%\%) gekennzeichnet.
 
-    \item Außerdem gibt es keine Zeichenbegrenzung für Zeilen in \AbkP{LP}.
-    Damit (bei ausgeschaltetem \Abk{IDE} \textquote{auto-wrap}) eine schnelle und gute Übersicht des \Abk{LP} gegeben ist.
-    Da zumeist die wichtigen ausmachenden Informationen am Anfang stehen und zumal die Anwendung von Fakten und Regeln sich wiederholen.
+    \item Die zweite Design-Entscheidung zu \AbkP{LP} ist, dass es keine Zeichenbegrenzung für Zeilen in \AbkP{LP} gibt.
+    Damit ist eine schnelle und gute Übersicht des \Abk{LP} (bei ausgeschaltetem \Abk{IDE} \textquote{auto-wrap}) gegeben, da zumeist die wichtigen Informationen am Anfang stehen und zumal sich die Anwendung von Fakten und Regeln hintereinander wiederholt.
     Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
 
-    \item\label{itm:DE.LpDateistruktur} Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitige vorgegebene Grundstruktur gering eingeschränkt.
+    \item\label{itm:DE.LpDateistruktur} Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint} wird durch eine derzeitig vorgegebene Grundstruktur gering eingeschränkt.
     Diese schlägt eine Trennung der Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}) vor.
     (vgl. \Kapitel[KP]{subsec:pruefung-der-regelbuecher-struktur})
 
     \item\label{itm:DE.EngineUnterprogramme} Weiter wird die Freiheit durch die, der \Code{Engine} (siehe nachfolgendes Kapitel), vorgegebene Mindestaufteilung in Unterprogramme verringert.
-    Dadurch wird eine feinere Steuerung und Trennung von unrelevanten Programmteilen, für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
+    Dadurch wird eine feinere Steuerung und Trennung von irrelevanten Programmteilen für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
 
-    Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierende Spielwelt-Regel-Verletzungen, zu beschränken.
+    Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierenden Spielwelt-Regel-Verletzungen, zu beschränken.
     Diese Unterprogramme werden Charakter-Va\-li\-die\-rungs\-schritt genannt.
-    Pro Charakter-Merkmal gibt es \idR zwei solcher Va\-li\-die\-rungs\-schritte.
-    Zuerst zur Prüfung, ob die Ausprägung/en genutzt werden kann/können, also ob durch die bereits gewählten anderen Merkmale oder einer Spielwelt-Regel, wie die Überschreitung einer maximalen Stufe, ein Regelverstoß vorliegt.
-    Und anschließen, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
+    Pro Charakter-Merkmal gibt es \idR zwei solcher Va\-li\-die\-rungs\-schritte:
+    Zuerst die Prüfung, ob die Ausprägung/en genutzt werden kann/können, also ob durch die bereits gewählten anderen Merkmale oder einer Spielwelt-Regel, wie die Überschreitung einer maximalen Stufe, ein Regelverstoß vorliegt.
+    Und anschließend wird geprüft, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
 
     \item\label{itm:DE.ExtraStep} Jedem Validierungsschritt wird eine Nummer zugeteilt, welche im Namen des Unterprogramms enthalten ist.
     Die Ausführungsreihenfolge der Schritte wird durch die zugeordnete Nummer ermittelt, beginned mit der Kleinsten.
     Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert (vgl. \Anhang[KP]{sec:common.lp}).
 
      Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.
-    Dazu müssen Sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) ein Fakt mit der Schrittnummer (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
+    Dazu müssen sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) einen Fakt mit der Schrittnummer (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
 
 \end{enumerateWithCode}
 
