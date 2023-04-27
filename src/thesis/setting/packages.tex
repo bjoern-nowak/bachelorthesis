@@ -22,6 +22,18 @@
 %% csquotes loaded at very end of file (preamble): prevent warning
 
 
+%% ----- PDF #1 ---------------------------------------------------------------
+\usepackage[table]{xcolor} %% predefined color names and \rowcolor cmd
+%% pdfx shall be loaded early to set pdf version for the hole document to be used by other packages; but after babel so correct language is used on hyperref
+\usepackage{pdfx} %% generate PDFs that comply with "PDF/" standards
+%% see https://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/pdfx/pdfx.pdf
+\ifthenelse{\boolean{isBookPrint}}{
+    \PassOptionsToPackage{x-5g}{pdfx} %% print optimized, includes some default color profile
+}{
+    \PassOptionsToPackage{a-3a}{pdfx} %% archive optimized
+}
+
+
 %% ----- Font Family ----------------------------------------------------------
 %\usepackage{relsize} %% Schriftgröße relativ festlegen %% TODO REMOVE
 %\usepackage[
@@ -107,13 +119,13 @@
 
 
 %% ----- Styling --------------------------------------------------------------
-\usepackage{xcolor} %% predefined color names
+%% xcolor loaded at start of file
 \usepackage{lscape} %% rotates specific page in landscape
 \usepackage{caption} %% required for custom listing see '\captionsetup'
 
 
 %% ----- Sonstiges ------------------------------------------------------------
-\usepackage[hyphens]{url} %% URL verlinken, lange URLs umbrechen etc.
+%\usepackage[hyphens]{url} %% URL verlinken, lange URLs umbrechen etc. %% clashes with pdfx
 \usepackage{chngcntr} %% fortlaufendes Durchnummerieren der Fußnoten
 \usepackage{paralist} %% inline aufzählung mit \begin{inparaenum}[a)] (alternative zu enumitem)
 \usepackage[inline]{enumitem} %% anpassbare Enumerates/Itemizes
@@ -184,10 +196,11 @@
     %% none  := Do not sort at all. All entries are processed in citation order.
 ]{biblatex} %% http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf
 
-%% ----- PDF ------------------------------------------------------------------
+
+%% ----- PDF #2 ---------------------------------------------------------------
 \usepackage{pdflscape} % pdf-Grafiken quer auf eine Seite
 \usepackage{pdfpages} %% import of PDFs into a PDF
-\usepackage{hyperref} %% creates links within a document and outside
+\usepackage{hyperref} %% already loaded by pdfx // creates links within a document and outside
 \usepackage{hypcap} %% ensures hyperref's links to e.x. tables point to that and not the label below
 
 
