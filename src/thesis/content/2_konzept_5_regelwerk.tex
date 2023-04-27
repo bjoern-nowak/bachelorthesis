@@ -230,7 +230,7 @@ def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
 \pagebreak % due to \Needspace* in enumerateWithCode
 \paragraph{Regelbuch-spezifische weiche Regeln:}\label{par:WR}
 \begin{enumerateWithCode}[.5em plus .5em minus .5em]{WR}
-    \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(vgl.)()[][Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
+    \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(\vgl)()[][Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(race("Elfen"),culture("Auelfen")).
 missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C),           not has_usual(race(R),culture(C)).

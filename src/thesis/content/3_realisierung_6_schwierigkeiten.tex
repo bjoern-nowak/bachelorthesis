@@ -13,13 +13,13 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Begriff{Clingo}-\Tech{Tuple} zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
-    \todo{sollten das Listings sein?}Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (vgl. \Anhang[KP]{sec:common.lp}, Zeile 49-62):
+    \todo{sollten das Listings sein?}Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (\vgl \Anhang[KP]{sec:common.lp}, Zeile 49-62):
     \begin{mintedNameless}[linenos=false]{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{mintedNameless}
 
-    Die externe Funktion \Code{@talents} ist wie folgt umgesetzt (vgl. \Anhang[KP]{sec:hero-wrapper.py}):
+    Die externe Funktion \Code{@talents} ist wie folgt umgesetzt (\vgl \Anhang[KP]{sec:hero-wrapper.py}):
     \begin{mintedNameless}{python}
 % [ ... ]
 def _map_skills(skills: List[Skill]) -> List[Symbol]:
