@@ -56,8 +56,8 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Und anschließend wird geprüft, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
 
     \item\label{itm:DE.ExtraStep} Jedem Validierungsschritt wird eine Nummer zugeteilt, welche im Namen des Unterprogramms enthalten ist.
-    Die Ausführungsreihenfolge der Schritte wird durch die zugeordnete Nummer ermittelt, beginned mit der Kleinsten.
-    Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert (vgl. \Anhang[KP]{sec:common.lp}).
+    Die Ausführungsreihenfolge der Schritte wird durch die zugeordnete Nummer ermittelt, beginnend mit der Kleinsten.
+    Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert und der Erste fängt bei 50 an (vgl. \Anhang[KP]{sec:common.lp}).
 
      Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.
     Dazu müssen sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) einen Fakt mit der Schrittnummer (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.

@@ -4,11 +4,11 @@ Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wich
 Zwei sehr bekannte und von den Prinzipien ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
 Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.
 
-\begin{wrapfigure}{l}{.45\textwidth}%
+\begin{wrapfigure}{l}{.5\textwidth}%
     \centering
     \caption{Onion Architecture\\(Anlehnung an \Zitat{REALISIERUNG-Palermo2008})}\label{fig:onion-architecture}
-    \vspace{.25em}
-    \ImageInRatio{.45}{onion-architecture.pdf}
+    \vspace{1em}
+    \ImageInRatio{.475}{onion-architecture.pdf}
 \end{wrapfigure}%
 %\begin{minipage}[t]{.4\textwidth}
 %    \captionsetup{labelsep=newline,format=plain,justification=centering}
@@ -36,7 +36,7 @@ Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klass
 
 Wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(vgl.)()[][Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
 
-Nachfolgendes bezieht sich \insb dem eingefärbten Teil der \Abbildung[K]{fig:projekt-struktur-architektur}:
+Nachfolgendes bezieht sich \insb auf den eingefärbten Teil der \Abbildung[K]{fig:projekt-struktur-architektur}:
 
 \begin{enumerateWithCode}{AT}
     \item Sämtliche Packages der äußeren Schichten und der Applikationsschicht befinden sich direkt unter \textquote{dsaheldenbogen}.

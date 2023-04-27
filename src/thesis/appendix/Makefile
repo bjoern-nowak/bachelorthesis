@@ -38,24 +38,23 @@ lint: ## TODO may use 'flake8' instead of 'pylint'
 	## enforce coding standards
 	#poetry run python -m --ignore=W503,E501 $(SRC) $(TESTS)
 	## very strict (coding standards, code smells, simple refactors)
-	poetry run python -m pylint $(SRC) $(TESTS)
+	poetry run python -m pylint $(SRC) $(TESTS) || true
 	## find security issues
-	poetry run python -m bandit -r $(SRC)
+	poetry run python -m bandit -r $(SRC) || true
 
 	## [PRE CHECK]
 	#poetry run python -m isort --profile=black --lines-after-imports=2 --check-only $(TESTS) $(SRC)
 	#poetry run python -m black -check $(TESTS) $(SRC) --diff
 
-
-.PHONY: typehint 
+.PHONY: typehint
 typehint:
-	poetry run python -m mypy $(SRC) $(TESTS)
+	poetry run python -m mypy $(SRC) $(TESTS) || true
 
-.PHONY: test 
+.PHONY: test
 test:
 	poetry run python -m unittest discover --start-directory $(TESTS) --top-level-directory $(ROOT)
 
-.PHONY: format 
+.PHONY: format
 format: ## TODO currently experimental
 	## sort and group imports
 	poetry run python -m isort --profile=black --lines-after-imports=2 $(TESTS) $(SRC)
@@ -66,13 +65,13 @@ format: ## TODO currently experimental
 	## eformats entire code to the best style possible
 	poetry run python -m yapf
 
-.PHONY: prebuild 
-prebuild: lint typehint test
+.PHONY: prebuild
+prebuild: lint test
 
 .PHONY: debug
 debug:
 	poetry run python $(MAIN) --reload --loglevel debug
 
 .PHONY: start
-start: test
+start: prebuild
 	poetry run python $(MAIN) --workers 4

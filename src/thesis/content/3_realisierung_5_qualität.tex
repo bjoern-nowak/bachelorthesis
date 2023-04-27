@@ -23,14 +23,14 @@ Zur Wahrung der Quellcode-Qualität werden die Werkzeuge pylint\Note{\url{https:
 Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleistet wird.
 
 
-\subsection{Prüfung der Regelbücher Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}
+\subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}
 
 Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (vgl. \Anhang[KP]{sec:rulebook-validator.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
 Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt).
 
 
-\subsection{Prüfung einzelner Regeln/Funktionalitäten}\label{subsec:prufung-einzelner-regeln/funktionalitaten}
+\subsection{Prüfung einzelner Funktionalitäten}\label{subsec:prufung-einzelner-funktionalitaten}
 
 Zur Prüfung einzelner Funktionalitäten der Applikation wurde nicht eine vielzahl an kleinen und separaten Komponententests geschrieben, sondern Systemtests.
 Diese prüfen die technische Korrektheit der Funktionalität auf Ebene der Applikationsserviceschicht und durchlaufen dabei alle tieferen Schichten.

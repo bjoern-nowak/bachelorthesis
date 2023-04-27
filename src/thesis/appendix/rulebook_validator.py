@@ -6,7 +6,7 @@ from dsaheldenbogen.app.engine.rulebook_function import RulebookFunction
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.resource import Resource
-from tests.rulebook_tester import RulebookTester
+from dsaheldenbogen.app.services.rulebook_executor import RulebookExecutor
 
 logger = logging.getLogger(__name__)
 
@@ -22,11 +22,11 @@ class RulebookValidator:
 
     required_files: set[str] = {Rulebook.entrypoint_file_name(), 'meta.lp', 'rules.lp'}
 
-    @staticmethod
-    def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:
+    @classmethod
+    def filter(cls, rulebooks: List[Rulebook]) -> List[Rulebook]:
         valid_books = []
         for rulebook in rulebooks:
-            errors = RulebookValidator.check(rulebook)
+            errors = cls.check(rulebook)
             if errors:
                 logger.warning(f"Rulebook '{rulebook}' is not valid and will be ignored.")
                 logger.debug(errors)
@@ -34,39 +34,40 @@ class RulebookValidator:
                 valid_books.append(rulebook)
         return valid_books
 
-    @staticmethod
-    def check(rulebook: Rulebook) -> List[str]:
+    @classmethod
+    def check(cls, rulebook: Rulebook) -> List[str]:
         """
         :return: list of errors, rulebook is valid when empty
         """
         try:
-            errors = [RulebookValidator._file_structure_valid(rulebook),
-                      RulebookValidator._has_required_programs(rulebook)] + RulebookValidator._only_declares_itself(rulebook)
+            errors = [cls._file_structure_valid(rulebook),
+                      cls._has_required_programs(rulebook)] \
+                     + cls._only_declares_itself(rulebook)
             return [err for err in errors if err is not None]
         except Exception as ex:
             logger.exception(f"Could not validate rulebook '{rulebook}'.")
             raise ex
 
-    @staticmethod
-    def _file_structure_valid(rulebook: Rulebook) -> Optional[str]:
+    @classmethod
+    def _file_structure_valid(cls, rulebook: Rulebook) -> Optional[str]:
         found_files = set(Resource.list_files(rulebook.folder()))
-        if not RulebookValidator.required_files.issubset(found_files):
-            return f"Rulebook '{rulebook}' missing required file(s): {RulebookValidator.required_files - found_files}"
+        if not cls.required_files.issubset(found_files):
+            return f"Rulebook '{rulebook}' missing required file(s): {cls.required_files - found_files}"
 
     @classmethod
     def _has_required_programs(cls, rulebook: Rulebook) -> Optional[str]:
-        tester = RulebookTester(rulebook)
-        missing_programs = tester.has_programs(cls.REQUIRED_PROGRAMS)
+        book = RulebookExecutor(rulebook)
+        missing_programs = book.has_programs(cls.REQUIRED_PROGRAMS)
         if missing_programs:
             return f"Rulebook '{rulebook}' missing required program(s): {missing_programs}"
 
     @staticmethod
     def _only_declares_itself(rulebook: Rulebook) -> List[str]:
         errors = []
-        tester = RulebookTester(rulebook)
-        found, others = tester.has_function_with_value([RulebookProgram.RULEBOOK_USABLE],
-                                                       RulebookFunction.RULEBOOK,
-                                                       rulebook.name)
+        book = RulebookExecutor(rulebook)
+        found, others = book.has_function_with_value(
+            [RulebookProgram.RULEBOOK_USABLE], RulebookFunction.RULEBOOK, rulebook.name
+        )
         if not found:
             errors.append(f"Rulebook '{rulebook}' does not declares itself as fact.")
         if others:
