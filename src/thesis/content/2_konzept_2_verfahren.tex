@@ -7,7 +7,7 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
 \subsection{Bekannte Verfahren}\label{subsec:bekannte-verfahren}
 
 \begin{description}
-    \item[\Abk{Prolog}] hat zur Grundlage die formalisierte Darstellung von Wissen und die Verwendung von logischen Regeln, um dieses Wissen zu verarbeiten und Probleme zu lösen.
+    \item[\Abk{Prolog}] hat die formalisierte Darstellung von Wissen und die Verwendung von logischen Regeln als Grundlage, um dieses Wissen zu verarbeiten und Probleme zu lösen.
     \Abk{Prolog} basiert auf der \Tech{Horn-Klausel}-Semantik, bei der eine Aussage durch eine Menge von Horn-Klauseln dargestellt und von einem \Abk{Prolog}-Interpreter verarbeitet wird.
     Eine Horn-Klausel ist eine logische Formel, die aus einem \Tech{Kopf} und einer Menge von \Tech{Füßen} besteht, wobei der Kopf ein positives Literal ist und die Füße negative Literale sind.
     Eine Aussage ist dann wahr, wenn es eine Übereinstimmung (Unifikation) zwischen dem Kopf und einer der Füße gibt.
@@ -24,9 +24,9 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
     \Abk{SAT} ist ein NP-vollständiges Problem, was bedeutet, dass es keine effiziente algorithmische Lösung gibt, die für alle Fälle eine korrekte Lösung findet.
     Es gibt jedoch algorithmische Ansätze, die in vielen Fällen effizient arbeiten und erfolgreich eingesetzt werden.
     Nennenswerte und weit verbreitete Ansätze sind der \Abk{DPLL}-Algorithmus und Backtracking-Algorithmen, wie \AbkS{CDCL}{Conflict-Driven Clause Learning}.
-    Letzterer vermeidet unnötiges Backtracking, und verkürzt damit die Laufzeit des Algorithmus, indem es Konflikt- und Klausel-Lernstrategien nutzt.
+    Letzterer vermeidet unnötiges Backtracking und verkürzt damit die Laufzeit des Algorithmus, indem es Konflikt- und Klausel-Lernstrategien nutzt.
     Das \Abk{SAT}-Solver-Verfahren wird häufig mit anderen Techniken, wie \zB Formalisierungs- und Beweisverfahren, kombiniert, sodass Probleme in einer formalen Sprache beschrieben und mögliche Lösungen effizient verifiziert werden können.
-    Es ist ein wichtiges und weitverbreitetes (Entscheidungs-)Problem in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und weiterhin intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
+    Es ist ein wichtiges und weit verbreitetes (Entscheidungs-)Problem in der theoretischen Informatik und der künstlichen Intelligenz, das viel Anwendung findet und weiterhin intensiv erforscht wird, um effizientere und leistungsfähigere Lösungsmethoden zu entwickeln.
     \Vgl{SAT-Zhang2002,SAT-MarquesSilva2008,SAT-Vizel2015}
 
     \item[\Abk{ASP}] ist ein deklaratives Problemlösungsparadigma.
@@ -37,7 +37,7 @@ Dazu werden in den nachfolgenden Kapiteln bekannte Verfahren/Varianten von Regel
     Dies kann interpretiert werden als: wenn die Bedingung \textquote{\textit{es regnet}} erfüllt ist, dann ist die Konsequenz \textquote{\textit{ich nehme einen Regenschirm mit}} auch erfüllt.
     Fakten sind einfache logische Aussagen, die bereits als \Tech{wahr} bekannt sind; sie haben keine Bedigung.
     Unbekannte Aussagen werden, gemäß der \AbkS{CWA}{Complete World Assumption}, als \Tech{falsch} gewertet.
-    Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden, die, unter den gegeben Regeln und Fakten, \Tech{wahr} sind.
+    Das Ziel des \Abk{ASP}-Systems ist es, eine Menge von Aussagen zu finden, die, unter den gegebenen Regeln und Fakten, \Tech{wahr} sind.
     Diese Menge von Aussagen wird als \Tech{Answer Set} (auch \Tech{stable models}) bezeichnet.
     Um ein Answer Set zu finden, verwendet das \Abk{ASP}-System (\Tech{Answer Set Solver}) einen Suchalgorithmus, um den Raum möglicher Lösungen zu durchsuchen.
     Es beginnt mit der Menge der Fakten und wendet die Regeln an, um zu sehen, welche anderen Aussagen logisch aus ihnen abgeleitet werden können.
@@ -128,5 +128,5 @@ Demnach ist das \textbf{Verfahren \Abk{ASP}} für die Umsetzung \textbf{am beste
 \Abk{ASP} ist ein modernes und verbreitetes Verfahren und erfüllt damit am ehesten den \hyperref[itm:TA.Popularitaet]{vorletzten Punkt der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Popularitaet}}.
 Es bringt die notwendige Effizienz bei großen Problemen auf, welches dem umfangreichen \Abk{DSA}-Regelwerk gerecht wird.
 Es bringt ebenfalls ein großes Set an Möglichkeiten mit sich, wie \zB Negationen und komplexe Kontroll- und Flussstrukturen.
-Desweiteren erlaubt es bereits vom Prinzip und der Technik her mehrere mögliche Lösungen, was der Realität, also dem Anwendungsbereich, am ehestem zutrifft.
-Die Schwäche einer steilen Lernkurve, aufgrund der komplexen Syntax und Semantik, kann und wird im Konzept, durch umfangreiche Dokumentation, beachtet und entgegengewirkt.
+Des Weiteren erlaubt es bereits vom Prinzip und der Technik her mehrere mögliche Lösungen, was der Realität, also dem Anwendungsbereich, am ehestem entspricht.
+Die Schwäche einer steilen Lernkurve, aufgrund der komplexen Syntax und Semantik, kann und wird in der Realisierung durch umfangreiche Dokumentation beachtet und entgegengewirkt.
