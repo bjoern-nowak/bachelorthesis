@@ -52,10 +52,24 @@
 
 
 %% ----- Tables ---------------------------------------------------------------
-\newcommand{\hTable}[4][!htbp]{%
+\NewDocumentCommand{\wTable}{ m m m m m}{%
+    \begin{wraptable}{#1}{#2}
+        \begin{threeparttable}[b]
+            \small
+            \onehalfspacing
+            \setlength{\abovecaptionskip}{0em plus 2em minus 2em}
+            \caption{#3}\label{#4}
+            {\centering
+                #5
+            }
+        \end{threeparttable}
+    \end{wraptable}
+}
+\NewDocumentCommand{\hTable}{ O{!htbp} m m m}{%
 %% Optional: placement by h=here t='top' b='bottom' p='extra page', enforce with '!'
 %% Required: caption (in text), label (for reference), table env
     \begin{table}[#1]
+        \centering
         \begin{threeparttable}[b]
             \small
             \onehalfspacing
@@ -254,6 +268,7 @@
             {KN}{\hyperref[#2]{\autoref{#2}:~\nameref{#2}}}
             {KP}{\hyperref[#2]{\autoref{#2} auf S.~\pageref{#2}}}
             {NP}{\hyperref[#2]{\nameref{#2} auf S.~\pageref{#2}}}
+            {RP}{\hyperref[#2]{\ref{#2} auf S.~\pageref{#2}}}
             {KNP}{\hyperref[#2]{\autoref{#2}:~\nameref{#2} auf S.~\pageref{#2}}}
     }[\autoref{#2}]%
 }
