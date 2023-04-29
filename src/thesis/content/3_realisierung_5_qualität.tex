@@ -14,7 +14,7 @@ Das Testverfahren gibt an, ob dieser Test statische oder dynamische ist, also ob
 Letzteres kategorisiert in welchen Rahmen sich der Test bewegt, \idR sind \zB Komponententest\Englisch{unit tests} schnelle und kleinteilige Tests, welche einfach zu entwickeln sind und von keiner anderen Komponente abhängen; während Ende-zu-Ende Tests meist eine längere Ausführungszeit und tendenziell einen komplexeren Aufbau haben, bei der die Applikation, in der Gesamtheit und dem Zusammenspiel seiner Komponenten, zur Laufzeit über die \Abk{API}, mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
 \Vgl{REALISIERUNG-Klein2021}
 
-\begin{wrapfigure}{r}{.5\textwidth}%
+\begin{wrapfigure}[8]{r}{.5\textwidth}%
     \vspace{.25em}
     \centering
     \captionsetup{labelsep=newline,format=plain,justification=centering}
@@ -22,13 +22,13 @@ Letzteres kategorisiert in welchen Rahmen sich der Test bewegt, \idR sind \zB Ko
     \vspace{.75em}
     \ImageInRatio[trim={1mm 2mm 1mm 2mm}]{.45}{testpyramide.pdf}
 \end{wrapfigure}%
-Diese beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell der Testpyramide (siehe \Abbildung[K]{fig:test-pyramide}).
-Es besagt im Wesentlichen, dass eher mehr schnelle und isolierte Komponententests zu schreiben sind und weniger langsame und integrative Ende-zu-Ende (\Begriff{ui}) Tests.
+Die beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell der Testpyramide (siehe \Abbildung[K]{fig:test-pyramide}).
+Es besagt im Wesentlichen, dass eher mehr schnelle und isolierte Komponententests und weniger langsame und integrative Ende-zu-Ende (\Begriff{ui}) Tests zu schreiben sind.
 \Vgl{REALISIERUNG-Cohn2009}
 
 Welches Testmodell zu wählen und damit
 \begin{minipage}[t]{.675\textwidth}
-welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren, wie Entwicklungsaufwand (Zeit) und der Testbarkeit der Software \bzw des Quellcodes selbst ab.
+welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
 
 \begin{enumerateWithCode}{QS}
     \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
@@ -92,16 +92,17 @@ Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
 
 \subsection{Prüfung einzelner Funktionalitäten}\label{subsec:prufung-einzelner-funktionalitaten}
 
-Zur Prüfung einzelner Funktionalitäten der Applikation wurde nicht eine vielzahl an kleinen und separaten Komponententests geschrieben, sondern Systemtests.
-Diese prüfen die technische Korrektheit der Funktionalität auf Ebene der Applikationsserviceschicht und durchlaufen dabei alle tieferen Schichten.
-Damit wird der Wartungsaufwand reduziert, ohne dabei an qualitativer Testabdeckung zu verlieren.
+Gemäß dem Modell der Testtrophäe wurde der Schwerpunkt auf die Erstellung von Integrationstests gelegt.
+Das Integrative an den hier beschriebenen Tests ist, dass diese die technische Korrektheit der Funktionalität über die Ebene der Applikationsservice-Schicht prüfen und dabei alle tieferen Schichten durchläuft.
+Eine verbreitete Definition bezeichnet solche als Systemtests, da diese nur von der eigentlichen Applikation abhängen und keine Integration mit \zB einer \Abk{DB} haben.
 
-Ein Beispiel zeigt der Test des \Code{MetaService} (\Anhang[KP]{sec:test-meta-service.py}), dieser Service stellt \zB die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, zu nennen.
-Dazu wird Um keine Abhängigkeit zu echten fachlichen Regelbücher zu haben, wurde dazu
+Ein Beispiel zeigt der Test des \Code{MetaService} (\Anhang[KP]{sec:test-meta-service.py}), dieser Service stellt \uA die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, aufzulisten.
+{\color{red}
+Dazu wird \Code{TestingEngine} (\Anhang[KP]{sec:testing-engine.py})
+Um keine Abhängigkeit zu echten fachlichen Regelbücher zu haben, wurde dazu
 Ist eine einfacherer Variante der echten Engine, welches es ermöglicht einfache Test-Regelbücher-\AbkP{LP} aus zu führen. welche auf dasinterne Validierungen, wie die Prüfung ob die angegeben Regelbücher nutzbare sind, verzichtet
+}
 
-
-\Anhang[KP]{sec:testing-engine.py}
 
 \subsection{Prüfung gesamtheitliches Zusammenspiel}\label{subsec:prufung-gesamntheitliches-zusammenspiel}
 
