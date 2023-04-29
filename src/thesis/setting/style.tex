@@ -106,6 +106,10 @@
 \frenchspacing %% erzeugt ein wenig mehr Platz hinter einem Punkt
 
 \setlength{\parskip}{.5em plus .5em minus .25em} %% Absatz-Trennung dynamisch: .25em bis 1em (default .5em)
+\makeatletter
+\newcommand{\@minipagerestore}{\setlength{\parskip}{.5em plus .5em minus .25em}} %% minipage sets parskip and parindent to 0pt, restore documents value
+\makeatletter
+
 \setlist[description]{leftmargin=1em} %% set text indention
 \setlist[itemize]{leftmargin=1.1em} %% set text indention
 

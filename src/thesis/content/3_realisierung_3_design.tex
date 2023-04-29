@@ -5,9 +5,9 @@ mit dem Ziel einen übersichtlichen, verständlichen und wartbaren Quellcode zu 
 Dies geht von Vorgaben zum Quellcode-Stil (\zB der Länge von Einrückungen und Position von Klammern) über Namenskonventionen bis hin zu Entwurfsmustern\Englisch{design patterns}.
 Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
 
-\begin{enumerateWithCode}{DE}
+\begin{enumerateWithCode}[0em plus 1em]{DE}
 
-    \item In diesem Stadium der Software werden für bestimmte Aufgaben keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog \textquote{Gang of Four (GoF) Design Patterns} aus \Zitat{REALISIERUNG-Gamma1994}, von dieser Arbeit gemacht.
+    \item In diesem Stadium der Software werden für bestimmte Aufgaben keine Vorgaben zur Anwendung bestimmter gängiger Entwurfsmuster, wie \zB den \sog[\AbkS{GoF}{Gang of Four} Design Patterns] aus \Zitat{REALISIERUNG-Gamma1994}, von dieser Arbeit gemacht.
     Dies soll, entsprechend dem \hyperref[itm:MF.Freude]{Motivationsfaktor~\ref{itm:MF.Freude} (Freude) auf S.\pageref{itm:MF.Freude}}, Freiheiten bei der Mitwirkung gewährleisten.
 
     \item Entsprechend des \hyperref[itm:TA.Standard]{zweiten Punktes der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Standard}}, wird der offizielle \textquote{Python Style Guide} \Tech{PEP-8} (\Zitat{REALISIEURNG-VanRossum2001}) als Grundlage definiert.
@@ -56,7 +56,7 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Und anschließend wird geprüft, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.
 
     \item\label{itm:DE.ExtraStep} Jedem Validierungsschritt wird eine Nummer zugeteilt, welche im Namen des Unterprogramms enthalten ist.
-    Die Ausführungsreihenfolge der Schritte wird durch die zugeordnete Nummer ermittelt, beginnend mit der Kleinsten.
+    Die Ausführungsreihenfolge der Schritte wird durch diese Nummer ermittelt, beginnend mit der Kleinsten.
     Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert und der Erste fängt bei 50 an (\vgl \Anhang[KP]{sec:common.lp}).
 
      Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.

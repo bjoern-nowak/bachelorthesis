@@ -120,7 +120,7 @@
                   {\labelsep -.25em}%
 }
 \SetLabelAlign{enumerateWithCodeAlign}{\hss\llap{#1}\hfil}
-\newenvironment{enumerateWithCode}[2][]
+\newenvironment{enumerateWithCode}[2][\parskip]
 {% see https://tex.stackexchange.com/questions/683448/enumerate-item-label-position-by-even-odd-page
     \let\originalitem\item%
     \def\item{%\par
@@ -137,11 +137,7 @@
         align=enumerateWithCodeAlign,
         label={\small\textbf{#2.\arabic*}},
         ref=#2.\arabic*] %% or \alph*
-        \ifthenelse{\isempty{#1}}{%
-            \setlength\itemsep{0em plus 1em}%
-        }{%
-            \setlength\itemsep{#1}%
-        }%
+        \setlength\itemsep{#1}%
 }{%
     \end{enumerate}%
     \def\item{\originalitem}%
@@ -219,7 +215,7 @@
 \newcommand{\AbkP}[1]{\textit{\acp{#1}}} % Abkürzung pural
 \newcommand{\AbkK}[1]{\textit{\acs{#1}}\ACplacelabel{#1}} % Abkürzung kurz (ohne Erstnennung ausgeschrieben)
 \newcommand{\AbkL}[1]{\textit{\acf{#1}}\ACplacelabel{#1}} % Abkürzung lang (immer ausgeschrieben)
-\newcommand{\AbkS}[2]{#2 (#1)} % Abkürzung: one-time (single) = nicht im Verzeichnis
+\newcommand{\AbkS}[2]{#2~(#1)} % Abkürzung: one-time (single) = nicht im Verzeichnis
 \newcommand{\Datum}[1]{\DTMdate{#1}} % Datum
 \newcommand{\Monat}[1]{% Datum ohne Tag, z.B. \Monat{2020-09}
     \DTMlangsetup{showdayofmonth=false}%
@@ -252,10 +248,7 @@
 %% K : Kurz = Nr, Seite
 %% V : Voll = Nr, Name, Seite
 %% https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix
-
 %% automatic naming with \autoref, using custom command for better readability in source
-
-
 \newcommand{\DefaultRefCase}{KNP}
 \ifthenelse{\boolean{isBookPrint}}{}{
     \renewcommand{\DefaultRefCase}{KN}
@@ -281,24 +274,6 @@
 \newcommand{\Item}[2][KP]{\RefByCase{#1}{#2}}
 \newcommand{\Regel}[1]{\hyperref[#1]{Regel~\ref{#1} auf S.~\pageref{#1}}}
 
-%% manual naming with \ref
-%\newcommand{\Gleichung}[1]{Gleichung~\ref{#1}}
-%\newcommand{\Abbildung}[1]{Abbildung~\ref{#1}}
-%\newcommand{\AbbildungV}[1]{Abbildung~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
-%\newcommand{\Anhang}[1]{Anhang~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
-%\newcommand{\AnhangK}[1]{Anhang~\ref{#1} auf S.~\pageref{#1}}
-%\newcommand{\AnhangKapitel}[1]{Kapitel~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
-%\newcommand{\Tabelle}[1]{Tabelle~\ref{#1}:~\nameref{#1}}
-%\newcommand{\TabelleK}[1]{Tabelle~\ref{#1} auf S.~\pageref{#1}}
-%\newcommand{\TabelleV}[1]{Tabelle~\ref{#1}:~\nameref{#1} auf S.~\pageref{#1}}
-%\newcommand{\Verweis}[1]{Kapitel~\ref{#1}}
-%\newcommand{\VerweisKL}[1]{Kapitel~\ref{#1} auf Seite~\pageref{#1}}
-%\newcommand{\VerweisVL}[1]{Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}}
-%\newcommand{\VerweisKT}[1]{(Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1})}
-%\newcommand{\VerweisVT}[1]{(Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1})}
-%\newcommand{\VerweisKF}[1]{\footnote{Siehe Kapitel~\ref{#1} auf Seite~\pageref{#1}.}}
-%\newcommand{\VerweisVF}[1]{\footnote{Siehe Kapitel~\ref{#1}:~\nameref{#1} auf Seite~\pageref{#1}.}}
-
 
 %% ----- Abkürzungen, ggf. mit korrektem Leerraum ----------------------------
 \newcommand{\bs}{$\backslash$\xspace}
@@ -310,7 +285,6 @@
 \newcommand{\eur}[1]{\mbox{#1\,\texteuro}\xspace} % Euro Zeichen
 \newcommand{\evtl}{evtl.\xspace} % eventuell
 \newcommand{\ggf}{ggf.\xspace} % gegebenenfalls
-\newcommand{\Ggf}{Ggf.\xspace} % Gegebenenfalls
 \newcommand{\gqq}[1]{\glqq{}#1\grqq{}}
 \newcommand{\idR}{i.\xspace{}d.\xspace{}R.\xspace} % in der Regel
 \newcommand{\inkl}{inkl.\xspace} % inklusive
@@ -319,14 +293,9 @@
 \newcommand{\uA}{\mbox{u.\,a.}\xspace} % unter anderen
 \newcommand{\usw}{usw.\xspace} % und so weiter
 \newcommand{\vgl}{vgl.\xspace} % vergleich
-\newcommand{\Vvgl}{Vgl.\xspace} % Vergleich
 \newcommand{\zB}{\mbox{z.\,B.}\xspace} % zum Beispiel
 \newcommand{\ZB}{\mbox{Z.\,B.}\xspace} % zum Beispiel
 \newcommand{\og}{\mbox{o.\,g.}\xspace} % oben genannt
 \newcommand{\sog}[1][]{ % sogenannt
-    \ifthenelse{\isempty{#1}}{%
-        sog.\xspace%
-    }{%
-        sog.\xspace\textquote{#1}%
-    }
+sog.\xspace\ifthenelse{\isempty{#1}}{}{\textquote{#1}}%
 }

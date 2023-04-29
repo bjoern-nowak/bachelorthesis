@@ -104,6 +104,8 @@ Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüche
 Für diese Überprüfung ist es erforderlich, dass Regelbücher bekannte Merkmalsausprägungen deklarieren.
 Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderen definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
 \begin{mintedNameless}{clingo}
+%% Eigene Existenz bekannt machen.
+rulebook("dsa5_aventurisches_götterwirken_2").
 %% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
 rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
 %% Allgemeine Überprüfung der Abhängigkeiten:
@@ -145,7 +147,7 @@ Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellieru
 Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}\label{par:AR}
-\begin{enumerateWithCode}[.5em plus .5em minus .5em]{AR}
+\begin{enumerateWithCode}{AR}
     \item\label{itm:AR.1} Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
     \begin{mintedNameless}[linenos=false]{clingo}
@@ -174,7 +176,7 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
 \end{enumerateWithCode}
 
 \paragraph{Regelbuch-spezifische harte Regeln:}\label{par:HR}
-\begin{enumerateWithCode}[.5em plus .5em minus .5em]{HR}
+\begin{enumerateWithCode}{HR}
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
     \begin{mintedNameless}{clingo}
@@ -229,7 +231,7 @@ def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
 
 \pagebreak % due to \Needspace* in enumerateWithCode
 \paragraph{Regelbuch-spezifische weiche Regeln:}\label{par:WR}
-\begin{enumerateWithCode}[.5em plus .5em minus .5em]{WR}
+\begin{enumerateWithCode}{WR}
     \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(\vgl)()[][Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}
 has_usual(race("Elfen"),culture("Auelfen")).
@@ -263,7 +265,7 @@ Dies ist die Aufgabe der Software, konkreter die Aufbereitung der Ergebnis-Fakte
 Typischerweise sucht man mit \Abk{ASP}%
 \begin{wrapfigure}{r}{.5\textwidth}%
     \centering
-    \caption{Deklarative Problemlösung \Vgl[Seite 14 (Folie 8)]{ASP-Gebser2012}}\label{fig:deklarative-problemloesung}
+    \caption{Deklarative Problemlösung (Anlehnung an \Zitat[Seite 14]{ASP-Gebser2012})}\label{fig:deklarative-problemloesung}
     \vspace{.25em}
     \Image{declarative_problem_solving.pdf}
 \end{wrapfigure}%

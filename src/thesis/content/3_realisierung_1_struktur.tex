@@ -4,8 +4,8 @@ Die Projektstruktur definiert den Aufbau des Projekts und damit \zB die Ablageor
 Es ist also maßgeblich für die Orientierung im quelloffenen Projekt und ist für den \hyperref[itm:TA.Dokumentation]{ersten Punkt der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Dokumentation}} relevant.
 Nachfolgend wird Bezug auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktur-architektur} genommen.
 
-\begin{enumerateWithCode}{PS}
-    \item Eine der wichtigsten Bestandteile ist die \sog \textquote{lies mich Datei} (\Anhang[KP]{sec:readme.md}).
+\begin{enumerateWithCode}[0em plus 1em]{PS}
+    \item Eine der wichtigsten Bestandteile ist die \sog[lies mich Datei] (\Anhang[KP]{sec:readme.md}).
     Diese wird oft von Betreibern quelloffener Aufbewahrungsorte automatisch als Einstiegsseite angezeigt und damit das \textquote{Aushängeschild} des Projekts.
     Inhalte sind \uA eine Kurzbeschreibung des Projektes, wie man mitwirken und Probleme melden kann sowie \ggf Lizenz- und Kontakt-Hinweise.
     \Vgl{GitHub-Doc-Readme}
@@ -16,16 +16,17 @@ Nachfolgend wird Bezug auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktu
 
     \item Diese Regelbücher, genauer die entsprechenden \Begriff{Clingo}-\AbkP{LP}, und \ggf künftig weitere, zur Laufzeit relevante, Ressourcen (nicht Python-Dateien) befinden sich unter \textquote{\Code{resources}}.
 
-    \item Die zweitwichtigste Datei ist das \sog \textquote{\Code{Makefile}} (\Anhang[KP]{sec:makefile}).
+    \item Die zweitwichtigste Datei ist das \sog[\Code{Makefile}] (\Anhang[KP]{sec:makefile}).
     Es dient zur Automatisierung häufiger Aufgaben \bzw Schritte von Mitwirkenden, wie \zB das Installieren von Abhängigkeiten, Durchführen aller Tests und Starten des Backends.
     \Vgl[Kapitel 1]{REALISIERUNG-Anaya2018}
 \end{enumerateWithCode}
 
-\begin{minipageContinuingFootnotes}[t]{.65\textwidth}
+\begin{minipageContinuingFootnotes}[t]{.59\textwidth}
+    \vspace{-1em}
     \begin{enumerateWithCode}{PS}
         \setcounter{enumi}{4}
 
-        \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog \textquote{virtuelle Umgebung} geschaffen; diese liegt unter \textquote{\Code{.venv}}.
+        \item Zur Wahrung der Portabilität und Vorbeugung von Versionskonflikten mit bereits installierten Abhängigkeiten, wird eine \sog[virtuelle Umgebung] geschaffen; diese liegt unter \textquote{\Code{.venv}}.
         Darin werden, anstatt global, Projekt-spezifisch die Abhängigkeiten installiert.
         Genutzt wird dazu das sehr verbreitete, funktionsreiche und leicht zu bedienende poetry\Note{\url{https://github.com/python-poetry/poetry}}.
         Es kann \uA auch die zu verwendende Python-Version steuern, falls Weitere installiert sind, und die Software für eine mögliche Verteilung, \zB als ausführbare Datei oder Container\Note{\zB als Docker: \url{https://www.docker.com/}}, verpacken.
@@ -33,7 +34,7 @@ Nachfolgend wird Bezug auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktu
         Poetry wertet dies aus und erzeugt eine \textquote{\Code{poetry.lock}} Datei, welche die exakt geladenen Versionen der Abhängigkeiten festhält.
 
         \item Hilfreiche Werkzeuge und Skripte für die Entwicklung werden unter \textquote{\Code{tools}} abgelegt.
-        Während der Entwicklung hat es sich \zB bewährt, Ideen zur Formalisierung und Modellierung zunächst auf eine \sog \textquote{grüne Wiese}, also ohne eventuell hinderliche Einflüsse der eigentlichen Implementierung, auszuprobieren.
+        Während der Entwicklung hat es sich \zB bewährt, Ideen zur Formalisierung und Modellierung zunächst auf eine \sog[grüne Wiese], also ohne eventuell hinderliche Einflüsse der eigentlichen Implementierung, auszuprobieren.
         Dazu liegt entsprechend ein ausführbares Python-Programm bereit, welches ein leeres \Abk{LP} ausführt.
         Der Quellcode der eigentlichen Implementierung kann dabei nach Bedarf genutzt werden; so kann \zB das Modell des Charakters weiterhin genutzt werden.
 
@@ -45,17 +46,16 @@ Nachfolgend wird Bezug auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktu
         %% sekundaer b: https://docs.python-guide.org/writing/structure/
         Jegliche Art von Tests sind in \textquote{\Code{tests}} abgelegt; mehr dazu in \Item{itm:AT.Tests}.
 
-        \item Zur Versionsverwaltung des Quellcodes wird das verbreitete und quelloffene GiT\Note{\url{https://git-scm.com/}} eingesetzt.
-        Mit der Datei \textquote{\Code{.gitignore}}, werden Pfade und Dateien, welche \zB \parfillskip 0pt
     \end{enumerateWithCode}
 \end{minipageContinuingFootnotes}
 \hfill %% TODO [SUBMISSION] IF IT IS NOT A BOOKPRINT: PLACE IMAGE TO THE LEFT
-\begin{minipage}[t]{.32\textwidth}
-    \vspace{.5em}
+\begin{minipage}[t]{.375\textwidth}
+    \vspace{-.5em}
 %    \flushright
 %    \centering
+%    \captionsetup{format=plain,justification=raggedright}
     \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \captionof{figure}{Projektstruktur und -architektur}\label{fig:projekt-struktur-architektur}
+    \captionof{figure}{Projektstruktur und -architektur\\(Eigene Darstellung)}\label{fig:projekt-struktur-architektur}
     \vspace{.25em}
     \Image{projekt-struktur-architektur.pdf}
 \end{minipage}
@@ -67,7 +67,11 @@ Nachfolgend wird Bezug auf die erste Ebene in \Abbildung[KP]{fig:projekt-struktu
 %    \vspace{.25em}
 %    \Image{projektstruktur.pdf}
 %\end{minipage}
+\begin{enumerateWithCode}{PS}
+    \setcounter{enumi}{7}
 
-durch Frameworks oder die eingesetzte Entwicklungsumgebung erstellt werden und keine Relevanz für die Software selbst haben, als zu ignorieren markiert.
-Dazu gehören \textquote{\Code{.venv}} und \textquote{\Code{poetry.lock}}.
-Zur Veröffentlichung der Software wird die größte und bekannteste GiT-Plattform GitHub\Note{\url{https://github.com/bjoern-nowak/dsa-heldenbogen}} genutzt.
+    \item Zur Versionsverwaltung des Quellcodes wird das verbreitete und quelloffene GiT\Note{\url{https://git-scm.com/}} eingesetzt.
+    Mit der Datei \textquote{\Code{.gitignore}}, werden Pfade und Dateien, welche \zB durch Frameworks oder die eingesetzte Entwicklungsumgebung erstellt werden und keine Relevanz für die Software selbst haben, als zu ignorieren markiert.
+    Dazu gehören \textquote{\Code{.venv}} und \textquote{\Code{poetry.lock}}.
+    Zur Veröffentlichung der Software wird die größte und bekannteste GiT-Plattform GitHub\Note{\url{https://github.com/bjoern-nowak/dsa-heldenbogen}} genutzt.
+\end{enumerateWithCode}

@@ -3,8 +3,8 @@
 Die \underline{automatisierte} Qualitätssicherung ist ein unerlässliches Werkzeug bei der Entwicklung \underline{nachhaltig} korrekter und wartbarer Software.
 Das Feld von Tests in der Softwareentwicklung ist breit gefächert; es gibt verschiedene Standards wie \Zitat{REALISIERUNG-ISO-25010} und \Zitat{REALISIERUNG-IEEE-29119}, als auch Standards und Definitionen indirekt geprägt durch Zertifizierungen von Testenden durch ISTQB (\Zitat{REALISIERUNG-ISTQB}).
 
-Die weltweite Gemeinschaft der Software-Entwickelnden hat sich bis heute nicht auf eine Terminologie im Bereich der Tests festlegen können.
-Dabei gibt es durchaus Definitionen, welche eher verbreitet, anwendbar und auf Zustimmung stoßen, als Andere.
+Dabei hat sich die weltweite Gemeinschaft der Software-Entwickelnden bis heute nicht auf eine Terminologie im Bereich der Tests festlegen können.
+Es gibt durchaus Definitionen, welche eher verbreitet, sowie allgemein anwendbar sind und auf mehr Zustimmung stoßen, als Andere.
 Entscheidend ist, dass es innerhalb der Software eine klare Definition dessen gibt.
 \Vgl{REALISIERUNG-Vocke2018}.
 
@@ -14,53 +14,55 @@ Das Testverfahren gibt an, ob dieser Test statische oder dynamische ist, also ob
 Letzteres kategorisiert in welchen Rahmen sich der Test bewegt, \idR sind \zB Komponententest\Englisch{unit tests} schnelle und kleinteilige Tests, welche einfach zu entwickeln sind und von keiner anderen Komponente abhängen; während Ende-zu-Ende Tests meist eine längere Ausführungszeit und tendenziell einen komplexeren Aufbau haben, bei der die Applikation, in der Gesamtheit und dem Zusammenspiel seiner Komponenten, zur Laufzeit über die \Abk{API}, mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
 \Vgl{REALISIERUNG-Klein2021}
 
-\begin{wrapfigure}[8]{r}{.47\textwidth}%
-    \vspace{-1em}
+\begin{wrapfigure}{r}{.5\textwidth}%
+    \vspace{.25em}
     \centering
     \captionsetup{labelsep=newline,format=plain,justification=centering}
     \caption{Testpyramide (Anlehnung an \Zitat{REALISIERUNG-Cohn2009})}\label{fig:test-pyramide}
-    \vspace{.5em}
+    \vspace{.75em}
     \ImageInRatio[trim={1mm 2mm 1mm 2mm}]{.45}{testpyramide.pdf}
 \end{wrapfigure}%
-Diese beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell der Testpyramide (\Zitat{REALISIERUNG-Cohn2009}).
+Diese beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell der Testpyramide (siehe \Abbildung[K]{fig:test-pyramide}).
 Es besagt im Wesentlichen, dass eher mehr schnelle und isolierte Komponententests zu schreiben sind und weniger langsame und integrative Ende-zu-Ende (\Begriff{ui}) Tests.
-Welches Testmodell zu wählen und damit welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren, wie Entwicklungsaufwand (Zeit) und der Testbarkeit der Software \bzw des Quellcodes selbst ab.
+\Vgl{REALISIERUNG-Cohn2009}
 
-%\begin{minipage}[t]{.275\textwidth}
-%    \captionsetup{labelsep=newline,format=plain,justification=centering}
-%    \centering
-%    \captionof{figure}{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
-%    \vspace{.75em}
-%    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.9}{testtrophy.pdf}
-%\end{minipage}
-%\hfill
-%\begin{minipage}[t]{.7\textwidth}
+Welches Testmodell zu wählen und damit
+\begin{minipage}[t]{.675\textwidth}
+welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren, wie Entwicklungsaufwand (Zeit) und der Testbarkeit der Software \bzw des Quellcodes selbst ab.
+
 \begin{enumerateWithCode}{QS}
     \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
     Diese drückt aus, wie hoch der Nutzen einer Teststufe im Vergleich zum notwendigen Entwicklungsaufwand ist
-    (siehe \Abbildung[KP]{fig:test-trophy}).
+    (siehe \Abbildung[K]{fig:test-trophy}).
     Fokussiert werden demnach Tests mit dem besten Verhältnis, was dem \hyperref[itm:TA.Tests]{dritten Punkt der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Tests}} und dem impliziten Ziel einer möglichst wartbaren Software entspricht.
-\end{enumerateWithCode}
-%\end{minipage}[
-\begin{wrapfigure}{r}{.3\textwidth}%
-    \centering
-    \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \caption{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
-    \vspace{1em}
-    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.25}{testtrophy.pdf}
-\end{wrapfigure}%
-
-\begin{enumerateWithCode}{QS}
-    \setcounter{enumi}{1}
 
     \item Bei der Testintention unterscheidet das Projekt zwischen der Prüfung der Quellcode-Qualität und der Anforderungseinhaltung.
 \end{enumerateWithCode}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.3\textwidth}
+    \vspace{.75em}
+    \centering
+    \captionsetup{labelsep=newline,format=plain,justification=centering}
+    \captionof{figure}{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
+    \vspace{.75em}
+    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.75}{testtrophy.pdf}
+\end{minipage}
+%\begin{wrapfigure}{r}{.3\textwidth}%
+%    \centering
+%    \captionsetup{labelsep=newline,format=plain,justification=centering}
+%    \caption{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
+%    \vspace{1em}
+%    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.25}{testtrophy.pdf}
+%\end{wrapfigure}%
 
-Die Analyse der Quellcode-Qualität kann statisch und dynamisch, um \zB die Testabdeckung zu ermitteln, durchgeführt werden.
+\vspace{\parskip}
+Die Analyse der Quellcode-Qualität kann statisch und dynamisch durchgeführt werden.
+Beim Letzteren kann \zB die Testabdeckung ermitteln werden,
 Die Testabdeckung drückt aus wie viele Zeilen Quellcode durch die vorhanden Tests abgedeckt sind und gegeben somit einen sehr einfachen Indikator für blinde Flecke.
 Eine hohe Testabdeckung ist nicht gleichzusetzen mit einer hohen Testqualität.
-Das Messen der Testqualität ist ein schwieriges Feld, erwähnt sei als bekanntes Mittel das \sog \textquote{Mutation Testing}\Note{die Populärsten Python-Frameworks dazu sind mutmut (\url{https://github.com/boxed/mutmut}) und mutpy (\url{https://github.com/mutpy/mutpy})}.
-Bei der statischen Quellcode-Analyse wird \zB die Einhaltung von Programmierkonventionen und vorgegebener Quellcode-Formatierung, die Existenz von ungenutzten Variablen und Imports sowie Programmierfehler (wie eine falsche Reihenfolge beim Fangen von Exceptions) und schlechter Praktiken (\sog \textquote{code smells}) überprüft.
+Das Messen der Testqualität ist ein schwieriges Feld, erwähnt sei als bekanntes Mittel das \sog[Mutation Testing]\Note{die Populärsten Python-Frameworks dazu sind mutmut (\url{https://github.com/boxed/mutmut}) und mutpy (\url{https://github.com/mutpy/mutpy})}.
+Bei der statischen Quellcode-Analyse wird \zB die Einhaltung von Programmierkonventionen und vorgegebener Quellcode-Formatierung, die Existenz von ungenutzten Variablen und Imports sowie Programmierfehler (wie eine falsche Reihenfolge beim Fangen von Exceptions) und schlechter Praktiken (\sog[code smells]) überprüft.
 Bei der Anforderungseinhaltung geht es um die Erstellung von Tests, welche Funktionalitäten auf bekannte Anforderungen überprüft.
 Die Relevanz dessen lässt sich \uA durch die Verbreitung des \AbkS{TDD}{\textquote{test-driven development}} beispielhaft zeigen.
 Es ist eine Entwicklungsmethode, bei der die Erstellung des Testes vor der Implementierung der Funktionalität gestellt wird.
@@ -80,13 +82,12 @@ Dabei können Anforderungen technisch, \zB eine Methode soll in einem bestimmten
 Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleistet wird.
 
 
-\subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}
+\subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}\todo{QS.x statt kapitel?}
 
 Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (\vgl \Anhang[KP]{sec:rulebook-validator.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
-Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt).
-
-Diese Tests entsprechen der Definition von Komponententests.
+Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt), wie es im ersten \Abk{LP}-Beispiel in \Kapitel[KP]{subsec:validierungsvoraussetzung} gezeigt wird.
+Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
 
 
 \subsection{Prüfung einzelner Funktionalitäten}\label{subsec:prufung-einzelner-funktionalitaten}
