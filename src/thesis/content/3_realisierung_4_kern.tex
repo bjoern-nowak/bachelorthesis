@@ -20,7 +20,7 @@ Dabei wird Bezug auf konkrete Klassen genommen, welche daher in \Tabelle[K]{tab:
 }
 
 Die \Code{Engine} ist die, den formalisierten Regelbüchern übergeordnete, Steuerungseinheit.
-Sie definiert \zB ein geordnetes Standard-Set an Charakter-Va\-li\-die\-rungs\-schritt, welches, gemäß \Item[K]{itm:DE.ExtraStep}, erweitert werden kann.
+Sie definiert \zB ein geordnetes Standard-Set an Charakter-Va\-li\-die\-rungs\-schritten, welches, gemäß \Item[K]{itm:DE.ExtraStep}, erweitert werden kann.
 Eine Charakter-Validierung läuft wie folgt ab:
 Jeder Schritt wird einzeln ausgeführt.
 Dabei werden Validierungswarnungen Schritt-übergreifend gesammelt.
@@ -36,10 +36,10 @@ Dabei ist anzumerken, dass, wie bereits in \Kapitel[KP]{subsec:interpretation-de
 
 Neben den frei-wählbaren Regelbücher-\AbkP{LP}, wird zusätzlich immer das \Code{common.lp} mitgeladen.
 Dieses enthält Regelbuch-übergreifende, also allgemeine, Definitionen wie Spielwelt-Regeln und Charakter-Fakten.
-Dadurch wäre es möglich andere Basisregelbücher zu implementieren, ohne Gemeinsamkeiten neu zu implementieren, wie \zB die \hyperref[par:AR]{allgemeingültigen Regeln auf S.\pageref{par:AR}}.
+Dadurch wäre es möglich andere Basisregelbücher zu implementieren, ohne Gemeinsamkeiten erneut zu implementieren, wie \zB die \hyperref[par:AR]{allgemeingültigen Regeln auf S.\pageref{par:AR}}.
 
 Jeder Charakter-Valididierungsschritt ist ein eigener Durchlauf und bekommt als Kontext die Klasse \Code{HeroWrapper}.
 Dieses stellt die Felder des Charakter-Domänenmodells als \Begriff{Clingo}-\Tech{Symbole}, wie in \Kapitel[KP]{subsec:eingabemodell-(kontext):-der-charakter} dargestellt, bereit.
-Das aus dem jeweiligen Durchlauf resultierende \Tech{answer set} wird dann von der \Code{Engine} an den \Code{Collector} übergeben, um die entsprechend gesuchten Ergebnis-Fakten herausfiltert.
+Das aus dem jeweiligen Durchlauf resultierende \Tech{answer set} wird dann von der \Code{Engine} an den \Code{Collector} übergeben, um die entsprechend gesuchten Ergebnis-Fakten herauszufiltern.
 Anschließend werden diese vom \Code{HeroValidationInterpreter} in entsprechende Domänenmodelle (Validierungswarnungen oder -fehler) konvertiert.
-\textbf{Anmerkung:} diese Klasse ist von kritischer Bedeutung, da es die genaue Interpretation des \Abk{ASP}-Ergebnisses beherbergt.
+\textbf{Anmerkung:} Diese Klasse ist von kritischer Bedeutung, da es die genaue Interpretation des \Abk{ASP}-Ergebnisses beherbergt.
