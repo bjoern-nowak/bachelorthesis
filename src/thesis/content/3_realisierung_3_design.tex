@@ -1,7 +1,6 @@
 \section{Design-Entscheidungen}\label{sec:design-entscheidungen}
 
-Wie auch bei der Architektur, nur in diesem Fall noch stärker, sind Design-Entscheidungen subjektive Maßnahmen;
-mit dem Ziel einen übersichtlichen, verständlichen und wartbaren Quellcode zu entwickeln.
+Wie auch bei der Architektur, nur in diesem Fall noch stärker, sind Design-Entscheidungen subjektive Maßnahmen mit dem Ziel einen übersichtlichen, verständlichen und wartbaren Quellcode zu entwickeln.
 Dies geht von Vorgaben zum Quellcode-Stil (\zB der Länge von Einrückungen und Position von Klammern) über Namenskonventionen bis hin zu Entwurfsmustern\Englisch{design patterns}.
 Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
 
@@ -18,19 +17,18 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Außerdem ist der Autor davon überzeugt, dass bei zu vielen gleichzeitig betrachteten Dateien der Fokus verloren geht und dessen Notwendigkeit ein Zeichen schlechter \AbkS{SoC}{\textquote{Separation of Concerns}\Note{\url{https://clean-code-developer.de/die-grade/orangener-grad/\#Separation_of_Concerns_SoC}}} ist.
     Des Weiteren sei unter Verwendung der Namenskonvention und Vermeidung von Abkürzungen die sonst sehr beschränkte Zeile schnell aufgebraucht, welches zu unschönen (Lesefluss-störenden) Zeilenumbrüchen führe.
 
-    \item Weiter unterscheidet \Tech{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die consistent Anwendung einer frei-wählbaren Regel.
+    \item Weiter unterscheidet \Tech{PEP-8} nicht zwischen einfachen und doppelten Anführungszeichen bei Zeichenketten, empfiehlt jedoch die konsistente Anwendung einer frei-wählbaren Regel.
     In diesem Projekt werden einfache Anführungszeichen verwendet, wenn die Zeichenkette eine Identifikation (Schlüssel) darstellt, wie \zB der Name einer Merkmalsausprägung, und Doppelte bei freien Texten, wie Fehlermeldungen.
 
-    \item Python-Dateien sind \sog Module, können entsprechend alles enthalten (Variablen, Funktionen, Klassen und auszuführende Befehle) und gruppiert üblicherweiße Funktionalitäten eines Kontextes.
+    \item Python-Dateien sind \sog Module, können entsprechend alles enthalten (Variablen, Funktionen, Klassen und auszuführende Befehle) und gruppieren üblicherweise Funktionalitäten eines Kontextes.
     Dabei können Module von anderen Modulen in Gänze oder in Teile importiert werden.
     Zusätzlich des eigentlichen Zwecks, werden Klassen stets in separate Module geschrieben (Klassen-Modul).
     Dies soll die Übersichtlichkeit (Vermeidung von sehr langen Dateien) und Auffindbarkeit von Klassen stärken.
     \Vgl[Kapitel 6]{REALISIERUNG-PythonDoc-Modules}
 
     \item Das Importieren von Sub-Modulen in Packages, zur Verkürzung von Import-Befehlen und damit der Verschleierung der Implementierungsstruktur, wird vermieden \Vgl[Kapitel 5.4.2]{REALISIERUNG-PythonDoc-Modules}.
-    Als Grund ist zu nennen, das diese Software keine \textquote{öffentliche Bibliothek/Framework} darstellt und die Verwendung daher (beim Importieren) nicht vereinfacht werden muss.
+    Als Grund ist zu nennen, dass diese Software keine \textquote{öffentliche Bibliothek/Framework} darstellt und die Verwendung daher (beim Importieren) nicht vereinfacht werden muss.
     Bei reinen Klassen-Modulen wird dies jedoch akzeptiert, da dies Redundanz bei den Import-Befehlen reduziert, da der Klassenname \idR dem Modulnamen gleicht.
-
     Eine Ausnahme sind Exceptions, aufgrund der oft kurzen Definition.
     Es ist erlaubt diese in einem Modul, eines \ggf übergeordneten Packages, namens \textquote{excpetions.py} oder \textquote{errors.py} zu sammeln.
     Dies ist in der Python-Gemeinschaft bei Bibliotheken und Frameworks üblich.
@@ -42,7 +40,7 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Damit ist eine schnelle und gute Übersicht des \Abk{LP} (bei ausgeschaltetem \Abk{IDE} \textquote{auto-wrap}) gegeben, da zumeist die wichtigen Informationen am Anfang stehen und zumal sich die Anwendung von Fakten und Regeln hintereinander wiederholt.
     Bei konkretem Lesebedarf können Zeilen natürlich temporär, also nicht in die Versionsverwaltung übertragen, umgebrochen werden.
 
-    \item\label{itm:DE.LpDateistruktur} Die strukturelle Freiheit bei der Implementierung von Regelbücher aus \Item{itm:A.LpEntrypoint} wird durch eine derzeitig vorgegebene Grundstruktur gering eingeschränkt.
+    \item\label{itm:DE.LpDateistruktur} Die strukturelle Freiheit bei der Implementierung von Regelbüchern aus \Item{itm:A.LpEntrypoint}, wird durch eine derzeitig vorgegebene Grundstruktur gering eingeschränkt.
     Diese schlägt eine Trennung der Spielwelt-Regeln (\Code{rules.lp}) von Regelbuch- und Spielwelt-Fakten (\Code{meta.lp}) vor.
     (\vgl \Kapitel[KP]{subsec:pruefung-der-regelbuecher-struktur})
 
@@ -50,7 +48,7 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Dadurch wird eine feinere Steuerung und Trennung von irrelevanten Programmteilen für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
 
     Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierenden Spielwelt-Regel-Verletzungen, zu beschränken.
-    Diese Unterprogramme werden Charakter-Va\-li\-die\-rungs\-schritt genannt.
+    Diese Unterprogramme werden Charakter-Va\-li\-die\-rungs\-schritte genannt.
     Pro Charakter-Merkmal gibt es \idR zwei solcher Va\-li\-die\-rungs\-schritte:
     Zuerst die Prüfung, ob die Ausprägung/en genutzt werden kann/können, also ob durch die bereits gewählten anderen Merkmale oder einer Spielwelt-Regel, wie die Überschreitung einer maximalen Stufe, ein Regelverstoß vorliegt.
     Und anschließend wird geprüft, ob alle Voraussetzungen der Ausprägung/en erfüllt sind, \zB ob noch eine andere Merkmalsausprägung fehlt.

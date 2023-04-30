@@ -34,7 +34,7 @@ Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.
 Durch \Abk{DIP}\Note{\url{https://clean-code-developer.de/die-grade/gelber-grad/\#Dependency_Inversion_Principle_DIP}} wird es inneren Schichten ermöglicht indirekt äußere Schichten zu verwenden.
 Es ist dadurch notwendig, dass ein Mechanismus bereitsteht, wodurch innere Klassen zur Laufzeit Äußere einbinden können. \Vgl{REALISIERUNG-Palermo2008}
 
-Wie \zB durch das \textquote{Dependency Injection Pattern} \parencites(\vgl)()[][Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
+Das \textquote{Dependency Injection Pattern} ist ein solcher Mechanismus \parencites(\vgl)()[][Seite 195 bis 212]{PYTHON-Jaworski2021}{REALISIERUNG-Fowler2004}.
 
 Nachfolgendes bezieht sich \insb auf den eingefärbten Teil der \Abbildung[K]{fig:projekt-struktur-architektur}:
 
@@ -47,7 +47,7 @@ Nachfolgendes bezieht sich \insb auf den eingefärbten Teil der \Abbildung[K]{fi
     Diese werden nicht zur Laufzeit benötigt und werden daher von der eigentlichen Applikation getrennt.
     Das \Code{tests} Package ist in weitere Packages unterteilt; konkret spiegelt es die Package-Struktur von \Code{dsaheldenbogen} wider und wird daher nicht zusätzlich abgebildet.
     Der Vorteil daran ist, dass schnell erkannt werden kann in welchem Kontext der Test stattfindet.
-    Das Package \Code{tests\_resources} verhält sich ähnlich, es spiegelt die Struktur der \Code{resources} ab und enthält Test-exclusive Regelbücher-\AbkP{LP}.
+    Das Package \Code{tests\_resources} verhält sich ähnlich; es spiegelt die Struktur der \Code{resources} ab und enthält Test-exklusive Regelbücher-\AbkP{LP}.
 
     \item\label{itm:A.LpEntrypoint} Alle Regelbücher-\AbkP{LP} befinden sich unter \textquote{\Code{resources/rulebook}} in separaten Unterordnern.
     Die Applikation lädt für ein Regelbuch jeweils immer nur eine \Abk{LP}-Datei als Einstiegspunkt, welche direkt unterhalb des Unterordners sein und den Namen \textquote{\Code{\_entrypoint.lp}} tragen muss.
@@ -58,10 +58,10 @@ Nachfolgendes bezieht sich \insb auf den eingefärbten Teil der \Abbildung[K]{fi
     Auch stellt es, aufgrund der Einordnung des \Begriff{Clingo}-Frameworks in die Infrastruktur-Schicht, ein Implementierungsdetail der eigentlichen \Code{Engine} (im Sinne von \Abk{DIP}) dar.
     Daher werden sie als eine der äußersten Schichten angesiedelt betrachtet.
 
-    \item Die Schnittstelle, unter \textquote{\Code{api}}, definiert zusätzlich, neben den Domänenmodells, eigene entsprechende Schemas.
+    \item Die Schnittstelle liegt unter \textquote{\Code{api}} und definiert zusätzlich, neben den Domänenmodells, eigene entsprechende Schemata.
     Dies ist nicht nur konform zur Architektur, sondern bietet \insb die Möglichkeit die Strukturen und Datentypen so zu wählen, dass diese möglichst einfach für die \Abk{API}-Benutzenden (\zB das Frontend) zu nutzen sind.
 
-    \item Konkrete Endpunkte werden unter \textquote{\Code{api/endpoints}} getrennt nach der Domäne abgelegt und spiegelt im Dateinamen die Domäne wider.
+    \item Konkrete Endpunkte werden unter \textquote{\Code{api/endpoints}} getrennt nach der Domäne abgelegt und spiegeln im Dateinamen die Domäne wider.
     So stellt der Charakter eine Domäne dar.
     Künftig könnte ebenfalls der Benutzende eine Domäne sein, über dessen Endpunkte ein Benutzender, wie beim Charakter, erstellt, bearbeitet und gelöscht werden könnte.
     Die Funktionalität des An- und Abmeldens hingegen gehört der Applikationsdomäne \textquote{\Code{root}} selbst an.
@@ -77,9 +77,9 @@ Nachfolgendes bezieht sich \insb auf den eingefärbten Teil der \Abbildung[K]{fi
     Mehr dazu in \Kapitel{sec:kern-funktionalitat}.
 
     \item Unter \textquote{\Code{infrastructure}} befindet sich der Python-Code, welcher als Schnittstelle zwischen der \Code{Engine} und \Begriff{Clingo}-\Abk{API} fungiert.
-    Hier soll die Konvertierung des Charakter-Domain-Models zum \Begriff{Clingo}-\Tech{Kontext} und die erste Übersetzung der Ergebnis-Fakten in ein Domänenmodell passieren, sodass entsprechend der Zielarchitektur bei Änderungen dieses Teils der Applikationskern unberührt bleibt.
+    Hier soll die Konvertierung des Charakter-Domänen-Modells zum \Begriff{Clingo}-\Tech{Kontext} und die erste Übersetzung der Ergebnis-Fakten in ein Domänenmodell passieren, sodass, entsprechend der Zielarchitektur, bei Änderungen dieses Teils der Applikationskern unberührt bleibt.
 
-    \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer aufgeführten (und hier weit ausgelegten) Prinzipen \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern dort abgewichen, wo es der Wartbarkeit zuträglich ist.
+    \item\label{itm:A.1} Entsprechend der in Clean-Code-Developer aufgeführten (und hier weit ausgelegten) Prinzipien \AbkS{KISS}{\textquote{Keep it simple, stupid}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Keep_it_simple_stupid_KISS}}} und \AbkS{YAGNI}{\textquote{You Ain´t Gonna Need It}\Note{\url{https://clean-code-developer.de/die-grade/blauer-grad/\#You_Aint_Gonna_Need_It_YAGNI}}}, wird die vorgegebene Architektur nicht strikt/blind gefolgt, sondern dort abgewichen, wo es der Wartbarkeit zuträglich ist.
     Dies ist, auf Ebene der Klassen, der Fall bei der Anwendung von \Abk{DIP} und stellt eine Verletzung der fundamentalen Regel von \Tech{Onion Architecture} dar.
     Es wird also auf einen gewissen Grad loser Kopplung verzichtet, aber Klassen weiterhin ihrer Schicht zugeordnet.
     So kann dies bei Bedarf durch steigende Anforderungen nachgeholt werden.

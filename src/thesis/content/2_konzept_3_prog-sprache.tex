@@ -25,13 +25,14 @@ Beispiele sind clingo-haskell\Note{\Begriff{Clingo}-\Abk{API} für Haskell: \url
     \Vgl[Kapitel 3 und 7]{DLV-Leone2006}
 
     DLVSYSTEM S.R.L. bewirbt und vertreibt \Abk{DLV} mit dem Fokus auf industrielle Bereiche.
-    Diese Firma wurde \Jahr{2005}, von Professoren der Universität von Calabria, gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
+    Diese Firma wurde \Jahr{2005} von Professoren der Universität von Calabria gegründet und \Jahr{2009} als Ausgründung dieser Universtität anerkannt.
     \Vgl{DLV-Calimeri2012, DLV-dlvsystem-histroy}
 
     Ein \Abk{DLV}-Programm kann ausgeführt werden, indem es über das \AbkS{CLI}{\textquote{command-line interface}} ausgerufen wird.
     Dies kann manuell oder gesteuert durch eine Software beliebiger Programmiersprache geschehen;
     die naheliegendste ist C++, da das Framework in C implementiert wurde.
-    Um die Entwicklung zu vereinfachen, wurde von DLVSYSTEM S.R.L. eine eigene \Abk{IDE} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}), diese bietet, neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, \Abk{DB}-Integration und eine Plattform zum Austausch von Plugins, erstellt von anderen Benutzern.
+    Um die Entwicklung zu vereinfachen, wurde von DLVSYSTEM S.R.L. eine eigene \Abk{IDE} entwickelt (ASPIDE\Note{\url{https://www.dlvsystem.it/dlvsite/aspide/}}).
+    Diese bietet, neben einer \AbkS{GUI}{\textquote{graphical user interface}}, wichtige Funktionen wie \textquote{unit testing}, \Abk{DB}-Integration und eine Plattform zum Austausch von Plugins, erstellt von Anderen.
     \Vgl{DLV-Leone2015}
 
     Es existiert zudem eine Java-Schnittstelle\Englisch{interface} (JDLV\Note{\url{https://www.dlvsystem.it/dlvsite/jdlv/}}), wobei die Integration über die Meta-Spezifikation JASP realisiert wird \Vgl{DLV-Febbraro2012}.
@@ -42,19 +43,18 @@ Beispiele sind clingo-haskell\Note{\Begriff{Clingo}-\Abk{API} für Haskell: \url
     \Vgl{DLV-unical-home}
 
     \item[Clingo] ist ein \Abk{ASP}-System von \Abk{Potassco}, ein Projekt der Universtität Potsdam, das sowohl den \sog \Tech{grounder} (gringo) als auch den \Tech{solver} (clasp) des selbigen Herstellers \Abk{Potassco} vereint \Vgl{CLINGO-Guide}.
-    \Begriff{Clingo} selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen;
-    und seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
+    \Begriff{Clingo} selbst und alle seine Komponenten sind seit \Jahr{2008} quelloffen und seit \Jahr{2016} auf GitHub \Vgl{CLINGO-Github}.
     Eine native Anbindung an Programmiersprachen wird durch die \Abk{API}s für Python\Note{\url{https://potassco.org/clingo/python-api/5.6/clingo/}}, C\Note{\url{https://potassco.org/clingo/c-api/current/}} und Rust\Note{\url{https://github.com/potassco/clingo-rs}} gewährleistet.
     Aus einem \Begriff{Clingo}-\Abk{LP} kann man außerdem sehr einfach externe Funktionen, \zB Python-Funktionen, aufrufen \Vgl[Kapitel 3.1.14]{CLINGO-Guide}.
 
-    Zwei wichtige Features, für die Modellierung von komplexen Problemen, sind:
+    Zwei wichtige Features für die Modellierung von komplexen Problemen sind:
     erstens die Möglichkeit Teile des \AbkP{LP} in separat aufrufbare Unterprogramme (Funktionen) zu strukturieren;
     und zweitens Regeln und Fakten mit noch unbekannten Aussagen zu formulieren, welche erst später, \zB in Unterprogrammen, definiert werden \Vgl{CLINGO-Gebser2014}.
     Ebenfalls nennenswert ist die Unterstützung von Theorien-basierter Argumentation\Englisch{theory-specific reasoning}, womit komplexe Regeln, Fakten und Aussagen modular (innerhalb einer Theorie) definiert und entstehende Aussagen außerhalb dieser wiederverwendet werden können \Vgl{CLINGO-Gebser2016}.
     Auch zu nennen ist das \sog[multi-shot solving], bei dem ein \Abk{LP} nicht einmal in Gänze gelöst wird, sondern in Teilprobleme separiert wird, welche wiederholt und aufeinander aufbauend gelöst werden, um so eine optimale Lösung, bei sich verändernden Aussagen, zu finden \Vgl{CLINGO-Gebser2017}.
 
     Mit der \Begriff{Clingo}-Erweiterung clingcon können in der Problemstellung auch Bedingungen auf endliche Ganzzahlen beachtet werden \Vgl{CLINGO-Clingcon}.
-    Hingegen die Erweiterung \AbkS{clorm}{\Begriff{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping} ergänzt, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
+    Hingegen ergänzt die Erweiterung \AbkS{clorm}{\Begriff{Clingo} ORM} die Python \Abk{API} um \AbkS{ORM}{Object Relational Mapping}, welches die (statische) Modellierung der Fachlichkeit vereinfacht \Vgl{CLINGO-Clorm}.
 \end{description}
 
 
@@ -79,9 +79,9 @@ Beispiele sind clingo-haskell\Note{\Begriff{Clingo}-\Abk{API} für Haskell: \url
 %    \Vgl{JAVA-Parsons2020}
 %}
 
-    \item[C++] ist eine Objekt-orientierte, imperative und Template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991}, als eine Allzweck-Programmiersprache, entwickelt wurde.
-    Es ist eine Erweiterung oder Nachfolger der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und Wiederverwendbarkeit von Code zu beheben.
-    So wurden klassische \Abk{OOP}-Konzepte wie Klassen, Vererbung, Polymorphismus und Abstraktion, als auch Paradigmen wie generische Typen, eingebaut, die es Entwickelnden ermöglicht, komplexe Software effizient zu entwickeln und übersichtlich zu organisieren.
+    \item[C++] ist eine Objekt-orientierte, imperative und Template-basierte Programmiersprache, die von Bjarne Stroustrup \Jahr{1991} als eine Allzweck-Programmiersprache entwickelt wurde.
+    Es ist eine Erweiterung oder Nachfolger der Programmiersprache C, um dessen Mängel in Bezug auf \Abk{OOP} und die Wiederverwendbarkeit von Code zu beheben.
+    So wurden klassische \Abk{OOP}-Konzepte, wie Klassen, Vererbung, Polymorphismus und Abstraktion, als auch Paradigmen, wie generische Typen, eingebaut, die es Entwickelnden ermöglicht, komplexe Software effizient zu entwickeln und übersichtlich zu organisieren.
     \Vgl{C++-Stroustrup2007}
 
     Besondere Eigenschaft sind \uA:
@@ -137,7 +137,7 @@ Hier bietet \Begriff{Clingo}, aufgrund der veröffentlichten Materialien, welche
 Die von \Begriff{Clingo} nativ, also offiziell (out-of-the-box), unterstützten und relevanten (aufgrund der Popularität) Programmiersprachen sind C(++) und Python.
 Die freundlichste für ungeübte und angehende Programmierende ist Python.
 Dies, also der Einstieg in die Programmierung abhängig der Sprache, wurde in Ansätzen in \Vgl{C++-Ateeq2014} für Python und C++ aufgezeigt.
-Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwicklenden bestimmte Aufgabenbereiche abnimmt.
+Das Potenzial möglicher Fehlerquellen ist in Python ebenfalls geringer, da diese entgegen C(++) eine Programmiersprache der höheren Ebene ist und daher den Entwickelnden bestimmte Aufgabenbereiche abnimmt.
 Die Syntax von Python ist außerdem sehr natürlich, was diesem zuträglich ist und so gut zum formalen und ebenfalls natürlichen Sprachbild von \Begriff{Clingo}-\AbkP{LP} passt.
 Eine größere Komplexität wird durch die Verwendung von Python vermieden, da nur mit Python\Note{eine weitere Sprache währe LUA, wobei diese nicht zur Auswahl steht} die Möglichkeit besteht aus einem \Begriff{Clingo}-\Abk{LP} heraus externe und Kontext-bezogene (Python) Funktionen aufzurufen und daher keine weitere Programmiersprache erlernt werden muss.
 Somit stellt \textbf{Python} die \textbf{sinnvollste} Wahl der \textbf{Programmiersprache} dar.

@@ -7,11 +7,11 @@ Durch den Umfang ist es zugleich eine gute Dokumentation der Schnittstelle.
 Dazu wird eine der populärsten Spezifikationen \textbf{OpenAPI} eingesetzt und im Format \textbf{\Abk{YAML}} bereitgestellt, da es eine gut lesbare Syntax hat und Kommentare erlaubt \Vgl[Kapitel 4]{KONZEPT-De2017}.
 
 Der Vorteil einer frühzeitigen Definition ist, dass man unabhängig \textquote{gegen} diesen Schnittstellenvertrag entwickeln kann, sodass keine (zeitlichen) Entwicklungsabhängigkeiten zwischen Front- und Backend entstehen \Vgl[Kapitel 3]{KONZEPT-De2017}.
-Basierend auf den Schnittstellenvertrag können \sog Mocks zur Entkopplung erstellt werden.
+Basierend auf dem Schnittstellenvertrag können \sog Mocks zur Entkopplung erstellt werden.
 Dies sind Nachbildungen der jeweils anderen Schnittstellen-Seite, welche das erwartete Verhalten imitiert und so ermöglicht das eigene System \textquote{gegen} die Schnittstelle zu testen.
 
 Im Laufe der Zeit, nach dieser Arbeit und der Veröffentlichung der Software, wird es vorkommen, dass Anpassungen am Schnittstellenvertrag gemacht werden und so verschiedene Versionen entstehen \Vgl[Kapitel 6]{KONZEPT-De2017}.
-Um den Wartungsaufwand, \zB durch \Abk{API}-Versionierung im Pfad, gering zu halten und weil es sich hierbei um keine öffentliche \Abk{API} handelt mit einer großen Anwenderzahl, wird stets nur die aktuellste Version vom Backend unterstützt.
+Um den Wartungsaufwand, \zB durch \Abk{API}-Versionierung im Pfad, gering zu halten und weil es sich hierbei weder um eine öffentliche \Abk{API} handelt, noch eine große Anwenderzahl hat, wird stets nur die aktuellste Version vom Backend unterstützt.
 Dies bedeutet, dass eine neue \Abk{API}-Version nur veröffentlicht werden kann, wenn diese mit der aktuell veröffentlichten Frontend-Version kompatibel ist.
 
 
@@ -23,20 +23,19 @@ Nachfolgende Zeilen-Referenzen beziehen sich auf das \Listing[KP]{lst:characterS
 Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{race}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
 diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
 Das Konzept der Schemata sieht vor, dass sämtliche konkrete Werte, neben Zahlen, Zeichenfolgen (Text) sind.
-Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbüchern gemäß der Anfrage, ergeben.
+Grund ist, dass konkrete Werte nicht statisch modelliert werden können, da sie sich erst dynamisch zur Laufzeit, je nach zu verwendenden Regelbüchern (gemäß der Anfrage), ergeben.
 
 Auch die Merkmale \Code{talents} und \Code{combat\_techniques} geben die Merkmalsausprägung (Name) als Freitext an;
 dies ist jedoch schwerer abzulesen.
 Hinter der Typen-Definition (\zB Zeile 356 bis 359) steht ein \sog \Tech{Wörterbuch}\Englisch{Dictionary} von Python;
-dies kann man als Map von Schlüssel-Wert-Paaren begreifen.
-Wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
+dies kann man als Map von Schlüssel-Wert-Paaren begreifen, wobei ein Schlüssel, aufgrund des \Abk{JSON}-Formats, stets ein Text ist und der Wert als positive Ganzzahl definiert wurde.
 Der Wert ist bei diesen Merkmalen die Stufe.
 Ein Schlüssel kann nur einmalig in einem solchen Wörterbuch (und auch im JSON-Type \Begriff{object}) existieren.
-Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufe darunter ableitbar sind.
+Dies deckt sich mit der Modellierung des Charakters, da bei einer mehrfachen Existenz eines Merkmals mit Stufe nur der mit der höchsten Stufe relevant ist, da alle Stufen darunter ableitbar sind.
 
 Bei den Merkmalen \Code{advantages} und \Code{disadvantages} ist es etwas leichter zu erkennen (siehe Zeile 368 bis 377).
 Dies sind Listen von drei-elementigen Tuple, dargestellt durch eine zwei-dimensionale Liste, wobei die Verschachtelte genau drei Elemente verlangt.
-Das erste Element ist wie bisher der Name der Merkmalsausprägung.
+Das erste Element ist (wie bisher) der Name der Merkmalsausprägung.
 Das letzte Element ist die Stufe.
 Das Mittlere ist ein Text, welches \insb auch leer sein darf.
 Dies wird benötigt, da einige Vor- und Nachteile dahingehend mehrfach vorkommen können, dass sie auf andere Merkmalsausprägungen oder gar nicht modellierbare, frei wählbare Definitionen referenzieren können und daher nur in der Kombination spezifisch sind \Vgl{RWiki-HassAuf,RWiki-ImmunitaetKrankheit,RWiki-Unfaehig,RWiki-SchlechteEigenschaft}.
@@ -53,7 +52,7 @@ Diese Ausnahmefälle können jedoch leicht umgangen werden, indem das vermeintli
 
 Der vollständige Schnittstellenvertrag liegt im \Kapitel[KP]{sec:openapi.yaml} vor.
 Im Generellen sind die Anfrage-Körper\Englisch{request bodies} und Antworten\Englisch{responses} im Format \textbf{\AbkK{JSON}}\@.
-Nachfolgend werden die vorgesehenen Endpunkte erklärt, dabei wird unter \textquote{Regelbuch} auch Regelbuch-Erweiterung verstanden.
+Nachfolgend werden die vorgesehenen Endpunkte erklärt; dabei wird unter \textquote{Regelbuch} auch Regelbuch-Erweiterung verstanden.
 
 Beim Entwurf wurde darauf geachtet, dass Eingabe-Parameter nach Möglichkeit stets am gleichen \textquote{Ort} anzugeben sind, um die Verwendung der \Abk{API} konsistent und einfach zu halten.
 So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Parameter anzugeben.
@@ -72,7 +71,7 @@ So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Param
     \end{tabularx}
 
     \item[/api/meta/feature/list] gibt für ein Merkmal die Liste der verfügbaren Ausprägungen, unter Beachtung zu verwendender Regelbücher, zurück.
-    Diese Information muss dynamisch entsprechend der auszuwertenden Regelbücher ermittelt werden.
+    Diese Information muss dynamisch, entsprechend der auszuwertenden Regelbücher, ermittelt werden.
 
     \begin{tabularx}{.936\textwidth}{XX}
         \footnotesize Beispiel Anfrage:                           & \footnotesize Beispiel Antwort:                            \\
@@ -82,9 +81,9 @@ So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Param
     \end{tabularx}
 
     \item[/api/hero/validate] stellt den wichtigsten Endpunkt dar.
-    Es wird geprüft ob, der gegebenen Charakter, unter Beachtung der zu verwendenden Regelbücher, gültig ist.
+    Es wird geprüft, ob der gegebene Charakter, unter Beachtung der zu verwendenden Regelbücher, gültig ist.
     Dabei werden etwaige Regelverstöße detailliert als Fehler \bzw Warnung zurückgegeben.
-    Nur Fehler führen dazu, dads ein Charakter für ungültig erklärt wird.
+    Nur Fehler führen dazu, dass ein Charakter für ungültig erklärt wird.
 
     \begin{tabularx}{.936\textwidth}{XX}
         \footnotesize Beispiel Anfrage:                              & \footnotesize Beispiel Antwort:                                 \\
@@ -111,7 +110,7 @@ Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, we
     \end{tabularx}
 
     \item[/api/hero/export] exportiert einen gespeicherten Charakter in ein Format, dass auch von anderen Softwares unterstützt wird.
-    Das Antwort-Format is daher nicht \Abk{JSON}\@.
+    Das Antwort-Format ist daher nicht \Abk{JSON}\@.
 
     \begin{tabularx}{.936\textwidth}{XX}
 %        \midrule
@@ -130,7 +129,7 @@ Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, we
 \end{description}
 
 \begin{listing}[!h]
-    \caption{Beispiel Anfragekörper: invalider Held}\label{lst:invalidheroexamplejson}
+    \caption{Beispiel Anfragekörper zu einem invaliden Helden}\label{lst:invalidheroexamplejson}
     \inputMintedTwoCols[style=colorful]{json}{appendix/invalid-hero-example.json}
 \end{listing}
 
