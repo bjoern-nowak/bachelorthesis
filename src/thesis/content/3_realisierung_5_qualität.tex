@@ -36,7 +36,7 @@ welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten
     (siehe \Abbildung[K]{fig:test-trophy}).
     Fokussiert werden demnach Tests mit dem besten Verhältnis, was dem \hyperref[itm:TA.Tests]{dritten Punkt der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Tests}} und dem impliziten Ziel einer möglichst wartbaren Software entspricht.
 
-    \item Bei der Testintention unterscheidet das Projekt zwischen der Prüfung der Quellcode-Qualität und der Anforderungseinhaltung.
+    \item Bei der Testintention unterscheidet das Projekt zwischen der Quellcode-Qualität und der Anforderungseinhaltung.
 \end{enumerateWithCode}
 \end{minipage}
 \hfill
@@ -84,7 +84,7 @@ Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleis
 
 \subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}\todo{QS.x statt kapitel?}
 
-Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (\vgl \Anhang[KP]{sec:rulebook-validator.py}).
+Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (\vgl \Anhang[KP]{sec:rulebook-validator.py} und \Anhang[KP]{sec:test-resources-rulebooks.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
 Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt), wie es im ersten \Abk{LP}-Beispiel in \Kapitel[KP]{subsec:validierungsvoraussetzung} gezeigt wird.
 Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
@@ -94,26 +94,24 @@ Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
 
 Gemäß dem Modell der Testtrophäe wurde der Schwerpunkt auf die Erstellung von Integrationstests gelegt.
 Das Integrative an den hier beschriebenen Tests ist, dass diese die technische Korrektheit der Funktionalität über die Ebene der Applikationsservice-Schicht prüfen und dabei alle tieferen Schichten durchläuft.
-Eine verbreitete Definition bezeichnet solche als Systemtests, da diese nur von der eigentlichen Applikation abhängen und keine Integration mit \zB einer \Abk{DB} haben.
+%Eine verbreitete Definition bezeichnet solche als Systemtests, da diese nur von der eigentlichen Applikation abhängen und keine Integration mit \zB einer \Abk{DB} haben. % falsch
 
-Ein Beispiel zeigt der Test des \Code{MetaService} (\Anhang[KP]{sec:test-meta-service.py}), dieser Service stellt \uA die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, aufzulisten.
-{\color{red}
-Dazu wird \Code{TestingEngine} (\Anhang[KP]{sec:testing-engine.py})
-Um keine Abhängigkeit zu echten fachlichen Regelbücher zu haben, wurde dazu
-Ist eine einfacherer Variante der echten Engine, welches es ermöglicht einfache Test-Regelbücher-\AbkP{LP} aus zu führen. welche auf dasinterne Validierungen, wie die Prüfung ob die angegeben Regelbücher nutzbare sind, verzichtet
-}
+Als Beispiel sei der \Code{TestMetaService} (\Anhang[KP]{sec:test-meta-service.py}) aufgeführt, welcher den \Code{MetaService} (\Anhang[KP]{sec:meta-service.py}) testet.
+Dieser Service stellt \uA die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, aufzulisten.
+Damit solche Tests unabhängig \textquote{echter} Regelbücher durchgeführt werden können und damit wartungsarm bleiben, wurde eine Test-Variante (\Code{TestingRulebook}) der interne Representation von Regelbüchern eingeführt, welche Regelbücher aus dem separaten \Code{tests\_resources/rulebook} Ordner lädt.
+So ist es möglich für verschiedene Testklassen und -fälle unterschiedliche Regelbücher zu definieren, wodurch auch Negativtests ermöglicht werden.
+Um die Implementierung/Nutzung dieser Test-Regelbücher zu verbessern, wurde die \Code{Engine} um eine \Code{TestingEngine} (\Anhang[KP]{sec:testing-engine.py}) erweitert.
+Diese fügt das \Code{common.lp} nicht automatisch hinzu und führt keine Validierung durch, ob ein Regelbuch nutzbar ist.
+Das Prinzip von \AbkS{FCoI}{\textquote{Favour Composition over Inheritance}\Note{\url{https://clean-code-developer.de/die-grade/roter-grad/\#Favour_Composition_over_Inheritance_FCoI}}} ermöglicht es Tests die \Code{TestingEngine} zu nutzen, indem sie bei der Erstellung des zu testenden Service diesen übergeben können.
 
 
 \subsection{Prüfung gesamtheitliches Zusammenspiel}\label{subsec:prufung-gesamntheitliches-zusammenspiel}
 
-{\color{red}
-Um unvermeidliche blinde Flecken, durch fehlende Komponententests, wahrscheinlicher aufzudecken, werden \sog \textbf{Funktionstests} durchgeführt.
-In Gegensatz zu Komponententests werden bei diesen ganze fachliche Anforderungen getestet, dabei gibt es lediglich eine definierte Eingabe und ein erwartetes Ergebnis.
-Alles dazwischen wird im Sinne einer \textquote{schwarzen Box} nicht betrachtet.
-(VERGLEICH)\todo{VERGLEICH}
+Um (un)vermeidliche blinde Flecken, durch fehlende Komponenten- oder Integrationstests und \insb bei vergessenen Testfällen, wahrscheinlicher aufzudecken, werden Ende-zu-Ende Tests durchgeführt.
+In Gegensatz zu Komponententests werden bei diesen sämtliche Anforderungen, technisch wie fachlich, für einen Testfall gleichzeitig getestet.
+Bei diesen Ende-zu-Ende Tests wird die Applikation gestartet, um die \Abk{API} mit definierten Anfragen anzusteuern und gegen erwartete Ergebnisse zu testen.
+Alles dazwischen, also die Verarbeitung innerhalb der Applikation, ist im Sinne einer \textquote{schwarzen Box} nicht bekannt und wird daher bei der Testfallerstellung nicht berücksichtigt.
+Beachtet wird lediglich der Schnittstellenvertrag.
 
-Ein Beispiel wäre, dass zu ein validen Charakter keine Validierungsfehler erzeugt werden.
-}
-
-
-
+Der Test \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) als solcher \zB, prüft den \Code{/hero/validate} Endpunkt darauf ab, das zu einem gültigen Charakter keine Validierungsfehler erzeugt werden (Warnungen werden ignoriert) und bei ungültigen Charakteren entsprechend korrekte Validierungsfehler zurückgemeldet werden.
+Dessen Testfälle sind ausgelagert in separate Klassen (\Anhang[KP]{sec:invalid-heros.py} und \Anhang[KP]{sec:valid-heros.py}) definiert, da diese aufgrund der Länge die Testklasse zu unübersichtlich machen würde und damit diese von anderen Tests (sauber) wiederverwendet werden können.

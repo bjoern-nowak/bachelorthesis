@@ -70,15 +70,42 @@
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/rulebook_validator.py}
 
 %    \newpage
+    \section{<repo>/tests/resources/test\_resources\_rulebooks.py}\label{sec:test-resources-rulebooks.py}
+    Prüft alle \textquote{echten} Regelbücher mit dem \Code{RulebookValidator} (\Anhang[KP]{sec:rulebook-validator.py}).
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_resources_rulebooks.py}
+
+%    \newpage
     \section{<repo>/tests/app/services/test\_meta\_service.py}\label{sec:test-meta-service.py}
-    Komponententests das die Funktionalitäten des \Code{MetaService} prüft.
-    Es nutzt dazu die \Code{TestingEngine} (siehe \Anhang[KP]{sec:testing-engine.py}).
+    Komponententest das die Funktionalitäten des \Code{MetaService} (\Anhang[KP]{sec:meta-service.py}) prüft.
+    Es nutzt dazu die \Code{TestingEngine} (\Anhang[KP]{sec:testing-engine.py}).
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_meta_service.py}
+
+%    \newpage
+    \section{<repo>/app/services/meta\_service.py}\label{sec:meta-service.py}
+    App-Service für den \Code{/meta} Endpunkt.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/meta_service.py}
 
 %    \newpage
     \section{<repo>/tests/app/engine/testing\_engine.py}\label{sec:testing-engine.py}
     Ist eine einfachere Variante der echten Engine, welches es ermöglicht einfache Test-Regelbücher-\AbkP{LP} aus zu führen.
     \vspace{-1em}\inputMintedTwoCols{python}{appendix/testing_engine.py}
+
+%    \newpage
+    \section{<repo>/tests/e2e/test\_hero\_api.py}\label{sec:test-hero-api.py}
+    Ende-zu-Ende Test, welches den \Code{/hero} Endpunkt überprüft.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/test_hero_api.py}
+
+%    \newpage
+    \section{<repo>/tests/e2e/invalid-heros.py}\label{sec:invalid-heros.py}
+    Dies ist, aufgrund der Länge, nur ein Auszug und nicht die vollständige Datei.
+    Es representiert Testfälle mit ungültigen Charakteren und wird von \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) genutzt.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/invalid_heros.py}
+
+%    \newpage
+    \section{<repo>/tests/e2e/valid-heros.py}\label{sec:valid-heros.py}
+    Dies ist, aufgrund der Länge, nur ein Auszug und nicht die vollständige Datei.
+    Es representiert Testfälle mit gültigen Charakteren und wird von \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) genutzt.
+    \vspace{-1em}\inputMintedTwoCols{python}{appendix/valid_heros.py}
 
     %\lstinputlisting[nolol,language=yaml]{appendix/api-contract.yaml}
     %\lstinputlisting[nolol,language=clingo]{appendix/clingo-cheatsheet.lp}
