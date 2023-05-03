@@ -108,6 +108,29 @@
     outputdir={../../out/thesis/} %% move tmp files to output folder
 ]{minted} %% define with \setminted and print with \inputminted (need latex cmd arg '-shell-escape')
 
+%\ifthenelse{\boolean{freezeMinted}}{
+%    \IfFileExists{\jobname.fm}{
+%        \makeatletter\@input{\jobname.fm}\makeatother
+%
+%        \ifthenelse{\boolean{freezeMinted-finalized-cache}}{
+%            \PassOptionsToPackage{frozencache}{minted}
+%        }{
+%            \PassOptionsToPackage{finalizecache}{minted}
+%            \write\freezeMintedFile{\noexpand\newboolean{freezeMinted-finalized-cache}\noexpand\setboolean{freezeMinted-finalized-cache}{true}}
+%        }
+%    }{
+%        \PassOptionsToPackage{finalizecache}{minted}
+%        \newwrite\freezeMintedFile
+%        \immediate\openout\freezeMintedFile=\jobname.fm
+%        \write\freezeMintedFile{\noexpand\newboolean{freezeMinted-finalized-cache}\noexpand\setboolean{freezeMinted-finalized-cache}{true}}
+%    }
+%}{
+%    \IfFileExists{\jobname.fm}{
+%        \write\freezeMintedFile{\noexpand\newboolean{freezeMinted-finalized-cache}\noexpand\setboolean{freezeMinted-finalized-cache}{false}}
+%    }{}
+%}
+
+
 %% or use
 %\usepackage{listings} %% define with \lstset and print with \lstinputlisting
 %\usepackage{scrhack} %% remove warning from srcreprt due to listings using deprecated '\float@addtolists'

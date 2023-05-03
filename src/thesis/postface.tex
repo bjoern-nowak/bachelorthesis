@@ -1,18 +1,24 @@
-\renewcommand{\UrlFont}{\small} %% make URLs in bib smaller and non monospaced
-%\nocite{*} %% TODO [DEVELOP] insert when there are no citations
-\defbibnote{prenote}{Alle Online-Referenzen (jene mit URLs) wurden am 03.05.2023 abgerufen.}
-\printbibliography[title=\bibTitle, prenote=prenote]
+\hypersetup{linkcolor=\linkColorToc}
 
-\hypersetup{linkcolor=\linkColorToc} %% ToC uses its on link color
+
 %\clearpage
 \listoftables
-\todo{Entfernen? Gibt ja auch nichts fuer Gleichungen}
 
 %\clearpage
-\todo{soll nach PA vorne hin}
 \listoffigures
+\todo{soll nach PA vorne hin}
+\todo{List of Gleichungen?}
+\todo{Listen auf einer seiten?}
 
 %\clearpage
 \SetupFloatingEnvironment{listing}{listname=\lstTitle}
 \listoflistings %% vs '\lstlistoflistings' from lstlisting package
-\hypersetup{linkcolor=\linkColor} %% ToC uses its on link color
+
+
+\hypersetup{linkcolor=\linkColor}
+
+
+\renewcommand{\UrlFont}{\small} %% make URLs in bib smaller and non monospaced
+%\nocite{*} %% TODO [DEVELOP] insert when there are no citations
+\defbibnote{prenote}{Alle Online-Referenzen (jene mit URLs) wurden am 03.05.2023 abgerufen.}
+\printbibliography[title=\bibTitle, prenote=prenote]

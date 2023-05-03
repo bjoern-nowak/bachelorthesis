@@ -157,7 +157,7 @@ max_count_exceeded(culture,MAX) :- COUNT=#count{C:culture(C)}, MAX=#max{MC:max_c
 
     \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
     Somit sind negative Zahlen ausgeschlossen.
-    Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.\todo{Sollen das Listings mit Überschriften sein?}
+    Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.
     \begin{mintedNameless}[linenos=false]{clingo}
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN=0, LVL < MIN.
     \end{mintedNameless}
