@@ -29,9 +29,7 @@ Die beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell 
 Es besagt im Wesentlichen, dass eher mehr schnelle und isolierte Komponententests und weniger langsame und integrative Ende-zu-Ende (\Begriff{ui}) Tests zu schreiben sind.
 \Vgl{REALISIERUNG-Cohn2009}
 
-Welches Testmodell zu wählen und damit
-\begin{minipage}[t]{.675\textwidth}
-welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
+Welches Testmodell zu wählen und damit welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
 
 \begin{enumerateWithCode}{QS}
     \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
@@ -41,25 +39,38 @@ welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten
 
     \item Bei der Testintention unterscheidet das Projekt zwischen der Quellcode-Qualität und der Anforderungseinhaltung.
 \end{enumerateWithCode}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.3\textwidth}
-    \vspace{.75em}
+
+\begin{wrapfigure}[13]{r}{.3\textwidth}%
+    \vspace{-2em}
     \centering
     \captionsetup{labelsep=newline,format=plain,justification=centering}
-    \captionof{figure}{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
+    \caption{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
     \vspace{.75em}
-    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.75}{testtrophy.pdf}
-\end{minipage}
-%\begin{wrapfigure}{r}{.3\textwidth}%
+    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.25}{testtrophy.pdf}
+\end{wrapfigure}%
+%Welches Testmodell zu wählen und damit
+%\begin{minipage}[t]{.675\textwidth}
+%    welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
+%
+%    \begin{enumerateWithCode}{QS}
+%        \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
+%        Diese drückt aus, wie hoch der Nutzen einer Teststufe im Vergleich zum notwendigen Entwicklungsaufwand ist
+%        (siehe \Abbildung[K]{fig:test-trophy}).
+%        Fokussiert werden demnach Tests mit dem besten Verhältnis, was dem \PageRef{itm:TA.Tests}{dritten Punkt der abgeleiteten technischen Anforderungen} und dem impliziten Ziel einer möglichst wartbaren Software entspricht.
+%
+%        \item Bei der Testintention unterscheidet das Projekt zwischen der Quellcode-Qualität und der Anforderungseinhaltung.
+%    \end{enumerateWithCode}
+%\end{minipage}
+%\hfill
+%\begin{minipage}[t]{.3\textwidth}
+%    \vspace{.75em}
 %    \centering
 %    \captionsetup{labelsep=newline,format=plain,justification=centering}
-%    \caption{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
-%    \vspace{1em}
-%    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.25}{testtrophy.pdf}
-%\end{wrapfigure}%
-
-\vspace{\parskip}
+%    \captionof{figure}{Testtrophäe\\(Anlehnung an \Zitat{REALISIERUNG-Dodds2019})}\label{fig:test-trophy}
+%    \vspace{.75em}
+%    \ImageInRatio[trim={3mm 1mm 3mm 1mm}]{.75}{testtrophy.pdf}
+%\end{minipage}
+%\vspace{\parskip}
 Die Analyse der Quellcode-Qualität kann statisch und dynamisch durchgeführt werden.
 Beim Letzteren kann \zB die Testabdeckung ermitteln werden,
 Die Testabdeckung drückt aus wie viele Zeilen Quellcode durch die vorhanden Tests abgedeckt sind und gegeben somit einen sehr einfachen Indikator für blinde Flecke.
