@@ -39,6 +39,8 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
     Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
+    Auch die \Abk{API} beachtet dieses nicht, hier müsste die \Abk{API} generischer modelliert werden, sodass diese ausschließlich Listen für Merkmale akzeptiert.
+    Wenn \zB ein Regelbuch implementiert werden soll, welches mehrere Spezies erlaubt, dann wäre auch dies vollständig und wartungsfrei von der \Abk{API} unterstützt.
 
     \item Eine einfach nutzbare und gut verständliche Formalisierung der \textquote{count\_by} Methode aus \Regel{itm:HR.AnyOf} konnte nicht gefunden werden.
     Die Modellierung erfordert, dass die Auswahlliste kein Tuple von freier Länge ist, sodass \textquote{pooling} genutzt werden muss.
@@ -57,6 +59,9 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
         \end{minted}
     \end{listing}
 
+    \item Außerdem sollte für einen guten Wiedererkennungswert die Struktur einer \Abk{LP}-Funktion beibehalten werden.
+    Bei der Regel~\ref{itm:HR.AnyOf} wird jedoch die \Abk{LP}-Funktion \textquote{any\_of} im Ergebnis-Fakt anders als in der Spielwelt-Regel aufgebaut, sowie die \PageRef{itm:KV.Merkmale}{Konvention~\ref{itm:KV.Merkmale}} gebrochen und stellt damit bereits jetzt eine technische Schuld dar.
+
     \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung zwischen der \Code{Engine} (Domäne) und \Begriff{Clingo} (Infrastruktur).
     Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), doch es kann für die zukünftige Testerstellung oder einem, aktuell unwahrscheinlichem, Wechsel des \Abk{ASP}-Framework hinderlich sein.
     Die Packages/Module sind sauber definiert, jedoch wurde das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
@@ -65,6 +70,13 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
 %    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Tech{Clingo}).
 %    Das Packet\Englisch{package}, als dessen Schnittstelle zu sehen, ist \textquote{sehr nahe} \bzw sehr gekoppelt an die Verwendung von \Tech{Clingo}.
 %    Eine sauberer Trennung ist aber möglich -> besonders positiv anzumerken}
+
+    \item Als besonders praktisch hat sich die \PageRef{itm:KV.Verursacher}{Konvention~\ref{itm:KV.Verursacher}} gezeigt.
+    Bei Umsetzungsfehlern und Unklarheiten konnte man dadurch schnell die Quelle der Regel nachschlagen ohne jede Spielwelt-Regel explizit mit einer Quelle dokumentieren zu müssen.
+
+    \item Auch die \PageRef{itm:KV.Relation}{Konvention~\ref{itm:KV.Relation}} ist positiv anzumerken.
+    Dies hat die Verständlichkeit der Spielwelt-Regel-Formalisierung gefördert und ermöglichte ein einfaches Interpretieren der Ergebnisfakten.
+
 \end{enumerateWithCode}
 
 

@@ -34,7 +34,7 @@ welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten
     \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
     Diese drückt aus, wie hoch der Nutzen einer Teststufe im Vergleich zum notwendigen Entwicklungsaufwand ist
     (siehe \Abbildung[K]{fig:test-trophy}).
-    Fokussiert werden demnach Tests mit dem besten Verhältnis, was dem \hyperref[itm:TA.Tests]{dritten Punkt der abgeleiteten technischen Anforderungen auf S.\pageref{itm:TA.Tests}} und dem impliziten Ziel einer möglichst wartbaren Software entspricht.
+    Fokussiert werden demnach Tests mit dem besten Verhältnis, was dem \PageRef{itm:TA.Tests}{dritten Punkt der abgeleiteten technischen Anforderungen} und dem impliziten Ziel einer möglichst wartbaren Software entspricht.
 
     \item Bei der Testintention unterscheidet das Projekt zwischen der Quellcode-Qualität und der Anforderungseinhaltung.
 \end{enumerateWithCode}
@@ -114,4 +114,8 @@ Alles dazwischen, also die Verarbeitung innerhalb der Applikation, ist im Sinne 
 Beachtet wird lediglich der Schnittstellenvertrag.
 
 Der Test \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) als solcher \zB, prüft den \Code{/hero/validate} Endpunkt darauf ab, das zu einem gültigen Charakter keine Validierungsfehler erzeugt werden (Warnungen werden ignoriert) und bei ungültigen Charakteren entsprechend korrekte Validierungsfehler zurückgemeldet werden.
-Dessen Testfälle sind ausgelagert in separate Klassen (\Anhang[KP]{sec:invalid-heros.py} und \Anhang[KP]{sec:valid-heros.py}) definiert, da diese aufgrund der Länge die Testklasse zu unübersichtlich machen würde und damit diese von anderen Tests (sauber) wiederverwendet werden können.
+
+Dessen Testfälle sind ausgelagert in separate Klassen definiert, da diese aufgrund der Länge die Testklasse zu unübersichtlich machen würde und damit sie von anderen Tests (sauber) wiederverwendet werden können.
+Diese Klassen bieten eine praktische Methode an alle definierten Testfälle aufzulisten, sodass beim Entfernen oder Hinzufügen von Fällen die Tests nicht manuell angepasst werden müssen.
+Der Testfall bei gültigen Charakteren ist denkbar einfach, es besteht ausschließlich aus den vom Endpunkt angeforderten Daten: dem Charakter und die Regelbücher.
+Für den Fall von ungültigen Charakteren wird dieses Modell um Informationen zum erwarteten Validierungsfehler ergänzt, dazu gehört der Typ und eine Menge von Parameter. (siehe \Anhang[KP]{sec:valid-heros.py} und \Anhang[RP]{sec:invalid-heros.py})

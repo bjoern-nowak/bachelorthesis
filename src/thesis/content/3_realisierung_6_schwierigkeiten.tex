@@ -11,7 +11,7 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
     pytestarch\Note{\url{https://github.com/zyskarch/pytestarch}}) gefunden, doch konnte keins vom Funktionsumfang überzeugen (im Vergleich zu ArchUnit\Note{\url{https://www.archunit.org/}} für Java).
     Die Entscheidung wurde, daher offen gelassen.
 
-    \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten mit mehreren Argumenten ohne Hilfsfakten zu erzeugen.
+    \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten, welche mehrere Argumente haben, ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Begriff{Clingo}-\Tech{Tuple} zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
     \todo{sollten das Listings sein?}Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (\vgl \Anhang[KP]{sec:common.lp}, Zeile 49-62):
     \begin{mintedNameless}[linenos=false]{clingo}
@@ -34,8 +34,8 @@ class HeroWrapper:
     \end{mintedNameless}
 
     \item Zur Überprüfung der Existenz von Pflicht-\Abk{LP}-Unterprogrammen (gemäß \Kapitel[KP]{subsec:pruefung-der-regelbuecher-struktur}) musste eine implizite Anforderung an die Deklarierung von \Abk{LP}-Unterprogrammen aufgenommen werden.
-    Diese besagt, dass jede Deklaration von einem Fakt mit dessen Namen folgen muss.
-    Um dies zu gewährleisten, müsste die Anforderung im \Code{RulebookValidator} aufgenommen werden.
+    Diese besagt, dass nach jeder Deklaration eines Unterprogramms ein zusätzlicher Fakt mit dessen Namen folgen muss.
+    Um dies zu gewährleisten, sollte die Anforderung im \Code{RulebookValidator} aufgenommen werden.
     \begin{mintedNameless}[linenos=false]{clingo}
 #program rulebook_usable.
 program("rulebook_usable").
@@ -43,14 +43,26 @@ program("rulebook_usable").
     Notwendig ist dies, da die \Begriff{Clingo}-Python-\Abk{API} keine Möglichkeit bietet auf die Existenz eines Unterprogramms zu prüfen.
     Selbst beim programmatischen Hinzufügen eines Unterprogramms (über diese \Abk{API}) zu einem \Abk{LP}, dass bereits ein gleichnamiges Unterprogramm definiert hat, wird keine Fehlermeldung geworfen, sondern lediglich die Definition erweitert.
 
-    {\color{red}\item Das Definieren von sinnvollen und ausreichenden Testfällen war und ist schwierig bei den Komponententests.
-    Bei den Funktionstets können einfach valide Charaktere (Testdaten) ermittelt werden und \ggf gezielt fehlerhafte Abweichungen platziert werden.
-    Für die Komponententests geht dies nur bedingt, so ist es, für die Wartbarkeit, zu vermeiden die Testdaten mit unnötigen Informationen zu füllen, also Charakter-Merkmale anzugeben die für den Testfall nicht relevant sind.
-    Dies erfordert wissen über die Implementierung und gegenseitige Beieinflussung von Regeln.
-    Trotz der Stufen-weiße Helden-Validierung können solch gezielte Testdaten, für den Testfall, unrelevante Meldungen erzeugen.
+    \item Das Prüfen einzelner (Regelbuch-spezifischer) Spielwelt-Regeln ohne Einflüsse Anderer ist nicht ohne eine unverhältnismäßig hohe Verschlechterung der Wartbarkeit möglich.
+    Um die zu testende Spielwelt-Regel in einem Durchlauf zu erreichen, müssen sämtliche vorherige Charakter-Validierungsschritte positiv ausfallen.
+    Es erfordert also Wissen und die Modellierung von nicht-relevanten Informationen für den Testfall, wie \zB beim Testen einer Regel zu Kampftechniken, bei das Merkmal der Spezies nicht von bedeutung ist, jedoch angegeben werden muss.
+    Dabei können mögliche und unrelevante Charakter-Validierungswarnungen entstehen.
 
-    Es ist auch schwierig zuvermeiden ungewollt gleiches tu testen ...... Ferner, für die Wartbarkeit, ist es wichtig ein möglichst kleines Set and Testfällen zu definieren, welches dennoch eine vollständige Abdeckung der Funktionalitäten bietet und konkrete nur einzelne Funktionen prüft.
+    Der erstellte und nicht mehr verfolgte Test \Code{TestHeroValidation} (\Anhang[KP]{sec:test-hero-validation.py}) zeigt diese Abhängigkeit gut auf.
+    Wie in \Listing[K]{lst:auszug-test-hero-validation} zu sehen ist, wird zum Testen der fachlichen Anforderung \textquote{der Berufs muss verwendbar sein} also einer allgemeinen Spielwelt-Regel Angaben zu Merkmalen gemacht, welche vorher geprüft werden.
+    Um dies zu vermeiden, müsste jede Spielwelt-Regel in einem separaten Unterprogramm definiert und damit einzeln aufrufbar gemacht werden.
+    Tatsächlich bieten die bereits existierenden Charakter-Validierungsschritte eine solche Trennung, wenn auch nicht so kleinteilig.
+    Die \Code{TestingEngine} könnte derart angepasst werden, dass sie ermöglicht nur bestimmte Schritte auszuführen.
+    \begin{listing}[htbp]
+        \caption{Auszug von \protect\Anhang[K]{sec:test-hero-validation.py}}\label{lst:auszug-test-hero-validation}
+        \inputminted[firstline=40,lastline=46]{python}{appendix/test_hero_validation.py}
+    \end{listing}
 
-    }
+    \item Das Definieren von sinnvollen und ausreichenden Testfällen auf der Teststufe der, in \Kapitel[KP]{subsec:prufung-einzelner-funktionalitaten} vorgestellten, Integrations- als auch Ende-zu-Ende Tests war und ist schwierig.
+    So gilt es unter der Prämisse der Wartbarkeit ein möglichst kleines Set an Testfällen zu definieren, welches dennoch eine möglichst vollständige Abdeckung der Funktionalitäten bietet.
+    Ferner ist es für die Verständlichkeit von Tests äußerst hilfreich, wenn ein Testfall nur eine Absicht hat, wie \zB eine bestimmte Funktion/Regel zu testen oder eine spezielle komplexe (und realitätsnahe) Kombination von Regelbüchern und Merkmalen.
+    In einer idealen Welt würden \zB bei einem Entwicklungsfehler nur wenige, aber dafür der Ursache relevante, Tests fehlschlagen und so die Lösungsfindung vereinfachen.
+    Das strikte Folgen dessen, würde jedoch dafür sorgen, dass viele ähnliche Tests entstehen und damit der eingangs genannte Prämisse widersprechen.
+    Aufgrund der Rahmenbedingungen des Projektes, eine \textquote{attraktive} quelloffene Software für Mitwirkende zu sein und der schier unzähligen Kombinationsmöglichkeiten von Regelbüchern und Charakter-Merkmalen, wurde bisher und sollte auch künftig der Fokus auf die Sicherstellung der einzelnen Funktionalitäten gelegt werden und darüber hinaus nur besondere/wichtige komplexe Fälle getestet werden.
 
 \end{enumerateWithCode}

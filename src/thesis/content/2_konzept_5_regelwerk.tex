@@ -11,16 +11,16 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
 \subsection{Konventionen}\label{subsec:konventionen}
 
 \begin{enumerateWithCode}{KV}
-    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln  und \todo{besserer Name?}Ergebnis-Fakten.
+    \item Es wird unterschieden zwischen den Charakter-Fakten, Spielwelt-Fakten, Spielwelt-Regeln  und Ergebnis-Fakten.
     Fakten sind immer \Begriff{Clingo}-\Tech{Funktionen}.
     Spielwelt-Regeln sind immer \Begriff{Clingo}-\Tech{Regeln}, welche Ergebnis-Fakten ableiten.
 
-    \item Bei Fakten ist als erstes Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
+    \item\label{itm:KV.Verursacher} Bei Fakten ist als erstes Argument das Merkmal zu platzieren, welches das \textquote{Verursachende} ist, sofern vorhanden.
     Verursachend gilt jenes Merkmal, dessen Ausprägung die Regel festlegt, wie \zB, dass eine bestimmte andere Merkmalsausprägung benötigt wird.
     Letzteres ist damit das referenzierte Merkmal.
     Dies macht es möglich die dazugehörige Regel schneller im echten Regelbuch nachzuschlagen.
 
-    \item Merkmale werden als \Begriff{Clingo}-\Tech{Konstante} oder -\Tech{Funktion} formuliert.
+    \item\label{itm:KV.Merkmale} Merkmale werden als \Begriff{Clingo}-\Tech{Konstante} oder -\Tech{Funktion} formuliert.
     Bei Letzterem ist das erste Argument immer der Name der Merkmalsausprägung.
     Diese sind immer in Form eines \Begriff{Clingo}-\Tech{Textes} (also in Hochkommata), da Leerzeichen und Sonderzeichen möglich sind.
     Dies macht es einfach die Merkmalsausprägung im echten Regelbuch wiederzufinden.
@@ -28,7 +28,7 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     \item \Begriff{Clingo}-\Tech{Variable}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
     Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
 
-    \item Fakten mit (mindestens) zwei Argumenten sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
+    \item\label{itm:KV.Relation} Funktionen mit (mindestens) zwei Argumenten, im speziellen Spielwelt-Regeln und Ergebnis-Fakten, sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
     Semantisch wird aus \textquote{\mintinline[fontsize=\small]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
     \begin{mintedNameless}{clingo}
 %% Spielwelt-Fakt:
@@ -204,7 +204,7 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profes
     \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägungen eines anderen Merkmals, das mehrere Ausprägungen haben kann, auf \underline{eine Mindeststufe} \Vgl{RWiki-Soeldner}.
     Aufgrund der leichteren Implementierung, Wartbarkeit und Verständlichkeit wird die Zählung jener Ausprägungen, welche die Mindeststufe erreicht haben, in Python umgesetzt.
     Dessen Entwurf wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
-    So kann die Auswahlliste als Tuple modelliert werden. \todo{any\_of is generisch aber im Ergebnis-Fakt nicht mehr}
+    So kann die Auswahlliste als Tuple modelliert werden.
     \begin{mintedNameless}{clingo}
 %% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
 requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen"),10)).
