@@ -81,9 +81,9 @@
         \end{threeparttable}
     \end{table}
 }
-\newcommand{\vTable}[3]{%
+\newcommand{\vTable}[4][]{%
     \begin{landscape}
-        \hTable{#1}{#2}{#3}
+        \hTable[#1]{#2}{#3}{#4}
     \end{landscape}
 }
 
@@ -273,7 +273,7 @@
 \newcommand{\Kapitel}[2][\DefaultRefCase]{\RefByCase{#1}{#2}}
 \newcommand{\Item}[2][KP]{\RefByCase{#1}{#2}}
 \newcommand{\Regel}[1]{\hyperref[#1]{Regel~\ref{#1} auf S.~\pageref{#1}}}
-\newcommand{\PageRef}[2]{\hyperref[#1]{#2} auf S.~\pageref{#1}}
+\newcommand{\PageRef}[2]{\hyperref[#1]{#2 auf S.~\pageref{#1}}}
 
 
 %% ----- Abkürzungen, ggf. mit korrektem Leerraum ----------------------------

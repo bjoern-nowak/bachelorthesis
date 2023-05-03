@@ -46,6 +46,7 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
 
     \item\label{itm:DE.EngineUnterprogramme} Weiter wird die Freiheit durch die, der \Code{Engine} (siehe nachfolgendes Kapitel), vorgegebene Mindestaufteilung in Unterprogramme verringert.
     Dadurch wird eine feinere Steuerung und Trennung von irrelevanten Programmteilen für die jeweilige Aufgabe, \zB das Auflisten bekannter Merkmalsausprägungen, ermöglicht.
+    Die \Tabelle[KP]{tab:engine-lp-unterprogramme} gibt eine Übersicht dieser.
 
     Dies ist auch erforderlich, um \insb bei der Charakter-Validierung die Ausgabe von (nicht relevanten) Folgefehlern, also kaskadierenden Spielwelt-Regel-Verletzungen, zu beschränken.
     Diese Unterprogramme werden Charakter-Va\-li\-die\-rungs\-schritte genannt.
@@ -57,8 +58,32 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
     Die Ausführungsreihenfolge der Schritte wird durch diese Nummer ermittelt, beginnend mit der Kleinsten.
     Die Standard-Schritte werden mit einem Abstand von 50 Nummern definiert und der Erste fängt bei 50 an (\vgl \Anhang[KP]{sec:common.lp}).
 
-     Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.
+    Dadurch können Regelbücher weitere (Zwischen-)Validierungsschritte frei definieren.
     Dazu müssen sie in einem \textquote{meta}-Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program meta.}) einen Fakt mit der Schrittnummer (Beispiel mit 175: \mintinline[fontsize=\small]{clingo}{extra_hero_validation_step(175).}) definieren und ein entsprechendes Unterprogramm (\mintinline[fontsize=\small]{clingo}{#program validate_hero_step_175.}) bereitstellten.
 
 \end{enumerateWithCode}
 
+\vTable[p]{Von der \Code{Engine} direkt genutzte \Abk{LP}-Unterprogramme}{tab:engine-lp-unterprogramme}{
+    \begin{tabularx}{\hsize}{lX}
+        \toprule
+        \textbf{Name}     & \textbf{Beschreibung}                                                                                                                                          \\
+        \midrule
+        \Code{base}                      & Wird immer ausgeführt. Im \Code{common.lp} werden \zB genutzte Atome vor-deklariert, um Warnungen zu vermeiden, wenn diese fehlen.                               \\\rowcolor{evenRow}
+        \Code{rulebook\_usable}          & Wird vor jeder Nutzung eines Regelbuchs ausgeführt und beschreibt, entsprechend dem \Item[KP]{itm:VV.RulebookFact}, die Abhängigkeiten zu anderen Regelbüchern \\
+        \Code{meta}                      & Wird vor den Charakter-Validierungsschritten ausgeführt, um \zB Regelbuch-spezifische Schritte, gemäß \Item[KP]{itm:DE.ExtraStep}, zu finden.                       \\\rowcolor{evenRow}
+        \Code{world\_facts}              & Enthält alle Spielwelt-Fakten, wie bekannte Merkmalsausprägungen und dessen Regeln (Voraussetzungen)                                                           \\
+        \Code{hero\_facts}               & Enthält \bzw generiert die Charakter-Fakten aus dem Kontext-Objekt                                                                                             \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_50}  & Charakter-Validierungsschritt zur Vorprüfung der Validierungsvoraussetzung gemäß \Item[KP]{itm:VV.Unknown}                                                     \\
+        \Code{validate\_hero\_step\_100} & Charakter-Validierungsschritt zur Prüfung, ob die Spezies nutzbar ist.                                                                                          \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_150} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Spezies.                                                                                       \\
+        \Code{validate\_hero\_step\_200} & Charakter-Validierungsschritt zur Prüfung, ob die Kultur nutzbar ist.                                                                                           \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_250} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Kultur.                                                                                        \\
+        \Code{validate\_hero\_step\_300} & Charakter-Validierungsschritt zur Prüfung, ob die Profession nutzbar ist.                                                                                       \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_350} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Profession.                                                                                    \\
+        \Code{validate\_hero\_step\_400} & Charakter-Validierungsschritt zur Prüfung, ob die Vor- und Nachteile nutzbar sind.                                                                              \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_450} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Vor- und Nachteile.                                                                            \\
+        \Code{validate\_hero\_step\_500} & Charakter-Validierungsschritt zur Prüfung, ob die Fähigkeiten (Talente und Kampftechniken) nutzbar sind.                                                        \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_550} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Fähigkeiten (Talente und Kampftechniken).                                                      \\
+        \bottomrule
+    \end{tabularx}
+}
