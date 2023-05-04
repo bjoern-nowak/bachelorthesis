@@ -1,8 +1,8 @@
 \section{Qualitätssicherung}\label{sec:qualitaetssicherung}
 
 Die \underline{automatisierte} Qualitätssicherung ist ein unerlässliches Werkzeug bei der Entwicklung \underline{nachhaltig} korrekter und wartbarer Software.
-Zusätzlich ist es aufgrund des \PageRef{itm:TA.Tests}{dritten Punkt der abgeleiteten technischen Anforderungen an quelloffene Software} von hoher Bedeutung für dieses Projekt.
-Die Qualitätssicherung in der Softwareentwicklung ist vielfältiges Feld und in der Breite wie Tiefe komplex; es gibt verschiedene Standards wie \Zitat{REALISIERUNG-ISO-25010} und \Zitat{REALISIERUNG-IEEE-29119}, als auch Standards und Definitionen indirekt geprägt durch Zertifizierungen von Testenden durch ISTQB (\Zitat{REALISIERUNG-ISTQB}).
+Zusätzlich ist es aufgrund des \PageRef{itm:TA.Tests}{dritten Punktes der abgeleiteten technischen Anforderungen an quelloffene Software} von hoher Bedeutung für dieses Projekt.
+Die Qualitätssicherung in der Softwareentwicklung ist ein vielfältiges Feld und in der Breite wie Tiefe komplex; es gibt verschiedene Standards wie \Zitat{REALISIERUNG-ISO-25010} und \Zitat{REALISIERUNG-IEEE-29119}, als auch Standards und Definitionen indirekt geprägt durch Zertifizierungen von Testenden durch ISTQB (\Zitat{REALISIERUNG-ISTQB}).
 
 Dabei hat sich die weltweite Gemeinschaft der Software-Entwickelnden bis heute nicht auf eine Terminologie im Bereich der Tests festlegen können.
 Es gibt durchaus Definitionen, welche eher verbreitet, sowie allgemein anwendbar sind und auf mehr Zustimmung stoßen, als Andere.
@@ -12,9 +12,9 @@ Entscheidend ist, dass es innerhalb der Software eine klare Definition dessen gi
 So kann unterschieden werden zwischen der Testintention, dem Testverfahren und der Teststufe.
 Ersteres beschreibt welchen Zweck der Test verfolgt, wie \zB das Testen von (nicht-)funktionalen Anforderungen oder Leistung.
 Das Testverfahren gibt an, ob dieser Test statische oder dynamische ist, also ob die Software ausgeführt wird, und ob der Tests Kenntnisse über die Implementierung hat, also ein \textquote{black/white box} Tests ist.
-Letzteres kategorisiert in welchen Rahmen sich der Test bewegt \bzw welchen Umfang der Tests hat.
-So sind \idR \zB Komponententest\Englisch{unit tests} schnelle und kleinteilige Tests, welche einfach zu entwickeln sind und von keiner anderen Komponente abhängen.
-Während dessen haben Ende-zu-Ende Tests meist eine längere Ausführungszeit und tendenziell einen komplexeren Aufbau, bei der die Applikation, in der Gesamtheit und dem Zusammenspiel seiner Komponenten, zur Laufzeit über die \Abk{API}, mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
+Letzteres kategorisiert in welchen Rahmen sich der Test bewegt \bzw welchem Umfang der Tests hat.
+So sind \idR \zB Komponententests\Englisch{unit tests} schnelle und kleinteilige Tests, welche einfach zu entwickeln sind und von keiner anderen Komponente abhängen.
+Währenddessen haben Ende-zu-Ende Tests meist eine längere Ausführungszeit und tendenziell einen komplexeren Aufbau, bei der die Applikation, in der Gesamtheit und dem Zusammenspiel seiner Komponenten, zur Laufzeit über die \Abk{API}, mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
 \Vgl{REALISIERUNG-Klein2021}
 
 \begin{wrapfigure}[8]{r}{.5\textwidth}%
@@ -100,7 +100,7 @@ Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleis
 
 Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (\vgl \Anhang[KP]{sec:rulebook-validator.py} und \Anhang[KP]{sec:test-resources-rulebooks.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
-Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein anderen ausgibt), wie es entsprechend in im \PageRef{itm:VV.RulebookFact}{\Abk{LP}-Beispiel von \ref{itm:VV.RulebookFact}} als notwendige Gegebenheit gezeigt wird.
+Konkret wird geprüft, dass die vorgeschlagene Dateistruktur (\Item{itm:DE.LpDateistruktur}) eingehalten wird, die notwendigen Unterprogramme für die \Code{Engine} vorhanden sind (\Item{itm:DE.EngineUnterprogramme}) und das ein Regelbuch nur sich selbst als Fakt deklariert (sich also nicht als ein Anderes ausgibt), wie es entsprechend im \PageRef{itm:VV.RulebookFact}{\Abk{LP}-Beispiel von \ref{itm:VV.RulebookFact}} als notwendige Gegebenheit gezeigt wird.
 Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
 
 
