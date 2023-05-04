@@ -66,24 +66,24 @@ Nachfolgend werden jene vorgestellt, welche der Autor verfolgt hat:
 \vTable[p]{Von der \Code{Engine} direkt genutzte \Abk{LP}-Unterprogramme}{tab:engine-lp-unterprogramme}{
     \begin{tabularx}{\hsize}{lX}
         \toprule
-        \textbf{Name}     & \textbf{Beschreibung}                                                                                                                                          \\
+        \textbf{Name}                    & \textbf{Beschreibung}                                                                                                                                           \\
         \midrule
-        \Code{base}                      & Wird immer ausgeführt. Im \Code{common.lp} werden \zB genutzte Atome vor-deklariert, um Warnungen zu vermeiden, wenn diese fehlen.                               \\\rowcolor{evenRow}
-        \Code{rulebook\_usable}          & Wird vor jeder Nutzung eines Regelbuchs ausgeführt und beschreibt, entsprechend dem \Item[KP]{itm:VV.RulebookFact}, die Abhängigkeiten zu anderen Regelbüchern \\
-        \Code{meta}                      & Wird vor den Charakter-Validierungsschritten ausgeführt, um \zB Regelbuch-spezifische Schritte, gemäß \Item[KP]{itm:DE.ExtraStep}, zu finden.                       \\\rowcolor{evenRow}
-        \Code{world\_facts}              & Enthält alle Spielwelt-Fakten, wie bekannte Merkmalsausprägungen und dessen Regeln (Voraussetzungen)                                                           \\
-        \Code{hero\_facts}               & Enthält \bzw generiert die Charakter-Fakten aus dem Kontext-Objekt                                                                                             \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_50}  & Charakter-Validierungsschritt zur Vorprüfung der Validierungsvoraussetzung gemäß \Item[KP]{itm:VV.Unknown}                                                     \\
+        \Code{base}                      & Wird immer ausgeführt. Im \Code{common.lp} werden \zB genutzte Atome vor-deklariert, um Warnungen zu vermeiden, wenn diese fehlen.                              \\\rowcolor{evenRow}
+        \Code{rulebook\_usable}          & Wird vor jeder Nutzung eines Regelbuchs ausgeführt und beschreibt, entsprechend dem \Item[KP]{itm:VV.RulebookFact}, die Abhängigkeiten zu anderen Regelbüchern. \\
+        \Code{meta}                      & Wird vor den Charakter-Validierungsschritten ausgeführt, um \zB Regelbuch-spezifische Schritte, gemäß \Item[KP]{itm:DE.ExtraStep}, zu finden.                   \\\rowcolor{evenRow}
+        \Code{world\_facts}              & Enthält alle Spielwelt-Fakten, wie bekannte Merkmalsausprägungen und dessen Regeln (Voraussetzungen).                                                           \\
+        \Code{hero\_facts}               & Enthält \bzw generiert die Charakter-Fakten aus dem Kontext-Objekt.                                                                                             \\\rowcolor{evenRow}
+        \Code{validate\_hero\_step\_50}  & Charakter-Validierungsschritt zur Vorprüfung der Validierungsvoraussetzung gemäß \Item[KP]{itm:VV.Unknown}.                                                     \\
         \Code{validate\_hero\_step\_100} & Charakter-Validierungsschritt zur Prüfung, ob die Spezies nutzbar ist.                                                                                          \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_150} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Spezies.                                                                                       \\
+        \Code{validate\_hero\_step\_150} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Spezies.                                                                                        \\
         \Code{validate\_hero\_step\_200} & Charakter-Validierungsschritt zur Prüfung, ob die Kultur nutzbar ist.                                                                                           \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_250} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Kultur.                                                                                        \\
+        \Code{validate\_hero\_step\_250} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Kultur.                                                                                         \\
         \Code{validate\_hero\_step\_300} & Charakter-Validierungsschritt zur Prüfung, ob die Profession nutzbar ist.                                                                                       \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_350} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Profession.                                                                                    \\
+        \Code{validate\_hero\_step\_350} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Profession.                                                                                     \\
         \Code{validate\_hero\_step\_400} & Charakter-Validierungsschritt zur Prüfung, ob die Vor- und Nachteile nutzbar sind.                                                                              \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_450} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Vor- und Nachteile.                                                                            \\
+        \Code{validate\_hero\_step\_450} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Vor- und Nachteile.                                                                             \\
         \Code{validate\_hero\_step\_500} & Charakter-Validierungsschritt zur Prüfung, ob die Fähigkeiten (Talente und Kampftechniken) nutzbar sind.                                                        \\\rowcolor{evenRow}
-        \Code{validate\_hero\_step\_550} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Fähigkeiten (Talente und Kampftechniken).                                                      \\
+        \Code{validate\_hero\_step\_550} & Charakter-Validierungsschritt zur Prüfung der Anforderungen der Fähigkeiten (Talente und Kampftechniken).                                                       \\
         \bottomrule
     \end{tabularx}
 }
