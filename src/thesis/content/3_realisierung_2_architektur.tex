@@ -1,8 +1,8 @@
 \section{Architektur}\label{sec:architektur}
 
 Die Architektur ist das Fundament des Quellcodes und stellt damit eines der wichtigsten technischen Merkmale dar, um eine qualitative und wartbare Software zu erstellen \Vgl[Kapitel 15]{REALISIERUNG-Martin2017}.
-Zwei sehr bekannte und von den Prinzipien ähnliche sind \textquote{Clean Architecture} (\Zitat[Kapitel 22]{REALISIERUNG-Martin2017}) und \textquote{Onion Architecture} (\Zitat{REALISIERUNG-Palermo2008}).
-Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} (\Zitat{REALISIERUNG-Evans2004}) gut integriert.
+Zwei sehr bekannte und von den Prinzipien ähnliche sind \textquote{Clean Architecture} \Zitat[Kapitel 22]{REALISIERUNG-Martin2017} und \textquote{Onion Architecture} \Zitat{REALISIERUNG-Palermo2008}.
+Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-driven Design} \Zitat{REALISIERUNG-Evans2004} gut integriert.
 
 \begin{wrapfigure}{l}{.5\textwidth}%
     \centering
@@ -27,7 +27,7 @@ Gewählt wird Letzteres, da es bereits das (Standard-)Pattern \textquote{Domain-
 %\hfill
 %\begin{minipage}[t]{.575\textwidth}
 
-Es fokussiert sich auf eine möglichst lose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}). \todo{([x]) ?}
+Es fokussiert sich auf eine möglichst lose Kopplung zwischen den Schichten und das \textquote{Zentrieren} der fachlichen Logik in die Mitte (siehe \Abbildung[K]{fig:onion-architecture}).
 Dabei ist es fundamental, dass jede Schicht nur von Tieferen abhängig sein darf.
 Die Idee ist, umso tiefer die Schicht ist, desto seltener kommen Änderungen vor, wodurch weniger Wartungsaufwand bei den äußeren Schichten entstehen soll.
 Dies macht die innerste Schicht \textquote{Domain Model} zur stabilsten.

@@ -1,20 +1,20 @@
 \chapter{Diskussion und Ausblick}\label{ch:diskussion}
 
 \paragraph{Diskussion}\label{par:diskussion}
-In diesem Teil der Arbeit wird die entstandene Software begutachtet, bei dem \insb Entscheidungen des Konzeptes und der Realisierung bewertet werden.
+In diesem Teil der Arbeit wird die entstandene Software begutachtet, bei der \insb Entscheidungen des Konzeptes und der Realisierung bewertet werden.
 
 \begin{enumerateWithCode}{DK}
 
-    \item Ein Export-Endpunkt, welches einen Charakter in einem Format zurückgibt, das kompatibel zu anderen Softwares ist, ist zwar im Allgemeinen Benutzenden-freundlich.
-    Besser \bzw wichtiger ist jedoch ein Import-Endpunkt, welches es ermöglicht fremde Formate in das Eigene zu konvertieren.
+    \item Ein Export-Endpunkt, welches einen Charakter in einem Format zurückgibt, das kompatibel zu anderen Softwares ist, ist zwar im Allgemeinen Benutzenden-freundlich;
+    besser \bzw wichtiger ist jedoch ein Import-Endpunkt, welches es ermöglicht fremde Formate in das Eigene zu konvertieren.
     Dies würde Benutzenden die Migration von einer anderen Software erleichtern und damit die Zahl der Benutzenden und möglichen Mitwirkenden potenziell vergrößern.
 
 %    \item Regel(-Funktionen) könnten zwar expliziert definiert sein (z.B. 'profession\_requires\_culture("<profession>","<culture>").' ) anstatt generisch (z.B. 'requires(profession("<profession>"),culture("<culture>")).' ) macht das Konzept aber zu starr, wodurch bei der Wartung und Erweiterung mehr Arbeit in Python bei der reimplementierung der gleichen Regel in einer anderen Ausprägung machen würde.
 %    Limitert ist die generik jedoch weiterhin durch die fest implementieren Character-Merkmale
 
     \item Viele Regeln werden im \Abk{LP} für ähnliche Merkmale wiederholt.
-    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Begriff{Clingo}-\Tech{Funktion} (\Tech{Gruppe}) abbilden.
-    Wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
+    Zur Vermeidung dessen könnte man diese Merkmale auf eine gemeinsame \Begriff{Clingo}-\Tech{Funktion} (\Tech{Gruppe}) abbilden,
+    wodurch die Regel nur noch einmalig für diese \textquote{Gruppe} definiert werden muss.
     Die Gruppe kann von den bestehenden Charakter-Fakten abgeleitet werden oder diese ersetzen; Letzteres ist jedoch nicht zu empfehlen, da Ersteres mehr Freiheiten bietet.
     Das \Listing[K]{lst:modellierung-von-strukturell-ahnlichen-merkmalen-in-einer-gruppe} zeigt dies beispielhaft.
     Dadurch müsste jedoch die Interpretation der Ergebnis-Fakten angepasst werden, weil das erste Argument nicht mehr (ausschließlich) eine \Begriff{Clingo}-\Tech{Funktion} als Merkmal ist, sondern dessen Argumente direkte Argumente des Ergebnis-Fakts wären (\vgl \Anhang[KP]{sec:hero-validation-interpreter.py}).
@@ -39,7 +39,7 @@ missing_min_lvl(FEATURE,NAME,LVL,MIN) :- skill(FEATURE,NAME,LVL), MIN = 0, LVL <
     \item Bei den konzipierten formalen Regeln (Punkte AR, HR und WR) wird bei den gesuchten Merkmalsausprägungen zwischen Merkmalen unterschieden, welche eine oder mehrere Ausprägungen annehmen können.
     Dies wurde aber nicht dynamisch in der Regel formalisiert, sondern lediglich zum IST-Stand während der Modellierung beachtet.
     Dadurch kann eine Inkonsistenz/Widerspruch entstehen, wenn entsprechende Änderungen der maximalen Anzahl (definiert wie in \Item{itm:AR.1}) gemacht werden, aber betroffene Regeln nicht korrigiert werden.
-    Auch die \Abk{API} beachtet dieses nicht, hier müsste die \Abk{API} generischer modelliert werden, sodass diese ausschließlich Listen für Merkmale akzeptiert.
+    Auch die \Abk{API} beachtet dieses nicht; hier müsste die \Abk{API} generischer modelliert werden, sodass diese ausschließlich Listen für Merkmale akzeptiert.
     Wenn \zB ein Regelbuch implementiert werden soll, welches mehrere Spezies erlaubt, dann wäre auch dies vollständig und wartungsfrei von der \Abk{API} unterstützt.
 
     \item Eine einfach nutzbare und gut verständliche Formalisierung der \textquote{count\_by} Methode aus \Regel{itm:HR.AnyOf} konnte nicht gefunden werden.
@@ -59,11 +59,11 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
         \end{minted}
     \end{listing}
 
-    \item Außerdem sollte für einen guten Wiedererkennungswert die Struktur einer \Abk{LP}-Funktion beibehalten werden.
+    \item Außerdem sollte, für einen guten Wiedererkennungswert, die Struktur einer \Abk{LP}-Funktion beibehalten werden.
     Bei der Regel~\ref{itm:HR.AnyOf} wird jedoch die \Abk{LP}-Funktion \textquote{any\_of} im Ergebnis-Fakt anders als in der Spielwelt-Regel aufgebaut, sowie die \PageRef{itm:KV.Merkmale}{Konvention~\ref{itm:KV.Merkmale}} gebrochen und stellt damit bereits jetzt eine technische Schuld dar.
 
-    \item Der entstandenen Software mangelt es an tiefgehender looser Kopplung zwischen der \Code{Engine} (Domäne) und \Begriff{Clingo} (Infrastruktur).
-    Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), doch es kann für die zukünftige Testerstellung oder einem, aktuell unwahrscheinlichem, Wechsel des \Abk{ASP}-Framework hinderlich sein.
+    \item Der entstandenen Software mangelt es an tiefgehender loser Kopplung zwischen der \Code{Engine} (Domäne) und \Begriff{Clingo} (Infrastruktur).
+    Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), jedoch kann es für die zukünftige Testerstellung oder einem, aktuell unwahrscheinlichen, Wechsel des \Abk{ASP}-Frameworks hinderlich sein.
     Die Packages/Module sind sauber definiert, jedoch wurde das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
     Dadurch, dass vermehrt und etwas \textquote{un-pythonic} (also für Python-Verhältnisse unüblich) vorwiegend \bzw grundsätzlich Klassen erstellt wurden, kann auch dies mit überschaubarem Aufwand bei Bedarf nachgepflegt werden.
     Des Weiteren fehlt es an einem Domänenmodell der Ergebnis-Fakten, welches der \Code{ClingoExecutor}, \bzw eine andere Infrastruktur-Klasse, an die \Code{Engine} zurückgeben müsste, sodass die Applikationskern-Schicht gänzlich vom genutzten \Abk{ASP}-Framework unabhängig sein kann.
@@ -81,20 +81,20 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
 
 
 \paragraph{Ausblick}\label{par:ausblick}
-Ähnlich zur Diskussion wird der IST-Zustand der Software betrachtet, jedoch um kommende wichtige Aufgabe zu benennen, welche nicht Fokus dieser Arbeit waren.
+Ähnlich zur Diskussion wird der IST-Zustand der Software betrachtet, jedoch um kommende wichtige Aufgaben zu benennen, welche nicht Fokus dieser Arbeit waren.
 
 \begin{enumerateWithCode}{AB}
 
-    \item Zur Minimierung von Implementierungsfehlern in den Regelbücher-\AbkP{LP} sollte ein allgemeines Unterprogramm hinzugefügt werden, welches überprüft, dass alle Spielwelt-Fakten und -Regel nur bekannte Merkmalsausprägungen nutzen.
-    Dabei müssen entsprechenden Regelbuchabhängigkeiten mit beachtet werden.
+    \item Zur Minimierung von Implementierungsfehlern in den Regelbücher-\AbkP{LP} sollte ein allgemeines Unterprogramm hinzugefügt werden, welches überprüft, dass alle Spielwelt-Fakten und -Regeln nur bekannte Merkmalsausprägungen nutzen.
+    Dabei müssen entsprechende Regelbuchabhängigkeiten mit beachtet werden.
     Dieses Unterprogramm kann dann dem \Code{RulebookValidator} als weiteres Kriterium hinzugefügt werden.
 
-    \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre, \zB bei einer Meldung das die gewählte Kultur nicht von der gewählte Spezies nutzbar ist.
-    Es sollte ein Endpunkt bereitgestellt werden, welcher mögliche Merkmalsausprägungen des, anzugebenen, gesuchten Merkmals, unter Beachtung der zu verwenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
+    \item Durch die generierten Validierungsfehler und -warnungen weiß der Benutzende zwar was problematisch ist, aber nicht unbedingt wie es richtig wäre, \zB bei einer Meldung, dass die gewählte Kultur nicht von der gewählten Spezies nutzbar ist.
+    Es sollte ein Endpunkt bereitgestellt werden, welcher mögliche Merkmalsausprägungen des, anzugebenen, gesuchten Merkmals, unter Beachtung der zu verwendenden Regelbücher und vor allem der bereits gewählten Merkmale, identifiziert und zurückgibt.
     Das nächst zu wählende, also gesuchte, Merkmal könnte auch hierarchisch, gemäß der Schritte aus \Zitat{RWiki-Erstellung}, automatisch ermittelt werden.
     Wenn \zB für einen Charakter bereits eine Spezies und Kultur gewählt wurde, so könnte dieser Endpunkt mögliche Professionen benennen.
     Dazu muss das Schema des Charakters so angepasst werden, dass diese Merkmale keine Pflichtfelder sind.
-    Entgegen der bisherigen Implementierung von \AbkP{LP}, entsprechend \Kapitel[KP]{subsec:interpretation-des-asp-ergebnisses}, wäre das zu entwickelnde \Abk{LP} ein klassisches, bei dem unter Vorgaben (unvollständiger Held) für ein Problem (füllen eines Merkmals) mögliche Lösungen (nutzbare Merkmalsausprägungen für das Merkmal) ermittelt werden.
+    Entgegen der bisherigen Implementierung von \AbkP{LP}, entsprechend \Kapitel[KP]{subsec:interpretation-des-asp-ergebnisses}, wäre das zu entwickelnde \Abk{LP} ein klassisches, bei dem unter Vorgaben (unvollständiger Held) für ein Problem (Füllen eines Merkmals) mögliche Lösungen (nutzbare Merkmalsausprägungen für das Merkmal) ermittelt werden.
 %    Dabei könnte man außerdem unterstützen, die Lösungsmenge durch niedrigere Merkmale (hierarchisch gesehen) einzuschränken.
 %    Ein einfaches Beispiel ist das selbige nur das auch bereits gewählt Talente wurden und so Berufe gesucht/gefunden werden, welche zu diesen passen.
 
@@ -102,17 +102,17 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
     Es fehlt die Möglichkeit diese zu ignorieren \bzw als \textquote{von der Spielleitung akzeptierte Abweichungen} zu markieren.
     Dazu kann die \Abk{API} angepasst werden, sodass der Validierungsendpunkt zusätzlich eine Liste der konkret zu ignorierenden Warnungen (so wie sie zuvor zurückgegeben wurden) annimmt.
 
-    \item\label{itm:D.CharakterVerwaltung} Die Charakter-Verwaltung ist zwar nicht Fokus dieser Arbeit spielt jedoch eine entscheidende Rolle bei der Frage \bzw dem Problem \textquote{wie das komplette Regelwerk zu \Abk{DSA} formalisiert werden kann}, weshalb nachfolgend ein kurzer Ausblick gegeben wird.
+    \item\label{itm:D.CharakterVerwaltung} Die Charakter-Verwaltung ist zwar nicht Fokus dieser Arbeit, spielt jedoch eine entscheidende Rolle bei der Frage \bzw dem Problem \textquote{wie das komplette Regelwerk zu \Abk{DSA} formalisiert werden kann}, weshalb nachfolgend ein kurzer Ausblick gegeben wird.
     Ein herausfordernder Aspekt ist die Beachtung von \Abk{AP}, also das Führen eines \Abk{AP}-Kontos für einen Charakter und die Beachtung der \Abk{AP}-Kosten der Merkmale.
     Dies könnte durch zusätzliche Spielwelt-Fakten je Merkmalsausprägung modelliert werden.
     Dadurch muss die bereits existierende Modellierung der Merkmale nicht nachträglich von den Regelbüchern angepasst werden, was einer guten Modularität entspricht und damit einem geringeren Wartungsaufwand.
     Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
     \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf Bezug genommen und entsprechend in Gänze validiert werden kann.
     In \Listing[KP]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
-    Dafür kann \ggf das \sog[multi-shot solving] relevant/hilfreich sein, bei dem könnte erst der Charakter ohne Änderungen validiert werden und anschließend sukzessiv jede Änderung einzeln \Vgl{DISKUSSION-Gebser2018}.
+    Dafür kann \ggf das \sog[multi-shot solving] relevant/hilfreich sein, bei dem erst der Charakter ohne Änderungen und anschließend sukzessiv jede Änderung einzeln validiert werden könnte \Vgl{DISKUSSION-Gebser2018}.
 
     Der zweite Aspekt ist im Prinzip ähnlich zum Ersten.
-    Es ist die Modellierung der Charakter-Eigenschaften und -Basiswerte \inkl des Verfolgens der Veränderungen durch Merkmalsausprägungen und die Einhaltung von Grenzen.
+    Bei diesem handelt es sich um die Modellierung der Charakter-Eigenschaften und -Basiswerte \inkl des Verfolgens der Veränderungen durch Merkmalsausprägungen und die Einhaltung von Grenzen.
 
     \begin{listing}[htbp]
         \caption{Grob-Formalisierung von \AbkK{AP}}\label{lst:grob-formalisierung-von-ap}

@@ -2,17 +2,17 @@
 
 Die \underline{automatisierte} Qualitätssicherung ist ein unerlässliches Werkzeug bei der Entwicklung \underline{nachhaltig} korrekter und wartbarer Software.
 Zusätzlich ist es aufgrund des \PageRef{itm:TA.Tests}{dritten Punktes der abgeleiteten technischen Anforderungen an quelloffene Software} von hoher Bedeutung für dieses Projekt.
-Die Qualitätssicherung in der Softwareentwicklung ist ein vielfältiges Feld und in der Breite wie Tiefe komplex; es gibt verschiedene Standards wie \Zitat{REALISIERUNG-ISO-25010} und \Zitat{REALISIERUNG-IEEE-29119}, als auch Standards und Definitionen indirekt geprägt durch Zertifizierungen von Testenden durch ISTQB (\Zitat{REALISIERUNG-ISTQB}).
+Die Qualitätssicherung in der Softwareentwicklung ist ein vielfältiges Feld und in der Breite wie Tiefe komplex; es gibt verschiedene Standards wie \Zitat{REALISIERUNG-ISO-25010} und \Zitat{REALISIERUNG-IEEE-29119}, als auch Standards und Definitionen indirekt geprägt durch Zertifizierungen von Testenden durch ISTQB \Zitat{REALISIERUNG-ISTQB}.
 
 Dabei hat sich die weltweite Gemeinschaft der Software-Entwickelnden bis heute nicht auf eine Terminologie im Bereich der Tests festlegen können.
-Es gibt durchaus Definitionen, welche eher verbreitet, sowie allgemein anwendbar sind und auf mehr Zustimmung stoßen, als Andere.
+Es gibt durchaus Definitionen, welche eher verbreitet sowie allgemein anwendbar sind und auf mehr Zustimmung stoßen als andere.
 Entscheidend ist, dass es innerhalb der Software eine klare Definition dessen gibt.
-\Vgl{REALISIERUNG-Vocke2018}.
+\Vgl{REALISIERUNG-Vocke2018}
 
 So kann unterschieden werden zwischen der Testintention, dem Testverfahren und der Teststufe.
-Ersteres beschreibt welchen Zweck der Test verfolgt, wie \zB das Testen von (nicht-)funktionalen Anforderungen oder Leistung.
-Das Testverfahren gibt an, ob dieser Test statische oder dynamische ist, also ob die Software ausgeführt wird, und ob der Tests Kenntnisse über die Implementierung hat, also ein \textquote{black/white box} Tests ist.
-Letzteres kategorisiert in welchen Rahmen sich der Test bewegt \bzw welchem Umfang der Tests hat.
+Ersteres beschreibt welchen Zweck der Test verfolgt, wie \zB das Testen von (nicht-)funktionalen Anforderungen oder Leistungen.
+Das Testverfahren gibt an, ob dieser Test statisch oder dynamisch ist, also ob die Software ausgeführt wird, und ob der Test Kenntnisse über die Implementierung hat, also ein \textquote{black/white box} Test ist.
+Letzteres kategorisiert in welchem Rahmen sich der Test bewegt \bzw welchem Umfang der Test hat.
 So sind \idR \zB Komponententests\Englisch{unit tests} schnelle und kleinteilige Tests, welche einfach zu entwickeln sind und von keiner anderen Komponente abhängen.
 Währenddessen haben Ende-zu-Ende Tests meist eine längere Ausführungszeit und tendenziell einen komplexeren Aufbau, bei der die Applikation, in der Gesamtheit und dem Zusammenspiel seiner Komponenten, zur Laufzeit über die \Abk{API}, mit gegebenen Anfragen und erwarteten Antworten, überprüft wird.
 \Vgl{REALISIERUNG-Klein2021}
@@ -29,7 +29,7 @@ Die beschriebene Kategorisierung von Teststufen entspricht dem gängigen Modell 
 Es besagt im Wesentlichen, dass eher mehr schnelle und isolierte Komponententests und weniger langsame und integrative Ende-zu-Ende (\Begriff{ui}) Tests zu schreiben sind.
 \Vgl{REALISIERUNG-Cohn2009}
 
-Welches Testmodell zu wählen und damit welche Tests(stufen) letztlich geschrieben werden hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
+Welches Testmodell zu wählen und damit welche Tests (in welchen Teststufen) letztlich geschrieben werden, hängt von unterschiedlichsten Faktoren ab, wie \zB dem Entwicklungsaufwand, der Testbarkeit der Software \bzw des Quellcodes selbst und Laufzeitanforderungen.
 
 \begin{enumerateWithCode}{QS}
     \item In diesem Projekt wird das Modell der Testtrophäe nach \Zitat{REALISIERUNG-Dodds2019} verfolgt.
@@ -72,14 +72,14 @@ Welches Testmodell zu wählen und damit welche Tests(stufen) letztlich geschrieb
 %\end{minipage}
 %\vspace{\parskip}
 Die Analyse der Quellcode-Qualität kann statisch und dynamisch durchgeführt werden.
-Beim Letzteren kann \zB die Testabdeckung ermitteln werden,
-Die Testabdeckung drückt aus wie viele Zeilen Quellcode durch die vorhanden Tests abgedeckt sind und gegeben somit einen sehr einfachen Indikator für blinde Flecke.
+Beim Letzteren kann \zB die Testabdeckung ermittelt werden.
+Die Testabdeckung drückt aus wie viele Zeilen des Quellcodes durch die vorhandenen Tests abgedeckt sind und gegeben somit einen sehr einfachen Indikator für blinde Flecke.
 Eine hohe Testabdeckung ist nicht gleichzusetzen mit einer hohen Testqualität.
-Das Messen der Testqualität ist ein schwieriges Feld, erwähnt sei als bekanntes Mittel das \sog[Mutation Testing]\Note{die Populärsten Python-Frameworks dazu sind mutmut (\url{https://github.com/boxed/mutmut}) und mutpy (\url{https://github.com/mutpy/mutpy})}.
+Das Messen der Testqualität ist ein schwieriges Feld; erwähnt sei als bekanntes Mittel das \sog[Mutation Testing]\Note{die Populärsten Python-Frameworks dazu sind mutmut (\url{https://github.com/boxed/mutmut}) und mutpy (\url{https://github.com/mutpy/mutpy})}.
 Bei der statischen Quellcode-Analyse wird \zB die Einhaltung von Programmierkonventionen und vorgegebener Quellcode-Formatierung, die Existenz von ungenutzten Variablen und Imports sowie Programmierfehler (wie eine falsche Reihenfolge beim Fangen von Exceptions) und schlechter Praktiken (\sog[code smells]) überprüft.
 Bei der Anforderungseinhaltung geht es um die Erstellung von Tests, welche Funktionalitäten auf bekannte Anforderungen überprüft.
 Die Relevanz dessen lässt sich \uA durch die Verbreitung des \AbkS{TDD}{\textquote{test-driven development}} beispielhaft zeigen.
-Es ist eine Entwicklungsmethode, bei der die Erstellung des Testes vor der Implementierung der Funktionalität gestellt wird.
+Es ist eine Entwicklungsmethode, bei der die Erstellung des Tests vor der Implementierung der Funktionalität gestellt wird.
 \parencites(\vgl)()[][Kapitel 8]{REALISIERUNG-Anaya2018}[][Kapitel 10]{PYTHON-Jaworski2021}
 
 Dabei können Anforderungen technisch, \zB eine Methode soll in einem bestimmten Fall eine Exception werfen, oder fachlich, \zB ein Regelbuch ist verwendbar, wenn all seine Abhängigkeiten gegeben sind, sein.
@@ -89,14 +89,14 @@ Dabei können Anforderungen technisch, \zB eine Methode soll in einem bestimmten
 
     \item Alle Tests werden automatisch vor dem Start der Applikation ausgeführt und können während der Entwicklung beliebig oft wiederholt werden (\vgl \Anhang[KP]{sec:makefile}).
 
-    \item Zur Wahrung der Quellcode-Qualität werden die Werkzeuge pylint\Note{\url{https://github.com/pylint-dev/pylint}} (strike Prüfung von Programmierkonventionen]), bandit\Note{\url{https://github.com/PyCQA/bandit}} (Finden von bekannten Sicherheitslücken]) und mypy\Note{\url{https://github.com/python/mypy}} (statische Prüfung der Typisierung) in der Standardkonfiguration eingesetzt.
+    \item Zur Wahrung der Quellcode-Qualität werden die Werkzeuge pylint\Note{\url{https://github.com/pylint-dev/pylint}} (strikte Prüfung von Programmierkonventionen]), bandit\Note{\url{https://github.com/PyCQA/bandit}} (Finden von bekannten Sicherheitslücken]) und mypy\Note{\url{https://github.com/python/mypy}} (statische Prüfung der Typisierung) in der Standardkonfiguration eingesetzt.
     Diese können \textquote{dem Sockel der Testtrophäe} zugeordnet werden.
 \end{enumerateWithCode}
 
 Nachfolgend wird dargelegt, wie die fachliche Anforderungseinhaltung gewährleistet wird.
 
 
-\subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}\todo{QS.x statt kapitel?}
+\subsection{Prüfung der Regelbücher-Struktur}\label{subsec:pruefung-der-regelbuecher-struktur}
 
 Um zu gewährleisten, dass alle implementierten Regelbücher von der \Code{Engine} nutzbar sind, werden diese auf entsprechenden Anforderungen durch den \Code{RulebookValidator} überprüft (\vgl \Anhang[KP]{sec:rulebook-validator.py} und \Anhang[KP]{sec:test-resources-rulebooks.py}).
 Diese Prüfung wird auch genutzt, wenn per \Abk{API} die verfügbaren Regelbücher abgefragt werden.
@@ -106,13 +106,13 @@ Dies kann als Komponententest im Testtrophäen-Modell angesiedelt werden.
 
 \subsection{Prüfung einzelner Funktionalitäten}\label{subsec:prufung-einzelner-funktionalitaten}
 
-Gemäß dem Modell der Testtrophäe wurde der Schwerpunkt auf die Erstellung von Integrationstests gelegt.
+Gemäß dem Modell der Testtrophäe, wurde der Schwerpunkt auf die Erstellung von Integrationstests gelegt.
 Das Integrative an den hier beschriebenen Tests ist, dass diese die technische Korrektheit der Funktionalität über die Ebene der Applikationsservice-Schicht prüfen und dabei alle tieferen Schichten durchläuft.
 %Eine verbreitete Definition bezeichnet solche als Systemtests, da diese nur von der eigentlichen Applikation abhängen und keine Integration mit \zB einer \Abk{DB} haben. % falsch
 
 Als Beispiel sei der \Code{TestMetaService} (\Anhang[KP]{sec:test-meta-service.py}) aufgeführt, welcher den \Code{MetaService} (\Anhang[KP]{sec:meta-service.py}) testet.
 Dieser Service stellt \uA die Funktionalität bereit für ein Merkmal alle bekannten Ausprägungen, unter Angabe der zu nutzenden Regelbücher, aufzulisten.
-Damit solche Tests unabhängig \textquote{echter} Regelbücher durchgeführt werden können und damit wartungsarm bleiben, wurde eine Test-Variante (\Code{TestingRulebook}) der interne Representation von Regelbüchern eingeführt, welche Regelbücher aus dem separaten \Code{tests\_resources/rulebook} Ordner lädt.
+Damit solche Tests unabhängig \textquote{echter} Regelbücher durchgeführt werden können und damit wartungsarm bleiben, wurde eine Test-Variante (\Code{TestingRulebook}) der internen Representation von Regelbüchern eingeführt, welche Regelbücher aus dem separaten \Code{tests\_resources/rulebook} Ordner lädt.
 So ist es möglich für verschiedene Testklassen und -fälle unterschiedliche Regelbücher zu definieren, wodurch auch Negativtests ermöglicht werden.
 Um die Implementierung/Nutzung dieser Test-Regelbücher zu verbessern, wurde die \Code{Engine} um eine \Code{TestingEngine} (\Anhang[KP]{sec:testing-engine.py}) erweitert.
 Diese fügt das \Code{common.lp} nicht automatisch hinzu und führt keine Validierung durch, ob ein Regelbuch nutzbar ist.
@@ -127,9 +127,9 @@ Bei diesen Ende-zu-Ende Tests wird die Applikation gestartet, um die \Abk{API} m
 Alles dazwischen, also die Verarbeitung innerhalb der Applikation, ist im Sinne einer \textquote{schwarzen Box} nicht bekannt und wird daher bei der Testfallerstellung nicht berücksichtigt.
 Beachtet wird lediglich der Schnittstellenvertrag.
 
-Der Test \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) als solcher \zB, prüft den \Code{/hero/validate} Endpunkt darauf ab, das zu einem gültigen Charakter keine Validierungsfehler erzeugt werden (Warnungen werden ignoriert) und bei ungültigen Charakteren entsprechend korrekte Validierungsfehler zurückgemeldet werden.
+Der Test \Code{TestHeroApi} (\Anhang[KP]{sec:test-hero-api.py}) als solcher \zB prüft den \Code{/hero/validate} Endpunkt darauf, dass zu einem gültigen Charakter keine Validierungsfehler erzeugt werden (Warnungen werden ignoriert) und bei ungültigen Charakteren entsprechend korrekte Validierungsfehler zurückgemeldet werden.
 
 Dessen Testfälle sind ausgelagert in separate Klassen definiert, da diese aufgrund der Länge die Testklasse zu unübersichtlich machen würde und damit sie von anderen Tests (sauber) wiederverwendet werden können.
 Diese Klassen bieten eine praktische Methode an alle definierten Testfälle aufzulisten, sodass beim Entfernen oder Hinzufügen von Fällen die Tests nicht manuell angepasst werden müssen.
-Der Testfall bei gültigen Charakteren ist denkbar einfach, es besteht ausschließlich aus den vom Endpunkt angeforderten Daten: dem Charakter und die Regelbücher.
-Für den Fall von ungültigen Charakteren wird dieses Modell um Informationen zum erwarteten Validierungsfehler ergänzt, dazu gehört der Typ und eine Menge von Parameter. (siehe \Anhang[KP]{sec:valid-heros.py} und \Anhang[RP]{sec:invalid-heros.py})
+Der Testfall bei gültigen Charakteren ist denkbar einfach; es besteht ausschließlich aus den vom Endpunkt angeforderten Daten: dem Charakter und die Regelbücher.
+Für den Fall von ungültigen Charakteren wird dieses Modell um Informationen zum erwarteten Validierungsfehler ergänzt; dazu gehört der Typ und eine Menge von Parameter. (siehe \Anhang[KP]{sec:valid-heros.py} und \Anhang[RP]{sec:invalid-heros.py})

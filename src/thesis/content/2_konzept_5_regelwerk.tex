@@ -25,10 +25,10 @@ Dazu werden die verschiedenen Regelvarianten ausgearbeitet und anschließend, im
     Diese sind immer in Form eines \Begriff{Clingo}-\Tech{Textes} (also in Hochkommata), da Leerzeichen und Sonderzeichen möglich sind.
     Dies macht es einfach die Merkmalsausprägung im echten Regelbuch wiederzufinden.
 
-    \item \Begriff{Clingo}-\Tech{Variable}-Namen sind prägnant; also möglichst kurz, \underline{aber} unverwechselbar.
+    \item \Begriff{Clingo}-\Tech{Variable}-Namen sind prägnant, also möglichst kurz, \underline{aber} unverwechselbar.
     Abkürzungen sind erlaubt, wenn sie sich direkt aus dem verwendeten Atom ableiten lassen.
 
-    \item\label{itm:KV.Relation} Funktionen mit (mindestens) zwei Argumenten, im speziellen Spielwelt-Regeln und Ergebnis-Fakten, sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
+    \item\label{itm:KV.Relation} Funktionen mit (mindestens) zwei Argumenten, im Speziellen Spielwelt-Regeln und Ergebnis-Fakten, sind so zu lesen/verstehen, dass der \textquote{Faktname} die Beziehung zwischen den beiden Argumenten (meist Merkmale) beschreibt.
     Semantisch wird aus \textquote{\mintinline[fontsize=\small]{clingo}{relates_to(caused_feature, referred_feature).}} dann \textquote{\Code{caused feature relates to referred feature}}.
     \begin{mintedNameless}{clingo}
 %% Spielwelt-Fakt:
@@ -137,7 +137,7 @@ Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüche
 
 Wie bereits in \Kapitel{sec:grundlagen} beschrieben, gibt es nach \Zitat{Wiki-Regelsystem} folgende Regelkategorien: Grundregel, optionale Regel, Fokusregel und Hausregel.
 Hausregeln können nicht betrachtet werden, da diese unter den Spielenden frei definierbar sind.
-Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} oder Charakter-Eigenschaften \bzw -Basiswerte.
+Aufgrund des sonst entstehenden Umfangs dieser Arbeit wird folgendes nicht beachtet: optionale Regeln, Fokusregeln und Grundregel bezogen auf \Abk{AP} oder Charakter-Eigenschaften \bzw\ -Basiswerte.
 Beachtet werden Grundregeln außerdem nur mit Relevanz bei der Charakter-Erstellung.
 In \Kapitel[KN]{ch:diskussion} (\Item{itm:D.CharakterVerwaltung}) wird ein Ausblick auf die Verwaltung gegeben.
 
@@ -256,7 +256,7 @@ atypical(race(R),disadvantage(DA,USES)) :- race(R), has_atypical(race(R),disadva
 Wie zu sehen ist, ist die Struktur der formalen Regeln in \ref{itm:WR.1} und \ref{itm:WR.2} gleich.
 Diese kann auch auf die Semantik von \textquote{empfohlen} und \textquote{ungeeignet} übertragen werden, weshalb sie nicht zusätzlich aufgeführt werden \Vgl{RWiki-Ritter}.
 
-Darüber hinaus wird im Regelwerk der Einhaltungsgrad der weichen Regeln mit \textquote{dringend empfohlen} zwar verschärft dargestellt, aber zugleich Abweichungen, wie bisher, nach Absprache erlaubt \Vgl{RWiki-Spezies-Elfen}.
+Darüber hinaus wird im Regelwerk der Einhaltungsgrad der weichen Regeln mit \textquote{dringend empfohlen} verschärft dargestellt, aber wie bisher sind Abweichungen nach Absprache erlaubt \Vgl{RWiki-Spezies-Elfen}.
 Letzteres hat daher lediglich eine Relevanz bei der Auswertung/Interpretation der Ergebnis-Fakten.
 
 
@@ -279,7 +279,7 @@ Daher leitet das zuvor beschriebene \textquote{Kochbuch} immer konkrete \Tech{At
 Das Nutzen von \zB \textquote{integrity constraints} ist daher nicht möglich.
 Dadurch bleibt, im Sinne von \Abk{ASP}, das Problem erfüllbar und das \Abk{LP} gibt für einen Charakter ein \Tech{Answer Set} an möglichen Regelverstößen zurück.
 
-Die für die Interpretation relevanten Atome sind entsprechend dem Erfüllungsgrads (hart: muss, weich: kann) als Validierungsfehler oder -warnung zu interpretieren.
+Die für die Interpretation relevanten Atome sind entsprechend dem Erfüllungsgrad (hart: muss, weich: kann) als Validierungsfehler oder -warnung zu interpretieren.
 So gehören zu den Fehlern die Atome:
 \begin{multicols}{3}
     \begin{itemize}
