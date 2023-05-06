@@ -1,11 +1,16 @@
 \chapter{Fazit}\label{ch:fazit}
 
-{\color{red}
-Die Regeln von \Abk{DSA} lassen sich gut mit \Abk{ASP} formalisieren.
+In dieser Arbeit konnte erfolgreich aufgezeigt werden, dass die Formalisierung des \Abk{DSA}-Regelwerks zur Charakter-Validierung möglich ist.
+Es hat sich dabei gezeigt, dass die Formalisierung mit dem wissenschaftlich erprobten \Abk{ASP} unkompliziert war und leicht verständlich ist, sowohl bei der Formalisierung selbst als auch bei der Integration des genutzten Frameworks \Begriff{clingo}.
+Aufgrund des Umfangs konnten nicht sämtliche relevanten Regeln und Charakter-Merkmale beachtet werden, sodass erst in Zukunft bewertet werden kann, ob nach vollständiger Formalisierung dies so bleibt.
+Üblicherweise wird mit \Abk{ASP} eine Aussage über die Erfüllbarkeit eines Problems und mögliche Lösungen getroffen.
+Dieses Vorgehen wurde hier \textquote{gebrochen}, da (bisher) jedes erstelle \Abk{LP} erfüllbar sein musste und nicht mögliche Charaktere (Merkmals-Kombinationen) gefunden werden sollten, sondern vordefinierte abzuleitende Fakten als Validierungsergebnis generiert werden mussten.
 
-Bei der Realisierung hat sich gezeigt, dass die Wahl auf \Begriff{Clingo} mit der guten Integration, Möglichkeiten und Dokumentation, die richtige Wahl ist.
-
-Eine solide Software ist entstanden auf der Weiterentwickelt werden kann.
-
-
-}
+Das Problem hoher Migrationsaufwände der bisherigen \Abk{DSA}-Hilfsmittel auf die aktuelle 5te-Ausgabe, aufgrund einer (angenommenen) starken Verflechtung der fachlichen Logik (dem Regelwerk) mit der technischen Implementierung oder zu komplexen und schlecht wartbaren Software, wurde in dieser Arbeit beachtet.
+Mit den im Konzept aufgestellten Konventionen, als auch den getroffenen Architektur- und Design-Entscheidungen sowie den qualitätssichernden Maßnahmen in der Realisierung wurde eine hohe Wartbarkeit der Software erreicht.
+Auch die Wahl von Python als Programmiersprache war dafür von Vorteil.
+Ebenfalls konnte in der Realisierung, durch einen modularen Aufbau der Regelbücher-\AbkP{LP}, die Umsetzung weiterer Regelbücher und Regelbuch-Erweiterungen berücksichtigt werden.
+Für die Implementierung anderer Regelwerksausgaben bedarf es jedoch geringfügiger Anpassungen, sofern die Charakter-Modellierung abweicht, wie \zB durch neue Merkmale.
+Die entwickelte \Code{Engine} mit dem generischen Ablauf der Charakter-Validierung, klaren Ein- (Charaktermodell) und Ausgabe-Formaten (Ergebnis-Fakten) sowie den ermöglichten Freiheiten bei der strukturellen Umsetzung der \AbkP{LP} stellt die zentralste Komponente dar.
+Die entstandene Software selbst ist insgesamt eine solide Grundbasis für ein langfristiges quelloffenes Projekt.
+Dies war neben der Formalisierung ein weiteres Ziel der Arbeit.
