@@ -50,10 +50,10 @@ class YamlsStyle(Style):
         # Name.Function: '',
         # Name.Function.Magic: '',
         # Name.Property: '',
-        Name.Label: '#A6AC00',
+        Name.Label: '#A6AC00', # yellow
         Name.Namespace: '#00FF00',
         # Name.Other: '',
-        Name.Tag: '#F26264',  # red
+        Name.Tag: '#0F7315',  # green
         # Name.Variable: '',
         # Name.Variable.Class: '',
         # Name.Variable.Global: '',
@@ -63,7 +63,7 @@ class YamlsStyle(Style):
         # Literal: '',
         # Literal.Date: '',
 
-        String: '#3AB161', # green
+        String: '#6A0B86', # lila
         # String.Affix: '',
         # String.Backtick: '',
         # String.Char: '',
@@ -79,18 +79,18 @@ class YamlsStyle(Style):
         # String.Symbol: '',
 
         Number: '#C48C4E', # orange
-        # Number.Bin: '',
-        # Number.Float: '',
-        # Number.Hex: '',
-        # Number.Integer: '',
-        # Number.Integer.Long: '',
-        # Number.Oct: '',
+        Number.Bin: '#C48C4E',
+        Number.Float: '#C48C4E',
+        Number.Hex: '#C48C4E',
+        Number.Integer: '#C48C4E',
+        Number.Integer.Long: '#C48C4E',
+        Number.Oct: '#C48C4E',
 
         # Operator: '',
         # Operator.Word: '',
 
-        Punctuation: 'bold #A900AC',
-        Punctuation.Indicator: 'bold #A900AC',
+        Punctuation: 'bold #A900AC', # purple
+        Punctuation.Indicator: 'bold #A900AC', # purple
         # Punctuation.Marker: '',
 
         Comment: 'italic #808080',  # gray

@@ -3,7 +3,6 @@
 Während der Umsetzung des Konzeptes sind einige unerwartete oder nennenswerte Schwierigkeiten aufgekommen.
 Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
 
-%% also good python colors: autumn, manni, perldoc, tango, lovelace, rainbow_dash, gruvbox-light
 \begin{enumerateWithCode}{SK}
     \item Das Absichern der Architektur ist ebenso wichtig wie klassische Funktionstests.
     Für Python war die Wahl eines passenden Frameworks jedoch nicht eindeutig.
@@ -14,7 +13,7 @@ Diese werden nachfolgend aufgelistet (die Reihenfolge hat keine Bedeutung):
     \item Es war nicht möglich für ein Merkmal mehrere Charakter-Fakten, welche mehrere Argumente haben, ohne Hilfsfakten zu erzeugen.
     Zwar können \textquote{external functions} auch Listen \bzw \Begriff{Clingo}-\Tech{Tuple} zurückgeben; diese werden aber nicht automatisch als Argumente entpackt.
     Für \zB Talente sieht daher die Generierung der Merkmalsfakten wie folgt aus (\vgl \Anhang[KP]{sec:common.lp}, Zeile 49-62):
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 __talent_wrapper(@talents).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
     \end{mintedNameless}
@@ -36,7 +35,7 @@ class HeroWrapper:
     \item Zur Überprüfung der Existenz von Pflicht-\Abk{LP}-Unterprogrammen (gemäß \Kapitel[KP]{subsec:pruefung-der-regelbuecher-struktur}) musste eine implizite Anforderung an die Deklarierung von \Abk{LP}-Unterprogrammen aufgenommen werden.
     Diese besagt, dass nach jeder Deklaration eines Unterprogramms ein zusätzlicher Fakt mit dessen Namen folgen muss.
     Um dies zu gewährleisten, sollte die Anforderung im \Code{RulebookValidator} aufgenommen werden.
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 #program rulebook_usable.
 program("rulebook_usable").
     \end{mintedNameless}

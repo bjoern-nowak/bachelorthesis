@@ -53,9 +53,11 @@ def as_error(error: Symbol) -> HeroValidationError:
     case ErrorAtom.MISSING_MIN_LVL:
       return _missing_min_lvl_error(error)
     case _:
-      raise NotImplementedError(f"There is no 'error' parsing definition for given result fact.\n"
-                                f"Result fact name: {error.name}\n"
-                                f"Result fact parameters: {[str(a) for a in error.arguments]}.")
+      raise NotImplementedError(
+        f"There is no 'error' parsing definition for given result fact.\n"
+        f"Result fact name: {error.name}\n"
+        f"Result fact parameters: {[str(a) for a in error.arguments]}."
+      )
 
 
 def as_warning(warning: Symbol) -> HeroValidationWarning:
@@ -71,9 +73,11 @@ def as_warning(warning: Symbol) -> HeroValidationWarning:
     case WarningAtom.MISSING_USUAL:
       return _missing_usual_warning(warning)
     case _:
-      raise NotImplementedError(f"There is no 'warning' parsing definition for given result fact.\n"
-                                f"Result fact name: {warning.name}\n"
-                                f"Result fact parameters: {[str(a) for a in warning.arguments]}.")
+      raise NotImplementedError(
+        f"There is no 'warning' parsing definition for given result fact.\n"
+        f"Result fact name: {warning.name}\n"
+        f"Result fact parameters: {[str(a) for a in warning.arguments]}."
+      )
 
 
 def _unknown_error(error: Symbol):

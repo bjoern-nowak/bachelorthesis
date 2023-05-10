@@ -105,30 +105,30 @@ Alle angegebenen Merkmalsausprägungen müssen unter den verwendeten Regelbüche
     \item\label{itm:VV.RulebookFact} Für diese Überprüfung ist es erforderlich, dass Regelbücher bekannte Merkmalsausprägungen deklarieren.
     Dabei kann und sollte ein Regelbuch eine Abhängigkeit zu einem Anderen definieren, um dessen deklarierte Merkmalsausprägungen wiederzuverwenden und nicht doppelt zu deklarieren.
     \begin{mintedNameless}{clingo}
-    %% Eigene Existenz bekannt machen.
-    rulebook("dsa5_aventurisches_götterwirken_2").
-    %% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
-    rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
-    %% Allgemeine Überprüfung der Abhängigkeiten:
-    rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
+%% Eigene Existenz bekannt machen.
+rulebook("dsa5_aventurisches_götterwirken_2").
+%% Anforderung im Regelbuch 'DSA5 Aventurisches Götterwirken II':
+rulebook_depends("dsa5_aventurisches_götterwirken_2", "dsa5").
+%% Allgemeine Überprüfung der Abhängigkeiten:
+rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
     \end{mintedNameless}
 
     \item Deklariert werden Merkmalsausprägungen mit dem Präfix \textquote{\Code{known\_}} und den Merkmalsnamen.
     Die Stufen bei \zB Talenten und Kampftechniken werden nicht deklariert, da diese beliebig sein können;
     hingegen sind diese bei Vor- und Nachteilen nicht beliebig und daher zu deklarieren.
     \begin{mintedNameless}{clingo}
-    known_profession("Händler").
-    known_combat_technique("Armbrüste";"Raufen").
-    known_advantage("Dunkelsicht","",(1..2)).
-    known_advantage("Begabung",("Singen";"Musizieren"),1).
+known_profession("Händler").
+known_combat_technique("Armbrüste";"Raufen").
+known_advantage("Dunkelsicht","",(1..2)).
+known_advantage("Begabung",("Singen";"Musizieren"),1).
     \end{mintedNameless}
 
     \item\label{itm:VV.Unknown} Diese somit bekannten Merkmalsausprägungen werden dann überprüft.
     \begin{mintedNameless}{clingo}
-    %% Finde unbekannte Ausprägungen
-    unknown(profession(P)) :- profession(P), not known_profession(P).
-    unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
-    unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+%% Finde unbekannte Ausprägungen
+unknown(profession(P)) :- profession(P), not known_profession(P).
+unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
+unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
     \end{mintedNameless}
 \end{enumerateWithCode}
 
@@ -153,7 +153,7 @@ Ein Beispiel endet immer mit der Regel.
 \begin{enumerateWithCode}{AR}
     \item\label{itm:AR.1} Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 max_count(culture,1). %% nur Fakt mit höhstem Wert entscheidend
 max_count_exceeded(culture,MAX) :- COUNT=#count{C:culture(C)}, MAX=#max{MC:max_count(culture,MC)}, COUNT > MAX.
     \end{mintedNameless}
@@ -161,7 +161,7 @@ max_count_exceeded(culture,MAX) :- COUNT=#count{C:culture(C)}, MAX=#max{MC:max_c
     \item Die Mindeststufe für alle Fertigkeiten, wenn aktiviert (also angegeben), ist null \Vgl[Schritt 8]{RWiki-Erstellung}.
     Somit sind negative Zahlen ausgeschlossen.
     Es ist nicht vorgesehen, dass andere Regelbücher diese Grenze verschieben.
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN=0, LVL < MIN.
     \end{mintedNameless}
 
@@ -240,7 +240,7 @@ def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
 
 \begin{enumerateWithCode}{WR}
     \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(\vgl)()[][Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
-    \begin{mintedNameless}[linenos=false]{clingo}
+    \begin{mintedNameless}{clingo}
 has_usual(race("Elfen"),culture("Auelfen")).
 missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C),           not has_usual(race(R),culture(C)).
     \end{mintedNameless}
