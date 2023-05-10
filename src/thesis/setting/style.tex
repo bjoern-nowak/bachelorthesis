@@ -35,9 +35,14 @@
 
     \ifthenelse{\boolean{isFinalVersion}}{}{
         \cfoot
-        [\large\textsc{\color{red}-~\version~-}]
-        {\large\textsc{\color{red}-~\version~-}}
+        [\large\textsc{\color{red}-~\versionDraft~-}]
+        {\large\textsc{\color{red}-~\versionDraft~-}}
     }
+    \ifthenelse{\boolean{isFinalDraft}}{
+        \cfoot
+        [\large\textsc{\color{red}-~\versionDraftFinal~-}]
+        {\large\textsc{\color{red}-~\versionDraftFinal~-}}
+    }{}
 }{
     \usepackage[
         headsepline, %% Trennlinie unter Kopfzeile
@@ -66,9 +71,14 @@
 
     \ifthenelse{\boolean{isFinalVersion}}{}{
         \chead
-        [\large\textsc{\color{red}\version\\}]
-        {\large\textsc{\color{red}\version\\}}
+        [\large\textsc{\color{red}\versionDraft\\}]
+        {\large\textsc{\color{red}\versionDraft\\}}
     }
+    \ifthenelse{\boolean{isFinalDraft}}{
+        \chead
+        [\large\textsc{\color{red}\versionDraftFinal\\}]
+        {\large\textsc{\color{red}\versionDraftFinal\\}}
+    }{}
     %% manual adapt to book print
     \setlength{\voffset}{-1.1mm}
     \setlength{\headsep}{9mm} %% separation space between header and text

@@ -18,7 +18,7 @@ Dies bedeutet, dass eine neue \Abk{API}-Version nur veröffentlicht werden kann,
 \subsection{Schemata}\label{subsec:schemata}
 
 Das Konzept der Schemata wird am wichtigsten Schema, das des Charakters, erklärt.
-Nachfolgende Zeilen-Referenzen beziehen sich auf das \Listing[KP]{lst:characterSchema}.
+Nachfolgende Zeilen-Referenzen beziehen sich auf das \Listing[K]{lst:characterSchema}.
 
 Darin kann direkt abgelesen werden, dass die einfachen Merkmale (\Code{experience\_level}, \Code{race}, \Code{culture}, \Code{profession}) Zeichenfolgen\Englisch{strings} sind;
 diese spiegeln den Namen der Merkmalsausprägung aus einem Regelbuch wider.
@@ -87,8 +87,8 @@ So ist \zB die Liste der zu verwendenden Regelbücher stets als \sog Query-Param
 
     \begin{tabularx}{.936\textwidth}{XX}
         \footnotesize Beispiel Anfrage:                              & \footnotesize Beispiel Antwort:                                 \\
-        \HttpInline{POST /api/hero/validate?rulebooks=dsa5}          & \CodeInline{<\Listing[KP]{lst:invalidheroresponseexamplejson}>} \\
-        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} &                                                                 \\
+        \HttpInline{POST /api/hero/validate?rulebooks=dsa5}          & \CodeInline{<\Listing[K]{lst:invalidheroresponseexamplejson}>} \\
+        \HttpInline{BODY <\Listing[K]{lst:invalidheroexamplejson}>} &                                                                 \\
 %        \midrule
     \end{tabularx}
 \end{description}
@@ -106,7 +106,7 @@ Folgende Endpunkte wurden bereits für die Verwendung im Frontend vorgesehen, we
 %        \midrule
         \footnotesize Beispiel Anfrage:                              & \footnotesize Beispiel Antwort: \\
         \HttpInline{PUT /api/hero/save?rulebooks=dsa5}               & \CodeInline{<leeres HTTP OK>} \\[0em]
-        \HttpInline{BODY <\Listing[KP]{lst:invalidheroexamplejson}>} &                                 \\
+        \HttpInline{BODY <\Listing[K]{lst:invalidheroexamplejson}>} &                                 \\
     \end{tabularx}
 
     \item[/api/hero/export] exportiert einen gespeicherten Charakter in ein Format, dass auch von anderen Softwares unterstützt wird.

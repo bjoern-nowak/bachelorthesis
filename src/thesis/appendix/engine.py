@@ -107,9 +107,11 @@ class Engine:
                 raise HeroInvalidError([hero_validation_interpreter.as_error(e) for e in step_errors], warnings)
         return warnings
 
-    def _perform_hero_validation_step(self,
-                                      hero: Hero,
-                                      program: tuple[str, Sequence[Symbol]]) -> tuple[List[Symbol], List[Symbol]]:
+    def _perform_hero_validation_step(
+            self,
+            hero: Hero,
+            program: tuple[str, Sequence[Symbol]]
+    ) -> tuple[List[Symbol], List[Symbol]]:
         """
         :return: tuple of (errors, warnings)
         """

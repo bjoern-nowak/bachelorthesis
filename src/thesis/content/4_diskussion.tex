@@ -64,7 +64,7 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
 
     \item Der entstandenen Software mangelt es an tiefgehender loser Kopplung zwischen der \Code{Engine} (Domäne) und \Begriff{Clingo} (Infrastruktur).
     Dies ist zwar durchaus beabsichtigt (\vgl \Item{itm:A.1}), jedoch kann es für die zukünftige Testerstellung oder einem, aktuell unwahrscheinlichen, Wechsel des \Abk{ASP}-Frameworks hinderlich sein.
-    Die Packages/Module sind sauber definiert, jedoch wurde das \Abk{DIP} und \insb das, in \Kapitel[KN]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
+    Die Packages/Module sind sauber definiert, jedoch wurde das \Abk{DIP} und \insb das, in \Kapitel[KNP]{sec:architektur} genannte, \textquote{Dependency Injection Pattern} zu stark vernachlässigt.
     Dadurch, dass vermehrt und etwas \textquote{un-pythonic} (also für Python-Verhältnisse unüblich) vorwiegend \bzw grundsätzlich Klassen erstellt wurden, kann auch dies mit überschaubarem Aufwand bei Bedarf nachgepflegt werden.
     Des Weiteren fehlt es an einem Domänenmodell der Ergebnis-Fakten, welches der \Code{ClingoExecutor}, \bzw eine andere Infrastruktur-Klasse, an die \Code{Engine} zurückgeben müsste, sodass die Applikationskern-Schicht gänzlich vom genutzten \Abk{ASP}-Framework unabhängig sein kann.
 %    {\color{red}\item Zu bemängeln ist die im Software-Prototypen mangelnde Trennung der Fachlogik (\Begriff{Engine}) von der Infrastrukturschicht (\Tech{Clingo}).
@@ -108,7 +108,7 @@ CHOICES > #count{ KEY,CT: missing_level(prof(P),any_of(KEY,CHOICES,combatT,CT),M
     Dadurch muss die bereits existierende Modellierung der Merkmale nicht nachträglich von den Regelbüchern angepasst werden, was einer guten Modularität entspricht und damit einem geringeren Wartungsaufwand.
     Das \Abk{AP}-Konto müsste kumuliert je alle Eingänge und Ausgänge summieren, sodass als allgemeine Spielwelt-Regel modelliert werden kann, dass die Ausgaben nie höher als die Einnahmen sein dürfen.
     \Insb müsste für die Charakter-Verwaltung, also nach Spielbeginn, alle konkret gewünschten Veränderungen im \Abk{LP} bekannt sein, damit darauf Bezug genommen und entsprechend in Gänze validiert werden kann.
-    In \Listing[KP]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
+    In \Listing[K]{lst:grob-formalisierung-von-ap} wird dies in Ansätzen gezeigt.
     Dafür kann \ggf das \sog[multi-shot solving] relevant/hilfreich sein, bei dem erst der Charakter ohne Änderungen und anschließend sukzessiv jede Änderung einzeln validiert werden könnte \Vgl{DISKUSSION-Gebser2018}.
 
     Der zweite Aspekt ist im Prinzip ähnlich zum Ersten.

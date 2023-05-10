@@ -149,6 +149,7 @@ Dabei wird die Regel (Ableitung eines Atoms), als auch die notwendige Modellieru
 Ein Beispiel endet immer mit der Regel.
 
 \paragraph{Allgemeingültige Regeln:}\label{par:AR}
+
 \begin{enumerateWithCode}{AR}
     \item\label{itm:AR.1} Jeder Charakter gehört nur einer Spezies, Kultur und Profession an \Vgl[Schritt 4 und 6]{RWiki-Erstellung}.
     Wobei weitere Regelbücher diese Begrenzung auflockern könnten.
@@ -177,7 +178,10 @@ max_lvl_exceeded(talent(T,LVL),MAX) :- experience_level(EL), known_experience_le
     \end{mintedNameless}
 \end{enumerateWithCode}
 
+\pagebreak
+
 \paragraph{Regelbuch-spezifische harte Regeln:}\label{par:HR}
+
 \begin{enumerateWithCode}{HR}
     \item Eine Merkmalsausprägung benötigt eine Ausprägung eines anderen Merkmals, das \underline{nur eine} Ausprägung haben kann \Vgl{RWiki-Auelfen}.
     Das geforderte Merkmal hat \underline{keine} dynamische Stufe.
@@ -205,7 +209,7 @@ missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profes
 
     \item\label{itm:HR.AnyOf} Eine Merkmalsausprägung benötigt \underline{aus einer Liste eine Anzahl} von Ausprägungen eines anderen Merkmals, das mehrere Ausprägungen haben kann, auf \underline{eine Mindeststufe} \Vgl{RWiki-Soeldner}.
     Aufgrund der leichteren Implementierung, Wartbarkeit und Verständlichkeit wird die Zählung jener Ausprägungen, welche die Mindeststufe erreicht haben, in Python umgesetzt.
-    Dessen Entwurf wird mit \Listing[KP]{lst:entwurf-fulfills-any-of} aufgezeigt.
+    Dessen Entwurf wird mit \Listing[K]{lst:entwurf-fulfills-any-of} aufgezeigt.
     So kann die Auswahlliste als Tuple modelliert werden.
     \begin{mintedNameless}{clingo}
 %% 'Söldner' benötigt aus mehreren Möglichen eine (!) Kampftechnik auf Stufe 10
@@ -233,6 +237,7 @@ def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
 
 \pagebreak % due to \Needspace* in enumerateWithCode
 \paragraph{Regelbuch-spezifische weiche Regeln:}\label{par:WR}
+
 \begin{enumerateWithCode}{WR}
     \item\label{itm:WR.1} Eine Merkmalsausprägung definiert eine Ausprägung eines anderen Merkmals für üblich \parencites(\vgl)()[][Schritt 4 und 6]{RWiki-Erstellung}{RWiki-Spezies-Elfen}.
     \begin{mintedNameless}[linenos=false]{clingo}

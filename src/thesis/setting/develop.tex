@@ -4,7 +4,8 @@
 \usepackage{etoolbox}
 %% TODO [SUBMISSION] define print target
 \newboolean{isBookPrint}\setboolean{isBookPrint}{true} %% Printversion
-\newboolean{isFinalVersion}\setboolean{isFinalVersion}{false} %% Versionsangabe im header/footer, sign statement
+\newboolean{isFinalVersion}\setboolean{isFinalVersion}{true} %% ja: include sign statement / nein: Versionsangabe im header/footer,
+\newboolean{isFinalDraft}\setboolean{isFinalDraft}{true} %% Versionsangabe im header/footer
 %\newboolean{freezeMinted}\setboolean{freezeMinted}{true} %% prevent minting process, use cache
 %% ---- define paper pre and postface -----
 \newboolean{includeCover}\setboolean{includeCover}{true} %% show dummy text
