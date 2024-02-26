@@ -15,3 +15,13 @@ pygments = "^2.17.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+## key 'clingos' is NOT relevant as actual definitions are within class
+[tool.poetry.plugins."pygments.lexers"]
+clingo = "src/thesis/minted/clingo.py:ClingoLexer"
+
+## keys like 'clingos' are relevant as they are to be used in tex files
+[tool.poetry.plugins."pygments.styles"]
+clingos = "src/thesis/minted/clingos.py:ClingosStyle"
+yamls = "src/thesis/minted/yamls.py:YamlsStyle"
