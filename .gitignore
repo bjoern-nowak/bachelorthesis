@@ -2,3 +2,7 @@
 out/
 *.log
 **/_minted-thesis/
+
+# poetry
+poetry.lock
+/.venv/
