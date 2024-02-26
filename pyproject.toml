@@ -4,6 +4,8 @@ version = "1.0.0"
 description = ""
 authors = ["Björn Nowak <info@nowakhub.de>"]
 readme = "README.md"
+## we do not aim to publish this project
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.8"
