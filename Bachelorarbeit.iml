@@ -5,7 +5,7 @@
   </component>
   <component name="FacetManager">
     <facet type="Python" name="Python">
-      <configuration sdkName="Python 3.11" />
+      <configuration sdkName="Poetry (Bachelorarbeit)" />
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -15,9 +15,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludeFolder url="file://$MODULE_DIR$/src/thesis/_minted-thesis" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Python 3.11 interpreter library" level="application" />
+    <orderEntry type="library" name="Poetry (Bachelorarbeit) interpreter library" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
